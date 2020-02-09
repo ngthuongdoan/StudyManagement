@@ -1,0 +1,35 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+  background: url(../img/login_signup.jpg);
+  background-size: 100%;
+  color: #ffffff;
+  form {
+      background-color: rgba($color: #000000, $alpha: .3);
+    margin: 70px auto;
+    position: relative;
+    max-width: 600px;
+    max-height: 950px;
+    min-height: 500px;
+    text-align: center;
+    box-shadow: 0 5px 5px rgba(0,0,0,0.5);
+    h2 {
+      font-family: "Bahiana", cursive;
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: -20px;
+      left: -20px;
+      right: -20px;
+      bottom: -20px;
+      
+    }
+  }
+}

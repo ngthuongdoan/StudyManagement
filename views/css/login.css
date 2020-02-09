@@ -1,0 +1,40 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background: url(../img/login_signup.jpg);
+  background-size: 100%;
+  color: #ffffff;
+}
+
+body form {
+  background-color: rgba(0, 0, 0, 0.3);
+  margin: 70px auto;
+  position: relative;
+  max-width: 600px;
+  max-height: 950px;
+  min-height: 500px;
+  text-align: center;
+  -webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+body form h2 {
+  font-family: "Bahiana", cursive;
+}
+
+body form::before {
+  content: "";
+  position: absolute;
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+}
+/*# sourceMappingURL=login.css.map */
