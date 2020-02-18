@@ -8,12 +8,12 @@
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/login.css">
+    <link rel="stylesheet" href="css/register.css">
     <title>Schooling login</title>
 </head>
 
 <body>
-    <form action="/login" method="post" autocomplete="off">
+    <form action="/register" method="post" autocomplete="off">
         <h2>Schooling</h2>
         <div class="login">
             <input type="text" name="username" id="username">
@@ -28,8 +28,26 @@
                 Password
             </label>
             <hr>
-            <input type="submit" value="Log in" class="btn">
-            <p>or <a href="register.html">Sign up</a></p>
+            <input type="text" name="fullname" id="fullname">
+            <br>
+            <label for="fullname" class='label-name'>
+                Fullname
+            </label>
+            <hr>
+            <input type="email" name="email" id="email">
+            <br>
+            <label for="email" class='label-name'>
+                Email
+            </label>
+            <hr>
+            <input type="text" name="education" id="education">
+            <br>
+            <label for="education" class='label-name'>
+                Education
+            </label>
+            <hr>
+            <input type="submit" value="Register" class='btn'>
+            <input type="button" value="Cancel" class='btn' id='cancelbtn' onclick="window.location.href = '/';">
         </div>
     </form>
 </body>

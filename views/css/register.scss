@@ -1,6 +1,7 @@
 @import "login-register.scss";
+
 h2 {
-  padding-top: 70px;
+  padding-top: 30px;
   font-family: "Bahiana", cursive;
   font-size: 100px;
   text-shadow: black 8px 9px;
@@ -9,7 +10,7 @@ h2 {
   color: #e4abfb;
 }
 .login {
-  margin-top: 100px;
+  margin-top: 50px;
   input {
     width: 50%;
     height: auto;
@@ -17,13 +18,14 @@ h2 {
     background: none;
     padding-top: 18px;
     outline: none;
-    color: rgb(61, 58, 58);
+    color: rgb(255, 253, 253);
     font-weight: bolder;
     font-size: 18px;
     z-index: 2;
   }
   .btn {
-    margin-top: 25px;
+    margin-top: 10px;
+    margin-right: 20px;
     width: 150px;
     background-color: #ff416c;
     border-radius: 50px;
@@ -36,6 +38,11 @@ h2 {
       background-color: #bd0375;
       box-shadow: rgb(90, 84, 84) 0px 0px 10px;
     }
+  }
+  #cancelbtn{
+    margin-right: 0px;
+    margin-left: 20px;
+    background-color: #9b9294;
   }
   .label-name {
     margin-left: -150px;
