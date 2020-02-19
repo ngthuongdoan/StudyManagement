@@ -8,5 +8,5 @@ create table accounts(
 	email varchar(50) not null,
     education varchar(40) not null
 );
-insert into accounts('admin','admin')
+insert into accounts value('admin','admin','admin','example@admin.com','Example');
 select * from accounts
