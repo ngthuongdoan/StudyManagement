@@ -1,11 +1,20 @@
 const express = require("express");
+const session = require('express-session');
 const pageRouter = require(`./controllers/pageRouter`);
 const app = express();
 
-app.use(express.static(`${__dirname}/views`));
-app.use(express.urlencoded());
+app.use(session({
+	secret: 'secret',
+	resave: true,
+	saveUninitialized: true
+}));
 
+app.use(express.static(`${__dirname}/views`));
+app.use(express.urlencoded({extended:true}));
+app.use(express.json());
 app.use("/", pageRouter);
+
+
 
 app.use((req, res, next) => {
   let err = new Error("Page not found");

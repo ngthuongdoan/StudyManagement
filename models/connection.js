@@ -7,9 +7,9 @@ const conn = mysql.createConnection({
   password: "rootpassword"
 });
 
-conn.connect(err => {
+const connect = conn.connect(err => {
   if (err) return console.log(err.message);
-  return console.log("Success");
+  return console.log("Success to connect");
 });
 
 module.exports = conn;
