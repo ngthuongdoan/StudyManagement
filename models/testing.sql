@@ -9,4 +9,7 @@ create table accounts(
     education varchar(40) not null
 );
 insert into accounts value('admin','admin','admin','example@admin.com','Example');
-select * from accounts
+select * from accounts;
+
+ALTER USER 'root' IDENTIFIED WITH mysql_native_password BY 'rootpassword';
+flush privileges;
