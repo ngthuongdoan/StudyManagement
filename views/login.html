@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <form action="/login" method="post" autocomplete="off">
+    <form action="/login" method="post" autocomplete="off" id="form">
         <h2>Schooling</h2>
         <div class="login">
             <input type="text" name="username" id="username" required>
@@ -29,9 +29,12 @@
             </label>
             <hr>
             <input type="submit" value="Log in" class="btn">
-            <p>or <a href="register.html">Sign up</a></p>
+            <p>or <a href="/register">Sign up</a></p>
         </div>
     </form>
+    <div class="error">
+        <h1 class="message">{%MESSAGE%}</h1>
+    </div>
 </body>
 
 </html>

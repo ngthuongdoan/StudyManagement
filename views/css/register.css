@@ -16,15 +16,15 @@ body {
   padding: 0;
   min-height: 100%;
   background: url(../img/login_signup.jpg);
-  background-size: 1366px 768px;
+  background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-position: center;
+  background-position: left;
   color: #ffffff;
   z-index: -2;
 }
 
-body form {
+body #form {
   background-color: rgba(0, 0, 0, 0.3);
   margin: 30px auto;
   position: relative;
@@ -68,6 +68,7 @@ h2 {
   margin-right: 20px;
   width: 150px;
   background-color: #ff416c;
+  border: none;
   border-radius: 50px;
   color: white;
   font-weight: bold;
@@ -83,6 +84,10 @@ h2 {
           box-shadow: #5a5454 0px 0px 10px;
 }
 
+.login .btn:active {
+  border-style: outset;
+}
+
 .login #cancelbtn {
   margin-right: 0px;
   margin-left: 20px;
@@ -93,7 +98,7 @@ h2 {
   margin-left: -150px;
   font-size: 18px;
   position: absolute;
-  margin-top: -55px;
+  margin-top: -50px;
   width: 50%;
   padding-top: 0px;
   text-align: left;
@@ -110,5 +115,15 @@ h2 {
 .login a {
   font-style: italic;
   color: #00b9ff;
+}
+
+.login .errorlog {
+  position: absolute;
+  font-size: 14px;
+  opacity: 0.8;
+  text-align: left;
+  margin-left: 150px;
+  margin-top: -25px;
+  color: black;
 }
 /*# sourceMappingURL=register.css.map */

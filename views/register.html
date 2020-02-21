@@ -9,11 +9,13 @@
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="css/register.css">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.js"
+        integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI=" crossorigin="anonymous"></script>
     <title>Schooling login</title>
 </head>
 
 <body>
-    <form action="/register" method="post" autocomplete="off">
+    <form action="/register" method="post" autocomplete="off" id="form">
         <h2>Schooling</h2>
         <div class="login">
             <input type="text" name="username" id="username" required>
@@ -22,12 +24,14 @@
                 Username
             </label>
             <hr>
+            <p class="errorlog" id="usernameError"></p>
             <input type="password" name="password" id="password" required>
             <br>
             <label for="password" class='label-name'>
                 Password
             </label>
             <hr>
+            <p class="errorlog" id="passwordError"></p>
             <input type="text" name="fullname" id="fullname" required>
             <br>
             <label for="fullname" class='label-name'>
@@ -46,10 +50,11 @@
                 Education
             </label>
             <hr>
-            <input type="submit" value="Register" class='btn'>
-            <input type="button" value="Cancel" class='btn' id='cancelbtn' onclick="window.location.href = '/';">
+            <button class="btn" onclick="submitForm()">Register</button>
+            <button class='btn' id='cancelbtn' onclick="window.location.href = '/';">Cancel</button>
         </div>
     </form>
+    <script defer src="js/validate.js"></script>
 </body>
 
 </html>

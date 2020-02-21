@@ -1,9 +1,13 @@
 const express = require("express");
 const fs = require("fs");
-const session = require('express-session');
 const conn = require("../models/connection");
+// const validate = require("./validate");
+
 const login = fs.readFileSync(`${__dirname}/../views/login.html`);
 const register = fs.readFileSync(`${__dirname}/../views/register.html`);
+const dashboard = fs.readFileSync(`${__dirname}/../views/dashboard.html`);
+const notfound = fs.readFileSync(`${__dirname}/../views/notfound.html`);
+
 
 const router = express.Router();
 
@@ -46,17 +50,55 @@ router
     res.end(register);
   })
   .post((req, res) => {
-    res.json(req.body);
+    let username = req.body.username;
+    let password = req.body.password;
+    let fullname = req.body.fullname;
+    let email = req.body.email;
+    let education = req.body.education;
+    console.log(username, password);
+
+    // if (!validate.isValid(username, password)) {
+    //   res.status(404)
+    //   res.end(notfound);
+    //   return;
+    // }
+
+    conn.query(
+      "select username from accounts where username = ?",
+      [username],
+      (error, results, fields) => {
+        if (!error) {
+          res.send("All ready have");
+          res.end();
+        } else {
+          conn.query(
+            "insert into accounts value(?,?,?,?,?);",
+            [username, password, fullname, email, education],
+            (error, results, fields) => {
+              if (error) {
+                res.send("Something went wrong");
+                res.end();
+              } else {
+                res.redirect("/login");
+              }
+            }
+          );
+        }
+      }
+    );
   });
 
+router
+  .route("/notfound")
+  .get((req, res) => {
+    res.end(notfound);
+  })
 router.route("/dashboard").get((req, res) => {
-  console.log(req.session)
-  if(req.session.loggedin){
-    res.send('Welcome back, ' + req.session.username + '!');
-  }else{
-    res.send('Please log in');
+  if (req.session.loggedin) {
+    res.end(dashboard);
+  } else {
+    res.redirect("/login");
   }
-  res.end();
 });
 
 module.exports = router;
