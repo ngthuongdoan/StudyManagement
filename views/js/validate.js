@@ -9,15 +9,16 @@ const submitForm = () => {
     ).textContent = `Username mustn't have space`;
     error = true;
   }
-  if (password.length < 6) {
+  if (password.length < 6 || password.includes(' ')) {
     document.getElementById(
       "passwordError"
-    ).textContent = `Password must have at least 6 characters`;
+    ).textContent = `Password must have at least 6 characters and not contains space`;
     error = true;
   }
-  if (!error) {
-    document.getElementById("form").submit();
-  } else event.preventDefault();
+  if (error) {
+    return false;
+  } 
+  return true;
 };
 
 const init = () => {

@@ -58,7 +58,6 @@ h2 {
   padding-top: 18px;
   outline: none;
   color: #fffdfd;
-  font-weight: bolder;
   font-size: 18px;
   z-index: 2;
 }
@@ -125,5 +124,6 @@ h2 {
   margin-left: 150px;
   margin-top: -25px;
   color: black;
+  font-weight: bold;
 }
 /*# sourceMappingURL=register.css.map */

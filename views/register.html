@@ -15,7 +15,7 @@
 </head>
 
 <body>
-    <form action="/register" method="post" autocomplete="off" id="form">
+    <form action="/register" method="post" autocomplete="off" id="form" onsubmit="return submitForm()">
         <h2>Schooling</h2>
         <div class="login">
             <input type="text" name="username" id="username" required>
@@ -50,7 +50,7 @@
                 Education
             </label>
             <hr>
-            <button class="btn" onclick="submitForm()">Register</button>
+            <input type="submit" value="Register" class="btn">
             <button class='btn' id='cancelbtn' onclick="window.location.href = '/';">Cancel</button>
         </div>
     </form>
