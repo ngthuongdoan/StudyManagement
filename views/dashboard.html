@@ -7,6 +7,7 @@
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.8.1/dist/sweetalert2.all.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
     <title>Dashboard</title>
 </head>
@@ -23,6 +24,7 @@
                 <li class="category"><a href="#">Timetable</a></li>
                 <li class="category"><a href="#">Subject</a></li>
                 <li class="category"><a href="#">Teacher</a></li>
+                <li class="category"><a href="/logout">Logout</a></li>
             </ul>
             <h1 id="logo">Schooling</h1>
         </div>
@@ -31,6 +33,12 @@
             <h2 id="subtitle">to <span id="sublogo">Schooling</span></h2>
         </div>
     </main>
+    <script>
+        Swal.fire({
+            icon: 'success',
+            title: 'Login Success <3',
+        });
+    </script>
 </body>
 
 </html>

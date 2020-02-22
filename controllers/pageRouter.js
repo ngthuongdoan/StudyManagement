@@ -11,10 +11,13 @@ const notfound = fs.readFileSync(`${__dirname}/../views/notfound.html`);
 
 const router = express.Router();
 
+//ROOT
 router.route("/").get((req, res) => {
   res.end(login);
 });
 
+
+//LOGIN
 router
   .route("/login")
   .get((req, res) => {
@@ -31,20 +34,16 @@ router
           if (undefined !== results && results.length > 0) {
             req.session.loggedin = true;
             req.session.username = username;
-            // let content = `
-            // Swal.fire({
-            //   icon: 'success',
-            //   title: 'Success <3',
-            // })`;
-            // res.write(popup.replaceTemplate(false, content, login));
             res.redirect("/dashboard");
           } else {
             let content = `
-            Swal.fire({
-              icon: 'error',
-              title: 'Oops...',
-              text: 'Incorrect username or password!'
-            })`;
+            <script>
+              Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Incorrect username or password!'
+              })
+            </script>`;
             res.send(popup.replaceTemplate(false, content, login));
           }
           res.end();
@@ -53,6 +52,8 @@ router
     }
   });
 
+
+//REGISTER
 router
   .route("/register")
   .get((req, res) => {
@@ -70,27 +71,39 @@ router
       (error, results, fields) => {
         if (error) {
           let content = `
+          <script>
             Swal.fire({
               icon: 'error',
               title: 'Oops...',
               text: 'Already have!'
-            })`;
-            res.send(popup.replaceTemplate(false, content, register));
+            })
+          </script>`;
+          res.send(popup.replaceTemplate(false, content, register));
         } else {
           res.redirect("/login");
         }
       }
     );
   });
+
+//404 NOTFOUND
 router.route("/notfound").get((req, res) => {
   res.end(notfound);
 });
+
+//DASHBOARD
 router.route("/dashboard").get((req, res) => {
   if (req.session.loggedin) {
     res.end(dashboard);
   } else {
     res.redirect("/login");
   }
+});
+
+///LOGOUT
+router.route("/logout").get((req, res) => {
+  req.session.loggedin = false;
+  res.redirect("/login");
 });
 
 module.exports = router;
