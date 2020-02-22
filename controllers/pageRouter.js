@@ -1,7 +1,8 @@
 const express = require("express");
 const fs = require("fs");
 const conn = require("../models/connection");
-// const validate = require("./validate");
+const Swal = require("sweetalert2");
+const popup = require("./replaceTemplate");
 
 const login = fs.readFileSync(`${__dirname}/../views/login.html`);
 const register = fs.readFileSync(`${__dirname}/../views/register.html`);
@@ -30,16 +31,25 @@ router
           if (undefined !== results && results.length > 0) {
             req.session.loggedin = true;
             req.session.username = username;
+            // let content = `
+            // Swal.fire({
+            //   icon: 'success',
+            //   title: 'Success <3',
+            // })`;
+            // res.write(popup.replaceTemplate(false, content, login));
             res.redirect("/dashboard");
           } else {
-            res.send("Incorrect Username and/or Password!");
+            let content = `
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Incorrect username or password!'
+            })`;
+            res.send(popup.replaceTemplate(false, content, login));
           }
           res.end();
         }
       );
-    } else {
-      res.send("Please enter Username and Password!");
-      res.end();
     }
   });
 
@@ -48,27 +58,30 @@ router
   .get((req, res) => {
     res.end(register);
   })
-  .post(
-    (req, res) => {
-      let username = req.body.username;
-      let password = req.body.password;
-      let fullname = req.body.fullname;
-      let email = req.body.email;
-      let education = req.body.education;
-      conn.query(
-        "INSERT INTO accounts VALUES(?,?,?,?,?);",
-        [username, password, fullname, email, education],
-        (error, results, fields) => {
-          if (error) {
-            res.send("All ready have");
-            res.end();
-          } else {
-            res.redirect("/login");
-          }
+  .post((req, res) => {
+    let username = req.body.username;
+    let password = req.body.password;
+    let fullname = req.body.fullname;
+    let email = req.body.email;
+    let education = req.body.education;
+    conn.query(
+      "INSERT INTO accounts VALUES(?,?,?,?,?);",
+      [username, password, fullname, email, education],
+      (error, results, fields) => {
+        if (error) {
+          let content = `
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Already have!'
+            })`;
+            res.send(popup.replaceTemplate(false, content, register));
+        } else {
+          res.redirect("/login");
         }
-      );
-    }
-  );
+      }
+    );
+  });
 router.route("/notfound").get((req, res) => {
   res.end(notfound);
 });
