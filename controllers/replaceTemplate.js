@@ -1,3 +1,3 @@
-exports.replaceTemplate = (state, content, template) => {
-  if (!state) return template.toString().replace("{% POPUP %}", content);
+exports.replaceTemplate = (state,position, content, template) => {
+  if (!state) return template.toString().replace(position, content);
 };

@@ -1,7 +1,10 @@
 const express = require("express");
 const session = require('express-session');
 const pageRouter = require(`./controllers/pageRouter`);
+const morgan = require('morgan');
+
 const app = express();
+app.use(morgan('dev'));
 
 app.use(session({
 	secret: 'secret',
@@ -26,5 +29,8 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500);
   res.redirect('/notfound');
 });
+
+
+
 
 module.exports = app;

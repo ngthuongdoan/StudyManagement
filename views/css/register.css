@@ -7,8 +7,48 @@
 }
 
 html {
+  opacity: 0;
   margin: 0;
   min-height: 100%;
+  width: 100%;
+  -webkit-animation: fade 0.5s ease-in;
+          animation: fade 0.5s ease-in;
+}
+
+@-webkit-keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 0.25;
+  }
+  50% {
+    opacity: 0.5;
+  }
+  75% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 body {
@@ -21,13 +61,11 @@ body {
   background-attachment: fixed;
   background-position: left;
   color: #ffffff;
-  z-index: -2;
 }
 
 body #form {
   background-color: rgba(0, 0, 0, 0.3);
   margin: 30px auto;
-  position: relative;
   max-width: 600px;
   min-width: 600px;
   min-height: 700px;
