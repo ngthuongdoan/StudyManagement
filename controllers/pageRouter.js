@@ -2,28 +2,26 @@ const express = require("express");
 const fs = require("fs");
 const conn = require("../models/connection");
 const popup = require("./replaceTemplate");
-const sendemail= require('./sendEmail');
 
 const login = fs.readFileSync(`${__dirname}/../views/login.html`);
 const register = fs.readFileSync(`${__dirname}/../views/register.html`);
 const dashboard = fs.readFileSync(`${__dirname}/../views/dashboard.html`);
 const notfound = fs.readFileSync(`${__dirname}/../views/notfound.html`);
-const forget = fs.readFileSync(`${__dirname}/../views/forget.html`);
-const code = fs.readFileSync(`${__dirname}/../views/code.html`);
+const home = fs.readFileSync(`${__dirname}/../views/home.html`);
 
 
 const router = express.Router();
 
 //ROOT
 router.route("/").get((req, res) => {
-  res.end(login);
+  res.end(popup.replaceTemplate('{% POPUP %}','',login));
 });
 
 //LOGIN
 router
   .route("/login")
   .get((req, res) => {
-    res.end(login);
+    res.end(popup.replaceTemplate('{% POPUP %}','',login));
   })
   .post((req, res) => {
     let username = req.body.username;
@@ -35,7 +33,14 @@ router
         if (undefined !== results && results.length > 0) {
           req.session.loggedin = true;
           req.session.username = username;
-          res.redirect("/dashboard");
+          //CHECK TO SHOW INITIAL PAGE
+          if (results[0].firsttime){
+            res.redirect("/home");
+            res.end();
+          }else{
+            res.redirect("/dashboard");
+            res.end();
+          }
         } else {
           let content = `
             <script>
@@ -45,7 +50,7 @@ router
                 text: 'Incorrect username or password!'
               })
             </script>`;
-          res.send(popup.replaceTemplate(false, "{% POPUP %}", content, login));
+          res.send(popup.replaceTemplate('{% POPUP %}',content,login));
         }
         res.end();
       }
@@ -56,7 +61,7 @@ router
 router
   .route("/register")
   .get((req, res) => {
-    res.end(register);
+    res.end(popup.replaceTemplate('{% POPUP %}','',register));
   })
   .post((req, res) => {
     let username = req.body.username;
@@ -79,7 +84,7 @@ router
             })
           </script>`;
           res.send(
-            popup.replaceTemplate(false, "{% POPUP %}", content, register)
+            popup.replaceTemplate("{% POPUP %}", content, register)
           );
         } else {
           //SUCCESS RETURN LOGIN PAGE
@@ -115,7 +120,7 @@ router
 //           );
 //         } else {
 //           //SEND EMAIL
-//           const code = 
+//           const code =
 //           sendemail.sendEmail(req.body.email,code);
 //           res.send(
 //             popup.replaceTemplate(true, "{% POPUP %}", content, code)
@@ -137,14 +142,6 @@ router.route("/notfound").get((req, res) => {
 router.route("/dashboard").get((req, res) => {
   //CHECK IF SESSION NOT EXPERIED
   if (req.session.loggedin) {
-    //CHECK TO SHOW INITIAL PAGE
-    conn.query(
-      "SELECT firsttime FROM accounts WHERE username = ?",
-      [req.session.username],
-      (error, results, fields) => {
-        console.log(results[0].firsttime);
-      }
-    );
     res.end(dashboard);
   } else {
     //PREVENT TO LOGIN /dashboard BY URL
@@ -152,6 +149,14 @@ router.route("/dashboard").get((req, res) => {
   }
 });
 
+router.route('/home').get((req,res)=>{
+  if (req.session.loggedin) {
+    res.end(home);
+  } else {
+    //PREVENT TO LOGIN /dashboard BY URL
+    res.redirect("/login");
+  }
+})
 ///LOGOUT
 router.route("/logout").get((req, res) => {
   //REMOVE SESSION
