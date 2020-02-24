@@ -1,13 +1,16 @@
 const express = require("express");
 const fs = require("fs");
 const conn = require("../models/connection");
-const Swal = require("sweetalert2");
 const popup = require("./replaceTemplate");
+const sendemail= require('./sendEmail');
 
 const login = fs.readFileSync(`${__dirname}/../views/login.html`);
 const register = fs.readFileSync(`${__dirname}/../views/register.html`);
 const dashboard = fs.readFileSync(`${__dirname}/../views/dashboard.html`);
 const notfound = fs.readFileSync(`${__dirname}/../views/notfound.html`);
+const forget = fs.readFileSync(`${__dirname}/../views/forget.html`);
+const code = fs.readFileSync(`${__dirname}/../views/code.html`);
+
 
 const router = express.Router();
 
@@ -86,6 +89,45 @@ router
     );
   });
 
+//FORGET PAGE
+// router
+//   .route("/forget")
+//   .get((req, res) => {
+//     res.end(forget);
+//   })
+//   .post((req, res) => {
+//     const email = req.body.email;
+//     conn.query(
+//       "SELECT email FROM accounts WHERE email = ?",
+//       [email],
+//       (error, results, fields) => {
+//         if (undefined !== results && results.length > 0) {
+//           let content = `
+//         <script>
+//           Swal.fire({
+//             icon: 'error',
+//             title: 'Oops...',
+//             text: 'Cannot find email! Have you register???'
+//           })
+//         </script>`;
+//           res.send(
+//             popup.replaceTemplate(false, "{% POPUP %}", content, forget)
+//           );
+//         } else {
+//           //SEND EMAIL
+//           const code = 
+//           sendemail.sendEmail(req.body.email,code);
+//           res.send(
+//             popup.replaceTemplate(true, "{% POPUP %}", content, code)
+//           );
+//         }
+//       }
+//     );
+//   });
+
+// router.post('/code', (req,res)=>{
+
+// })
 //404 NOTFOUND
 router.route("/notfound").get((req, res) => {
   res.end(notfound);
