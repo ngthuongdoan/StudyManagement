@@ -1,3 +1,38 @@
 <form action="/config" method='post'>
-    <h1>This is the first time, we need you configure something</h1>
+    <h1 id="message">This is the first time, we need you configure something</h1>
+    <div class="config">
+        <label for="period">Number of period:</label>
+        <input type="number" name="period" placeholder="Period">
+        <br>
+        <p>Day of week:</p>
+        <div class="selection">
+            <label for="startday">From</label>
+            <select name="startday" id="startday">
+                <option value="1" selected>Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6">Saturday</option>
+                <option value="7">Sunday</option>
+            </select>
+            <label for="endday"> to </label>
+            <select name="endday" id="endday">
+                <option value="1">Monday</option>
+                <option value="2">Tuesday</option>
+                <option value="3">Wednesday</option>
+                <option value="4">Thursday</option>
+                <option value="5">Friday</option>
+                <option value="6" selected>Saturday</option>
+                <option value="7">Sunday</option>
+            </select>
+        </div>
+        <label for="gradetype">Type of grades</label>
+        <select name="gradetype" id="">
+            <option value="4" selected>4 scale</option>
+            <option value="10">10 scale</option>
+        </select>
+        <br>
+    </div>
+    <input type="submit" value="Submit" class="btn">
 </form>
