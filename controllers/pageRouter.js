@@ -1,5 +1,6 @@
 const express = require("express");
 const fs = require("fs");
+const url = require("url");
 const conn = require("../models/connection");
 const popup = require("./replaceTemplate");
 
@@ -7,21 +8,21 @@ const login = fs.readFileSync(`${__dirname}/../views/login.html`);
 const register = fs.readFileSync(`${__dirname}/../views/register.html`);
 const dashboard = fs.readFileSync(`${__dirname}/../views/dashboard.html`);
 const notfound = fs.readFileSync(`${__dirname}/../views/notfound.html`);
-const home = fs.readFileSync(`${__dirname}/../views/home.html`);
-
+const firsttime = fs.readFileSync(`${__dirname}/../views/firsttime.html`);
+const common = fs.readFileSync(`${__dirname}/../views/common.html`);
 
 const router = express.Router();
 
 //ROOT
 router.route("/").get((req, res) => {
-  res.end(popup.replaceTemplate('{% POPUP %}','',login));
+  res.end(popup.replaceTemplate("{% POPUP %}", "", login));
 });
 
 //LOGIN
 router
   .route("/login")
   .get((req, res) => {
-    res.end(popup.replaceTemplate('{% POPUP %}','',login));
+    res.end(popup.replaceTemplate("{% POPUP %}", "", login));
   })
   .post((req, res) => {
     let username = req.body.username;
@@ -33,14 +34,9 @@ router
         if (undefined !== results && results.length > 0) {
           req.session.loggedin = true;
           req.session.username = username;
+          req.session.firsttime = results[0].firsttime;
           //CHECK TO SHOW INITIAL PAGE
-          if (results[0].firsttime){
-            res.redirect("/home");
-            res.end();
-          }else{
-            res.redirect("/dashboard");
-            res.end();
-          }
+          res.redirect('/dashboard');
         } else {
           let content = `
             <script>
@@ -50,7 +46,7 @@ router
                 text: 'Incorrect username or password!'
               })
             </script>`;
-          res.send(popup.replaceTemplate('{% POPUP %}',content,login));
+          res.send(popup.replaceTemplate("{% POPUP %}", content, login));
         }
         res.end();
       }
@@ -61,7 +57,7 @@ router
 router
   .route("/register")
   .get((req, res) => {
-    res.end(popup.replaceTemplate('{% POPUP %}','',register));
+    res.end(popup.replaceTemplate("{% POPUP %}", "", register));
   })
   .post((req, res) => {
     let username = req.body.username;
@@ -83,9 +79,7 @@ router
               text: 'Already have!'
             })
           </script>`;
-          res.send(
-            popup.replaceTemplate("{% POPUP %}", content, register)
-          );
+          res.send(popup.replaceTemplate("{% POPUP %}", content, register));
         } else {
           //SUCCESS RETURN LOGIN PAGE
           res.redirect("/login");
@@ -95,44 +89,6 @@ router
   });
 
 //FORGET PAGE
-// router
-//   .route("/forget")
-//   .get((req, res) => {
-//     res.end(forget);
-//   })
-//   .post((req, res) => {
-//     const email = req.body.email;
-//     conn.query(
-//       "SELECT email FROM accounts WHERE email = ?",
-//       [email],
-//       (error, results, fields) => {
-//         if (undefined !== results && results.length > 0) {
-//           let content = `
-//         <script>
-//           Swal.fire({
-//             icon: 'error',
-//             title: 'Oops...',
-//             text: 'Cannot find email! Have you register???'
-//           })
-//         </script>`;
-//           res.send(
-//             popup.replaceTemplate(false, "{% POPUP %}", content, forget)
-//           );
-//         } else {
-//           //SEND EMAIL
-//           const code =
-//           sendemail.sendEmail(req.body.email,code);
-//           res.send(
-//             popup.replaceTemplate(true, "{% POPUP %}", content, code)
-//           );
-//         }
-//       }
-//     );
-//   });
-
-// router.post('/code', (req,res)=>{
-
-// })
 //404 NOTFOUND
 router.route("/notfound").get((req, res) => {
   res.end(notfound);
@@ -142,21 +98,16 @@ router.route("/notfound").get((req, res) => {
 router.route("/dashboard").get((req, res) => {
   //CHECK IF SESSION NOT EXPERIED
   if (req.session.loggedin) {
-    res.end(dashboard);
+    if (req.session.firsttime) {
+      res.end(popup.replaceTemplate("{% CONTENT %}", firsttime, dashboard));
+    }
+    res.end(res.end(popup.replaceTemplate("{% CONTENT %}", common, dashboard)));
   } else {
     //PREVENT TO LOGIN /dashboard BY URL
     res.redirect("/login");
   }
 });
 
-router.route('/home').get((req,res)=>{
-  if (req.session.loggedin) {
-    res.end(home);
-  } else {
-    //PREVENT TO LOGIN /dashboard BY URL
-    res.redirect("/login");
-  }
-})
 ///LOGOUT
 router.route("/logout").get((req, res) => {
   //REMOVE SESSION
