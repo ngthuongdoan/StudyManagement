@@ -12,7 +12,7 @@ exports.postMethod = (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
   conn.query(
-    "SELECT pass FROM accounts WHERE username = ?",
+    "SELECT pass,firsttime FROM accounts WHERE username = ?",
     [username],
     (error, results, fields) => {
       if (undefined !== results && results.length > 0) {
