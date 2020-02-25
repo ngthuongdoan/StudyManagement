@@ -1,6 +1,8 @@
 const fs = require("fs");
 const conn = require("../models/connection");
 const popup = require("./replaceTemplate");
+const User = require("./classes/User");
+
 const register = fs.readFileSync(`${__dirname}/../views/register.html`);
 
 exports.getMethod = (req, res) => {
@@ -8,18 +10,24 @@ exports.getMethod = (req, res) => {
 };
 
 exports.postMethod = (req, res) => {
-  let username = req.body.username;
-  let password = req.body.password;
-  let fullname = req.body.fullname;
-  let email = req.body.email;
-  let education = req.body.education;
+  const user = new User(
+    req.body.username,
+    req.body.password,
+    req.body.fullname,
+    req.body.email,
+    req.body.education,
+    "",
+    true
+  );
   conn.query(
-    "INSERT INTO accounts VALUES(?,?,?,?,?,?);",
-    [username, password, fullname, email, education, true],
+    "INSERT INTO accounts VALUES(?,?,?,?,?,?,?);",
+    user.send(),
     (error, results, fields) => {
       //POPUP ERROR IN REGISTER
+      console.log(user.send());
       if (error) {
-        let content = "All ready have!";
+        console.log(error);
+        let content = error.sql;
         res.send(
           popup.replacePopupTemplate(false, "{% POPUP %}", content, register)
         );

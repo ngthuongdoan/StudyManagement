@@ -8,6 +8,7 @@ const conn = mysql.createConnection({
 });
 
 const connect = conn.connect(err => {
+  console.log(process.env.MYSQL_DATABASE);
   if (err) return console.log(err.message);
   return console.log("Success to connect");
 });
