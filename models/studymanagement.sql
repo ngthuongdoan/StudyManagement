@@ -49,3 +49,21 @@ create table grade(
     timeGet varchar(40) not null,
     constraint pk_grade primary key (idSubject,timeGet)
 );
+
+-- Get all grades from account
+select gradeNumber from accounts as a, timetable as b, include as c, subjects as d, grade as e
+where
+	a.username='ngthuongdoan' and
+    a.username=b.username and
+    b.idTimetable=c.idTimetable and 
+    c.idSubject=d.idSubject and
+    d.idSubject=e.idSubject;
+-- Get all grades of a subject from account
+select gradeNumber from accounts as a, timetable as b, include as c, subjects as d, grade as e
+where
+	a.username='ngthuongdoan' and
+    a.username=b.username and
+    b.idTimetable=c.idTimetable and 
+    c.idSubject='CT112' and
+    c.idSubject=d.idSubject and
+    d.idSubject=e.idSubject;
