@@ -6,6 +6,7 @@ const loginRouter = require("./loginPage");
 const registerRouter = require("./registerPage");
 
 const dashboard = fs.readFileSync(`${__dirname}/../views/dashboard.html`);
+const teacher = fs.readFileSync(`${__dirname}/../views/teacher.html`);
 const notfound = fs.readFileSync(`${__dirname}/../views/notfound.html`);
 const firsttime = fs.readFileSync(`${__dirname}/../views/firsttime.html`);
 const common = fs.readFileSync(`${__dirname}/../views/common.html`);
@@ -54,5 +55,13 @@ router.route("/dashboard").get((req, res) => {
   }
 });
 
+router.route('/teacher').get((req,res)=>{
+  if (req.session.loggedin) {
+    res.end(teacher);
+  } else {
+    //PREVENT TO LOGIN /dashboard BY URL
+    res.redirect("/login");
+  }
+})
 
 module.exports = router;

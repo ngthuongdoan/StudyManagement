@@ -22,7 +22,7 @@ body {
 }
 
 body main {
-  background-color: #E1F4F3;
+  background-color: #e1f4f3;
   width: 1220px;
   min-height: 600px;
   position: absolute;
@@ -103,4 +103,79 @@ body main .leftpanel #logo {
   background-color: yellow;
   color: #706c61;
 }
-/*# sourceMappingURL=dashboard.css.map */
+
+.rightpanel {
+  float: left;
+  min-width: 1000px;
+  min-height: 600px;
+  text-align: center;
+}
+
+.rightpanel #title {
+  margin-top: 25%;
+  color: black;
+  text-transform: uppercase;
+}
+
+.rightpanel #sublogo {
+  font-family: "Bahiana", cursive;
+  font-size: 50px;
+  text-shadow: black 2px 2px;
+  -webkit-text-stroke-width: 0.1px;
+  -webkit-text-stroke-color: black;
+  color: #e4abfb;
+}
+
+.rightpanel form #message {
+  text-align: left;
+  margin-left: 10px;
+  margin-top: 10%;
+  color: black;
+  font-size: 20px;
+}
+
+.rightpanel form .config {
+  margin: 20px auto;
+  width: 400px;
+  -webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+  padding: 40px;
+  background-color: white;
+  text-align: left;
+  border-radius: 10px;
+}
+
+.rightpanel form .config label,
+.rightpanel form .config p {
+  margin: 10px auto;
+  font-weight: 600;
+}
+
+.rightpanel form .config input,
+.rightpanel form .config select {
+  margin: 10px auto;
+}
+
+.rightpanel form .config .selection {
+  margin-left: 30px;
+}
+
+.rightpanel form .btn {
+  width: 150px;
+  background-color: #ff416c;
+  border-radius: 50px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  padding: 10px 0px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.rightpanel form .btn:hover {
+  background-color: #bd0375;
+  -webkit-box-shadow: #5a5454 0px 0px 2px;
+          box-shadow: #5a5454 0px 0px 2px;
+}
+/*# sourceMappingURL=home.css.map */
