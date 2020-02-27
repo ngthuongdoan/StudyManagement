@@ -11,7 +11,6 @@ html {
 }
 
 body {
-  
   background: url(../img/login_signup.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -20,7 +19,7 @@ body {
   margin: 30px 0px;
   margin-left: 50px;
   main {
-    background-color: #E1F4F3;
+    background-color: #e1f4f3;
     width: 1220px;
     min-height: 600px;
     position: absolute;
@@ -35,23 +34,28 @@ body {
       min-width: 200px;
       min-height: 600px;
       border-radius: 30px;
-      .account {
-        background-color: #2c2525;
-        height: 200px;
-        border-top-left-radius: 30px;
-        border-top-right-radius: 30px;
-        text-align: center;
-        img {
-          margin: 30px 0px;
-          margin-bottom: 10px;
-          height: 100px;
-          width: 100px;
-          border-radius: 100px;
-          border: 2px yellow solid;
-        }
-        #accountname {
-          margin-top: 0;
-          font-size: 16px;
+      a {
+        text-decoration: none;
+        .account {
+          background-color: #2c2525;
+          height: 200px;
+          border-top-left-radius: 30px;
+          border-top-right-radius: 30px;
+          text-align: center;
+
+          img {
+            margin: 30px 0px;
+            margin-bottom: 10px;
+            height: 100px;
+            width: 100px;
+            border-radius: 100px;
+            border: 2px yellow solid;
+          }
+          #accountname {
+            color: white;
+            margin-top: 0;
+            font-size: 16px;
+          }
         }
       }
       ul {

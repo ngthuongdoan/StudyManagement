@@ -46,12 +46,12 @@ router.route("/dashboard").get((req, res) => {
   //CHECK IF SESSION NOT EXPERIED
   if (req.session.loggedin) {
     let result=popup.replaceTemplate("{% ACCOUNTNAME %}", req.session.fullname, dashboard);
-    result=popup.replaceTemplate("{% AVATAR %}", req.session.avatar, result);
+    result=popup.replaceTemplate("{% AVATAR %}",req.session.avatar, result);
     result=popup.replaceTemplate("{% USERNAME %}", req.session.username, result);
     if (req.session.firsttime) {
-      res.end(popup.replaceTemplate("{% CONTENT %}", firsttime, dashboard));
+      res.end(popup.replaceTemplate("{% CONTENT %}", firsttime, result));
     }
-    res.end(res.end(popup.replaceTemplate("{% CONTENT %}", common, dashboard)));
+    res.end(res.end(popup.replaceTemplate("{% CONTENT %}", common, result)));
   } else {
     //PREVENT TO LOGIN /dashboard BY URL
     res.redirect("/login");

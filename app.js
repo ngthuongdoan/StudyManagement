@@ -13,6 +13,7 @@ app.use(session({
 }));
 
 app.use(express.static(`${__dirname}/views`));
+app.use(express.static(`${__dirname}/models/avatars`));
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use("/", pageRouter);
