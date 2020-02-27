@@ -103,4 +103,63 @@ body main .leftpanel #logo {
   background-color: yellow;
   color: #706c61;
 }
-/*# sourceMappingURL=dashboard.css.map */
+
+.rightpanel {
+  float: left;
+}
+
+.rightpanel .btn {
+  margin: 20px 40px;
+  margin-left: 850px;
+  width: 100px;
+  background-color: #fc5a83;
+  border-radius: 10px;
+  border: none;
+  color: #fffefe;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 10px 0px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.rightpanel .btn:hover {
+  background-color: #bd0375;
+  -webkit-box-shadow: #5a5454 0px 0px 2px;
+          box-shadow: #5a5454 0px 0px 2px;
+}
+
+.rightpanel .mainwindow {
+  margin-top: 10px;
+  min-width: 1000px;
+  max-height: 500px;
+  overflow: auto;
+}
+
+.rightpanel .mainwindow table {
+  text-align: center;
+  width: 950px;
+  margin-left: 30px;
+}
+
+.rightpanel .mainwindow table tr:not(:first-child) {
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.rightpanel .mainwindow table tr:not(:first-child):hover {
+  background-color: #a8d1d0;
+}
+
+.rightpanel .mainwindow table tr:not(:first-child) th,
+.rightpanel .mainwindow table tr:not(:first-child) td {
+  padding: 10px 0px;
+  border-left: 2px rgba(0, 0, 0, 0.3) solid;
+  border-bottom: 2px rgba(0, 0, 0, 0.3) solid;
+}
+
+.rightpanel .mainwindow table tr:not(:first-child) th:first-child,
+.rightpanel .mainwindow table tr:not(:first-child) td:first-child {
+  border-left: none;
+}
+/*# sourceMappingURL=teacher.css.map */

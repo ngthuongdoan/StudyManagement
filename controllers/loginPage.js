@@ -38,11 +38,3 @@ exports.postMethod = (req, res) => {
     }
   );
 };
-
-//       } else {
-
-//       }
-//       res.end();
-//     }
-//   );
-// };
