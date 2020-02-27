@@ -45,6 +45,9 @@ router.route("/notfound").get((req, res) => {
 router.route("/dashboard").get((req, res) => {
   //CHECK IF SESSION NOT EXPERIED
   if (req.session.loggedin) {
+    let result=popup.replaceTemplate("{% ACCOUNTNAME %}", req.session.fullname, dashboard);
+    result=popup.replaceTemplate("{% AVATAR %}", req.session.avatar, result);
+    result=popup.replaceTemplate("{% USERNAME %}", req.session.username, result);
     if (req.session.firsttime) {
       res.end(popup.replaceTemplate("{% CONTENT %}", firsttime, dashboard));
     }
@@ -55,13 +58,13 @@ router.route("/dashboard").get((req, res) => {
   }
 });
 
-router.route('/teacher').get((req,res)=>{
+router.route("/teacher").get((req, res) => {
   if (req.session.loggedin) {
     res.end(teacher);
   } else {
     //PREVENT TO LOGIN /dashboard BY URL
     res.redirect("/login");
   }
-})
+});
 
 module.exports = router;

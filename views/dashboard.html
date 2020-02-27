@@ -15,10 +15,12 @@
 <body>
     <main>
         <div class="leftpanel">
-            <div class="account">
-                <img src="img/avatar.png" alt="avatar">
-                <h2 id="accountname">Doan Ngoc Thuong</h2>
-            </div>
+            <a href="/account?id={% USERNAME %}">
+                <div class="account">
+                    <img src="{% AVATAR %}" alt="avatar">
+                    <h2 id="accountname">{% ACCOUNTNAME %}</h2>
+                </div>
+            </a>
             <ul>
                 <li class="category active"><a href="/home">Home</a></li>
                 <li class="category"><a href="/timetable">Timetable</a></li>

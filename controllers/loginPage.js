@@ -12,13 +12,15 @@ exports.postMethod = (req, res) => {
   let username = req.body.username;
   let password = req.body.password;
   conn.query(
-    "SELECT pass,firsttime FROM accounts WHERE username = ?",
+    "SELECT * FROM accounts WHERE username = ?",
     [username],
     (error, results, fields) => {
       if (undefined !== results && results.length > 0) {
         if (bcrypt.compareSync(password, results[0].pass)) {
           req.session.loggedin = true;
           req.session.username = username;
+          req.session.fullname = results[0].fullname;
+          req.session.avatar = results[0].avatar;
           req.session.firsttime = results[0].firsttime;
           //CHECK TO SHOW INITIAL PAGE
           res.redirect("/dashboard");
