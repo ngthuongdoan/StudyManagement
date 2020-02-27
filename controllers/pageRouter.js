@@ -46,7 +46,7 @@ router
 
 router.route("/teacher").get((req, res) => {
   if (req.session.loggedin) {
-    res.end(teacher);
+    res.end(popup.replaceAccountTemplate(req.session,teacher));
   } else {
     //PREVENT TO LOGIN /dashboard BY URL
     res.redirect("/login");

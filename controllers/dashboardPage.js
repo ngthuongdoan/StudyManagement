@@ -8,17 +8,7 @@ const dashboard = fs.readFileSync(`${__dirname}/../views/dashboard.html`);
 exports.getMethod = (req, res) => {
   //CHECK IF SESSION NOT EXPERIED
   if (req.session.loggedin) {
-    let result = popup.replaceTemplate(
-      "{% ACCOUNTNAME %}",
-      req.session.fullname,
-      dashboard
-    );
-    result = popup.replaceTemplate("{% AVATAR %}", req.session.avatar, result);
-    result = popup.replaceTemplate(
-      "{% USERNAME %}",
-      req.session.username,
-      result
-    );
+    let result = popup.replaceAccountTemplate(req.session, dashboard);
     if (req.session.firsttime) {
       res.end(popup.replaceTemplate("{% CONTENT %}", firsttime, result));
     }
