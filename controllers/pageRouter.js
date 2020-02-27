@@ -4,12 +4,10 @@ const conn = require("../models/connection");
 const popup = require("./replaceTemplate");
 const loginRouter = require("./loginPage");
 const registerRouter = require("./registerPage");
+const dashboardRouter = require("./dashboardPage");
 
-const dashboard = fs.readFileSync(`${__dirname}/../views/dashboard.html`);
 const teacher = fs.readFileSync(`${__dirname}/../views/teacher.html`);
 const notfound = fs.readFileSync(`${__dirname}/../views/notfound.html`);
-const firsttime = fs.readFileSync(`${__dirname}/../views/firsttime.html`);
-const common = fs.readFileSync(`${__dirname}/../views/common.html`);
 
 const router = express.Router();
 
@@ -42,21 +40,9 @@ router.route("/notfound").get((req, res) => {
 });
 
 //DASHBOARD
-router.route("/dashboard").get((req, res) => {
-  //CHECK IF SESSION NOT EXPERIED
-  if (req.session.loggedin) {
-    let result=popup.replaceTemplate("{% ACCOUNTNAME %}", req.session.fullname, dashboard);
-    result=popup.replaceTemplate("{% AVATAR %}",req.session.avatar, result);
-    result=popup.replaceTemplate("{% USERNAME %}", req.session.username, result);
-    if (req.session.firsttime) {
-      res.end(popup.replaceTemplate("{% CONTENT %}", firsttime, result));
-    }
-    res.end(res.end(popup.replaceTemplate("{% CONTENT %}", common, result)));
-  } else {
-    //PREVENT TO LOGIN /dashboard BY URL
-    res.redirect("/login");
-  }
-});
+router
+  .route("/dashboard")
+  .get((req, res) => dashboardRouter.getMethod(req, res));
 
 router.route("/teacher").get((req, res) => {
   if (req.session.loggedin) {
