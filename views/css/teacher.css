@@ -64,6 +64,7 @@ body main .leftpanel a .account img {
 }
 
 body main .leftpanel a .account #accountname {
+  color: white;
   margin-top: 0;
   font-size: 16px;
 }

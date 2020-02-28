@@ -9,6 +9,18 @@ exports.getMethod = (req, res) => {
   //CHECK IF SESSION NOT EXPERIED
   if (req.session.loggedin) {
     let result = popup.replaceAccountTemplate(req.session, dashboard);
+    let content = `<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Login Success <3',
+    });
+    </script>`;
+    if (req.session.popup) {
+      req.session.popup = false;
+      result = popup.replaceTemplate("{% POPUP %}", content, result);
+    }else{
+      result = popup.replacePopupTemplate(true,'{% POPUP %}','',result);
+    }
     if (req.session.firsttime) {
       res.end(popup.replaceTemplate("{% CONTENT %}", firsttime, result));
     }
@@ -18,4 +30,3 @@ exports.getMethod = (req, res) => {
     res.redirect("/login");
   }
 };
-

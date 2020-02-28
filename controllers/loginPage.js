@@ -18,6 +18,7 @@ exports.postMethod = (req, res) => {
       if (undefined !== results && results.length > 0) {
         if (bcrypt.compareSync(password, results[0].pass)) {
           req.session.loggedin = true;
+          req.session.popup=true;
           req.session.username = username;
           req.session.fullname = results[0].fullname;
           req.session.avatar = results[0].avatar;
