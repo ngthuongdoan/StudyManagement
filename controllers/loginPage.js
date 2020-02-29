@@ -5,6 +5,11 @@ const popup = require("./replaceTemplate");
 const login = fs.readFileSync(`${__dirname}/../views/login.html`);
 
 exports.getMethod = (req, res) => {
+  // console.log(req.sessionID);
+  // console.log(req.cookies);
+  // console.log(document.cookie);
+  // if(document.cookie==null) res.redirect('/dashboard');
+  console.log(req.sessionID);
   res.end(popup.replaceTemplate("{% POPUP %}", "", login));
 };
 
@@ -18,7 +23,7 @@ exports.postMethod = (req, res) => {
       if (undefined !== results && results.length > 0) {
         if (bcrypt.compareSync(password, results[0].pass)) {
           req.session.loggedin = true;
-          req.session.popup=true;
+          req.session.popup = true;
           req.session.username = username;
           req.session.fullname = results[0].fullname;
           req.session.avatar = results[0].avatar;

@@ -23,7 +23,7 @@ router
 ///LOGOUT
 router.route("/logout").get((req, res) => {
   //REMOVE SESSION
-  req.session.loggedin = false;
+  req.session.destroy();
   res.redirect("/login");
 });
 
