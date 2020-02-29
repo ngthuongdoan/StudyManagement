@@ -1,12 +1,10 @@
 const express = require("express");
 const fs = require("fs");
-const conn = require("../models/connection");
-const popup = require("./replaceTemplate");
 const loginRouter = require("./loginPage");
 const registerRouter = require("./registerPage");
 const dashboardRouter = require("./dashboardPage");
+const teacherRouter = require("./teacherPage");
 
-const teacher = fs.readFileSync(`${__dirname}/../views/teacher.html`);
 const notfound = fs.readFileSync(`${__dirname}/../views/notfound.html`);
 
 const router = express.Router();
@@ -44,13 +42,6 @@ router
   .route("/dashboard")
   .get((req, res) => dashboardRouter.getMethod(req, res));
 
-router.route("/teacher").get((req, res) => {
-  if (req.session.loggedin) {
-    res.end(popup.replaceAccountTemplate(req.session,teacher));
-  } else {
-    //PREVENT TO LOGIN /dashboard BY URL
-    res.redirect("/login");
-  }
-});
+router.route("/teacher").get((req, res) => teacherRouter.getMethod(req, res));
 
 module.exports = router;

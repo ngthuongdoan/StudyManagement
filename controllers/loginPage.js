@@ -5,10 +5,7 @@ const popup = require("./replaceTemplate");
 const login = fs.readFileSync(`${__dirname}/../views/login.html`);
 
 exports.getMethod = (req, res) => {
-  // console.log(req.sessionID);
-  // console.log(req.cookies);
-  // console.log(document.cookie);
-  // if(document.cookie==null) res.redirect('/dashboard');
+  //PREVENT LOGIN PAGE HERE
   console.log(req.sessionID);
   res.end(popup.replaceTemplate("{% POPUP %}", "", login));
 };
