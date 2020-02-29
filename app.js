@@ -48,7 +48,7 @@ app.use(
     store: sessionStore,
     saveUninitialized: false,
     cookie: {
-      maxAge: 300000,
+      maxAge: 900000,
       secure: false
     }
   })

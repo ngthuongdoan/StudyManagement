@@ -1,7 +1,7 @@
 const bcrypt = require("bcrypt");
 
 class User {
-  constructor(username, pass, fullname, email, education, avatar, firsttime) {
+  constructor({ username, pass, fullname, email, education, avatar='Untitle.png', firsttime }) {
     this._username = username;
     this._pass = bcrypt.hashSync(pass, 10);
     this._fullname = fullname;

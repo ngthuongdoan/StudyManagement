@@ -10,15 +10,14 @@ exports.getMethod = (req, res) => {
 };
 
 exports.postMethod = (req, res) => {
-  const user = new User(
-    req.body.username,
-    req.body.password,
-    req.body.fullname,
-    req.body.email,
-    req.body.education,
-    "",
-    true
-  );
+  const user = new User({
+    username:req.body.username,
+    pass:req.body.password,
+    fullname:req.body.fullname,
+    email:req.body.email,
+    education:req.body.education,
+    firsttime:true
+});
   conn.query(
     "INSERT INTO accounts VALUES(?,?,?,?,?,?,?);",
     user.send(),
