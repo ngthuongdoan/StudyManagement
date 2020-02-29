@@ -69,12 +69,22 @@ insert into include values('CT24601','Untitled 2','ngthuongdoan');
 insert into grade value('CT22301','9','Cuối kì');
 insert into grade value('CT22301','7','Giữa kì');
 -- select all
+select * from sessions;
 select * from accounts;
 select * from timetable;
 select * from teacher;
 select * from subjects;
 select * from include;
 select * from grade;
+-- Get all teacher
+select a.* from teacher as a, accounts as b, include as c, subjects as d
+where
+	b.username='ngthuongdoan' and
+    b.username=c.username and
+    c.idSubject= d.idSubject and
+    d.teacherName=a.teacherName and
+    d.teacherEmail=a.teacherEmail
+;
 -- Get all timetable
 select b.timetableName from accounts as a, timetable as b 
 where
