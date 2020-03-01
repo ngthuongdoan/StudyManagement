@@ -94,7 +94,7 @@ body main .leftpanel ul li a:hover {
   color: #706c61;
 }
 
-body main .leftpanel #logo {
+#logo {
   margin-top: 50px;
   font-family: "Bahiana", cursive;
   font-size: 50px;

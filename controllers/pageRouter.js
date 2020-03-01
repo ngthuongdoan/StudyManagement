@@ -42,6 +42,9 @@ router
   .route("/dashboard")
   .get((req, res) => dashboardRouter.getMethod(req, res));
 
-router.route("/teacher").get((req, res) => teacherRouter.getMethod(req, res));
+router
+  .route("/teacher")
+  .get((req, res) => teacherRouter.getMethod(req, res))
+  .post((req, res) => teacherRouter.postMethod(req, res));
 
 module.exports = router;
