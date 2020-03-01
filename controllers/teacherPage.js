@@ -4,6 +4,7 @@ const conn = require("../models/connection");
 const fs = require("fs");
 const Teacher = require("./classes/Teacher");
 const teacherPage = fs.readFileSync(`${__dirname}/../views/teacher.html`);
+let resultPage = teacherPage;
 
 exports.getMethod = (req, res) => {
   if (session.sessionCheck(req, res)) {
@@ -29,7 +30,8 @@ exports.getMethod = (req, res) => {
         const teacherdata = fs.readFileSync(
           `${__dirname}/../views/teacher-data.html`
         );
-        let resultPage = popup.replaceAccountTemplate(req.session, teacherPage);
+        resultPage = popup.replaceAccountTemplate(req.session, teacherPage);
+        // resultPage = popup.replaceTemplate('{% POPUP %}','',resultPage);
         resultPage = popup.replaceTemplate(
           "{% DATA %}",
           teacherdata,
@@ -61,10 +63,7 @@ exports.postMethod = (req, res) => {
     (error, results, fields) => {
       //POPUP ERROR IN TEACHER
       if (error) {
-        const content = error.sql;
-        res.send(
-          popup.replacePopupTemplate(false, "{% POPUP %}", content, teacherPage)
-        );
+        res.end(popup.replacePopupTemplate(false, "{% POPUP %}", "Duplicate", resultPage));
       }else{
         res.redirect('/teacher');
       }

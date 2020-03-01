@@ -7,8 +7,8 @@
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/teacher.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.8.1/dist/sweetalert2.all.min.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.8.1/dist/sweetalert2.all.min.js"></script>
     <title>Teachers</title>
 </head>
 
@@ -26,6 +26,7 @@
             </div>
             <input type="submit" class="btn" value="Submit">
             <button type='button' class="btn" id="cancelbtn" onclick="overlayOff()">Cancel</button>
+            
         </form>
     </div>
     <main>
@@ -60,8 +61,8 @@
             </div>
         </div>
     </main>
+    <div id="alert">{% POPUP %}</div>
     <script src="js/overlay.js"></script>
-    <!-- {% POPUP %} -->
 </body>
 
 </html>

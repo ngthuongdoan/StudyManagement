@@ -191,6 +191,10 @@ body main .leftpanel ul li a:hover {
   background-color: #9b9294;
 }
 
+#alert {
+  visibility: hidden;
+}
+
 .rightpanel {
   float: left;
 }
