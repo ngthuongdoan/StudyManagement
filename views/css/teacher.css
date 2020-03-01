@@ -185,10 +185,16 @@ body main .leftpanel ul li a:hover {
   border-style: outset;
 }
 
-#overlay form #cancelbtn {
+#cancelbtn {
   margin-right: 0px;
   margin-left: 20px;
   background-color: #9b9294;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#cancelbtn:hover {
+  background-color: #665f60;
 }
 
 #alert {
@@ -201,7 +207,8 @@ body main .leftpanel ul li a:hover {
 
 .rightpanel .btn {
   margin: 20px 40px;
-  margin-left: 850px;
+  margin-left: 750px;
+  margin-right: 5px;
   width: 100px;
   background-color: #fc5a83;
   border-radius: 10px;
@@ -252,5 +259,9 @@ body main .leftpanel ul li a:hover {
 .rightpanel .mainwindow table tr:not(:first-child) th:first-child,
 .rightpanel .mainwindow table tr:not(:first-child) td:first-child {
   border-left: none;
+}
+
+.activerow {
+  background-color: #a8d1d0;
 }
 /*# sourceMappingURL=teacher.css.map */

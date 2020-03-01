@@ -4,6 +4,8 @@ const loginRouter = require("./loginPage");
 const registerRouter = require("./registerPage");
 const dashboardRouter = require("./dashboardPage");
 const teacherRouter = require("./teacherPage");
+const deleteTeacher = require("./teacherDelete");
+
 
 const notfound = fs.readFileSync(`${__dirname}/../views/notfound.html`);
 
@@ -45,6 +47,8 @@ router
 router
   .route("/teacher")
   .get((req, res) => teacherRouter.getMethod(req, res))
-  .post((req, res) => teacherRouter.postMethod(req, res));
+  .post((req, res) => teacherRouter.postMethod(req, res))
+
+router.route('/delete-teacher').post((req, res)=>deleteTeacher.postMethod(req,res))
 
 module.exports = router;
