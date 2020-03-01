@@ -10,7 +10,7 @@ const notfound = fs.readFileSync(`${__dirname}/../views/notfound.html`);
 const router = express.Router();
 
 //ROOT
-router.route("/").get((req, res) => loginRouter.getMethod(req, res));
+router.route("/").get((req, res) => dashboardRouter.getMethod(req, res));
 
 //LOGIN
 router
