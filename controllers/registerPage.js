@@ -23,16 +23,14 @@ exports.postMethod = (req, res) => {
     user.send(),
     (error, results, fields) => {
       //POPUP ERROR IN REGISTER
-      console.log(user.send());
       if (error) {
-        console.log(error);
         let content = error.sql;
         res.send(
           popup.replacePopupTemplate(false, "{% POPUP %}", content, register)
         );
       } else {
         //SUCCESS RETURN LOGIN PAGE
-        res.redirect("/login");
+        res.redirect("/teacher");
       }
     }
   );

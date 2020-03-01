@@ -8,14 +8,9 @@ const teacherPage = fs.readFileSync(`${__dirname}/../views/teacher.html`);
 exports.getMethod = (req, res) => {
   if (session.sessionCheck(req, res)) {
     if (req.session.loggedin) {
-      let query = `select a.* from teacher as a, accounts as b, include as c, subjects as d
+      let query = `select a.* from teacher as a
       where
-          b.username=? and
-          b.username=c.username and
-          c.idSubject= d.idSubject and
-          d.teacherName=a.teacherName and
-          d.teacherEmail=a.teacherEmail
-      ;`;
+          a.username=?;`;
       conn.query(query, [req.session.username], (error, results, fields) => {
         results.forEach(result => {
           let obj = {
@@ -28,7 +23,7 @@ exports.getMethod = (req, res) => {
             <td>${teacher.name}</td>
             <td>${teacher.email}</td>
             <td>${teacher.number}</td>
-        </tr><br>`;
+        </tr>`;
           fs.appendFileSync(`${__dirname}/../views/teacher-data.html`, data);
         });
         const teacherdata = fs.readFileSync(
@@ -51,4 +46,28 @@ exports.getMethod = (req, res) => {
     //PREVENT TO LOGIN /teacher BY URL
     res.redirect("/login");
   }
+};
+
+exports.postMethod = (req, res) => {
+  const teacher = new Teacher({
+    name: req.body.teacherName,
+    email: req.body.teacherEmail,
+    number: req.body.teacherNumber
+  });
+  console.table(teacher)
+  conn.query(
+    "INSERT INTO teacher VALUES(?,?,?,?);",
+    [req.session.username,teacher.name, teacher.email, teacher.number],
+    (error, results, fields) => {
+      //POPUP ERROR IN TEACHER
+      if (error) {
+        const content = error.sql;
+        res.send(
+          popup.replacePopupTemplate(false, "{% POPUP %}", content, teacherPage)
+        );
+      }else{
+        res.redirect('/teacher');
+      }
+    }
+  );
 };

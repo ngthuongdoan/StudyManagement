@@ -78,17 +78,21 @@ body {
           }
         }
       }
-      #logo {
-        margin-top: 50px;
-        font-family: "Bahiana", cursive;
-        font-size: 50px;
-        text-shadow: black 8px 9px;
-        -webkit-text-stroke-width: 0.1px;
-        -webkit-text-stroke-color: black;
-        color: #706c61;
-      }
+      
     }
   }
+}
+
+
+
+#logo {
+  margin-top: 50px;
+  font-family: "Bahiana", cursive;
+  font-size: 50px;
+  text-shadow: black 8px 9px;
+  -webkit-text-stroke-width: 0.1px;
+  -webkit-text-stroke-color: black;
+  color: #706c61;
 }
 .active {
   background-color: yellow;

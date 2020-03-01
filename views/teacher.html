@@ -13,6 +13,21 @@
 </head>
 
 <body>
+    <div id="overlay">
+        <form action="/teacher" method="post" autocomplete="off">
+            <h1 id="formlogo">Schooling</h1>
+            <div class="data">
+                <label for="teacherName">Name:</label>
+                <input type="text" name="teacherName" placeholder="Name" required><br>
+                <label for="teacherEmail">Email:</label>
+                <input type="email" name="teacherEmail" placeholder="example@mail.com" required><br>
+                <label for="teacherNumber">Telephone:</label>
+                <input type="tel" name="teacherNumber" pattern="[0-9]{10}" placeholder="0123456789"><br>
+            </div>
+            <input type="submit" class="btn" value="Submit">
+            <button type='button' class="btn" id="cancelbtn" onclick="overlayOff()">Cancel</button>
+        </form>
+    </div>
     <main>
         <div class="leftpanel">
             <a href="/account?id={% USERNAME %}">
@@ -31,7 +46,7 @@
             <h1 id="logo">Schooling</h1>
         </div>
         <div class='rightpanel'>
-            <button class="btn">Add new</button>
+            <button class="btn" onclick="overlayOn()">Add new</button>
             <div class="mainwindow">
                 <table>
                     <tr class="header">
@@ -45,6 +60,8 @@
             </div>
         </div>
     </main>
+    <script src="js/overlay.js"></script>
+    <!-- {% POPUP %} -->
 </body>
 
 </html>
