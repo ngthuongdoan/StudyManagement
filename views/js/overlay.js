@@ -1,4 +1,4 @@
-document.getElementById('overlay').style.display = 'none';
+// document.getElementById('overlay').style.display = 'none';
 const overlayOn = () =>{
     document.getElementById('overlay').style.display='block';
 }
