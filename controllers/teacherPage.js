@@ -20,7 +20,7 @@ exports.getMethod = (req, res) => {
             number: result.teacherNumber
           };
           let teacher = new Teacher(obj);
-          let data = `<tr>
+          let data = `<tr class='teacher'>
             <td>${teacher.name}</td>
             <td>${teacher.email}</td>
             <td>${teacher.number}</td>

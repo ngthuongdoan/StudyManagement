@@ -13,6 +13,14 @@
 </head>
 
 <body>
+    <div style="display: none;">
+        <form action="/delete-teacher" method="POST" id="delete" >
+            <input type="text" name="teacherName" id="delname" value="">
+            <input type="text" name="teacherEmail" id="delemail" value="">
+            <input type="text" name="teacherNumber" id="delnum" value="">
+            <input type="submit" value="" id="deleteBtn">
+        </form>
+    </div>
     <div id="overlay">
         <form action="/teacher" method="post" autocomplete="off">
             <h1 id="formlogo">Schooling</h1>
@@ -48,6 +56,8 @@
         </div>
         <div class='rightpanel'>
             <button class="btn" onclick="overlayOn()">Add new</button>
+            <button class="btn" id="cancelbtn" onclick="deleteTeacher()">Delete</button>
+            <div id="message" style='margin-left: 400px;display: none;'><h4>Please choose on the table</h4></div>
             <div class="mainwindow">
                 <table>
                     <tr class="header">
@@ -62,7 +72,7 @@
         </div>
     </main>
     <div id="alert">{% POPUP %}</div>
-    <script src="js/overlay.js"></script>
+    <script src="js/teacher.js"></script>
 </body>
 
 </html>

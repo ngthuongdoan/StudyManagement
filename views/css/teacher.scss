@@ -63,11 +63,17 @@
         border-style: outset;
       }
     }
-    #cancelbtn {
-      margin-right: 0px;
-      margin-left: 20px;
-      background-color: #9b9294;
-    }
+    
+  }
+}
+
+#cancelbtn {
+  margin-right: 0px;
+  margin-left: 20px;
+  background-color: #9b9294;
+  transition: background-color 0.3s ease-in-out;
+  &:hover{
+    background-color: #665f60;
   }
 }
 #alert{
@@ -77,7 +83,8 @@
   float: left;
   .btn {
     margin: 20px 40px;
-    margin-left: 850px;
+    margin-left: 750px;
+    margin-right:5px;
     width: 100px;
     background-color: rgb(252, 90, 131);
     border-radius: 10px;
@@ -118,4 +125,8 @@
       }
     }
   }
+}
+
+.activerow{
+  background-color: #a8d1d0;
 }
