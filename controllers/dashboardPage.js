@@ -23,10 +23,7 @@ exports.getMethod = (req, res) => {
       } else {
         result = popup.replacePopupTemplate(true, "{% POPUP %}", "", result);
       }
-      if (req.session.firsttime) {
-        res.end(popup.replaceTemplate("{% CONTENT %}", firsttime, result));
-      }
-      res.end(res.end(popup.replaceTemplate("{% CONTENT %}", common, result)));
+      res.end(result);
     } else {
       res.redirect("/login");
     }

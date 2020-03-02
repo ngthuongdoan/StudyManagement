@@ -16,21 +16,20 @@ exports.postMethod = (req, res) => {
     fullname:req.body.fullname,
     email:req.body.email,
     education:req.body.education,
-    firsttime:true
 });
   conn.query(
-    "INSERT INTO accounts VALUES(?,?,?,?,?,?,?);",
+    "INSERT INTO accounts VALUES(?,?,?,?,?,?);",
     user.send(),
     (error, results, fields) => {
       //POPUP ERROR IN REGISTER
       if (error) {
-        let content = error.sql;
+        let content = "All ready have!!!";
         res.send(
           popup.replacePopupTemplate(false, "{% POPUP %}", content, register)
         );
       } else {
         //SUCCESS RETURN LOGIN PAGE
-        res.redirect("/teacher");
+        res.redirect("/login");
       }
     }
   );
