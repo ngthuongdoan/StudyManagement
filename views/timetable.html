@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/timetable.css">
+    <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.8.1/dist/sweetalert2.all.min.js"></script>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <title>Timetable</title>
+</head>
+
+<body>
+    <div id="overlay">
+        <form action="/timetable" method="post" autocomplete="off">
+            <h1 id="formlogo">Schooling</h1>
+            <div class="data">
+                <label for="timetableName">Name:</label>
+                <input type="text" name="timetableName" placeholder="Name" required><br>
+                <label for="periods">Periods:</label>
+                <input type="number" name="periods" required><br>
+                    <label for="startDay">Start day:</label>
+                    <select name="startDay" id="">
+                        <option value="1" selected>Monday</option>
+                        <option value="2">Tuesday</option>
+                        <option value="3">Wednesday</option>
+                        <option value="4">Thursday</option>
+                        <option value="5">Friday</option>
+                        <option value="6">Saturday</option>
+                        <option value="7">Sunday</option>
+                    </select>
+                    <label for="endDay">End day:</label>
+                    <select name="endDay" id="">
+                        <option value="1">Monday</option>
+                        <option value="2">Tuesday</option>
+                        <option value="3">Wednesday</option>
+                        <option value="4">Thursday</option>
+                        <option value="5">Friday</option>
+                        <option value="6" selected>Saturday</option>
+                        <option value="7">Sunday</option>
+                    </select>
+                <br>
+            </div>
+            <input type="submit" class="btn" value="Submit">
+            <button type='button' class="btn" id="cancelbtn" onclick="overlayOff()">Cancel</button>
+        </form>
+    </div>
+    <main>
+        <div class="leftpanel">
+            <a href="/logout" id="logoutbtn"><ion-icon name="log-out-outline"></ion-icon></a>
+            <a id="accountlink" href="/account?id={% USERNAME %}">
+                <div class="account">
+                    <img src="{% AVATAR %}" alt="avatar">
+                    <h2 id="accountname">{% ACCOUNTNAME %}</h2>
+                </div>
+            </a>
+            <ul>
+                <li class="category"><a href="/dashboard">Home</a></li>
+                <li class="category active"><a href="/timetable">Timetable</a></li>
+                <li class="category"><a href="/subject">Subject</a></li>
+                <li class="category "><a href="/teacher">Teacher</a></li>
+                <li class="category"><a href="/logout">Logout</a></li>
+            </ul>
+            <h1 id="logo">Schooling</h1>
+        </div>
+        <div class='rightpanel'>
+            <!-- <button class="btn" onclick="overlayOn()">Add new</button>
+            <button class="btn" id="cancelbtn" onclick="deleteTeacher()">Delete</button> -->
+            <div class="mainwindow">
+                <label for="timetablename">Please choose timetable</label>
+                <select name="timetablename" id="timetablename">
+                    <option value=""></option>
+                    {% OPTION %}
+                </select>
+                <table>
+                    {% TABLE %}
+                </table>
+            </div>
+        </div>
+    </main>
+    <div id="alert">{% POPUP %}</div>
+    <script src="js/teacher.js"></script>
+    <script>
+        document.getElementById('timetablename').onchange = function() {
+            window.location.href = this.children[this.selectedIndex].getAttribute('href');
+        }
+        </script>
+</body>
+
+</html>

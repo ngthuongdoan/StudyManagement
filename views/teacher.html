@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/teacher.css">
     <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.8.1/dist/sweetalert2.all.min.js"></script>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <title>Teachers</title>
 </head>
 
@@ -39,7 +40,8 @@
     </div>
     <main>
         <div class="leftpanel">
-            <a href="/account?id={% USERNAME %}">
+            <a href="/logout" id="logoutbtn"><ion-icon name="log-out-outline"></ion-icon></a>
+            <a id="accountlink" href="/account?id={% USERNAME %}">
                 <div class="account">
                     <img src="{% AVATAR %}" alt="avatar">
                     <h2 id="accountname">{% ACCOUNTNAME %}</h2>
@@ -50,13 +52,13 @@
                 <li class="category"><a href="/timetable">Timetable</a></li>
                 <li class="category"><a href="/subject">Subject</a></li>
                 <li class="category active"><a href="/teacher">Teacher</a></li>
-                <li class="category"><a href="/logout">Logout</a></li>
+                <li class="category"><a href="/grade">Grade</a></li>
             </ul>
             <h1 id="logo">Schooling</h1>
         </div>
         <div class='rightpanel'>
             <button class="btn" onclick="overlayOn()">Add new</button>
-            <button class="btn" id="cancelbtn" onclick="deleteTeacher()">Delete</button>
+            <button class="btn" id="delbtn" onclick="deleteTeacher()">Delete</button>
             <div id="message" style='margin-left: 400px;display: none;'><h4>Please choose on the table</h4></div>
             <div class="mainwindow">
                 <table>
@@ -72,6 +74,7 @@
         </div>
     </main>
     <div id="alert">{% POPUP %}</div>
+    <script src="js/overlay.js"></script>
     <script src="js/teacher.js"></script>
 </body>
 

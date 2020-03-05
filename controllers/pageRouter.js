@@ -1,12 +1,12 @@
 const express = require("express");
 const fs = require("fs");
-const loginRouter = require("./loginPage");
-const registerRouter = require("./registerPage");
-const dashboardRouter = require("./dashboardPage");
-const teacherRouter = require("./teacherPage");
+const loginRouter = require("./loginRouter");
+const registerRouter = require("./registerRouter");
+const dashboardRouter = require("./dashboardRouter");
+const teacherRouter = require("./teacherRouter");
 const deleteTeacher = require("./teacherDelete");
-
-
+const timetableRouter = require("./timetableRouter");
+const subjectRouter = require("./subjectRouter");
 const notfound = fs.readFileSync(`${__dirname}/../views/notfound.html`);
 
 const router = express.Router();
@@ -47,8 +47,19 @@ router
 router
   .route("/teacher")
   .get((req, res) => teacherRouter.getMethod(req, res))
-  .post((req, res) => teacherRouter.postMethod(req, res))
+  .post((req, res) => teacherRouter.postMethod(req, res));
 
-router.route('/delete-teacher').post((req, res)=>deleteTeacher.postMethod(req,res))
+router
+  .route("/delete-teacher")
+  .post((req, res) => deleteTeacher.postMethod(req, res));
+
+router
+  .route("/timetable")
+  .get((req, res) => timetableRouter.getMethod(req, res));
+
+router
+  .route("/subject")
+  .get((req, res) => subjectRouter.getMethod(req, res))
+  .post((req, res) => subjectRouter.postMethod(req, res));
 
 module.exports = router;

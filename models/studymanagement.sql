@@ -7,8 +7,7 @@ create table accounts(
     fullname nvarchar(40) not null,
     accountEmail varchar(100) not null,
     education nvarchar(100),
-    avatar varchar(300),
-    firsttime boolean not null
+    avatar varchar(300)
 );
 drop table accounts;
 create table timetable(
@@ -22,20 +21,24 @@ create table timetable(
 );
 drop table timetable;
 create table teacher(
+	username varchar(50) references accounts(username),
     teacherName nvarchar(50) not null,
     teacherEmail varchar(100) not null,
     teacherNumber varchar(10),
-    primary key (teacherName, teacherEmail)
+    primary key (username, teacherName, teacherEmail)
 );
 drop table teacher;
 create table subjects(
-	idSubject varchar(10) primary key,
+	username varchar(20) references accounts(username),
+	idSubject varchar(10) not null,
 	teacherName nvarchar(50) references teacher(teacherName),
     teacherEmail nvarchar(50) references teacher(teacherEmail),
     subjectName nvarchar(50) not null,
     room varchar(20),
     studyTime varchar(100) not null,
-    note nvarchar(400)
+    target varchar(4) not null,
+    note nvarchar(400),
+    primary key(username,idSubject)
 );
 drop table subjects;
 create table include(
@@ -53,15 +56,15 @@ create table grade(
 );
 drop table grade;
 -- insert data
---     12345678 for monday,tuesday,wednesday,thursday,friday,saturday,sunday
+--     1234567 for monday,tuesday,wednesday,thursday,friday,saturday,sunday
 insert into timetable values('ngthuongdoan','Untitled 1',9,1,6);
 insert into timetable values('ngthuongdoan','Untitled 2',9,1,6);
 
-insert into teacher value('Thái Minh Tuấn','tmtuan@cit.ctu.edu.vn','');
-insert into teacher value('Huỳnh Quang Nghi','hqnghi@cit.ctu.edu.vn','');
+insert into teacher value('ngthuongdoan','Thái Minh Tuấn','tmtuan@cit.ctu.edu.vn','');
+insert into teacher value('ngthuongdoan','Huỳnh Quang Nghi','hqnghi@cit.ctu.edu.vn','0123456789');
 
-insert into subjects values('CT22301','Thái Minh Tuấn','tmtuan@cit.ctu.edu.vn','Quản lý dự án phần mềm','203/C1','Tuesday 345','');
-insert into subjects values('CT24601','Huỳnh Quang Nghi','hqnghi@cit.ctu.edu.vn','.NET','TH24DI','Thursday 15','');
+insert into subjects values('ngthuongdoan','CT22301','Thái Minh Tuấn','tmtuan@cit.ctu.edu.vn','Quản lý dự án phần mềm','203/C1','Tuesday 345','8.5','');
+insert into subjects values('ngthuongdoan','CT24601','Huỳnh Quang Nghi','hqnghi@cit.ctu.edu.vn','.NET','TH24DI','Thursday 15','7.2','');
 
 insert into include values('CT22301','Untitled 1','ngthuongdoan');
 insert into include values('CT24601','Untitled 2','ngthuongdoan');
@@ -72,7 +75,6 @@ insert into grade value('CT22301','7','Giữa kì');
 select * from sessions;
 select * from accounts;
 select * from timetable;
-select * from teacher;
 select * from subjects;
 select * from include;
 select * from grade;

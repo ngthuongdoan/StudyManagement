@@ -2,6 +2,7 @@ const popup = require("./replaceTemplate");
 const session = require("./session");
 const conn = require("../models/connection");
 const fs = require("fs");
+const QuickSort = require("./quicksort");
 const Teacher = require("./classes/Teacher");
 const teacherPage = fs.readFileSync(`${__dirname}/../views/teacher.html`);
 let resultPage = teacherPage;
@@ -9,24 +10,32 @@ let resultPage = teacherPage;
 exports.getMethod = (req, res) => {
   if (session.sessionCheck(req, res)) {
     if (req.session.loggedin) {
-      let query = `select a.* from teacher as a
-      where
-          a.username=?;`;
+      let query = `select * from teacher where username=?;`;
       conn.query(query, [req.session.username], (error, results, fields) => {
-        results.forEach(result => {
-          let obj = {
-            name: result.teacherName,
-            email: result.teacherEmail,
-            number: result.teacherNumber
-          };
-          let teacher = new Teacher(obj);
-          let data = `<tr class='teacher'>
-            <td>${teacher.name}</td>
-            <td>${teacher.email}</td>
-            <td>${teacher.number}</td>
-        </tr>`;
-          fs.appendFileSync(`${__dirname}/../views/teacher-data.html`, data);
-        });
+        let arr = [];
+        results.forEach(result => arr.push(result.teacherName));
+        const teacherNames = QuickSort(arr);
+        for (i = 0; i < teacherNames.length; i++) {
+          for (j = 0; j < results.length; j++) {
+            if (results[j].teacherName == teacherNames[i]) {
+              let obj = {
+                name: results[j].teacherName,
+                email: results[j].teacherEmail,
+                number: results[j].teacherNumber
+              };
+              let teacher = new Teacher(obj);
+              let data = `<tr class='teacher'>
+                  <td>${teacher.name}</td>
+                  <td>${teacher.email}</td>
+                  <td>${teacher.number}</td>
+              </tr>`;
+              fs.appendFileSync(
+                `${__dirname}/../views/teacher-data.html`,
+                data
+              );
+            }
+          }
+        }
         const teacherdata = fs.readFileSync(
           `${__dirname}/../views/teacher-data.html`
         );
@@ -56,16 +65,23 @@ exports.postMethod = (req, res) => {
     email: req.body.teacherEmail,
     number: req.body.teacherNumber
   });
-  console.table(teacher)
+  console.table(teacher);
   conn.query(
     "INSERT INTO teacher VALUES(?,?,?,?);",
-    [req.session.username,teacher.name, teacher.email, teacher.number],
+    [req.session.username, teacher.name, teacher.email, teacher.number],
     (error, results, fields) => {
       //POPUP ERROR IN TEACHER
       if (error) {
-        res.end(popup.replacePopupTemplate(false, "{% POPUP %}", "Duplicate", resultPage));
-      }else{
-        res.redirect('/teacher');
+        res.end(
+          popup.replacePopupTemplate(
+            false,
+            "{% POPUP %}",
+            "Duplicate",
+            resultPage
+          )
+        );
+      } else {
+        res.redirect("/teacher");
       }
     }
   );
