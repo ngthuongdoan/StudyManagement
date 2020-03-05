@@ -8,6 +8,7 @@
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/home.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.8.1/dist/sweetalert2.all.min.js"></script>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
     <title>Dashboard</title>
 </head>
@@ -15,7 +16,8 @@
 <body>
     <main>
         <div class="leftpanel">
-            <a href="/account?id={% USERNAME %}">
+            <a href="/logout" id="logoutbtn"><ion-icon name="log-out-outline"></ion-icon></a>
+            <a id="accountlink" href="/account?id={% USERNAME %}">
                 <div class="account">
                     <img src="{% AVATAR %}" alt="avatar">
                     <h2 id="accountname">{% ACCOUNTNAME %}</h2>
@@ -31,10 +33,11 @@
             <h1 id="logo">Schooling</h1>
         </div>
         <div class='rightpanel'>
-            {% CONTENT %}
+            <h1 id="title">Welcome</h1>
+            <h2 id="subtitle">to <span id="sublogo">Schooling</span></h2>
         </div>
     </main>
-    {% POPUP %}
+    <!-- {% POPUP %} -->
 </body>
 
 </html>

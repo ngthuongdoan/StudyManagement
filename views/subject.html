@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <meta http-equiv="refresh" content=""> -->
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="css/subject.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.8.1/dist/sweetalert2.all.min.js"></script>
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
+    <title>Subject</title>
+</head>
+
+<body>
+    <div id="overlay">
+        <form action="/subject" method="post" autocomplete="off">
+            <h1 id="formlogo">Schooling</h1>
+            <div class="data">
+                <label for="idSubject">ID Subject:</label>
+                <input type="text" name="idSubject" placeholder="CT112012" required><br>
+                <label for="subjectName">Subject Name:</label>
+                <input type="text" name="subjectName" placeholder="Mạng máy tính" required><br>
+                <label for="teacherName">Teacher Name:</label>
+                <select name="teacherName" id="">
+                    {% TEACHER %}
+                </select>
+                <label for="room">Room:</label>
+                <input type="text" name="room"  placeholder="101/C1"><br>
+                <label for="target">Target:</label>
+                <input type="number" name="target" step="0.1" required><br>
+                <label for="note">Note:</label>
+                <textarea name="note" id="" cols="25" rows="5"></textarea>
+            </div>
+            <input type="submit" class="btn" value="Submit">
+            <button type='button' class="btn" id="cancelbtn" onclick="overlayOff()">Cancel</button>
+            
+        </form>
+    </div>
+    <main>
+        <div class="leftpanel">
+            <a href="/logout" id="logoutbtn"><ion-icon name="log-out-outline"></ion-icon></a>
+            <a id="accountlink" href="/account?id={% USERNAME %}">
+                <div class="account">
+                    <img src="{% AVATAR %}" alt="avatar">
+                    <h2 id="accountname">{% ACCOUNTNAME %}</h2>
+                </div>
+            </a>
+            <ul>
+                <li class="category"><a href="/dashboard">Home</a></li>
+                <li class="category"><a href="/timetable">Timetable</a></li>
+                <li class="category active"><a href="/subject">Subject</a></li>
+                <li class="category"><a href="/teacher">Teacher</a></li>
+                <li class="category"><a href="/logout">Logout</a></li>
+            </ul>
+            <h1 id="logo">Schooling</h1>
+        </div>
+        <div class='rightpanel'>
+            <button class="btn" onclick="overlayOn()">Add new</button>
+            <button class="btn" id="delbtn" onclick="deleteTeacher()">Delete</button>
+            <div class="content">
+                {% CARDS %}
+            </div>
+        </div>
+    </main>
+    <script src="js/overlay.js"></script>
+</body>
+
+</html>

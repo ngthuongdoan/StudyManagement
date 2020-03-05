@@ -2,8 +2,6 @@ const fs = require("fs");
 const session = require("./session");
 const popup = require("./replaceTemplate");
 
-const firsttime = fs.readFileSync(`${__dirname}/../views/firsttime.html`);
-const common = fs.readFileSync(`${__dirname}/../views/common.html`);
 const dashboard = fs.readFileSync(`${__dirname}/../views/dashboard.html`);
 
 exports.getMethod = (req, res) => {
@@ -23,10 +21,7 @@ exports.getMethod = (req, res) => {
       } else {
         result = popup.replacePopupTemplate(true, "{% POPUP %}", "", result);
       }
-      if (req.session.firsttime) {
-        res.end(popup.replaceTemplate("{% CONTENT %}", firsttime, result));
-      }
-      res.end(res.end(popup.replaceTemplate("{% CONTENT %}", common, result)));
+      res.end(result);
     } else {
       res.redirect("/login");
     }

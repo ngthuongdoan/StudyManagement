@@ -37,6 +37,7 @@ const options = {
 };
 
 const sessionStore = new MySQLStore(options, conn);
+
 app.use(morgan("dev"));
 
 // app.use('truth proxy', true);

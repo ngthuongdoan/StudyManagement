@@ -143,7 +143,7 @@ body main .leftpanel ul li a:hover {
 #overlay form {
   text-align: center;
   width: 400px;
-  height: 400px;
+  height: 450px;
   background-color: white;
   margin: 60px auto;
   -webkit-box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.6);
@@ -203,7 +203,7 @@ body main .leftpanel ul li a:hover {
   border-style: outset;
 }
 
-#cancelbtn, #delbtn {
+#cancelbtn {
   margin-right: 0px;
   margin-left: 20px;
   background-color: #9b9294;
@@ -211,7 +211,7 @@ body main .leftpanel ul li a:hover {
   transition: background-color 0.3s ease-in-out;
 }
 
-#cancelbtn:hover, #delbtn:hover {
+#cancelbtn:hover {
   background-color: #665f60;
 }
 
@@ -245,6 +245,20 @@ body main .leftpanel ul li a:hover {
           box-shadow: #5a5454 0px 0px 2px;
 }
 
+.rightpanel label {
+  display: inline-block;
+  font-weight: bold;
+  margin-left: 620px;
+  padding-top: 20px;
+}
+
+.rightpanel #timetablename {
+  margin-top: 20px;
+  z-index: 10;
+  float: right;
+  font-size: 18px;
+}
+
 .rightpanel .mainwindow {
   margin-top: 10px;
   min-width: 1000px;
@@ -255,6 +269,7 @@ body main .leftpanel ul li a:hover {
 .rightpanel .mainwindow table {
   text-align: center;
   width: 950px;
+  padding-top: 30px;
   margin-left: 30px;
 }
 
@@ -269,7 +284,7 @@ body main .leftpanel ul li a:hover {
 
 .rightpanel .mainwindow table tr:not(:first-child) th,
 .rightpanel .mainwindow table tr:not(:first-child) td {
-  padding: 10px 0px;
+  padding: 20px 0px;
   border-left: 2px rgba(0, 0, 0, 0.3) solid;
   border-bottom: 2px rgba(0, 0, 0, 0.3) solid;
 }
@@ -279,7 +294,8 @@ body main .leftpanel ul li a:hover {
   border-left: none;
 }
 
-.activerow {
-  background-color: #a8d1d0;
+select {
+  width: 180px;
+  font-size: 16px;
 }
-/*# sourceMappingURL=teacher.css.map */
+/*# sourceMappingURL=timetable.css.map */

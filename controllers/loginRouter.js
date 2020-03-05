@@ -24,7 +24,6 @@ exports.postMethod = (req, res) => {
           req.session.username = username;
           req.session.fullname = results[0].fullname;
           req.session.avatar = results[0].avatar;
-          req.session.firsttime = results[0].firsttime;
           //CHECK TO SHOW INITIAL PAGE
           res.redirect("/dashboard");
         } else {
