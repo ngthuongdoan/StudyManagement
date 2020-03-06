@@ -59,28 +59,29 @@ exports.getMethod = (req, res) => {
                   data
                 );
               });
+              const teacherData = fs.readFileSync(
+                `${__dirname}/../views/teacher-name.html`
+              );
+              const subjectdata = fs.readFileSync(
+                `${__dirname}/../views/subject-data.html`
+              );
+              resultPage = popup.replaceTemplate(
+                "{% TEACHER %}",
+                teacherData,
+                subjectPage
+              );
+              resultPage = popup.replaceAccountTemplate(req.session, resultPage);
+              resultPage = popup.replaceTemplate(
+                "{% CARDS %}",
+                subjectdata,
+                resultPage
+              );
+              fs.writeFileSync(`${__dirname}/../views/teacher-name.html`, "");
+              fs.writeFileSync(`${__dirname}/../views/subject-data.html`, "");
+              res.end(resultPage);
             }
           );
-          const teacherData = fs.readFileSync(
-            `${__dirname}/../views/teacher-name.html`
-          );
-          const subjectdata = fs.readFileSync(
-            `${__dirname}/../views/subject-data.html`
-          );
-          resultPage = popup.replaceTemplate(
-            "{% TEACHER %}",
-            teacherData,
-            subjectPage
-          );
-          resultPage = popup.replaceAccountTemplate(req.session, resultPage);
-          resultPage = popup.replaceTemplate(
-            "{% CARDS %}",
-            subjectdata,
-            resultPage
-          );
-          fs.writeFileSync(`${__dirname}/../views/teacher-name.html`, "");
-          fs.writeFileSync(`${__dirname}/../views/subject-data.html`, "");
-          res.end(resultPage);
+          
         }
       );
     } else {
