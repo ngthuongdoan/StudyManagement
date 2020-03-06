@@ -15,6 +15,12 @@
 </head>
 
 <body>
+    <div style="display: none;">
+        <form action="/delete-subject" method="POST" id="delete" >
+            <input type="text" name="idSubject" id="delid" value="">
+            <input type="submit" value="" id="delBtn">
+        </form>
+    </div>
     <div id="overlay">
         <form action="/subject" method="post" autocomplete="off">
             <h1 id="formlogo">Schooling</h1>
@@ -36,7 +42,6 @@
             </div>
             <input type="submit" class="btn" value="Submit">
             <button type='button' class="btn" id="cancelbtn" onclick="overlayOff()">Cancel</button>
-
         </form>
     </div>
     <main>
@@ -61,13 +66,15 @@
         </div>
         <div class='rightpanel'>
             <button class="btn" onclick="overlayOn()">Add new</button>
-            <button class="btn" id="delbtn" onclick="deleteTeacher()">Delete</button>
+            <button class="btn" id="delbtn" onclick="deleteSubject()">Delete</button>
+            <div id="message" style='margin-left: 400px;display: none;'><h4>Please choose the card</h4></div>
             <div class="content">
                 {% CARDS %}
             </div>
         </div>
     </main>
     <script src="js/overlay.js"></script>
+    <script src="js/subject.js"></script>
 </body>
 
 </html>

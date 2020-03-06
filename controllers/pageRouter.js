@@ -7,6 +7,7 @@ const teacherRouter = require("./teacherRouter");
 const deleteTeacher = require("./teacherDelete");
 const timetableRouter = require("./timetableRouter");
 const subjectRouter = require("./subjectRouter");
+const deleteSubject = require('./subjectDelete')
 const notfound = fs.readFileSync(`${__dirname}/../views/notfound.html`);
 
 const router = express.Router();
@@ -61,5 +62,7 @@ router
   .route("/subject")
   .get((req, res) => subjectRouter.getMethod(req, res))
   .post((req, res) => subjectRouter.postMethod(req, res));
+
+router.route('/delete-subject').post((req,res)=>deleteSubject.postMethod(req,res));
 
 module.exports = router;

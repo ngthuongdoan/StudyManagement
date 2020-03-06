@@ -2,8 +2,15 @@ const deleteTeacher = () => {
   document.getElementById("message").style.display = "block";
   let btn = document.getElementById("delbtn");
   btn.textContent = "Cancel";
-  btn.addEventListener("click", init);
+  btn.addEventListener("click", ()=>{
+    window.location.reload()
+  });
+
   const data = document.getElementsByClassName("teacher");
+  submitForm(data);
+};
+
+const submitForm = data => {
   for (const el of data) {
     el.classList.add("activerow");
     el.addEventListener("click", () => {
@@ -19,9 +26,4 @@ const deleteTeacher = () => {
       document.getElementById("delete").submit();
     });
   }
-};
-
-const init = () => {
-  document.getElementById("message").style.display = "none";
-  document.getElementById("delbtn").textContent = "Delete";
 };
