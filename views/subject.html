@@ -28,7 +28,7 @@
                     {% TEACHER %}
                 </select>
                 <label for="room">Room:</label>
-                <input type="text" name="room"  placeholder="101/C1"><br>
+                <input type="text" name="room" placeholder="101/C1"><br>
                 <label for="target">Target:</label>
                 <input type="number" name="target" step="0.1" required><br>
                 <label for="note">Note:</label>
@@ -36,12 +36,14 @@
             </div>
             <input type="submit" class="btn" value="Submit">
             <button type='button' class="btn" id="cancelbtn" onclick="overlayOff()">Cancel</button>
-            
+
         </form>
     </div>
     <main>
         <div class="leftpanel">
-            <a href="/logout" id="logoutbtn"><ion-icon name="log-out-outline"></ion-icon></a>
+            <a href="/logout" id="logoutbtn">
+                <ion-icon name="log-out-outline"></ion-icon>
+            </a>
             <a id="accountlink" href="/account?id={% USERNAME %}">
                 <div class="account">
                     <img src="{% AVATAR %}" alt="avatar">
@@ -53,7 +55,7 @@
                 <li class="category"><a href="/timetable">Timetable</a></li>
                 <li class="category active"><a href="/subject">Subject</a></li>
                 <li class="category"><a href="/teacher">Teacher</a></li>
-                <li class="category"><a href="/logout">Logout</a></li>
+                <li class="category"><a href="/grade">Grade</a></li>
             </ul>
             <h1 id="logo">Schooling</h1>
         </div>

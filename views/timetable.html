@@ -22,26 +22,26 @@
                 <input type="text" name="timetableName" placeholder="Name" required><br>
                 <label for="periods">Periods:</label>
                 <input type="number" name="periods" required><br>
-                    <label for="startDay">Start day:</label>
-                    <select name="startDay" id="">
-                        <option value="1" selected>Monday</option>
-                        <option value="2">Tuesday</option>
-                        <option value="3">Wednesday</option>
-                        <option value="4">Thursday</option>
-                        <option value="5">Friday</option>
-                        <option value="6">Saturday</option>
-                        <option value="7">Sunday</option>
-                    </select>
-                    <label for="endDay">End day:</label>
-                    <select name="endDay" id="">
-                        <option value="1">Monday</option>
-                        <option value="2">Tuesday</option>
-                        <option value="3">Wednesday</option>
-                        <option value="4">Thursday</option>
-                        <option value="5">Friday</option>
-                        <option value="6" selected>Saturday</option>
-                        <option value="7">Sunday</option>
-                    </select>
+                <label for="startDay">Start day:</label>
+                <select name="startDay" id="">
+                    <option value="1" selected>Monday</option>
+                    <option value="2">Tuesday</option>
+                    <option value="3">Wednesday</option>
+                    <option value="4">Thursday</option>
+                    <option value="5">Friday</option>
+                    <option value="6">Saturday</option>
+                    <option value="7">Sunday</option>
+                </select>
+                <label for="endDay">End day:</label>
+                <select name="endDay" id="">
+                    <option value="1">Monday</option>
+                    <option value="2">Tuesday</option>
+                    <option value="3">Wednesday</option>
+                    <option value="4">Thursday</option>
+                    <option value="5">Friday</option>
+                    <option value="6" selected>Saturday</option>
+                    <option value="7">Sunday</option>
+                </select>
                 <br>
             </div>
             <input type="submit" class="btn" value="Submit">
@@ -50,7 +50,9 @@
     </div>
     <main>
         <div class="leftpanel">
-            <a href="/logout" id="logoutbtn"><ion-icon name="log-out-outline"></ion-icon></a>
+            <a href="/logout" id="logoutbtn">
+                <ion-icon name="log-out-outline"></ion-icon>
+            </a>
             <a id="accountlink" href="/account?id={% USERNAME %}">
                 <div class="account">
                     <img src="{% AVATAR %}" alt="avatar">
@@ -62,7 +64,7 @@
                 <li class="category active"><a href="/timetable">Timetable</a></li>
                 <li class="category"><a href="/subject">Subject</a></li>
                 <li class="category "><a href="/teacher">Teacher</a></li>
-                <li class="category"><a href="/logout">Logout</a></li>
+                <li class="category "><a href="/grade">Grade</a></li>
             </ul>
             <h1 id="logo">Schooling</h1>
         </div>
@@ -84,10 +86,10 @@
     <div id="alert">{% POPUP %}</div>
     <script src="js/teacher.js"></script>
     <script>
-        document.getElementById('timetablename').onchange = function() {
+        document.getElementById('timetablename').onchange = function () {
             window.location.href = this.children[this.selectedIndex].getAttribute('href');
         }
-        </script>
+    </script>
 </body>
 
 </html>
