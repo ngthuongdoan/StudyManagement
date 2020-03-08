@@ -25,80 +25,73 @@ const getDay = num => {
   }
 };
 
+const optionPage = (state, results, req) => {
+  if (!state) {
+    results.forEach(result => {
+      const timetableName = result.timetableName;
+      const data = `<option value='${timetableName}' href='/timetable?timetableName=${timetableName}'>${timetableName}</option><br>`;
+      fs.appendFileSync(`${__dirname}/../views/option.html`, data);
+    });
+  } else {
+    results.forEach(result => {
+      const timetableName = result.timetableName;
+      const selected = url.parse(req.url, true).query.timetableName;
+      const data =
+        selected == timetableName
+          ? `<option value='${timetableName}' href='/timetable?timetableName=${timetableName}' selected>${timetableName}</option><br>`
+          : `<option value='${timetableName}' href='/timetable?timetableName=${timetableName}'>${timetableName}</option><br>`;
+      fs.appendFileSync(`${__dirname}/../views/option.html`, data);
+    });
+  }
+};
+
+const displayPage = (req, res) => {
+  let option = fs.readFileSync(`${__dirname}/../views/option.html`);
+  let timetable = fs.readFileSync(`${__dirname}/../views/timetable-data.html`);
+  resultPage = popup.replaceAccountTemplate(req.session, timetablePage);
+  resultPage = popup.replaceTemplate("{% TABLE %}", timetable, resultPage);
+  resultPage = popup.replaceTemplate("{% OPTION %}", option, resultPage);
+  fs.writeFileSync(`${__dirname}/../views/timetable-data.html`, "");
+  fs.writeFileSync(`${__dirname}/../views/option.html`, "");
+  res.end(resultPage);
+};
+
+const timetableData = result => {
+  let dataHeader = "<tr>";
+  let arr = [];
+  for (i = result.startDay; i <= result.endDay; i++) arr.push(getDay(i));
+  arr.forEach(el => dataHeader += `<th>${el}</th>`);
+  dataHeader += "</tr>";
+  fs.appendFileSync(`${__dirname}/../views/timetable-data.html`, dataHeader);
+  let dataRow = "";
+  for (row = 1; row <= result.periods; row++) {
+    dataRow += "<tr>";
+    for (col = 1; col <= result.endDay; col++) dataRow += "<td></td>";
+    dataRow += "</tr>";
+  }
+  fs.appendFileSync(`${__dirname}/../views/timetable-data.html`, dataRow);
+};
+
 exports.getMethod = (req, res) => {
   if (session.sessionCheck(req, res)) {
     if (req.session.loggedin) {
-      if (req.query.timetableName!==undefined) {
+      if (req.query.timetableName !== undefined) {
         conn.query(
           "SELECT * FROM timetable WHERE username=?",
           [req.session.username],
           (error, results, fields) => {
-            results.forEach(result => {
-              const timetableName = result.timetableName;
-              const selected = url.parse(req.url, true).query.timetableName;
-              const data =
-                selected == timetableName
-                  ? `<option value='${timetableName}' href='/timetable?timetableName=${timetableName}' selected>${timetableName}</option><br>`
-                  : `<option value='${timetableName}' href='/timetable?timetableName=${timetableName}'>${timetableName}</option><br>`;
-              fs.appendFileSync(`${__dirname}/../views/option.html`, data);
-            });
+            //CREATE OPTION LIST
+            optionPage(req.query.timetableName !== undefined, results, req);
             let timetableName = url.parse(req.url, true).query.timetableName;
             conn.query(
               "SELECT * FROM timetable WHERE username=? AND timetableName=?",
               [req.session.username, timetableName],
               (error, results, fields) => {
                 results.forEach(result => {
-                  let dataHeader = "<tr>";
-                  let arr = [];
-                  for (i = result.startDay; i <= result.endDay; i++)
-                    arr.push(getDay(i));
-                  arr.forEach(el => {
-                    dataHeader += `<th>${el}</th>`;
-                  });
-                  dataHeader += "</tr>";
-                  fs.appendFileSync(
-                    `${__dirname}/../views/timetable-data.html`,
-                    dataHeader
-                  );
-                  let dataRow = "";
-                  for (row = 1; row <= result.periods; row++) {
-                    dataRow += "<tr>";
-                    for (col = 1; col <= result.endDay; col++) {
-                      dataRow += "<td></td>";
-                    }
-                    dataRow += "</tr>";
-                  }
-
-                  fs.appendFileSync(
-                    `${__dirname}/../views/timetable-data.html`,
-                    dataRow
-                  );
-                  let option = fs.readFileSync(
-                    `${__dirname}/../views/option.html`
-                  );
-                  let timetable = fs.readFileSync(
-                    `${__dirname}/../views/timetable-data.html`
-                  );
-                  resultPage = popup.replaceAccountTemplate(
-                    req.session,
-                    timetablePage
-                  );
-                  resultPage = popup.replaceTemplate(
-                    "{% TABLE %}",
-                    timetable,
-                    resultPage
-                  );
-                  resultPage = popup.replaceTemplate(
-                    "{% OPTION %}",
-                    option,
-                    resultPage
-                  );
-                  fs.writeFileSync(
-                    `${__dirname}/../views/timetable-data.html`,
-                    ""
-                  );
-                  fs.writeFileSync(`${__dirname}/../views/option.html`, "");
-                  res.end(resultPage);
+                  //CREATE TIMETABLE
+                  timetableData(result);
+                  //RES END
+                  displayPage(req, res);
                 });
               }
             );
@@ -109,24 +102,10 @@ exports.getMethod = (req, res) => {
           "SELECT * FROM timetable WHERE username=?",
           [req.session.username],
           (error, results, fields) => {
-            results.forEach(result => {
-              const timetableName = result.timetableName;
-              const data = `<option value='${timetableName}' href='/timetable?timetableName=${timetableName}'>${timetableName}</option><br>`;
-              fs.appendFileSync(`${__dirname}/../views/option.html`, data);
-            });
-            let option = fs.readFileSync(`${__dirname}/../views/option.html`);
-            resultPage = popup.replaceAccountTemplate(
-              req.session,
-              timetablePage
-            );
-            resultPage = popup.replaceTemplate("{% TABLE %}", "", resultPage);
-            resultPage = popup.replaceTemplate(
-              "{% OPTION %}",
-              option,
-              resultPage
-            );
-            fs.writeFileSync(`${__dirname}/../views/option.html`, "");
-            res.end(resultPage);
+            //CREATE OPTION LIST
+            optionPage(req.query.timetableName !== undefined, results, req);
+            //RES END
+            displayPage(req, res);
           }
         );
       }
