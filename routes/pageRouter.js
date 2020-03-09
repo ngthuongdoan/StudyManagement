@@ -7,19 +7,21 @@ const teacherRouter = require("./teacherRouter");
 const deleteTeacher = require("./teacherDelete");
 const timetableRouter = require("./timetableRouter");
 const subjectRouter = require("./subjectRouter");
-const deleteSubject = require('./subjectDelete')
+const deleteSubject = require("./subjectDelete");
 const notfound = fs.readFileSync(`${__dirname}/../views/notfound.html`);
 
 const router = express.Router();
 
 //ROOT
-router.route("/").get((req, res) => dashboardRouter.getMethod(req, res));
-
+router.use("/", dashboardRouter);
+router.use("/dashboard", dashboardRouter);
 //LOGIN
-router
-  .route("/login")
-  .get((req, res) => loginRouter.getMethod(req, res))
-  .post((req, res) => loginRouter.postMethod(req, res));
+router.use("/login", loginRouter);
+router.use("/register", registerRouter);
+router.use("/teacher", teacherRouter);
+router.use("/timetable", timetableRouter);
+router.use("/subject", subjectRouter);
+
 
 ///LOGOUT
 router.route("/logout").get((req, res) => {
@@ -27,12 +29,6 @@ router.route("/logout").get((req, res) => {
   req.session.destroy();
   res.redirect("/login");
 });
-
-//REGISTER
-router
-  .route("/register")
-  .get((req, res) => registerRouter.getMethod(req, res))
-  .post((req, res) => registerRouter.postMethod(req, res));
 
 //FORGET PAGE
 //404 NOTFOUND
@@ -42,27 +38,11 @@ router.route("/notfound").get((req, res) => {
 
 //DASHBOARD
 router
-  .route("/dashboard")
-  .get((req, res) => dashboardRouter.getMethod(req, res));
-
-router
-  .route("/teacher")
-  .get((req, res) => teacherRouter.getMethod(req, res))
-  .post((req, res) => teacherRouter.postMethod(req, res));
-
-router
   .route("/delete-teacher")
   .post((req, res) => deleteTeacher.postMethod(req, res));
-
 router
-  .route("/timetable")
-  .get((req, res) => timetableRouter.getMethod(req, res));
+  .route("/delete-subject")
+  .post((req, res) => deleteSubject.postMethod(req, res));
 
-router
-  .route("/subject")
-  .get((req, res) => subjectRouter.getMethod(req, res))
-  .post((req, res) => subjectRouter.postMethod(req, res));
-
-router.route('/delete-subject').post((req,res)=>deleteSubject.postMethod(req,res));
 
 module.exports = router;

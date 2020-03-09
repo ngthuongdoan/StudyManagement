@@ -1,10 +1,12 @@
 const fs = require("fs");
+const express = require("express");
 const url = require("url");
 const conn = require("../models/connection");
 const session = require("../controllers/session");
 const popup = require("../controllers/replaceTemplate");
 const timetablePage = fs.readFileSync(`${__dirname}/../views/timetable.html`);
 let resultPage = timetablePage;
+const router = express.Router();
 
 const getDay = num => {
   switch (num) {
@@ -60,7 +62,7 @@ const timetableData = result => {
   let dataHeader = "<tr>";
   let arr = [];
   for (i = result.startDay; i <= result.endDay; i++) arr.push(getDay(i));
-  arr.forEach(el => dataHeader += `<th>${el}</th>`);
+  arr.forEach(el => (dataHeader += `<th>${el}</th>`));
   dataHeader += "</tr>";
   fs.appendFileSync(`${__dirname}/../views/timetable-data.html`, dataHeader);
   let dataRow = "";
@@ -72,7 +74,7 @@ const timetableData = result => {
   fs.appendFileSync(`${__dirname}/../views/timetable-data.html`, dataRow);
 };
 
-exports.getMethod = (req, res) => {
+router.get("/", (req, res) => {
   if (session.sessionCheck(req, res)) {
     if (req.session.loggedin) {
       if (req.query.timetableName !== undefined) {
@@ -115,4 +117,6 @@ exports.getMethod = (req, res) => {
   } else {
     res.redirect("/login");
   }
-};
+});
+
+module.exports = router;

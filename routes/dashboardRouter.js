@@ -1,10 +1,11 @@
 const fs = require("fs");
+const express = require("express");
 const session = require("../controllers/session");
 const popup = require("../controllers/replaceTemplate");
-
+const router = express.Router();
 const dashboard = fs.readFileSync(`${__dirname}/../views/dashboard.html`);
 
-exports.getMethod = (req, res) => {
+router.get("/", (req, res) => {
   //CHECK IF SESSION NOT EXPERIED
   if (session.sessionCheck(req, res)) {
     if (req.session.loggedin) {
@@ -29,4 +30,6 @@ exports.getMethod = (req, res) => {
     //PREVENT TO LOGIN /dashboard BY URL
     res.redirect("/login");
   }
-};
+});
+
+module.exports = router;
