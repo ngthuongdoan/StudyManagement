@@ -1,7 +1,7 @@
 const fs = require("fs");
 const conn = require("../models/connection");
-const popup = require("./replaceTemplate");
-const User = require("./classes/User");
+const popup = require("../controllers/replaceTemplate");
+const User = require("../controllers/classes/User");
 
 const register = fs.readFileSync(`${__dirname}/../views/register.html`);
 

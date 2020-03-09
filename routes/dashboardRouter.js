@@ -1,6 +1,6 @@
 const fs = require("fs");
-const session = require("./session");
-const popup = require("./replaceTemplate");
+const session = require("../controllers/session");
+const popup = require("../controllers/replaceTemplate");
 
 const dashboard = fs.readFileSync(`${__dirname}/../views/dashboard.html`);
 

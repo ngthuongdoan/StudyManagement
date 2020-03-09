@@ -1,8 +1,8 @@
 const fs = require("fs");
 const url = require("url");
 const conn = require("../models/connection");
-const session = require("./session");
-const popup = require("./replaceTemplate");
+const session = require("../controllers/session");
+const popup = require("../controllers/replaceTemplate");
 const timetablePage = fs.readFileSync(`${__dirname}/../views/timetable.html`);
 let resultPage = timetablePage;
 

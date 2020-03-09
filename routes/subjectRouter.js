@@ -1,9 +1,9 @@
 const fs = require("fs");
 const conn = require("../models/connection");
-const session = require("./session");
-const QuickSort = require("./quicksort");
-const popup = require("./replaceTemplate");
-const Subject = require("./classes/Subject");
+const session = require("../controllers/session");
+const QuickSort = require("../controllers/quicksort");
+const popup = require("../controllers/replaceTemplate");
+const Subject = require("../controllers/classes/Subject");
 const subjectPage = fs.readFileSync(`${__dirname}/../views/subject.html`);
 let resultPage;
 

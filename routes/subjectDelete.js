@@ -1,5 +1,5 @@
 const conn = require("../models/connection");
-const Subject = require('./classes/Subject');
+const Subject = require('../controllers/classes/Subject');
 
 exports.postMethod = (req, res) => {
     const subject = new Subject({

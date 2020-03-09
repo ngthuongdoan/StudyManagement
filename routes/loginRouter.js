@@ -1,7 +1,7 @@
 const fs = require("fs");
 const bcrypt = require("bcrypt");
 const conn = require("../models/connection");
-const popup = require("./replaceTemplate");
+const popup = require("../controllers/replaceTemplate");
 const login = fs.readFileSync(`${__dirname}/../views/login.html`);
 
 exports.getMethod = (req, res) => {

@@ -1,5 +1,5 @@
 const conn = require("../models/connection");
-const Teacher = require('./classes/Teacher');
+const Teacher = require('../controllers/classes/Teacher');
 
 exports.postMethod = (req, res) => {
   const teacher = new Teacher({
