@@ -5,24 +5,23 @@ const conn = require("../models/connection");
 const session = require("../controllers/session");
 const popup = require("../controllers/replaceTemplate");
 const timetablePage = fs.readFileSync(`${__dirname}/../views/timetable.html`);
-let resultPage = timetablePage;
 const router = express.Router();
 
 const getDay = num => {
   switch (num) {
-    case 1:
+    case 0:
       return "Monday";
-    case 2:
+    case 1:
       return "Tuesday";
-    case 3:
+    case 2:
       return "Wednesday";
-    case 4:
+    case 3:
       return "Thursday";
-    case 5:
+    case 4:
       return "Friday";
-    case 6:
+    case 5:
       return "Saturday";
-    case 7:
+    case 6:
       return "Sunday";
   }
 };
@@ -47,31 +46,65 @@ const optionPage = (state, results, req) => {
   }
 };
 
+
+
+const timetableData = (result, req, res) => {
+  const startDay = result.startDay;
+  const endDay = result.endDay;
+  const periods = result.periods;
+
+  let data = new Array(periods)
+    .fill("")
+    .map(() => new Array(endDay + 1).fill(""));
+  let query = `select a.* from subjects as a, include as b
+  where
+    b.timetableName = ? and
+      b.username=? and
+      b.idSubject = a.idSubject
+  ;`;
+
+  conn.query(
+    query,
+    [result.timetableName, req.session.username],
+    (error, results, fields) => {
+      let dataHeader = "<tr>";
+      let arr = [];
+      for (i = startDay; i <= endDay; i++) arr.push(getDay(i));
+      arr.forEach(el => (dataHeader += `<th>${el}</th>`));
+      dataHeader += "</tr>";
+      fs.appendFileSync(`${__dirname}/../views/timetable-data.html`, dataHeader);
+    
+      let studytime = results[0].studyTime.split(";");
+      studytime.forEach(time => {
+        let [day, period] = time.split(" ");
+        let [start, end] = period.split("");
+        for (i = start - 1; i <= end - 1; i++) {
+          data[i][day] = results[0].idSubject;
+        }
+      });
+
+      let dataRow = "";
+      for (row = 0; row < periods; row++) {
+        dataRow += "<tr>";
+        for (col = 0; col <= endDay; col++)
+          dataRow += `<td>${data[row][col]}</td>\n`;
+        dataRow += "</tr>\n";
+      }
+      fs.appendFileSync(`${__dirname}/../views/timetable-data.html`, dataRow);
+      displayPage(req, res);
+    }
+  );
+};
+
 const displayPage = (req, res) => {
   let option = fs.readFileSync(`${__dirname}/../views/option.html`);
   let timetable = fs.readFileSync(`${__dirname}/../views/timetable-data.html`);
-  resultPage = popup.replaceAccountTemplate(req.session, timetablePage);
+  let resultPage = popup.replaceAccountTemplate(req.session, timetablePage);
   resultPage = popup.replaceTemplate("{% TABLE %}", timetable, resultPage);
   resultPage = popup.replaceTemplate("{% OPTION %}", option, resultPage);
   fs.writeFileSync(`${__dirname}/../views/timetable-data.html`, "");
   fs.writeFileSync(`${__dirname}/../views/option.html`, "");
   res.end(resultPage);
-};
-
-const timetableData = result => {
-  let dataHeader = "<tr>";
-  let arr = [];
-  for (i = result.startDay; i <= result.endDay; i++) arr.push(getDay(i));
-  arr.forEach(el => (dataHeader += `<th>${el}</th>`));
-  dataHeader += "</tr>";
-  fs.appendFileSync(`${__dirname}/../views/timetable-data.html`, dataHeader);
-  let dataRow = "";
-  for (row = 1; row <= result.periods; row++) {
-    dataRow += "<tr>";
-    for (col = 1; col <= result.endDay; col++) dataRow += "<td></td>";
-    dataRow += "</tr>";
-  }
-  fs.appendFileSync(`${__dirname}/../views/timetable-data.html`, dataRow);
 };
 
 router.get("/", (req, res) => {
@@ -91,9 +124,7 @@ router.get("/", (req, res) => {
               (error, results, fields) => {
                 results.forEach(result => {
                   //CREATE TIMETABLE
-                  timetableData(result);
-                  //RES END
-                  displayPage(req, res);
+                  timetableData(result, req, res);
                 });
               }
             );
