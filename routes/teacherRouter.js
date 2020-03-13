@@ -102,6 +102,6 @@ router
   });
 
 router.get('/:teacherName',(req,res)=>{
-  res.end(req.teacherName);
+  res.redirect('/teacher')
 })
 module.exports = router;

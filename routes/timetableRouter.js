@@ -46,8 +46,6 @@ const optionPage = (state, results, req) => {
   }
 };
 
-
-
 const timetableData = (result, req, res) => {
   const startDay = result.startDay;
   const endDay = result.endDay;
@@ -67,31 +65,46 @@ const timetableData = (result, req, res) => {
     query,
     [result.timetableName, req.session.username],
     (error, results, fields) => {
-      let dataHeader = "<tr>";
-      let arr = [];
-      for (i = startDay; i <= endDay; i++) arr.push(getDay(i));
-      arr.forEach(el => (dataHeader += `<th>${el}</th>`));
-      dataHeader += "</tr>";
-      fs.appendFileSync(`${__dirname}/../views/timetable-data.html`, dataHeader);
-    
-      let studytime = results[0].studyTime.split(";");
-      studytime.forEach(time => {
-        let [day, period] = time.split(" ");
-        let [start, end] = period.split("");
-        for (i = start - 1; i <= end - 1; i++) {
-          data[i][day] = results[0].idSubject;
+        let dataHeader = "<tr>";
+        let arr = [];
+        for (i = startDay; i <= endDay; i++) arr.push(getDay(i));
+        arr.forEach(el => (dataHeader += `<th>${el}</th>`));
+        dataHeader += "</tr>";
+        fs.appendFileSync(
+          `${__dirname}/../views/timetable-data.html`,
+          dataHeader
+        );
+        results.forEach(result=>{
+          let studytime = result.studyTime.split(";");
+          studytime.forEach(time => {
+            let [day, period] = time.split(" ");
+            let [start, end] = period.split("");
+            for (i = start - 1; i <= end - 1; i++) {
+              data[i][day] = result.idSubject + " " + result.color;
+            }
+          });
+        })
+        
+        let dataRow = "";
+        for (row = 0; row < periods; row++) {
+          dataRow += "<tr>";
+          for (col = 0; col <= endDay; col++) {
+            let [id, color] = data[row][col].split(" ");
+            if (id !== "") {
+              dataRow += `<td bgcolor='${color}'">${id}</td>\n`;
+            } else {
+              dataRow += `<td>${id}</td>\n`;
+            }
+          }
+          dataRow += "</tr>\n";
         }
-      });
 
-      let dataRow = "";
-      for (row = 0; row < periods; row++) {
-        dataRow += "<tr>";
-        for (col = 0; col <= endDay; col++)
-          dataRow += `<td>${data[row][col]}</td>\n`;
-        dataRow += "</tr>\n";
-      }
-      fs.appendFileSync(`${__dirname}/../views/timetable-data.html`, dataRow);
-      displayPage(req, res);
+        fs.appendFileSync(`${__dirname}/../views/timetable-data.html`, dataRow);
+      // }catch(e){
+      //   res.redirect('/timetable')
+      // }
+        displayPage(req, res);
+      
     }
   );
 };

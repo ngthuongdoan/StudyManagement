@@ -27,6 +27,7 @@ const createSubjectCards = (subjectNames, results) => {
           results[j].subjectName,
           card
         );
+        card = popup.replaceTemplate("COLOR", results[j].color, card);
         card = popup.replaceTemplate(
           "{% TEACHERNAME %}",
           results[j].teacherName,
@@ -102,18 +103,25 @@ router
       teacheremail: req.session.teacherEmail,
       subjectname: req.body.subjectName,
       room: req.body.room,
-      studytime: "a",
+      studytime: req.body.studyTime,
       target: req.body.target,
-      note: req.body.note
+      note: req.body.note,
+      color: req.body.color
     });
     conn.query(
-      `INSERT INTO subjects VALUE('${req.session.username}',?,?,?,?,?,?,?,?)`,
+      `INSERT INTO subjects VALUE('${req.session.username}',?,?,?,?,?,?,?,?,?)`,
       subject.send(),
       (error, results, fields) => {
         if (error) console.log(error.sql);
+        conn.query(
+          `INSERT INTO include VALUE('${subject.id}','Untitled 1','${req.session.username}')`,
+          (error, results, fields) => {
+            console.log(results);
+            res.redirect("/subject");
+          }
+        );
       }
     );
-    res.redirect("/subject");
   });
 
 module.exports = router;

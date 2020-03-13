@@ -232,6 +232,7 @@ a {
   -webkit-box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.6);
           box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.6);
   border-radius: 10px;
+  overflow: auto;
 }
 
 #overlay form #formlogo {
@@ -263,5 +264,6 @@ a {
 
 #overlay form input[type='submit'] {
   margin-left: 0;
+  margin-bottom: 50px;
 }
 /*# sourceMappingURL=subject.css.map */

@@ -1,3 +1,12 @@
+const days = {
+  Monday: 0,
+  Tuesday: 1,
+  Wednesday: 2,
+  Thursday: 3,
+  Friday: 4,
+  Saturday: 5,
+  Sunday: 6
+};
 class Subject {
   constructor({
     id,
@@ -7,16 +16,20 @@ class Subject {
     room = "",
     studytime = "",
     target,
-    note = ""
+    note = "",
+    color=''
   }) {
     this._id = id;
     this._teachername = teachername;
     this._teacheremail = teacheremail;
     this._subjectname = subjectname;
     this._room = room;
-    this._studytime = studytime;
+    this._studytime = studytime.replace(/Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday/gi, function(matched) {
+      return days[matched];
+    });
     this._target = target;
     this._note = note;
+    this._color = `#${color}`;
   }
   get id() {
     return this._id;
@@ -42,6 +55,9 @@ class Subject {
   get note() {
     return this._note;
   }
+  get color() {
+    return this._color;
+  }
 
   send() {
     return [
@@ -52,7 +68,8 @@ class Subject {
       this.room,
       this.studytime,
       this.target,
-      this.note
+      this.note,
+      this.color
     ];
   }
 }

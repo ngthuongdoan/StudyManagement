@@ -11,7 +11,16 @@ exports.postMethod = (req, res) => {
     "DELETE FROM teacher WHERE username=? AND teacherName=? AND teacherEmail=?",
     [req.session.username,teacher.name, teacher.email],
     (error, results, fields) => {
-      if(!error) res.redirect("/teacher");
+      conn.query(
+        "DELETE FROM subjects WHERE username=? AND teacherName=?",
+        [req.session.username,teacher.name],
+        (error, results, fields) => {
+          if(!error){
+            res.redirect("/teacher");
+          } else{
+            
+          }
+        });
     }
   );
 };

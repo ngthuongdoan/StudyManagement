@@ -11,18 +11,20 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.8.1/dist/sweetalert2.all.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
+    <script src="js/jscolor.js"></script>
+
     <title>Subject</title>
 </head>
 
 <body>
     <div style="display: none;">
-        <form action="/delete-subject" method="POST" id="delete" >
+        <form action="/delete-subject" method="POST" id="delete">
             <input type="text" name="idSubject" id="delid" value="">
             <input type="submit" value="" id="delBtn">
         </form>
     </div>
     <div id="overlay">
-        <form action="/subject" method="post" autocomplete="off">
+        <form action="/subject" method="post" autocomplete="off" id="addform" onsubmit="return validate();">
             <h1 id="formlogo">Schooling</h1>
             <div class="data">
                 <label for="idSubject">ID Subject:</label>
@@ -33,12 +35,17 @@
                 <select name="teacherName" id="">
                     {% TEACHER %}
                 </select>
+                <label for="studyTime">Study time</label>
+                <p>VD: Monday 15;Tuesday 35</p>
+                <textarea name="studyTime" id="studyTime" cols="25" rows="5" required></textarea>
                 <label for="room">Room:</label>
                 <input type="text" name="room" placeholder="101/C1"><br>
                 <label for="target">Target:</label>
                 <input type="number" name="target" step="0.1" required><br>
                 <label for="note">Note:</label>
                 <textarea name="note" id="" cols="25" rows="5"></textarea>
+                <label for="color">Color</label>
+                <input class="jscolor" name="color">
             </div>
             <input type="submit" class="btn" value="Submit">
             <button type='button' class="btn" id="cancelbtn" onclick="overlayOff()">Cancel</button>
@@ -67,14 +74,17 @@
         <div class='rightpanel'>
             <button class="btn" onclick="overlayOn()">Add new</button>
             <button class="btn" id="delbtn" onclick="deleteSubject()">Delete</button>
-            <div id="message" style='margin-left: 400px;display: none;'><h4>Please choose the card</h4></div>
+            <div id="message" style='margin-left: 400px;display: none;'>
+                <h4>Please choose the card</h4>
+            </div>
             <div class="content">
                 {% CARDS %}
             </div>
         </div>
     </main>
-    <script src="js/overlay.js"></script>
     <script src="js/subject.js"></script>
+    <script src="js/overlay.js"></script>
+
 </body>
 
 </html>
