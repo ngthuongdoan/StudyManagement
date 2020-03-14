@@ -38,6 +38,7 @@ create table subjects(
     studyTime varchar(100) not null,
     target varchar(4) not null,
     note nvarchar(400),
+    color varchar(20),
     primary key(username,idSubject)
 );
 drop table subjects;
@@ -56,22 +57,22 @@ create table grade(
 );
 drop table grade;
 -- insert data
---     1234567 for monday,tuesday,wednesday,thursday,friday,saturday,sunday
-insert into timetable values('ngthuongdoan','Untitled 1',9,1,6);
-insert into timetable values('ngthuongdoan','Untitled 2',9,1,6);
+--     0123456 for monday,tuesday,wednesday,thursday,friday,saturday,sunday
+insert into timetable values('ngthuongdoan','Untitled 1',9,0,5);
 
 insert into teacher value('ngthuongdoan','Thái Minh Tuấn','tmtuan@cit.ctu.edu.vn','');
 insert into teacher value('ngthuongdoan','Huỳnh Quang Nghi','hqnghi@cit.ctu.edu.vn','0123456789');
 
-insert into subjects values('ngthuongdoan','CT22301','Thái Minh Tuấn','tmtuan@cit.ctu.edu.vn','Quản lý dự án phần mềm','203/C1','Tuesday 345','8.5','');
-insert into subjects values('ngthuongdoan','CT24601','Huỳnh Quang Nghi','hqnghi@cit.ctu.edu.vn','.NET','TH24DI','Thursday 15','7.2','');
+insert into subjects values('ngthuongdoan','CT22301','Thái Minh Tuấn','tmtuan@cit.ctu.edu.vn','Quản lý dự án phần mềm','203/C1','Tuesday 345','8.5','','#FFFFFF');
+insert into subjects values('ngthuongdoan','CT24601','Huỳnh Quang Nghi','hqnghi@cit.ctu.edu.vn','.NET','TH24DI','Thursday 15','7.2','','#FFFFFF');
 
 insert into include values('CT22301','Untitled 1','ngthuongdoan');
-insert into include values('CT24601','Untitled 2','ngthuongdoan');
+-- insert into include values('CT24601','Untitled 2','ngthuongdoan');
 
-insert into grade value('CT22301','9','Cuối kì');
-insert into grade value('CT22301','7','Giữa kì');
+-- insert into grade value('CT22301','9','Cuối kì');
+-- insert into grade value('CT22301','7','Giữa kì');
 -- select all
+select * from teacher;
 select * from sessions;
 select * from accounts;
 select * from timetable;
@@ -110,3 +111,6 @@ where
     c.idSubject='CT112' and
     c.idSubject=d.idSubject and
     d.idSubject=e.idSubject;
+
+alter user 'root'@'localhost' identified with mysql_native_password by 'rootpassword';
+flush privileges;
