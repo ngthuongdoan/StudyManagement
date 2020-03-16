@@ -13,7 +13,7 @@ const router = express.Router();
 const sortTeacherByName = results => {
   let arr = [];
   results.forEach(result => arr.push(result.teacherName));
-  return QuickSort(arr);
+  return arr;
 };
 
 const createTeacherTable = (teacherNames, results) => {

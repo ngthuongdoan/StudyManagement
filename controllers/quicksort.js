@@ -4,14 +4,15 @@
 
 /**
  * Compare to sort full name by name
- * @param {String} a 
- * @param {String} b 
+ * @param {String} first - first string 
+ * @param {String} second - second string
+ * @returns {Number} 1 for
  */
-function compare(a, b) {
-  var splitA = a.split(" ");
-  var splitB = b.split(" ");
-  var lastA = splitA[splitA.length - 1];
-  var lastB = splitB[splitB.length - 1];
+const compare = (first, second) => {
+  let nameA = first.split(" ");
+  let nameB = second.split(" ");
+  var lastA = nameA[nameA.length - 1];
+  var lastB = nameB[nameB.length - 1];
 
   if (lastA < lastB) return -1;
   if (lastA > lastB) return 1;

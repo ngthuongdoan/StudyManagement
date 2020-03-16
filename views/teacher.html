@@ -10,6 +10,8 @@
     <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.8.1/dist/sweetalert2.all.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <script src="js/quicksortTeacher.js"></script>
+
     <title>Teachers</title>
 </head>
 
@@ -64,8 +66,8 @@
             <div class="mainwindow">
                 <table>
                     <tr class="header">
-                        <th>Name</th>
-                        <th>Email</th>
+                        <th onclick="sortTable(0)">Name</th>
+                        <th onclick="sortTable(1)">Email</th>
                         <th>Tel</th>
                     </tr>
                     <!-- data -->
@@ -77,6 +79,7 @@
     <div id="alert">{% POPUP %}</div>
     <script src="js/overlay.js"></script>
     <script src="js/teacher.js"></script>
+
 </body>
 
 </html>
