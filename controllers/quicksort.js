@@ -1,6 +1,23 @@
 // Find a "pivot" element in the array to compare all other
 // elements against and then shift elements before or after
 // pivot depending on their values
+
+/**
+ * Compare to sort full name by name
+ * @param {String} a 
+ * @param {String} b 
+ */
+function compare(a, b) {
+  var splitA = a.split(" ");
+  var splitB = b.split(" ");
+  var lastA = splitA[splitA.length - 1];
+  var lastB = splitB[splitB.length - 1];
+
+  if (lastA < lastB) return -1;
+  if (lastA > lastB) return 1;
+  return 0;
+}
+
 const QuickSort = (arr, left = 0, right = arr.length - 1) => {
   let len = arr.length,
     index;
@@ -23,12 +40,12 @@ const partition = (arr, left, right) => {
   while (i <= j) {
     // Move left pointer to the right until the value at the
     // left is greater than the pivot value
-    while (arr[i].localeCompare(pivot) == -1) {
+    while (compare(arr[i],pivot) == -1) {
       i++;
     }
     // Move right pointer to the left until the value at the
     // right is less than the pivot value
-    while (arr[j].localeCompare(pivot) == 1) {
+    while (compare(arr[j],pivot) == 1) {
       j--;
     }
     // If the left pointer is less than or equal to the
