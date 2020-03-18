@@ -173,9 +173,8 @@ a {
 }
 
 .btn {
-  display: inline-block;
   margin-top: 30px;
-  margin-left: 300px;
+  margin-left: 750px;
   width: 100px;
   background-color: #ff416c;
   border: none;
@@ -264,42 +263,8 @@ a {
   padding: 5px auto;
 }
 
-#overlay form input[type="submit"] {
+#overlay form input[type='submit'] {
   margin-left: 0;
   margin-bottom: 50px;
 }
-
-.sort {
-  display: block;
-  margin-left: 300px;
-  margin-bottom: -10px;
-}
-
-.sort p {
-  margin: 0;
-  padding: 0;
-  display: block;
-  margin-top: 20px;
-}
-
-.sort .sortbtn {
-  display: block;
-  float: left;
-  margin-top: 20px;
-  margin-right: 20px;
-  margin-bottom: 0;
-  width: 60px;
-  padding: 5px;
-  border-radius: 10px;
-  border: #8c98b8 1px solid;
-  color: white;
-  background-color: #bdd1cf;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
-
-.sort .sortbtn:hover {
-  background-color: #8fa1a0;
-  color: black;
-}
-/*# sourceMappingURL=subject.css.map */
+/*# sourceMappingURL=grade.css.map */

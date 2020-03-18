@@ -7,6 +7,7 @@ const teacherRouter = require("./teacherRouter");
 const deleteTeacher = require("./teacherDelete");
 const timetableRouter = require("./timetableRouter");
 const subjectRouter = require("./subjectRouter");
+const gradeRouter = require("./gradeRouter");
 const deleteSubject = require("./subjectDelete");
 const notfound = fs.readFileSync(`${__dirname}/../views/notfound.html`);
 
@@ -21,6 +22,7 @@ router.use("/register", registerRouter);
 router.use("/teacher", teacherRouter);
 router.use("/timetable", timetableRouter);
 router.use("/subject", subjectRouter);
+router.use("/grade", gradeRouter);
 
 
 ///LOGOUT

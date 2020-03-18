@@ -73,7 +73,13 @@
             <h1 id="logo">Schooling</h1>
         </div>
         <div class='rightpanel'>
-            <button onclick="sortTable(0)">Name</button>
+            <div class="sort">
+                <p>Sort by:</p>
+                <button class="sortbtn" onclick="sortTable(0)">Name</button>
+                <button class="sortbtn" onclick="sortTable(1)">ID</button>
+                <button class="sortbtn" onclick="sortTable(2)">Teacher</button>
+                <button class="sortbtn" onclick="sortTable(3)">Target</button>
+            </div>
             <button class="btn" onclick="overlayOn()">Add new</button>
             <button class="btn" id="delbtn" onclick="deleteSubject()">Delete</button>
             <div id="message" style='margin-left: 400px;display: none;'>

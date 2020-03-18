@@ -14,7 +14,7 @@ create table timetable(
     username varchar(50) references accounts(username),
     timetableName varchar(50) not null,
     periods int not null,
---     12345678 for monday,tuesday,wednesday,thursday,friday,saturday,sunday
+--     0123456 for monday,tuesday,wednesday,thursday,friday,saturday,sunday
     startDay int not null,
     endDay int not null,
     primary key(username,timetableName)
@@ -39,7 +39,7 @@ create table subjects(
     target varchar(4) not null,
     note nvarchar(400),
     color varchar(20),
-    primary key(username,idSubject)
+    primary key(username,idSubject,studyTime)
 );
 drop table subjects;
 create table include(
@@ -59,26 +59,33 @@ drop table grade;
 -- insert data
 --     0123456 for monday,tuesday,wednesday,thursday,friday,saturday,sunday
 insert into timetable values('ngthuongdoan','Untitled 1',9,0,5);
+-- insert into timetable values('ngthuongdoan','Untitled 2',9,0,6);
 
 insert into teacher value('ngthuongdoan','Thái Minh Tuấn','tmtuan@cit.ctu.edu.vn','');
 insert into teacher value('ngthuongdoan','Huỳnh Quang Nghi','hqnghi@cit.ctu.edu.vn','0123456789');
 
-insert into subjects values('ngthuongdoan','CT22301','Thái Minh Tuấn','tmtuan@cit.ctu.edu.vn','Quản lý dự án phần mềm','203/C1','Tuesday 345','8.5','','#FFFFFF');
-insert into subjects values('ngthuongdoan','CT24601','Huỳnh Quang Nghi','hqnghi@cit.ctu.edu.vn','.NET','TH24DI','Thursday 15','7.2','','#FFFFFF');
+insert into subjects values('ngthuongdoan','CT22301','Thái Minh Tuấn','tmtuan@cit.ctu.edu.vn','Quản lý dự án phần mềm','203/C1','1 35;2 35','8.5','','');
+-- insert into subjects values('ngthuongdoan','CT24601','Huỳnh Quang Nghi','hqnghi@cit.ctu.edu.vn','.NET','TH24DI','3 15','7.2','','#5FFF3D');
 
 insert into include values('CT22301','Untitled 1','ngthuongdoan');
 -- insert into include values('CT24601','Untitled 2','ngthuongdoan');
 
--- insert into grade value('CT22301','9','Cuối kì');
--- insert into grade value('CT22301','7','Giữa kì');
+insert into grade value('CT22301','9','Cuối kì');
+insert into grade value('CT22301','7','Giữa kì');
 -- select all
-select * from teacher;
 select * from sessions;
 select * from accounts;
 select * from timetable;
 select * from subjects;
 select * from include;
 select * from grade;
+
+select a.* from subjects as a, include as b
+where
+	b.timetableName = 'Untitled 1' and
+    b.username='ngthuongdoan' and
+    b.idSubject = a.idSubject
+;
 -- Get all teacher
 select a.* from teacher as a, accounts as b, include as c, subjects as d
 where
@@ -111,6 +118,3 @@ where
     c.idSubject='CT112' and
     c.idSubject=d.idSubject and
     d.idSubject=e.idSubject;
-
-alter user 'root'@'localhost' identified with mysql_native_password by 'rootpassword';
-flush privileges;
