@@ -1,5 +1,5 @@
 const conn = require("../models/connection");
-const Teacher = require('../controllers/classes/Teacher');
+const Teacher = require("../controllers/classes/Teacher");
 
 exports.postMethod = (req, res) => {
   const teacher = new Teacher({
@@ -17,8 +17,6 @@ exports.postMethod = (req, res) => {
         (error, results, fields) => {
           if(!error){
             res.redirect("/teacher");
-          } else{
-            
           }
         });
     }

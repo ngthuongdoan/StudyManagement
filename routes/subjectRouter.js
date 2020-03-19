@@ -16,8 +16,8 @@ const sortTeacherByName = results => {
 };
 
 const createSubjectCards = (subjectNames, results) => {
-  for (i = 0; i < subjectNames.length; i++) {
-    for (j = 0; j < results.length; j++) {
+  for (let i = 0; i < subjectNames.length; i++) {
+    for (let j = 0; j < results.length; j++) {
       if (results[j].subjectName == subjectNames[i]) {
         let card = fs.readFileSync(`${__dirname}/../views/card.html`);
         card = popup.replaceTemplate(/{% ID %}/g, results[j].idSubject, card);

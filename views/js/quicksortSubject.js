@@ -1,18 +1,18 @@
 const compareTeacherName = (a, b) => {
-  var splitA = a.split(" ");
-  var splitB = b.split(" ");
-  var lastA = splitA[splitA.length - 1];
-  var lastB = splitB[splitB.length - 1];
+  const splitA = a.split(" ");
+  const splitB = b.split(" ");
+  const lastA = splitA[splitA.length - 1];
+  const lastB = splitB[splitB.length - 1];
 
   if (lastA < lastB) return -1;
   if (lastA > lastB) return 1;
   return 0;
 };
 const compareName = (a, b) => {
-  var splitA = a.split(" ");
-  var splitB = b.split(" ");
-  var lastA = splitA[splitA.length - 1];
-  var lastB = splitB[splitB.length - 1];
+  const splitA = a.split(" ");
+  const splitB = b.split(" ");
+  const lastA = splitA[splitA.length - 1];
+  const lastB = splitB[splitB.length - 1];
 
   if (lastA < lastB) return -1;
   if (lastA > lastB) return 1;
@@ -42,26 +42,26 @@ const compare = (type, a, b) => {
   }
 };
 
-const QuickSort = (type, arr, left = 0, right = arr.length - 1) => {
-  let len = arr.length,
-    index;
+const quickSort = (type, arr, left = 0, right = arr.length - 1) => {
+  const len = arr.length;
+  let index;
   if (len > 1) {
     index = partition(type, arr, left, right);
     if (left < index - 1) {
-      QuickSort(type, arr, left, index - 1);
+      quickSort(type, arr, left, index - 1);
     }
     if (index < right) {
-      QuickSort(type, arr, index, right);
+      quickSort(type, arr, index, right);
     }
   }
   return arr;
 };
 
 const partition = (type, arr, left, right) => {
-  let middle = Math.floor((right + left) / 2),
-    pivot = arr[middle],
-    i = left, // Start pointer at the first item in the array
-    j = right; // Start pointer at the last item in the array
+  const middle = Math.floor((right + left) / 2);
+  const pivot = arr[middle];
+  let i = left;// Start pointer at the first item in the array
+  let j = right; // Start pointer at the last item in the array
   while (i <= j) {
     // Move left pointer to the right until the value at the
     // left is greater than the pivot value
@@ -84,11 +84,11 @@ const partition = (type, arr, left, right) => {
   return i;
 };
 
-function sortTable(n) {
-  var i;
-  var content = document.getElementsByClassName("content")[0];
-  var cards = document.getElementsByClassName("linktodetail");
-  var data;
+const sortTable=(n) =>{
+  let i,j;
+  const content = document.getElementsByClassName("content")[0];
+  const cards = document.getElementsByClassName("linktodetail");
+  let data;
   switch (n) {
     case 2:
       {
@@ -97,7 +97,7 @@ function sortTable(n) {
         for (i = 0; i < data.length; i++) {
           arr.push(data[i].innerText);
         }
-        let sorted = QuickSort(n, arr);
+        const sorted = quickSort(n, arr);
         console.log(sorted);
         for (i = 0; i < sorted.length; i++) {
           for (j = 0; j < data.length; j++) {
@@ -111,12 +111,11 @@ function sortTable(n) {
     case 3:
       {
         data = document.getElementsByClassName("subject-name");
-
         let arr = [];
         for (i = 0; i < data.length; i++) {
           arr.push(data[i].innerText.split(" ")[0]);
         }
-        let sorted = QuickSort(n, arr);
+        const sorted = quickSort(n, arr);
         console.log(sorted);
         for (i = 0; i < sorted.length; i++) {
           for (j = 0; j < data.length; j++) {
@@ -130,4 +129,4 @@ function sortTable(n) {
     default:
       break;
   }
-}
+};

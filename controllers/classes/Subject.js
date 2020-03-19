@@ -17,7 +17,7 @@ class Subject {
     studytime = "",
     target,
     note = "",
-    color=''
+    color=""
   }) {
     this._id = id;
     this._teachername = teachername;

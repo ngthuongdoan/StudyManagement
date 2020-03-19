@@ -1,3 +1,4 @@
+
 const deleteSubject = () => {
   document.getElementById("message").style.display = "block";
   let btn = document.getElementById("delbtn");
@@ -28,10 +29,12 @@ const validate = () => {
     document.getElementById("addform").submit();
     return true;
   } catch (e) {
+    /* eslint-disable */
     Swal.fire({
       icon: "error",
       title: "Oops..."
     });
+    /* eslint-disable */
     return false;
   }
 };

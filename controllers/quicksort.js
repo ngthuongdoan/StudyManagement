@@ -17,7 +17,7 @@ const compare = (first, second) => {
   if (lastA < lastB) return -1;
   if (lastA > lastB) return 1;
   return 0;
-}
+};
 
 const QuickSort = (arr, left = 0, right = arr.length - 1) => {
   let len = arr.length,

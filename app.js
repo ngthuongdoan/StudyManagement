@@ -3,7 +3,7 @@ const session = require("express-session");
 var MySQLStore = require("express-mysql-session")(session);
 const conn = require("./models/connection");
 const cookieparser = require("cookie-parser");
-const pageRouter = require(`./routes/pageRouter`);
+const pageRouter = require("./routes/pageRouter");
 const morgan = require("morgan");
 const app = express();
 

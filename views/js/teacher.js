@@ -3,7 +3,7 @@ const deleteTeacher = () => {
   let btn = document.getElementById("delbtn");
   btn.textContent = "Cancel";
   btn.addEventListener("click", ()=>{
-    window.location.reload()
+    window.location.reload();
   });
 
   const data = document.getElementsByClassName("teacher");

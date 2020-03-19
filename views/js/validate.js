@@ -8,19 +8,19 @@ const submitForm = () => {
   if (username.includes(" ")) {
     document.getElementById(
       "usernameError"
-    ).textContent = `Username mustn't have space`;
+    ).textContent = "Username mustn't have space";
     error = true;
   }
   if (password.length < 6 || password.includes(" ")) {
     document.getElementById(
       "passwordError"
-    ).textContent = `Password must have at least 6 characters and not contains space`;
+    ).textContent = "Password must have at least 6 characters and not contains space";
     error = true;
   } else {
     if (confirm !== password) {
       document.getElementById(
         "passwordError"
-      ).textContent = `Please confirm your password again`;
+      ).textContent = "Please confirm your password again";
       error = true;
     }
   }

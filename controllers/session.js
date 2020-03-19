@@ -2,7 +2,7 @@ const conn = require("../models/connection");
 
 exports.sessionCheck = (req, res) => {
   conn.query(
-    `SELECT * FROM sessions WHERE session_id = ?`,
+    "SELECT * FROM sessions WHERE session_id = ?",
     [req.sessionID],
     (error, results, fields) => {
       try {

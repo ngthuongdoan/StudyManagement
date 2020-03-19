@@ -17,8 +17,8 @@ const sortTeacherByName = results => {
 };
 
 const createTeacherTable = (teacherNames, results) => {
-  for (i = 0; i < teacherNames.length; i++) {
-    for (j = 0; j < results.length; j++) {
+  for (let i = 0; i < teacherNames.length; i++) {
+    for (let j = 0; j < results.length; j++) {
       if (results[j].teacherName == teacherNames[i]) {
         let obj = {
           name: results[j].teacherName,
@@ -26,7 +26,7 @@ const createTeacherTable = (teacherNames, results) => {
           number: results[j].teacherNumber
         };
         let teacher = new Teacher(obj);
-        let link = teacher.name.normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/ /g,'');
+        let link = teacher.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g,"");
         let data = `<tr class='teacher' onclick="window.location='/teacher/${link}';">
             <td>${teacher.name}</td>
             <td>${teacher.email}</td>
@@ -38,16 +38,16 @@ const createTeacherTable = (teacherNames, results) => {
   }
 };
 
-router.param('teacherName',(req,res,next,teacherName)=>{
+router.param("teacherName",(req,res,next,teacherName)=>{
   req.teacherName = teacherName;
   next();
-})
+});
 
 router
   .get("/", (req, res) => {
     if (session.sessionCheck(req, res)) {
       if (req.session.loggedin) {
-        let query = `select * from teacher where username=?;`;
+        let query = "select * from teacher where username=?;";
         conn.query(query, [req.session.username], (error, results, fields) => {
           const teacherNames = sortTeacherByName(results);
           createTeacherTable(teacherNames, results);
@@ -101,7 +101,8 @@ router
     );
   });
 
-router.get('/:teacherName',(req,res)=>{
-  res.redirect('/teacher')
-})
+router.get("/:teacherName",(req,res)=>{
+  res.redirect("/teacher");
+});
+
 module.exports = router;

@@ -67,10 +67,9 @@ const partition = (type, arr, left, right) => {
 };
 
 function sortTable(n) {
-  var table, i;
-  table = document.getElementsByTagName("table")[0];
-  teachers = document.getElementsByClassName("teacher");
-  header = document.getElementsByClassName("header")[0];
+  let i, j;
+  let table = document.getElementsByTagName("table")[0];
+  const teachers = document.getElementsByClassName("teacher");
   let arr = [];
   for (i = 0; i < teachers.length; i++) {
     arr.push(teachers[i].cells[n].innerText);

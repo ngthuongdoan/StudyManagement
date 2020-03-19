@@ -67,7 +67,7 @@ const timetableData = (result, req, res) => {
     (error, results, fields) => {
         let dataHeader = "<tr>";
         let arr = [];
-        for (i = startDay; i <= endDay; i++) arr.push(getDay(i));
+        for (let i = startDay; i <= endDay; i++) arr.push(getDay(i));
         arr.forEach(el => (dataHeader += `<th>${el}</th>`));
         dataHeader += "</tr>";
         fs.appendFileSync(
@@ -79,16 +79,16 @@ const timetableData = (result, req, res) => {
           studytime.forEach(time => {
             let [day, period] = time.split(" ");
             let [start, end] = period.split("");
-            for (i = start - 1; i <= end - 1; i++) {
+            for (let i = start - 1; i <= end - 1; i++) {
               data[i][day] = result.idSubject + " " + result.color;
             }
           });
-        })
+        });
         
         let dataRow = "";
-        for (row = 0; row < periods; row++) {
+        for (let row = 0; row < periods; row++) {
           dataRow += "<tr>";
-          for (col = 0; col <= endDay; col++) {
+          for (let col = 0; col <= endDay; col++) {
             let [id, color] = data[row][col].split(" ");
             if (id !== "") {
               dataRow += `<td bgcolor='${color}'">${id}</td>\n`;
