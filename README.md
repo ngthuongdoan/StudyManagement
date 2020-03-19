@@ -1,4 +1,8 @@
-# StudyManagement
+# SCHOOLING
+<p align="center">
+  <a target="_blank" href="https://www.npmjs.com/package/express"><img alt="npm" src="https://img.shields.io/npm/v/express?color=green&label=express"></a>
+  <a target="_blank" href="https://www.mysql.com/downloads/"><img alt="npm" src="https://img.shields.io/badge/MySQL-8.0-orange"></a>
+</p>
 
 ### INTRODUCTION
 
@@ -14,7 +18,7 @@ Before you continue, ensure you meet the following requirements:
   - [MySQL](https://www.mysql.com/): MySQL is an open-source relational database management system.
 - Prepare:
   - **.env file**: Create .env file in root folder with this content
-  >MYSQL_HOST='your_host'<br>
+  >MYSQL_HOST='localhost'<br>
   >MYSQL_USERNAME='your_mysql_username'<br>
   >MYSQL_PASSWORD='your_mysql_password'<br>
   >MYSQL_DATABASE='studymanagement'<br>
