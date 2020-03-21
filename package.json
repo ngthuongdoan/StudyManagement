@@ -5,7 +5,8 @@
   "scripts": {
     "devStart": "nodemon server.js",
     "test": "jest",
-    "eslint": "npx eslint"
+    "eslint": "npx eslint",
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
