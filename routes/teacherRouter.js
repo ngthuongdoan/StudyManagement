@@ -10,16 +10,8 @@ let resultPage = teacherPage;
 
 const router = express.Router();
 
-const sortTeacherByName = results => {
-  let arr = [];
-  results.forEach(result => arr.push(result.teacherName));
-  return arr;
-};
-
-const createTeacherTable = (teacherNames, results) => {
-  for (let i = 0; i < teacherNames.length; i++) {
+const createTeacherTable = (results) => {
     for (let j = 0; j < results.length; j++) {
-      if (results[j].teacherName == teacherNames[i]) {
         let obj = {
           name: results[j].teacherName,
           email: results[j].teacherEmail,
@@ -34,8 +26,6 @@ const createTeacherTable = (teacherNames, results) => {
         </tr>`;
         fs.appendFileSync(`${__dirname}/../views/teacher-data.html`, data);
       }
-    }
-  }
 };
 
 router.param("teacherName",(req,res,next,teacherName)=>{
@@ -49,8 +39,7 @@ router
       if (req.session.loggedin) {
         let query = "select * from teacher where username=?;";
         conn.query(query, [req.session.username], (error, results, fields) => {
-          const teacherNames = sortTeacherByName(results);
-          createTeacherTable(teacherNames, results);
+          createTeacherTable(results);
           //CREATE TEACHER PAGE
           const teacherdata = fs.readFileSync(
             `${__dirname}/../views/teacher-data.html`

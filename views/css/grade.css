@@ -8,8 +8,6 @@
 
 html {
   margin: 0;
-  min-height: 100%;
-  min-width: 100%;
 }
 
 body {
@@ -24,8 +22,6 @@ body {
 
 body main {
   background-color: #e1f4f3;
-  width: 90vw;
-  min-height: 90vh;
   position: absolute;
   border-radius: 30px;
   -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
@@ -38,8 +34,8 @@ body main .leftpanel {
   background-color: #333333;
   color: white;
   float: left;
-  min-width: 200px;
-  min-height: 90vh;
+  width: 200px;
+  height: 600px;
   border-radius: 30px;
 }
 
@@ -128,53 +124,31 @@ body main .leftpanel ul li a:hover {
   color: white;
 }
 
-.account {
-  width: 200px;
-}
-
-.content {
-  display: inline-block;
-  margin: 0 50px;
-  width: 900px;
-  height: 500px;
-  overflow: scroll;
-}
-
-.subject-card {
-  float: left;
-  color: black;
-  display: block;
-  background-color: wheat;
-  width: 200px;
-  height: 300px;
+.rightpanel {
+  margin-left: 200px;
+  width: 1000px;
+  height: 350px;
   text-align: center;
-  -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-          box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-  margin: 20px 30px;
 }
 
-.subject-target {
-  margin-bottom: 50px;
+#cancelbtn,
+#delbtn {
+  margin-right: 0px;
+  margin-left: 20px;
+  background-color: #9b9294;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
 }
 
-.target-container {
-  padding-top: 50px;
-  width: 200px;
-  height: 150px;
-  background-color: white;
-}
-
-p {
-  font-size: 16px;
-}
-
-a {
-  display: inline-block;
+#cancelbtn:hover,
+#delbtn:hover {
+  background-color: #665f60;
 }
 
 .btn {
+  display: inline-block;
   margin-top: 30px;
-  margin-left: 750px;
+  margin-left: 600px;
   width: 100px;
   background-color: #ff416c;
   border: none;
@@ -195,20 +169,6 @@ a {
 
 .btn:active {
   border-style: outset;
-}
-
-#cancelbtn,
-#delbtn {
-  margin-right: 0px;
-  margin-left: 20px;
-  background-color: #9b9294;
-  -webkit-transition: background-color 0.3s ease-in-out;
-  transition: background-color 0.3s ease-in-out;
-}
-
-#cancelbtn:hover,
-#delbtn:hover {
-  background-color: #665f60;
 }
 
 #overlay {
@@ -263,7 +223,7 @@ a {
   padding: 5px auto;
 }
 
-#overlay form input[type='submit'] {
+#overlay form input[type="submit"] {
   margin-left: 0;
   margin-bottom: 50px;
 }

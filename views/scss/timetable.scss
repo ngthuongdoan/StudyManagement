@@ -1,5 +1,12 @@
 @import "dashboard.scss";
 
+.rightpanel {
+  margin-left: 200px;
+  width: 1000px;
+  height: 350px;
+  text-align: center;
+}
+
 #overlay {
   position: fixed;
   display: none;
@@ -79,7 +86,6 @@
   visibility: hidden;
 }
 .rightpanel {
-  float: left;
   .btn {
     margin: 20px 40px;
     margin-left: 750px;

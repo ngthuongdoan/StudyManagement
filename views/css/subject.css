@@ -8,8 +8,6 @@
 
 html {
   margin: 0;
-  min-height: 100%;
-  min-width: 100%;
 }
 
 body {
@@ -24,8 +22,6 @@ body {
 
 body main {
   background-color: #e1f4f3;
-  width: 90vw;
-  min-height: 90vh;
   position: absolute;
   border-radius: 30px;
   -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
@@ -38,8 +34,8 @@ body main .leftpanel {
   background-color: #333333;
   color: white;
   float: left;
-  min-width: 200px;
-  min-height: 90vh;
+  width: 200px;
+  height: 600px;
   border-radius: 30px;
 }
 
@@ -128,13 +124,19 @@ body main .leftpanel ul li a:hover {
   color: white;
 }
 
+.rightpanel {
+  margin-left: 200px;
+  width: 1000px;
+  height: 350px;
+  text-align: center;
+}
+
 .account {
   width: 200px;
 }
 
 .content {
-  display: inline-block;
-  margin: 0 50px;
+  display: block;
   width: 900px;
   height: 500px;
   overflow: scroll;
@@ -176,6 +178,7 @@ a {
   display: inline-block;
   margin-top: 30px;
   margin-left: 300px;
+  margin-bottom: 20px;
   width: 100px;
   background-color: #ff416c;
   border: none;
@@ -271,15 +274,8 @@ a {
 
 .sort {
   display: block;
-  margin-left: 300px;
+  margin-left: 30px;
   margin-bottom: -10px;
-}
-
-.sort p {
-  margin: 0;
-  padding: 0;
-  display: block;
-  margin-top: 20px;
 }
 
 .sort .sortbtn {

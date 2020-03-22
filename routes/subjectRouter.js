@@ -9,16 +9,8 @@ const subjectPage = fs.readFileSync(`${__dirname}/../views/subject.html`);
 let resultPage;
 const router = express.Router();
 
-const sortTeacherByName = results => {
-  let arr = [];
-  results.forEach(result => arr.push(result.subjectName));
-  return QuickSort(arr);
-};
-
-const createSubjectCards = (subjectNames, results) => {
-  for (let i = 0; i < subjectNames.length; i++) {
+const createSubjectCards = (results) => {
     for (let j = 0; j < results.length; j++) {
-      if (results[j].subjectName == subjectNames[i]) {
         let card = fs.readFileSync(`${__dirname}/../views/card.html`);
         card = popup.replaceTemplate(/{% ID %}/g, results[j].idSubject, card);
         card = popup.replaceTemplate("{% TARGET %}", results[j].target, card);
@@ -35,8 +27,6 @@ const createSubjectCards = (subjectNames, results) => {
         );
         fs.appendFileSync(`${__dirname}/../views/subject-data.html`, card);
       }
-    }
-  }
 };
 
 const addTeacher = results => {
@@ -68,8 +58,7 @@ router
           "SELECT * FROM subjects WHERE username=?",
           [req.session.username],
           (error, results, fields) => {
-            const subjectNames = sortTeacherByName(results);
-            createSubjectCards(subjectNames, results);
+            createSubjectCards(results);
             conn.query(
               "SELECT * FROM teacher WHERE username=?",
               [req.session.username],

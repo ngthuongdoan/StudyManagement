@@ -1,5 +1,12 @@
 @import "dashboard.scss";
 
+.rightpanel {
+  margin-left: 200px;
+  width: 1000px;
+  height: 350px;
+  text-align: center;
+}
+
 #overlay {
   position: fixed;
   display: none;
@@ -80,10 +87,9 @@
   visibility: hidden;
 }
 .rightpanel {
-  float: left;
   .btn {
     margin: 20px 40px;
-    margin-left: 750px;
+    margin-left: 600px;
     margin-right:5px;
     width: 100px;
     background-color: rgb(252, 90, 131);
@@ -107,7 +113,6 @@
     table {
       text-align: center;
       width: 950px;
-      margin-left: 30px;
       tr:not(:first-child) {
         transition: all 0.3s ease-in-out;
         &:hover {

@@ -7,8 +7,7 @@
 
 html {
   margin: 0;
-  min-height: 100%;
-  min-width: 100%;
+
 }
 
 body {
@@ -21,8 +20,6 @@ body {
   margin-left: 50px;
   main {
     background-color: #e1f4f3;
-    width: 90vw;
-    min-height: 90vh;
     position: absolute;
     border-radius: 30px;
     box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
@@ -32,8 +29,8 @@ body {
       background-color: #333333;
       color: white;
       float: left;
-      min-width: 200px;
-      min-height: 90vh;
+      width: 200px;
+      height: 600px;
       border-radius: 30px;
       #accountlink {
         text-decoration: none;
@@ -80,12 +77,9 @@ body {
           }
         }
       }
-      
     }
   }
 }
-
-
 
 #logo {
   margin-top: 50px;
@@ -101,7 +95,7 @@ body {
   color: #706c61;
 }
 
-#logoutbtn{
+#logoutbtn {
   display: block;
   background-color: white;
   border-radius: 50px;
@@ -110,8 +104,8 @@ body {
   left: 160px;
   top: 10px;
   border: 1px solid yellow;
-  ion-icon{
-    left:5px;
+  ion-icon {
+    left: 5px;
     font-size: 20px;
     color: white;
   }

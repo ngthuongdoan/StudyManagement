@@ -1,11 +1,18 @@
 @import "dashboard.scss";
 
+
+.rightpanel {
+  margin-left: 200px;
+  width: 1000px;
+  height: 350px;
+  text-align: center;
+}
+
 .account {
   width: 200px;
 }
 .content {
-  display: inline-block;
-  margin: 0 50px;
+  display: block;
   width: 900px;
   height: 500px;
   overflow: scroll;
@@ -41,6 +48,7 @@ a {
   display: inline-block;
   margin-top: 30px;
   margin-left: 300px;
+  margin-bottom: 20px;
   width: 100px;
   background-color: #ff416c;
   border: none;
@@ -121,14 +129,9 @@ a {
 }
 .sort {
   display: block;
-  margin-left: 300px;
+  margin-left: 30px;
   margin-bottom: -10px;
-  p {
-    margin: 0;
-    padding: 0;
-    display: block;
-    margin-top: 20px;
-  }
+
   .sortbtn {
     display: block;
     float: left;

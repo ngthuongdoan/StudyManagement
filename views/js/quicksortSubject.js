@@ -142,7 +142,6 @@ const sortName = (n, subject_name, content, cards) => {
     arr.push(subject_name[i].innerText);
   }
   const sorted = quickSort(n, arr);
-  console.log(sorted);
   for (let i = 0; i < sorted.length; i++) {
     for (let j = 0; j < subject_name.length; j++) {
       if (subject_name[j].innerText == sorted[i]) {
@@ -157,7 +156,6 @@ const sortId = (n, subject_id, content, cards) => {
     arr.push(subject_id[i].innerText);
   }
   const sorted = quickSort(n, arr);
-  console.log(sorted);
   for (let i = 0; i < sorted.length; i++) {
     for (let j = 0; j < subject_id.length; j++) {
       if (subject_id[j].innerText == sorted[i]) {
@@ -173,7 +171,6 @@ const sortTeacherName = (n, subject_teacher, content, cards) => {
     arr.push(subject_teacher[i].innerText);
   }
   const sorted = quickSort(n, arr);
-  console.log(sorted);
   for (let i = 0; i < sorted.length; i++) {
     for (let j = 0; j < subject_teacher.length; j++) {
       if (subject_teacher[j].innerText == sorted[i]) {
@@ -188,7 +185,6 @@ const sortTarget = (n, subject_target, content, cards) => {
     arr.push(subject_target[i].innerText);
   }
   const sorted = quickSort(n, arr);
-  console.log(sorted);
   for (let i = 0; i < sorted.length; i++) {
     for (let j = 0; j < subject_target.length; j++) {
       if (subject_target[j].innerText == sorted[i]) {

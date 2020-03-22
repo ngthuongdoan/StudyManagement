@@ -1,9 +1,10 @@
 @import 'dashboard.scss';
 
 .rightpanel {
-    float: left;
-    min-width: 1000px;
-    min-height: 600px;
+    // float: left;
+    margin-left: 200px;
+    width: 1000px;
+    height: 350px;
     text-align: center;
     #title {
       margin-top: 25%;
