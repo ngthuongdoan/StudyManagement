@@ -78,6 +78,21 @@ const partition = (type, arr, left, right) => {
   }
   return i;
 };
+let [nameSorted, idSorted, teacherSorted, targetSorted] = [
+  false,
+  false,
+  false,
+  false
+];
+
+const reset=()=>{
+  [nameSorted, idSorted, teacherSorted, targetSorted] = [
+    false,
+    false,
+    false,
+    false
+  ];
+};
 
 const sortTable = n => {
   const content = document.getElementsByClassName("content")[0];
@@ -86,78 +101,99 @@ const sortTable = n => {
   const subject_target = document.getElementsByClassName("subject-target");
   const subject_name = document.getElementsByClassName("subject-name");
   const subject_id = document.getElementsByClassName("subject-id");
-
   // let data;
   switch (n) {
     case 0:
-      {
-        let arr = [];
-        for (let i = 0; i < subject_name.length; i++) {
-          arr.push(subject_name[i].innerText);
-        }
-        const sorted = quickSort(n, arr);
-        console.log(sorted);
-        for (let i = 0; i < sorted.length; i++) {
-          for (let j = 0; j < subject_name.length; j++) {
-            if (subject_name[j].innerText == sorted[i]) {
-              content.appendChild(cards[j]);
-            }
-          }
-        }
+      if (!nameSorted) {
+        reset();
+        nameSorted = true;
+        sortName(n, subject_name, content, cards);
       }
       break;
     case 1:
-      {
-        let arr = [];
-        for (let i = 0; i < subject_id.length; i++) {
-          arr.push(subject_id[i].innerText);
-        }
-        const sorted = quickSort(n, arr);
-        console.log(sorted);
-        for (let i = 0; i < sorted.length; i++) {
-          for (let j = 0; j < subject_id.length; j++) {
-            if (subject_id[j].innerText == sorted[i]) {
-              content.appendChild(cards[j]);
-            }
-          }
-        }
+      if (!idSorted) {
+        reset();
+        idSorted = true;
+        sortId(n, subject_id, content, cards);
       }
       break;
     case 2:
-      {
-        let arr = [];
-        for (let i = 0; i < subject_teacher.length; i++) {
-          arr.push(subject_teacher[i].innerText);
-        }
-        const sorted = quickSort(n, arr);
-        console.log(sorted);
-        for (let i = 0; i < sorted.length; i++) {
-          for (let j = 0; j < subject_teacher.length; j++) {
-            if (subject_teacher[j].innerText == sorted[i]) {
-              content.appendChild(cards[j]);
-            }
-          }
-        }
+      if (!teacherSorted) {
+        reset();
+        teacherSorted = true;
+        sortTeacherName(n, subject_teacher, content, cards);
       }
       break;
     case 3:
-      {
-        let arr = [];
-        for (let i = 0; i < subject_target.length; i++) {
-          arr.push(subject_target[i].innerText);
-        }
-        const sorted = quickSort(n, arr);
-        console.log(sorted);
-        for (let i = 0; i < sorted.length; i++) {
-          for (let j = 0; j < subject_target.length; j++) {
-            if (subject_target[j].innerText == sorted[i]) {
-              content.appendChild(cards[j]);
-            }
-          }
-        }
+      if (!targetSorted) {
+        reset();
+        targetSorted = true;
+        sortTarget(n, subject_target, content, cards);
       }
       break;
     default:
       break;
+  }
+};
+
+const sortName = (n, subject_name, content, cards) => {
+  let arr = [];
+  for (let i = 0; i < subject_name.length; i++) {
+    arr.push(subject_name[i].innerText);
+  }
+  const sorted = quickSort(n, arr);
+  console.log(sorted);
+  for (let i = 0; i < sorted.length; i++) {
+    for (let j = 0; j < subject_name.length; j++) {
+      if (subject_name[j].innerText == sorted[i]) {
+        content.appendChild(cards[j]);
+      }
+    }
+  }
+};
+const sortId = (n, subject_id, content, cards) => {
+  let arr = [];
+  for (let i = 0; i < subject_id.length; i++) {
+    arr.push(subject_id[i].innerText);
+  }
+  const sorted = quickSort(n, arr);
+  console.log(sorted);
+  for (let i = 0; i < sorted.length; i++) {
+    for (let j = 0; j < subject_id.length; j++) {
+      if (subject_id[j].innerText == sorted[i]) {
+        content.appendChild(cards[j]);
+      }
+    }
+  }
+};
+
+const sortTeacherName = (n, subject_teacher, content, cards) => {
+  let arr = [];
+  for (let i = 0; i < subject_teacher.length; i++) {
+    arr.push(subject_teacher[i].innerText);
+  }
+  const sorted = quickSort(n, arr);
+  console.log(sorted);
+  for (let i = 0; i < sorted.length; i++) {
+    for (let j = 0; j < subject_teacher.length; j++) {
+      if (subject_teacher[j].innerText == sorted[i]) {
+        content.appendChild(cards[j]);
+      }
+    }
+  }
+};
+const sortTarget = (n, subject_target, content, cards) => {
+  let arr = [];
+  for (let i = 0; i < subject_target.length; i++) {
+    arr.push(subject_target[i].innerText);
+  }
+  const sorted = quickSort(n, arr);
+  console.log(sorted);
+  for (let i = 0; i < sorted.length; i++) {
+    for (let j = 0; j < subject_target.length; j++) {
+      if (subject_target[j].innerText == sorted[i]) {
+        content.appendChild(cards[j]);
+      }
+    }
   }
 };
