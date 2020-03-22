@@ -9,14 +9,7 @@ const compareTeacherName = (a, b) => {
   return 0;
 };
 const compareName = (a, b) => {
-  const splitA = a.split(" ");
-  const splitB = b.split(" ");
-  const lastA = splitA[splitA.length - 1];
-  const lastB = splitB[splitB.length - 1];
-
-  if (lastA < lastB) return -1;
-  if (lastA > lastB) return 1;
-  return 0;
+  return a.localeCompare(b);
 };
 
 const compareID = (a, b) => {
@@ -24,7 +17,9 @@ const compareID = (a, b) => {
 };
 
 const compareTarget = (a, b) => {
-  return a.localeCompare(b);
+  if (+a < +b) return 1;
+  if (+a > +b) return -1;
+  if (+a == +b) return 0;
 };
 
 const compare = (type, a, b) => {
@@ -60,7 +55,7 @@ const quickSort = (type, arr, left = 0, right = arr.length - 1) => {
 const partition = (type, arr, left, right) => {
   const middle = Math.floor((right + left) / 2);
   const pivot = arr[middle];
-  let i = left;// Start pointer at the first item in the array
+  let i = left; // Start pointer at the first item in the array
   let j = right; // Start pointer at the last item in the array
   while (i <= j) {
     // Move left pointer to the right until the value at the
@@ -84,24 +79,61 @@ const partition = (type, arr, left, right) => {
   return i;
 };
 
-const sortTable=(n) =>{
-  let i,j;
+const sortTable = n => {
   const content = document.getElementsByClassName("content")[0];
   const cards = document.getElementsByClassName("linktodetail");
-  let data;
+  const subject_teacher = document.getElementsByClassName("subject-teacher");
+  const subject_target = document.getElementsByClassName("subject-target");
+  const subject_name = document.getElementsByClassName("subject-name");
+  const subject_id = document.getElementsByClassName("subject-id");
+
+  // let data;
   switch (n) {
-    case 2:
+    case 0:
       {
-        data = document.getElementsByClassName("subject-teacher");
         let arr = [];
-        for (i = 0; i < data.length; i++) {
-          arr.push(data[i].innerText);
+        for (let i = 0; i < subject_name.length; i++) {
+          arr.push(subject_name[i].innerText);
         }
         const sorted = quickSort(n, arr);
         console.log(sorted);
-        for (i = 0; i < sorted.length; i++) {
-          for (j = 0; j < data.length; j++) {
-            if (data[j].innerText == sorted[i]) {
+        for (let i = 0; i < sorted.length; i++) {
+          for (let j = 0; j < subject_name.length; j++) {
+            if (subject_name[j].innerText == sorted[i]) {
+              content.appendChild(cards[j]);
+            }
+          }
+        }
+      }
+      break;
+    case 1:
+      {
+        let arr = [];
+        for (let i = 0; i < subject_id.length; i++) {
+          arr.push(subject_id[i].innerText);
+        }
+        const sorted = quickSort(n, arr);
+        console.log(sorted);
+        for (let i = 0; i < sorted.length; i++) {
+          for (let j = 0; j < subject_id.length; j++) {
+            if (subject_id[j].innerText == sorted[i]) {
+              content.appendChild(cards[j]);
+            }
+          }
+        }
+      }
+      break;
+    case 2:
+      {
+        let arr = [];
+        for (let i = 0; i < subject_teacher.length; i++) {
+          arr.push(subject_teacher[i].innerText);
+        }
+        const sorted = quickSort(n, arr);
+        console.log(sorted);
+        for (let i = 0; i < sorted.length; i++) {
+          for (let j = 0; j < subject_teacher.length; j++) {
+            if (subject_teacher[j].innerText == sorted[i]) {
               content.appendChild(cards[j]);
             }
           }
@@ -110,16 +142,15 @@ const sortTable=(n) =>{
       break;
     case 3:
       {
-        data = document.getElementsByClassName("subject-name");
         let arr = [];
-        for (i = 0; i < data.length; i++) {
-          arr.push(data[i].innerText.split(" ")[0]);
+        for (let i = 0; i < subject_target.length; i++) {
+          arr.push(subject_target[i].innerText);
         }
         const sorted = quickSort(n, arr);
         console.log(sorted);
-        for (i = 0; i < sorted.length; i++) {
-          for (j = 0; j < data.length; j++) {
-            if (data[j].innerText.split(" ")[0] == sorted[i]) {
+        for (let i = 0; i < sorted.length; i++) {
+          for (let j = 0; j < subject_target.length; j++) {
+            if (subject_target[j].innerText == sorted[i]) {
               content.appendChild(cards[j]);
             }
           }
