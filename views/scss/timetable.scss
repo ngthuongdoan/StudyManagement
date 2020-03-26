@@ -44,7 +44,7 @@
         font-size: 16px;
         padding-top: 10px;
       }
-      input{
+      input {
         font-size: 16px;
         padding: 5px auto;
       }
@@ -69,7 +69,6 @@
         border-style: outset;
       }
     }
-    
   }
 }
 
@@ -78,18 +77,18 @@
   margin-left: 20px;
   background-color: #9b9294;
   transition: background-color 0.3s ease-in-out;
-  &:hover{
+  &:hover {
     background-color: #665f60;
   }
 }
-#alert{
+#alert {
   visibility: hidden;
 }
 .rightpanel {
   .btn {
     margin: 20px 40px;
     margin-left: 750px;
-    margin-right:5px;
+    margin-right: 5px;
     width: 100px;
     background-color: rgb(252, 90, 131);
     border-radius: 10px;
@@ -104,23 +103,28 @@
       box-shadow: rgb(90, 84, 84) 0px 0px 2px;
     }
   }
-  label{
+  label {
     display: inline-block;
     font-weight: bold;
-    margin-left: 620px;
+    margin-left: 600px;
     padding-top: 20px;
   }
-  #timetablename{
+  #timetablename {
     margin-top: 20px;
     z-index: 10;
-    float: right;
     font-size: 18px;
   }
+
   .mainwindow {
     margin-top: 10px;
     min-width: 1000px;
     max-height: 500px;
-    overflow: auto;
+    .clear {
+      margin-top: 10px;
+      overflow: auto;
+      min-width: 1000px;
+      max-height: 500px;
+    }
     table {
       text-align: center;
       width: 950px;
@@ -146,7 +150,7 @@
   }
 }
 
-select{
-    width: 180px;
-    font-size: 16px;
+select {
+  width: 180px;
+  font-size: 16px;
 }

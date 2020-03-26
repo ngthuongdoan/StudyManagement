@@ -248,14 +248,13 @@ body main .leftpanel ul li a:hover {
 .rightpanel label {
   display: inline-block;
   font-weight: bold;
-  margin-left: 620px;
+  margin-left: 600px;
   padding-top: 20px;
 }
 
 .rightpanel #timetablename {
   margin-top: 20px;
   z-index: 10;
-  float: right;
   font-size: 18px;
 }
 
@@ -263,7 +262,13 @@ body main .leftpanel ul li a:hover {
   margin-top: 10px;
   min-width: 1000px;
   max-height: 500px;
+}
+
+.rightpanel .mainwindow .clear {
+  margin-top: 10px;
   overflow: auto;
+  min-width: 1000px;
+  max-height: 500px;
 }
 
 .rightpanel .mainwindow table {
