@@ -100,9 +100,6 @@ const timetableData = (result, req, res) => {
         }
 
         fs.appendFileSync(`${__dirname}/../views/timetable-data.html`, dataRow);
-      // }catch(e){
-      //   res.redirect('/timetable')
-      // }
         displayPage(req, res);
       
     }
