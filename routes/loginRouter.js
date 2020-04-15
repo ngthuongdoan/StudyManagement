@@ -4,11 +4,13 @@ const bcrypt = require("bcrypt");
 const conn = require("../models/connection");
 const popup = require("../controllers/replaceTemplate");
 const login = fs.readFileSync(`${__dirname}/../views/login.html`);
+const session = require("../controllers/session");
 const router = express.Router();
 
 router
   .get("/", (req, res) => {
     //PREVENT LOGIN PAGE HERE
+    if(req.session.loggedin) res.redirect("/dashboard");
     res.end(popup.replaceTemplate("{% POPUP %}", "", login));
   })
   .post("/", (req, res) => {

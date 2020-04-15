@@ -6,6 +6,7 @@ exports.sessionCheck = (req, res) => {
     [req.sessionID],
     (error, results, fields) => {
       try {
+        console.log(req);
         let data = JSON.parse(results[0].data);
         if (data.username !== req.session.username) {
           return false;
