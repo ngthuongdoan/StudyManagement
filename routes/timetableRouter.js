@@ -7,7 +7,7 @@ const popup = require("../controllers/replaceTemplate");
 const timetablePage = fs.readFileSync(`${__dirname}/../views/timetable.html`);
 const router = express.Router();
 
-const getDay = num => {
+const getDay = (num) => {
   switch (num) {
     case 0:
       return "Monday";
@@ -28,13 +28,13 @@ const getDay = num => {
 
 const optionPage = (state, results, req) => {
   if (!state) {
-    results.forEach(result => {
+    results.forEach((result) => {
       const timetableName = result.timetableName;
       const data = `<option value='${timetableName}' href='/timetable?timetableName=${timetableName}'>${timetableName}</option><br>`;
       fs.appendFileSync(`${__dirname}/../views/option.html`, data);
     });
   } else {
-    results.forEach(result => {
+    results.forEach((result) => {
       const timetableName = result.timetableName;
       const selected = url.parse(req.url, true).query.timetableName;
       const data =
@@ -65,43 +65,42 @@ const timetableData = (result, req, res) => {
     query,
     [result.timetableName, req.session.username],
     (error, results, fields) => {
-        let dataHeader = "<tr>";
-        let arr = [];
-        for (let i = startDay; i <= endDay; i++) arr.push(getDay(i));
-        arr.forEach(el => (dataHeader += `<th>${el}</th>`));
-        dataHeader += "</tr>";
-        fs.appendFileSync(
-          `${__dirname}/../views/timetable-data.html`,
-          dataHeader
-        );
-        results.forEach(result=>{
-          let studytime = result.studyTime.split(";");
-          studytime.forEach(time => {
-            let [day, period] = time.split(" ");
-            let [start, end] = period.split("");
-            for (let i = start - 1; i <= end - 1; i++) {
-              data[i][day] = result.idSubject + " " + result.color;
-            }
-          });
-        });
-        
-        let dataRow = "";
-        for (let row = 0; row < periods; row++) {
-          dataRow += "<tr>";
-          for (let col = 0; col <= endDay; col++) {
-            let [id, color] = data[row][col].split(" ");
-            if (id !== "") {
-              dataRow += `<td bgcolor='${color}'">${id}</td>\n`;
-            } else {
-              dataRow += `<td>${id}</td>\n`;
-            }
+      let dataHeader = "<tr>";
+      let arr = [];
+      for (let i = startDay; i <= endDay; i++) arr.push(getDay(i));
+      arr.forEach((el) => (dataHeader += `<th>${el}</th>`));
+      dataHeader += "</tr>";
+      fs.appendFileSync(
+        `${__dirname}/../views/timetable-data.html`,
+        dataHeader
+      );
+      results.forEach((result) => {
+        let studytime = result.studyTime.split(";");
+        studytime.forEach((time) => {
+          let [day, period] = time.split(" ");
+          let [start, end] = period.split("");
+          for (let i = start - 1; i <= end - 1; i++) {
+            data[i][day] = result.idSubject + " " + result.color;
           }
-          dataRow += "</tr>\n";
-        }
+        });
+      });
 
-        fs.appendFileSync(`${__dirname}/../views/timetable-data.html`, dataRow);
-        displayPage(req, res);
-      
+      let dataRow = "";
+      for (let row = 0; row < periods; row++) {
+        dataRow += "<tr>";
+        for (let col = 0; col <= endDay; col++) {
+          let [id, color] = data[row][col].split(" ");
+          if (id !== "") {
+            dataRow += `<td bgcolor='${color}'">${id}</td>\n`;
+          } else {
+            dataRow += `<td>${id}</td>\n`;
+          }
+        }
+        dataRow += "</tr>\n";
+      }
+
+      fs.appendFileSync(`${__dirname}/../views/timetable-data.html`, dataRow);
+      displayPage(req, res);
     }
   );
 };
@@ -109,11 +108,15 @@ const timetableData = (result, req, res) => {
 const displayPage = (req, res) => {
   let option = fs.readFileSync(`${__dirname}/../views/option.html`);
   let timetable = fs.readFileSync(`${__dirname}/../views/timetable-data.html`);
+  let subjectOnTimetable = fs.readFileSync(`${__dirname}/../views/subject-on-timetable.html`);
   let resultPage = popup.replaceAccountTemplate(req.session, timetablePage);
   resultPage = popup.replaceTemplate("{% TABLE %}", timetable, resultPage);
+  resultPage = popup.replaceTemplate("{% ALL-SUBJECT %}", subjectOnTimetable, resultPage);
   resultPage = popup.replaceTemplate("{% OPTION %}", option, resultPage);
   fs.writeFileSync(`${__dirname}/../views/timetable-data.html`, "");
   fs.writeFileSync(`${__dirname}/../views/option.html`, "");
+  fs.writeFileSync(`${__dirname}/../views/subject-on-timetable.html`, "");
+
   res.end(resultPage);
 };
 
@@ -127,12 +130,23 @@ router.get("/", (req, res) => {
           (error, results, fields) => {
             //CREATE OPTION LIST
             optionPage(req.query.timetableName !== undefined, results, req);
+
             let timetableName = url.parse(req.url, true).query.timetableName;
             conn.query(
               "SELECT * FROM timetable WHERE username=? AND timetableName=?",
               [req.session.username, timetableName],
               (error, results, fields) => {
-                results.forEach(result => {
+                conn.query(
+                  "SELECT * FROM subjects WHERE username=?",
+                  [req.session.username],
+                  (error, results, fields) => {
+                    results.forEach((result) => {
+                      let content = `<button class="subject" style="background-color:${result.color}">${result.idSubject}</button>`;
+                      fs.appendFileSync(`${__dirname}/../views/subject-on-timetable.html`, content);
+                    });
+                  }
+                );
+                results.forEach((result) => {
                   //CREATE TIMETABLE
                   timetableData(result, req, res);
                 });

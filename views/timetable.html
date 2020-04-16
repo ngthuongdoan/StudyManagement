@@ -15,7 +15,7 @@
 
 <body>
     <div id="overlay">
-        <form action="/timetable" method="post" autocomplete="off">
+        <!-- <form action="/timetable" method="post" autocomplete="off">
             <h1 id="formlogo">Schooling</h1>
             <div class="data">
                 <label for="timetableName">Name:</label>
@@ -46,7 +46,11 @@
             </div>
             <input type="submit" class="btn" value="Submit">
             <button type='button' class="btn" id="cancelbtn" onclick="overlayOff()">Cancel</button>
-        </form>
+        </form> -->
+        <div id="subject-container">
+            <ion-icon id="exit-icon" name="close-outline" onclick='overlay.style.display="none"'></ion-icon>
+            {% ALL-SUBJECT %}
+        </div>
     </div>
     <main>
         <div class="leftpanel">
@@ -96,9 +100,12 @@
         document.getElementById('timetablename').onchange = function () {
             window.location.href = this.children[this.selectedIndex].getAttribute('href');
         }
-
         const table = document.getElementById("table");
         const rows = table.getElementsByTagName("tr");
+        const subject = document.getElementsByClassName("subject");
+        const overlay = document.getElementById("overlay");
+        overlay.style.display = "none";
+
         let color = "{% COLOR %}";
         let name = "{% NAME %}";
 
@@ -106,6 +113,7 @@
 
         let arr = [];
         const getStudyTime = (state) => {
+            overlay.style.display = state ? "block" : "none";
             for (let i = 0; i < rows.length; i++) {
                 //Get the cells in the given row
                 let cells = rows[i].getElementsByTagName("td");
@@ -119,7 +127,7 @@
                     // Track with onclick
                     cell.onclick = function () {
                         if (state) {
-                            if (cell.innerText==="") {
+                            if (cell.innerText === "") {
                                 cell.style.backgroundColor = color;
                                 cell.innerText = name;
                                 arr.push(`${toDate(this.positionIndex)}, ${this.rowIndex}`)
