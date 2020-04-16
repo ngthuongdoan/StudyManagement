@@ -71,6 +71,11 @@
         <div class='rightpanel'>
             <!-- <button class="btn" onclick="overlayOn()">Add new</button>
             <button class="btn" id="cancelbtn" onclick="deleteTeacher()">Delete</button> -->
+            <button class="btn" style="float:left; margin:0 10px; width:fit-content; padding: 10px"
+                onclick="getStudyTime(true)">Add Subject</button>
+            <button class="btn"
+                style="float:left; margin:0 10px; width:fit-content; padding: 10px; background-color: #9b9294"
+                onclick="getStudyTime(false)">Done</button>
             <div class="mainwindow">
                 <label for="timetablename">Please choose timetable</label>
                 <select name="timetablename" id="timetablename">
@@ -78,7 +83,7 @@
                     {% OPTION %}
                 </select>
                 <div class="clear">
-                    <table>
+                    <table id="table">
                         {% TABLE %}
                     </table>
                 </div>
@@ -90,6 +95,46 @@
     <script>
         document.getElementById('timetablename').onchange = function () {
             window.location.href = this.children[this.selectedIndex].getAttribute('href');
+        }
+
+        const table = document.getElementById("table");
+        const rows = table.getElementsByTagName("tr");
+        let color = "{% COLOR %}";
+        let name = "{% NAME %}";
+
+        let state = false;
+
+        let arr = [];
+        const getStudyTime = (state) => {
+            for (let i = 0; i < rows.length; i++) {
+                //Get the cells in the given row
+                let cells = rows[i].getElementsByTagName("td");
+                for (let j = 0; j < cells.length; j++) {
+                    // Cell Object
+                    let cell = cells[j];
+                    cell.rowIndex = i;
+                    cell.positionIndex = j;
+                    cell.totalCells = cells.length;
+                    cell.totalRows = rows.length;
+                    // Track with onclick
+                    cell.onclick = function () {
+                        if (state) {
+                            if (cell.innerText==="") {
+                                cell.style.backgroundColor = color;
+                                cell.innerText = name;
+                                arr.push(`${toDate(this.positionIndex)}, ${this.rowIndex}`)
+                            }
+                        } else {
+                            event.preventDefault();
+                        }
+                    };
+                }
+            }
+        }
+
+        const toDate = (num) => {
+            const date = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
+            return date[num];
         }
     </script>
 </body>
