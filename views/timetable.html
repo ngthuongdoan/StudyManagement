@@ -79,7 +79,7 @@
                 onclick="getStudyTime(true)">Add Subject</button>
             <button class="btn"
                 style="float:left; margin:0 10px; width:fit-content; padding: 10px; background-color: #9b9294"
-                onclick="getStudyTime(false)">Done</button>
+                onclick="showDate();getStudyTime(false)">Done</button>
             <div class="mainwindow">
                 <label for="timetablename">Please choose timetable</label>
                 <select name="timetablename" id="timetablename">
@@ -88,7 +88,7 @@
                 </select>
                 <div class="clear">
                     <table id="table">
-                        {% TABLE %}
+                        {% TABLE %} 
                     </table>
                 </div>
             </div>
@@ -113,6 +113,9 @@
 
         let arr = [];
 
+        const showDate = () => {
+            console.log(new Set(arr));
+        }
 
         const getStudyTime = (state) => {
             overlay.style.display = state ? "block" : "none";
@@ -134,8 +137,6 @@
                                 cell.innerText = name;
                                 arr.push(`${toDate(this.positionIndex)}, ${this.rowIndex}`)
                             }
-                        } else {
-                            event.preventDefault();
                         }
                     };
                 }
@@ -148,24 +149,9 @@
                 let target = e.target || e.srcElement;
                 name = target.textContent || target.innerText;
                 color = target.style.backgroundColor;
-                overlay.style.display="none";
-
+                overlay.style.display = "none";
             }, false);
         }
-
-
-        const getData = (e) => {
-            e = e || window.event;
-            var target = e.target || e.srcElement,
-                text = target.textContent || target.innerText;
-            console.log(target, text);
-        }
-        // for (let index = 0; index < subjects.length; index++) {
-        //     const subject = subjects[index];
-        //     subject.addEventListener("click", (this) => {
-        //         console.log(subject);
-        //     })
-        // }
 
         const toDate = (num) => {
             const date = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
