@@ -141,7 +141,7 @@ router.get("/", (req, res) => {
                   [req.session.username],
                   (error, results, fields) => {
                     results.forEach((result) => {
-                      let content = `<button class="subject" style="background-color:${result.color}">${result.idSubject}</button>`;
+                      let content = `<button class="subject" style="background-color:${result.color}" ">${result.idSubject}</button>`;
                       fs.appendFileSync(`${__dirname}/../views/subject-on-timetable.html`, content);
                     });
                   }

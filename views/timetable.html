@@ -102,16 +102,18 @@
         }
         const table = document.getElementById("table");
         const rows = table.getElementsByTagName("tr");
-        const subject = document.getElementsByClassName("subject");
+        const subjects = document.getElementsByClassName("subject");
         const overlay = document.getElementById("overlay");
         overlay.style.display = "none";
 
-        let color = "{% COLOR %}";
-        let name = "{% NAME %}";
+        let color;
+        let name;
 
         let state = false;
 
         let arr = [];
+
+
         const getStudyTime = (state) => {
             overlay.style.display = state ? "block" : "none";
             for (let i = 0; i < rows.length; i++) {
@@ -139,6 +141,31 @@
                 }
             }
         }
+        for (let index = 0; index < subjects.length; index++) {
+            const subject = subjects[index];
+            subject.addEventListener('click', function (e) {
+                e = e || window.event;
+                let target = e.target || e.srcElement;
+                name = target.textContent || target.innerText;
+                color = target.style.backgroundColor;
+                overlay.style.display="none";
+
+            }, false);
+        }
+
+
+        const getData = (e) => {
+            e = e || window.event;
+            var target = e.target || e.srcElement,
+                text = target.textContent || target.innerText;
+            console.log(target, text);
+        }
+        // for (let index = 0; index < subjects.length; index++) {
+        //     const subject = subjects[index];
+        //     subject.addEventListener("click", (this) => {
+        //         console.log(subject);
+        //     })
+        // }
 
         const toDate = (num) => {
             const date = ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"];
