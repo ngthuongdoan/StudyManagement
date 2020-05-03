@@ -65,6 +65,8 @@ const timetableData = (result, req, res) => {
     query,
     [result.timetableName, req.session.username],
     (error, results, fields) => {
+
+      //Header
       let dataHeader = "<tr>";
       let arr = [];
       for (let i = startDay; i <= endDay; i++) arr.push(getDay(i));
@@ -74,14 +76,13 @@ const timetableData = (result, req, res) => {
         `${__dirname}/../views/timetable-data.html`,
         dataHeader
       );
+
+      //Data
       results.forEach((result) => {
-        let studytime = result.studyTime.split(";");
-        studytime.forEach((time) => {
+        let studytime = result.studyTime.split(",");
+        studytime.forEach(time =>{
           let [day, period] = time.split(" ");
-          let [start, end] = period.split("");
-          for (let i = start - 1; i <= end - 1; i++) {
-            data[i][day] = result.idSubject + " " + result.color;
-          }
+          data[period-1][day] = result.idSubject + " " + result.color;
         });
       });
 
@@ -136,6 +137,7 @@ router.get("/", (req, res) => {
               "SELECT * FROM timetable WHERE username=? AND timetableName=?",
               [req.session.username, timetableName],
               (error, results, fields) => {
+
                 conn.query(
                   "SELECT * FROM subjects WHERE username=?",
                   [req.session.username],
@@ -146,6 +148,7 @@ router.get("/", (req, res) => {
                     });
                   }
                 );
+
                 results.forEach((result) => {
                   //CREATE TIMETABLE
                   timetableData(result, req, res);
