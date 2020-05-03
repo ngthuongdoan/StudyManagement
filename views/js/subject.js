@@ -14,30 +14,13 @@ const deleteSubject = () => {
   submitForm(data);
 };
 
-const validate = () => {
-  let studyTime = document.getElementById("studyTime").value;
-
-  console.log(studyTime);
-  try {
-    let values = studyTime.split(";");
-    values.forEach(value => {
-      let [day, period] = value.trim().split(" ");
-      if (period.length !== 1) throw new Error("Periods Error");
-      if (!+period) throw new Error("NaN");
-      let [start, end] = period.split("");
-    });
-    document.getElementById("addform").submit();
-    return true;
-  } catch (e) {
-    /* eslint-disable */
-    Swal.fire({
-      icon: "error",
-      title: "Oops..."
-    });
-    /* eslint-disable */
-    return false;
-  }
-};
+// const validate = () => {
+//   let studyTime = document.getElementById("studyTime").value;
+  
+//     document.getElementById("addform").submit();
+//     return true;
+  
+// };
 const submitForm = data => {
   for (const el of data) {
     el.addEventListener("click", () => {

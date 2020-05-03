@@ -89,50 +89,50 @@ router
       (error, results, fields) => {
         req.session.teacherEmail = results[0].teacherEmail;
 
-        conn.query(
-          "SELECT studyTime FROM subjects WHERE username=? ORDER BY studyTime;",
-          [req.session.username],
-          (error, results, fields) => {
-            const allStudyTime = Array.from(
-              results,
-              result => result.studyTime
-            );
-            const days = {
-              Monday: 0,
-              Tuesday: 1,
-              Wednesday: 2,
-              Thursday: 3,
-              Friday: 4,
-              Saturday: 5,
-              Sunday: 6
-            };
-            const testStudyTime = req.body.studyTime.replace(/Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday/gi, function(matched) {
-              return days[matched];
-            });
-            const [dayTest, periodTest] = testStudyTime.split(" ");
-            const [startTimeTest, endTimeTest] = periodTest.split("");
-            console.log(dayTest,startTimeTest,endTimeTest);
-            let state = false;
-            allStudyTime.forEach(el => {
-              let [dayA, periodA] = el.split(" ");
-              if (dayA == dayTest) {
-                let [startTimeA, endTimeA] = periodA.split("");
-                if (endTimeA >= startTimeTest) {
-                  state = true;
-                }
-              }
-            });
+        // conn.query(
+        //   "SELECT studyTime FROM subjects WHERE username=? ORDER BY studyTime;",
+        //   [req.session.username],
+        //   (error, results, fields) => {
+        //     const allStudyTime = Array.from(
+        //       results,
+        //       result => result.studyTime
+        //     );
+        //     const days = {
+        //       Monday: 0,
+        //       Tuesday: 1,
+        //       Wednesday: 2,
+        //       Thursday: 3,
+        //       Friday: 4,
+        //       Saturday: 5,
+        //       Sunday: 6
+        //     };
+        //     const testStudyTime = req.body.studyTime.replace(/Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday/gi, function(matched) {
+        //       return days[matched];
+        //     });
+        //     const [dayTest, periodTest] = testStudyTime.split(" ");
+        //     const [startTimeTest, endTimeTest] = periodTest.split("");
+        //     // console.log(dayTest,startTimeTest,endTimeTest);
+        //     let state = false;
+        //     allStudyTime.forEach(el => {
+        //       let [dayA, periodA] = el.split(" ");
+        //       if (dayA == dayTest) {
+        //         let [startTimeA, endTimeA] = periodA.split("");
+        //         if (endTimeA >= startTimeTest) {
+        //           state = true;
+        //         }
+        //       }
+        //     });
 
-            if (state) {
-              // addTeacher(results);
-              const notify = `<script>Swal.fire({
-                icon: "error",
-                title: "Your input has coincidence"
-              });
-              </script>`;
-              req.session.notify = notify;
-              res.redirect("/subject");
-            } else {
+        //     if (state) {
+        //       // addTeacher(results);
+        //       const notify = `<script>Swal.fire({
+        //         icon: "error",
+        //         title: "Your input has coincidence"
+        //       });
+        //       </script>`;
+        //       req.session.notify = notify;
+        //       res.redirect("/subject");
+        //     } else {
               //CREATE SUBJECT OBJ TO POST
               const subject = new Subject({
                 id: req.body.idSubject,
@@ -140,7 +140,7 @@ router
                 teacheremail: req.session.teacherEmail,
                 subjectname: req.body.subjectName,
                 room: req.body.room,
-                studytime: req.body.studyTime,
+                studytime: "",
                 target: req.body.target,
                 note: req.body.note,
                 color: req.body.color
@@ -159,10 +159,8 @@ router
                 }
               );
             }
-          }
         );
       }
     );
-  });
 
 module.exports = router;

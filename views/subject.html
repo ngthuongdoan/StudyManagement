@@ -25,7 +25,8 @@
         </form>
     </div>
     <div id="overlay">
-        <form action="/subject" method="post" autocomplete="off" id="addform" onsubmit="return validate();">
+         <!-- onsubmit="return validate();" -->
+        <form action="/subject" method="post" autocomplete="off" id="addform">
             <h1 id="formlogo">Schooling</h1>
             <div class="data">
                 <label for="idSubject">ID Subject:</label>
@@ -36,9 +37,6 @@
                 <select name="teacherName" id="">
                     {% TEACHER %}
                 </select>
-                <label for="studyTime">Study time</label>
-                <p>VD: Monday 15;Tuesday 35</p>
-                <textarea name="studyTime" id="studyTime" cols="25" rows="5" required></textarea>
                 <label for="room">Room:</label>
                 <input type="text" name="room" placeholder="101/C1"><br>
                 <label for="target">Target:</label>
