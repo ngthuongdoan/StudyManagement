@@ -22,7 +22,7 @@ const validate = () => {
     let values = studyTime.split(";");
     values.forEach(value => {
       let [day, period] = value.trim().split(" ");
-      if (period.length !== 2) throw new Error("Periods Error");
+      if (period.length !== 1) throw new Error("Periods Error");
       if (!+period) throw new Error("NaN");
       let [start, end] = period.split("");
     });
