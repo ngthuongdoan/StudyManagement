@@ -14,27 +14,24 @@ let state = false;
 
 let arr = [];
 
-const showDate = () => {
-  // var form = document.createElement("form");
-  // var element1 = document.createElement("input");
-  // var element2 = document.createElement("input");
+const submit = () => {
+  let form = document.createElement("form");
+  let studytime = document.createElement("input");
+  let subject = document.createElement("input");
 
-  // form.method = "POST";
-  // form.action = "login.php";
 
-  // element1.value="un";
-  // element1.name="un";
-  // form.appendChild(element1);
+  form.method = "POST";
+  form.action = "/add-subject";
 
-  // element2.value="pw";
-  // element2.name="pw";
-  // form.appendChild(element2);
-
-  // document.body.appendChild(form);
-
-  // form.submit();
-  let result = [];
-  
+  studytime.value=arr.join(", ");
+  console.log(arr);
+  studytime.name="studytime";
+  form.appendChild(studytime);
+  subject.value=name;
+  subject.name="idSubject";
+  form.appendChild(subject);
+  document.body.appendChild(form);
+  form.submit();
 };
 
 const getStudyTime = (state) => {
@@ -55,7 +52,7 @@ const getStudyTime = (state) => {
           if (cell.innerText === "") {
             cell.style.backgroundColor = color;
             cell.innerText = name;
-            arr.push(`${toDate(this.positionIndex)}, ${this.rowIndex}`);
+            arr.push(`${this.positionIndex} ${this.rowIndex}`);
           }
         }
       };
