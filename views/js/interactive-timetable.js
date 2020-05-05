@@ -15,23 +15,27 @@ let state = false;
 let arr = [];
 
 const submit = () => {
-  let form = document.createElement("form");
-  let studytime = document.createElement("input");
-  let subject = document.createElement("input");
-
-
-  form.method = "POST";
-  form.action = "/add-subject";
-
-  studytime.value=arr.join(", ");
   console.log(arr);
-  studytime.name="studytime";
-  form.appendChild(studytime);
-  subject.value=name;
-  subject.name="idSubject";
-  form.appendChild(subject);
-  document.body.appendChild(form);
-  form.submit();
+
+  if (arr.length!==0) {
+    let form = document.createElement("form");
+    form.style.display="none";
+    let studytime = document.createElement("input");
+    let subject = document.createElement("input");
+    form.method = "POST";
+    form.action = "/add-subject";
+    studytime.value = arr.join(", ");
+    console.log(arr);
+    studytime.name = "studytime";
+    form.appendChild(studytime);
+    subject.value = name;
+    subject.name = "idSubject";
+    form.appendChild(subject);
+    document.body.appendChild(form);
+    form.submit();
+  }else{
+    // event.preventDefault();
+  }
 };
 
 const getStudyTime = (state) => {
