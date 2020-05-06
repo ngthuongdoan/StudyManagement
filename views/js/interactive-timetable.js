@@ -1,6 +1,12 @@
+
+/**
+ * Change timetable when choosen
+ */
 document.getElementById("timetablename").onchange = function () {
   window.location.href = this.children[this.selectedIndex].getAttribute("href");
 };
+
+//Get elements needed
 const table = document.getElementById("table");
 const rows = table.getElementsByTagName("tr");
 const subjects = document.getElementsByClassName("subject");
@@ -9,17 +15,38 @@ overlay.style.display = "none";
 
 let color;
 let name;
-
 let state = false;
-
 let arr = [];
 
-const submit = () => {
-  console.log(arr);
+/**
+ * Create on click event listener when a cell is clicked.
+ */
+for (let index = 0; index < subjects.length; index++) {
+  const subject = subjects[index];
+  subject.addEventListener(
+    "click",
+    function (e) {
+      e = e || window.event;
+      let target = e.target || e.srcElement;
+      name = target.textContent || target.innerText;
+      color = target.style.backgroundColor;
+      overlay.style.display = "none";
+    },
+    false
+  );
+}
 
-  if (arr.length!==0) {
+
+/**
+ * Submit Form when the Done-button clicked. 
+ * POST studyTime to the database
+ * @author ngthuongdoan
+ * @return {void} Nothing
+ */
+const submit = () => {
+  if (arr.length !== 0) {
     let form = document.createElement("form");
-    form.style.display="none";
+    form.style.display = "none";
     let studytime = document.createElement("input");
     let subject = document.createElement("input");
     form.method = "POST";
@@ -33,11 +60,14 @@ const submit = () => {
     form.appendChild(subject);
     document.body.appendChild(form);
     form.submit();
-  }else{
-    // event.preventDefault();
   }
 };
 
+/**
+ * Change arr param to get studyTime on click.
+ * Delete when re-clicked
+ * @param {Boolean} state - Define that should be overlayed or not
+ */
 const getStudyTime = (state) => {
   overlay.style.display = state ? "block" : "none";
   for (let i = 0; i < rows.length; i++) {
@@ -63,30 +93,5 @@ const getStudyTime = (state) => {
     }
   }
 };
-for (let index = 0; index < subjects.length; index++) {
-  const subject = subjects[index];
-  subject.addEventListener(
-    "click",
-    function (e) {
-      e = e || window.event;
-      let target = e.target || e.srcElement;
-      name = target.textContent || target.innerText;
-      color = target.style.backgroundColor;
-      overlay.style.display = "none";
-    },
-    false
-  );
-}
 
-const toDate = (num) => {
-  const date = [
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-    "Sunday",
-  ];
-  return date[num];
-};
+
