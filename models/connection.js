@@ -4,7 +4,7 @@ const databaseName =
   process.env.ENVIRONMENT == "dev"
     ? process.env.MYSQL_DATABASE
     : process.env.MYSQL_REAL_DATABASE;
-    
+
 const conn = mysql.createConnection({
   host: process.env.MYSQL_URL,
   user: process.env.MYSQL_USERNAME,
@@ -14,7 +14,7 @@ const conn = mysql.createConnection({
 
 conn.connect((err) => {
   err ? console.log("Error") : console.log("Connected");
-  console.log(databaseName)
+  console.log(databaseName);
 });
 
 module.exports = conn;
