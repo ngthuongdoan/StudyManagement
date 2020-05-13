@@ -7,6 +7,7 @@ const teacherRouter = require("./teacherRouter");
 const deleteTeacher = require("./teacherDelete");
 const timetableRouter = require("./timetableRouter");
 const subjectRouter = require("./subjectRouter");
+const eventRouter = require("./eventRouter");
 const gradeRouter = require("./gradeRouter");
 const addSubjectRouter = require("./addSubjectRouter");
 const deleteSubject = require("./subjectDelete");
@@ -23,8 +24,8 @@ router.use("/register", registerRouter);
 router.use("/teacher", teacherRouter);
 router.use("/timetable", timetableRouter);
 router.use("/subject", subjectRouter);
+router.use("/event", eventRouter);
 router.use("/grade", gradeRouter);
-// router.use("/add-subject", addSubjectRouter);
 
 
 ///LOGOUT
