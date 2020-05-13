@@ -15,7 +15,7 @@
 
 <body>
     <div id="overlay">
-        <form action="/timetable" method="post" autocomplete="off">
+        <!-- <form action="/timetable" method="post" autocomplete="off">
             <h1 id="formlogo">Schooling</h1>
             <div class="data">
                 <label for="timetableName">Name:</label>
@@ -46,7 +46,11 @@
             </div>
             <input type="submit" class="btn" value="Submit">
             <button type='button' class="btn" id="cancelbtn" onclick="overlayOff()">Cancel</button>
-        </form>
+        </form> -->
+        <div id="subject-container">
+            <ion-icon id="exit-icon" name="close-outline" onclick='overlay.style.display="none"'></ion-icon>
+            {% ALL-SUBJECT %}
+        </div>
     </div>
     <main>
         <div class="leftpanel">
@@ -71,6 +75,11 @@
         <div class='rightpanel'>
             <!-- <button class="btn" onclick="overlayOn()">Add new</button>
             <button class="btn" id="cancelbtn" onclick="deleteTeacher()">Delete</button> -->
+            <button class="btn" style="float:left; margin:0 10px; width:fit-content; padding: 10px"
+                onclick="getStudyTime(true)">Add Subject</button>
+            <button class="btn"
+                style="float:left; margin:0 10px; width:fit-content; padding: 10px; background-color: #9b9294"
+                onclick="submit();getStudyTime(false)">Done</button>
             <div class="mainwindow">
                 <label for="timetablename">Please choose timetable</label>
                 <select name="timetablename" id="timetablename">
@@ -78,7 +87,7 @@
                     {% OPTION %}
                 </select>
                 <div class="clear">
-                    <table>
+                    <table id="table">
                         {% TABLE %}
                     </table>
                 </div>
@@ -87,11 +96,7 @@
     </main>
     <div id="alert">{% POPUP %}</div>
     <script src="js/teacher.js"></script>
-    <script>
-        document.getElementById('timetablename').onchange = function () {
-            window.location.href = this.children[this.selectedIndex].getAttribute('href');
-        }
-    </script>
+    <script src="js/interactive-timetable.js"></script>
 </body>
 
 </html>

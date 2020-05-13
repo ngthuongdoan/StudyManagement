@@ -28,5 +28,15 @@
     "eslint-config-google": "^0.14.0",
     "nodemon": "^2.0.3"
   },
-  "description": ""
+  "description": "",
+  "nodemonConfig": {
+    "ext": "ts,js,html,css",
+    "ignore": [
+      "*.test.ts"
+    ],
+    "delay": "3",
+    "execMap": {
+      "ts": "ts-node"
+    }
+  }
 }

@@ -68,7 +68,6 @@ insert into subjects values('ngthuongdoan','CT22301','Thái Minh Tuấn','tmtuan
 -- insert into subjects values('ngthuongdoan','CT24601','Huỳnh Quang Nghi','hqnghi@cit.ctu.edu.vn','.NET','TH24DI','3 15','7.2','','#5FFF3D');
 
 insert into include values('CT22301','Untitled 1','ngthuongdoan');
--- insert into include values('CT24601','Untitled 2','ngthuongdoan');
 
 insert into grade value('CT22301','9','Cuối kì');
 insert into grade value('CT22301','7','Giữa kì');

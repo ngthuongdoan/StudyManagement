@@ -8,6 +8,7 @@ const deleteTeacher = require("./teacherDelete");
 const timetableRouter = require("./timetableRouter");
 const subjectRouter = require("./subjectRouter");
 const gradeRouter = require("./gradeRouter");
+const addSubjectRouter = require("./addSubjectRouter");
 const deleteSubject = require("./subjectDelete");
 const notfound = fs.readFileSync(`${__dirname}/../views/notfound.html`);
 
@@ -23,6 +24,7 @@ router.use("/teacher", teacherRouter);
 router.use("/timetable", timetableRouter);
 router.use("/subject", subjectRouter);
 router.use("/grade", gradeRouter);
+// router.use("/add-subject", addSubjectRouter);
 
 
 ///LOGOUT
@@ -39,6 +41,9 @@ router.route("/notfound").get((req, res) => {
 });
 
 //DASHBOARD
+router
+  .route("/add-subject")
+  .post((req, res) => addSubjectRouter.postMethod(req, res));
 router
   .route("/delete-teacher")
   .post((req, res) => deleteTeacher.postMethod(req, res));
