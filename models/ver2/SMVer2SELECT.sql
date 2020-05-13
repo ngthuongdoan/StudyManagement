@@ -1,35 +1,41 @@
-use studymanagementv2;
+use studymanagement_exp;
 
 -- SELLECT
 -- Tất cả môn học của user
-select * from Subjects as a, Accounts as b
+select a.* from subjects as a, accounts as b
 where
 	b.username="ngthuongdoan" and
     b.username=a.username;
 -- Tất cả semester của user
-select * from Semester as a, Accounts as b, Timetable as c
+select a.* from semester as a, accounts as b, timetable as c
 where
 	b.username="ngthuongdoan" and
     b.username=c.username and
     c.semesterName=a.semesterName;
+    
 -- Tất cả môn của timetable của user
-select * from Subjects as a, Accounts as b, Timetable as c, Semester as e
+select a.* from subjects as a, accounts as b, detailSubject as c
 where
 	b.username="ngthuongdoan" and
-    b.username=a.username and
+    c.timetableName="Tuần 1" and
+    c.semesterName="HK2 2019-2020" and
     b.username=c.username and
-    c.semesterName=e.semesterName and
-    c.startTime=e.startTime and
-    c.endTime=e.endTime and
-    e.subjectId=a.subjectID;
+    c.idSubject=a.idSubject
+;
 -- Tất cả event và subject trong 1 timetable
-select (a.eventName, b.subjectId) from Events as a, Subjects as b, Accounts as c, Timetable as d, Semester as e
-where 
+select a.idSubject, b.eventName from subjects as a, events as b, accounts as c, semester as d, timetable as e, detailSubject as f, detailEvent as g
+where
 	c.username="ngthuongdoan" and
-    c.username=a.username and
-    c.username=b.username and
-    c.username=d.username and
-	d.semesterName=e.semesterName and
-    d.startTime=e.startTime and
-    d.endTime=e.endTime and
-    e.subjectId=b.subjectId
+    d.semesterName="HK2 2019-2020" and
+    e.timetableName="Tuần 1" and
+    c.username=f.username and
+    d.semesterName=f.semesterName and
+    e.timetableName=f.timetableName and
+    f.idSubject=a.idSubject and
+    c.username=g.username and
+    d.semesterName=g.semesterName and
+    e.timetableName=g.timetableName and
+    g.eventName=b.eventName and
+    g.eventTime=b.eventTime and
+    g.eventPlace=b.eventPlace
+    ;
