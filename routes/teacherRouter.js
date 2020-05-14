@@ -24,7 +24,7 @@ const createTeacherTable = (results) => {
             <td>${teacher.email}</td>
             <td>${teacher.number}</td>
         </tr>`;
-        fs.appendFileSync(`${__dirname}/../views/teacher-data.html`, data);
+        fs.appendFileSync(`${__dirname}/../views/placeholder/teacher-data.html`, data);
       }
 };
 
@@ -42,7 +42,7 @@ router
           createTeacherTable(results);
           //CREATE TEACHER PAGE
           const teacherdata = fs.readFileSync(
-            `${__dirname}/../views/teacher-data.html`
+            `${__dirname}/../views/placeholder/teacher-data.html`
           );
           resultPage = popup.replaceAccountTemplate(req.session, teacherPage);
           resultPage = popup.replaceTemplate(
@@ -50,7 +50,7 @@ router
             teacherdata,
             resultPage
           );
-          fs.writeFileSync(`${__dirname}/../views/teacher-data.html`, "");
+          fs.writeFileSync(`${__dirname}/../views/placeholder/teacher-data.html`, "");
           res.end(resultPage);
         });
       } else {

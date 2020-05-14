@@ -25,23 +25,23 @@ const createSubjectCards = results => {
       results[j].teacherName,
       card
     );
-    fs.appendFileSync(`${__dirname}/../views/subject-data.html`, card);
+    fs.appendFileSync(`${__dirname}/../views/placeholder/subject-data.html`, card);
   }
 };
 
 const addTeacher = results => {
   results.forEach(el => {
     let data = `<option value='${el.teacherName}'>${el.teacherName}</option>\n`;
-    fs.appendFileSync(`${__dirname}/../views/teacher-name.html`, data);
+    fs.appendFileSync(`${__dirname}/../views/placeholder/teacher-name.html`, data);
   });
 };
 
 const replaceResultPage = session => {
   const teacherData = fs.readFileSync(
-    `${__dirname}/../views/teacher-name.html`
+    `${__dirname}/../views/placeholder/teacher-name.html`
   );
   const subjectdata = fs.readFileSync(
-    `${__dirname}/../views/subject-data.html`
+    `${__dirname}/../views/placeholder/subject-data.html`
   );
   resultPage = popup.replaceTemplate("{% TEACHER %}", teacherData, subjectPage);
   resultPage = popup.replaceAccountTemplate(session, resultPage);
@@ -50,8 +50,8 @@ const replaceResultPage = session => {
     resultPage = popup.replaceTemplate("{% NOTIFY %}", session.notify, resultPage);
     session.notify="";
   }
-  fs.writeFileSync(`${__dirname}/../views/teacher-name.html`, "");
-  fs.writeFileSync(`${__dirname}/../views/subject-data.html`, "");
+  fs.writeFileSync(`${__dirname}/../views/placeholder/teacher-name.html`, "");
+  fs.writeFileSync(`${__dirname}/../views/placeholder/subject-data.html`, "");
 };
 
 router

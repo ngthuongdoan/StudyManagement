@@ -105,17 +105,17 @@ const timetableData = (result, req, res) => {
         dataRow += "</tr>\n";
       }
 
-      fs.appendFileSync(`${__dirname}/../views/timetable-data.html`, dataRow);
+      fs.appendFileSync(`${__dirname}/../views/placeholder/timetable-data.html`, dataRow);
       displayPage(req, res);
     }
   );
 };
 
 const displayPage = (req, res) => {
-  let option = fs.readFileSync(`${__dirname}/../views/option.html`);
-  let timetable = fs.readFileSync(`${__dirname}/../views/timetable-data.html`);
+  let option = fs.readFileSync(`${__dirname}/../views/placeholder/option.html`);
+  let timetable = fs.readFileSync(`${__dirname}/../views/placeholder/timetable-data.html`);
   let subjectOnTimetable = fs.readFileSync(
-    `${__dirname}/../views/subject-on-timetable.html`
+    `${__dirname}/../views/placeholder/subject-on-timetable.html`
   );
   let resultPage = popup.replaceAccountTemplate(req.session, timetablePage);
   resultPage = popup.replaceTemplate("{% TABLE %}", timetable, resultPage);
@@ -125,9 +125,9 @@ const displayPage = (req, res) => {
     resultPage
   );
   resultPage = popup.replaceTemplate("{% OPTION %}", option, resultPage);
-  fs.writeFileSync(`${__dirname}/../views/timetable-data.html`, "");
-  fs.writeFileSync(`${__dirname}/../views/option.html`, "");
-  fs.writeFileSync(`${__dirname}/../views/subject-on-timetable.html`, "");
+  fs.writeFileSync(`${__dirname}/../views/placeholder/timetable-data.html`, "");
+  fs.writeFileSync(`${__dirname}/../views/placeholder/option.html`, "");
+  fs.writeFileSync(`${__dirname}/../views/placeholder/subject-on-timetable.html`, "");
 
   res.end(resultPage);
 };
@@ -155,7 +155,7 @@ router.get("/", (req, res) => {
                     results.forEach((result) => {
                       let content = `<button class="subject" style="background-color:${result.color}" ">${result.idSubject}</button>`;
                       fs.appendFileSync(
-                        `${__dirname}/../views/subject-on-timetable.html`,
+                        `${__dirname}/../views/placeholder/subject-on-timetable.html`,
                         content
                       );
                     });

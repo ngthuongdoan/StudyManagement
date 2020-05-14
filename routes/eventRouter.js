@@ -53,8 +53,8 @@ const replaceResultPage = (session) => {
     );
     session.notify = "";
   }
-  fs.writeFileSync(`${__dirname}/../views/teacher-name.html`, "");
-  fs.writeFileSync(`${__dirname}/../views/subject-data.html`, "");
+  fs.writeFileSync(`${__dirname}/../views/placeholder/teacher-name.html`, "");
+  fs.writeFileSync(`${__dirname}/../views/placeholder/subject-data.html`, "");
 };
 
 router.get("/", (req, res) => {
