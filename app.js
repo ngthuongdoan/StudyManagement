@@ -56,7 +56,8 @@ app.use(
 );
 
 app.use(cookieparser());
-app.use(express.static(`${__dirname}/views`));
+app.use(express.static(`${__dirname}/views/asserts`));
+
 app.use(express.static(`${__dirname}/models/avatars`));
 
 app.use("/", pageRouter);

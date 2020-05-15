@@ -11,7 +11,7 @@ const router = express.Router();
 
 const createSubjectCards = results => {
   for (let j = 0; j < results.length; j++) {
-    let card = fs.readFileSync(`${__dirname}/../views/card.html`);
+    let card = fs.readFileSync(`${__dirname}/../views/placeholder/card.html`);
     card = popup.replaceTemplate(/{% ID %}/g, results[j].idSubject, card);
     card = popup.replaceTemplate("{% TARGET %}", results[j].target, card);
     card = popup.replaceTemplate(
