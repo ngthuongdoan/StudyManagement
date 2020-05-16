@@ -5,7 +5,7 @@ const registerRouter = require("./registerRouter");
 const dashboardRouter = require("./dashboardRouter");
 const teacherRouter = require("./teacherRouter");
 const deleteTeacher = require("./teacherDelete");
-const timetableRouter = require("./timetableRouter");
+// const timetableRouter = require("./timetableRouter");
 const subjectRouter = require("./subjectRouter");
 const eventRouter = require("./eventRouter");
 const gradeRouter = require("./gradeRouter");
@@ -22,11 +22,13 @@ router.use("/dashboard", dashboardRouter);
 router.use("/login", loginRouter);
 router.use("/register", registerRouter);
 router.use("/teacher", teacherRouter);
-router.use("/timetable", timetableRouter);
+// router.use("/timetable", timetableRouter);
 router.use("/subject", subjectRouter);
 router.use("/event", eventRouter);
 router.use("/grade", gradeRouter);
-
+router.route("/timetable").get((req,res)=>{
+  res.end(fs.readFileSync(`${__dirname}/../views/timetable.html`));
+}).post((req,res)=>{});
 
 ///LOGOUT
 router.route("/logout").get((req, res) => {
