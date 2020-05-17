@@ -29,7 +29,9 @@
 
 #external-events .fc-event, #external-subjects .fc-subject {
   margin: 10px 0;
+  padding: 5px;
   cursor: pointer;
+  border: none;
 }
 
 #external-events p, #external-subjects p {
@@ -53,4 +55,11 @@
   max-width: 900px;
   margin: 0 auto;
   color: rgb(66, 59, 59);
+}
+
+#backicon{
+  display: block;
+  position: absolute;
+  font-size: 20px;
+  cursor: pointer;
 }

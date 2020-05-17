@@ -55,20 +55,44 @@
 
             /* initialize the calendar
             -----------------------------------------------------------------*/
-
+            var del = false;
             var calendarEl = document.getElementById('calendar');
             var calendar = new Calendar(calendarEl, {
                 plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
+                customButtons: {
+                    deleteButton: {
+                        text: 'Delete',
+                        click: function () {
+                            let events = document.getElementsByClassName("fc-time-grid-event");
+                            for (let index = 0; index < events.length; index++) {
+                                let event = events[index];
+                                event.style.filter = "brightness(50%)";
+                                del = true;
+                            }
+                        }
+                    },
+                    cancelButton: {
+                        text: 'Cancel',
+                        click: function () {
+                            let events = document.getElementsByClassName("fc-time-grid-event");
+                            for (let index = 0; index < events.length; index++) {
+                                let event = events[index];
+                                event.style.filter = "brightness(100%)";
+                                del = false;
+                            }
+                        }
+                    }
+                },
                 header: {
                     left: 'prev,next today',
                     center: 'title',
-                    right: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                    right: 'deleteButton,cancelButton dayGridMonth,timeGridWeek,timeGridDay,listWeek'
                 },
                 timeZone: "Indochina Time",
                 editable: true,
                 droppable: true,
                 weekNumbers: true,
-                weekNumbersWithinDays:true,
+                weekNumbersWithinDays: true,
                 navLinks: true, // can click day/week names to navigate views
                 drop: function (arg) {
                     // is the "remove after drop" checkbox checked?
@@ -79,24 +103,57 @@
                 },
 
                 events: [
+                    {
+                        title: 'PTCT',
+                        start: '2020-05-17T13:00:00',
+                        end: '2020-05-17T17:00:00',
+                        extendedProps:{
+                            department: '302/C1'
+                        }
+                    }
                     //This is for Subject
-                // {
-                //   title: 'rrule event',
-                //   rrule: {
-                //     dtstart: '2020-02-09T13:00:00',
-                //     until: '2020-02-01',
-                //     freq: 'weekly'
-                //   },
-                //   duration: '02:00'
-                // }                
+                    // {
+                    //   title: 'rrule event',
+                    //   rrule: {
+                    //     dtstart: '2020-02-09T13:00:00',
+                    //     until: '2020-02-01',
+                    //     freq: 'weekly'
+                    //   },
+                    //   duration: '02:00'
+                    // }                
                 ],
-                eventClick: function (arg) {
-                    if (confirm('delete event?')) {
-                        arg.event.remove()
+                eventRender: function (info) {
+                    $(info.el).find('.fc-title').append("<br>" + info.event.extendedProps.department)
+                },
+                // eventAfterRender: function (event, element) {
+                //     //Check what is the key for description in event and use that one.
+                //     element.find('.fc-title').append(" " + event.description);
+                //     element.bind('dblclick', function () {
+                //         $('#ModalEdit #id').val(event.id);
+                //         $('#ModalEdit #title').val(event.title);
+                //         $('#ModalEdit').modal('show');
+                //     });
+                // },
+                eventClick: function (info) {
+                    if (del) {
+                        alert(info.event.title);
+                        del = false;
+                    } else {
+                        calendar.changeView('timeGridDay', info.event.start);
                     }
                 },
                 eventReceive: function (info) {
-                    alert(`${info.event.title}, 'new_start': ${info.event.start}`);
+                    console.log(info.event);
+                    $.ajax({
+                        url: "/timetable",
+                        type: "POST",
+                        dataType: "application/json",
+                        data: JSON.stringify({ 'id': info.event.id, 'url': info.event.url, 'title': info.event.title, 'new_start': info.event.start }),
+                        timeout: 5000
+                    }).done(function (msg) {
+                        alert("Data Saved: " + msg);
+                    });
+                    // alert(`${info.event.title}, 'new_start': ${info.event.start}`);
                 },
                 eventResize: function (info) {
                     alert(info.event.title + " end is now " + info.event.end.toISOString());
@@ -104,7 +161,7 @@
                 //Receive event dragable
                 eventDrop: function (info) {
                     $.ajax({
-                        url: "/",
+                        url: "/timetable",
                         type: "POST",
                         dataType: "application/json",
                         data: JSON.stringify({ 'id': info.event.id, 'url': info.event.url, 'title': info.event.title, 'new_start': info.event.start }),
@@ -121,15 +178,12 @@
 </head>
 
 <body>
-
+    <ion-icon name="arrow-back-outline" id="backicon" onclick="history.back()"></ion-icon>
     <div id="container">
         <div id='wrap'>
-
             <div id='external-events'>
                 <h4>Events</h4>
-
                 <div id='external-events-list'>
-                    <div class='fc-event'>My Event 1</div>
                     {% EVENTS %}
                 </div>
 
@@ -143,7 +197,6 @@
                 <h4>Subjects</h4>
 
                 <div id='external-subjects-list'>
-                    <div class='fc-event fc-subject'>My Subject 1</div>
                     {% SUBJECTS %}
                 </div>
 
