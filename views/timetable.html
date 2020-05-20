@@ -2,93 +2,102 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/timetable.css">
-    <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/timetable.css" />
+    <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.8.1/dist/sweetalert2.all.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
-    <link href='js/lib/calendarjs/packages/core/main.css' rel='stylesheet' />
-    <link href='js/lib/calendarjs/packages/daygrid/main.css' rel='stylesheet' />
-    <link href='js/lib/calendarjs/packages/timegrid/main.css' rel='stylesheet' />
-    <link href='js/lib/calendarjs/packages/list/main.css' rel='stylesheet' />
-    <script src='js/lib/calendarjs/packages/core/main.js'></script>
-    <script src='js/lib/calendarjs/packages/interaction/main.js'></script>
-    <script src='js/lib/calendarjs/packages/daygrid/main.js'></script>
-    <script src='js/lib/calendarjs/packages/timegrid/main.js'></script>
-    <script src='js/lib/calendarjs/packages/list/main.js'></script>
-    <script src='js/lib/calendarjs/packages/rrule/main.js'></script>
-    <script src='js/lib/calendarjs/vendor/rrule.js'></script>
+    <link href="js/lib/calendarjs/packages/core/main.css" rel="stylesheet" />
+    <link href="js/lib/calendarjs/packages/daygrid/main.css" rel="stylesheet" />
+    <link href="js/lib/calendarjs/packages/timegrid/main.css" rel="stylesheet" />
+    <link href="js/lib/calendarjs/packages/list/main.css" rel="stylesheet" />
+    <script src="js/lib/calendarjs/packages/core/main.js"></script>
+    <script src="js/lib/calendarjs/packages/interaction/main.js"></script>
+    <script src="js/lib/calendarjs/packages/daygrid/main.js"></script>
+    <script src="js/lib/calendarjs/packages/timegrid/main.js"></script>
+    <script src="js/lib/calendarjs/packages/list/main.js"></script>
+    <script src="js/lib/calendarjs/packages/rrule/main.js"></script>
+    <script src="js/lib/calendarjs/vendor/rrule.js"></script>
     <title>Timetable</title>
     <script>
-
-        document.addEventListener('DOMContentLoaded', function () {
+        document.addEventListener("DOMContentLoaded", function () {
             var Calendar = FullCalendar.Calendar;
-            var Draggable = FullCalendarInteraction.Draggable
+            var Draggable = FullCalendarInteraction.Draggable;
 
             /* initialize the external events
-            -----------------------------------------------------------------*/
+                                          -----------------------------------------------------------------*/
 
-            var containerEventsEl = document.getElementById('external-events-list');
+            var containerEventsEl = document.getElementById("external-events-list");
             new Draggable(containerEventsEl, {
-                itemSelector: '.fc-event',
+                itemSelector: ".fc-event",
                 eventData: function (eventEl) {
                     return {
-                        title: eventEl.innerText.trim()
-                    }
-                }
+                        title: eventEl.innerText.trim(),
+                    };
+                },
             });
 
-            var containerSubjectsEl = document.getElementById('external-subjects-list');
+            var containerSubjectsEl = document.getElementById(
+                "external-subjects-list"
+            );
             new Draggable(containerSubjectsEl, {
-                itemSelector: '.fc-subject',
+                itemSelector: ".fc-subject",
                 eventData: function (subjectEl) {
+                    // console.log(subjectEl.dataset.event);
+                    let data = JSON.parse(subjectEl.dataset.event);
                     return {
-                        title: subjectEl.innerText.trim()
-                    }
-                }
+                        title: data.title,
+                        backgroundColor: data.backgroundColor,
+                    };
+                },
             });
 
             /* initialize the calendar
-            -----------------------------------------------------------------*/
+                                     
+                        -----------------------------------------------------------------*/
             var del = false;
-            var calendarEl = document.getElementById('calendar');
+            var calendarEl = document.getElementById("calendar");
             var calendar = new Calendar(calendarEl, {
-                plugins: ['interaction', 'dayGrid', 'timeGrid', 'list'],
+                plugins: ["interaction", "dayGrid", "timeGrid", "list"],
                 customButtons: {
                     deleteButton: {
-                        text: 'Delete',
+                        text: "Delete",
                         click: function () {
-                            let events = document.getElementsByClassName("fc-time-grid-event");
+                            let events = document.getElementsByClassName(
+                                "fc-time-grid-event"
+                            );
                             for (let index = 0; index < events.length; index++) {
                                 let event = events[index];
                                 event.style.filter = "brightness(50%)";
                                 del = true;
                             }
-                        }
+                        },
                     },
                     cancelButton: {
-                        text: 'Cancel',
+                        text: "Cancel",
                         click: function () {
-                            let events = document.getElementsByClassName("fc-time-grid-event");
+                            let events = document.getElementsByClassName(
+                                "fc-time-grid-event"
+                            );
                             for (let index = 0; index < events.length; index++) {
                                 let event = events[index];
                                 event.style.filter = "brightness(100%)";
                                 del = false;
                             }
-                        }
-                    }
+                        },
+                    },
                 },
                 header: {
-                    left: 'prev,next today',
-                    center: 'title',
-                    right: 'deleteButton,cancelButton dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+                    left: "prev,next today",
+                    center: "title",
+                    right:
+                        "deleteButton,cancelButton dayGridMonth,timeGridWeek,timeGridDay,listWeek",
                 },
-                timeZone: "Indochina Time",
                 editable: true,
                 droppable: true,
                 weekNumbers: true,
@@ -96,121 +105,137 @@
                 navLinks: true, // can click day/week names to navigate views
                 drop: function (arg) {
                     // is the "remove after drop" checkbox checked?
-                    if (document.getElementById('drop-remove').checked) {
+                    if (document.getElementById("drop-remove").checked) {
                         // if so, remove the element from the "Draggable Events" list
                         arg.draggedEl.parentNode.removeChild(arg.draggedEl);
                     }
                 },
 
-                events: [
+                eventSources: [
                     {
-                        title: 'PTCT',
-                        start: '2020-05-17T13:00:00',
-                        end: '2020-05-17T17:00:00',
-                        extendedProps:{
-                            department: '302/C1'
-                        }
+                        url: "/get-event", // use the `url` property
+                        method: "GET"
+                    },
+                    {
+                        url: "/get-subject",
+                        method: "GET"
                     }
-                    //This is for Subject
-                    // {
-                    //   title: 'rrule event',
-                    //   rrule: {
-                    //     dtstart: '2020-02-09T13:00:00',
-                    //     until: '2020-02-01',
-                    //     freq: 'weekly'
-                    //   },
-                    //   duration: '02:00'
-                    // }                
                 ],
+                //This is for Subject
+                // {
+                //   title: 'rrule event',
+                //   rrule: {
+                //     dtstart: '2020-02-09T13:00:00',
+                //     until: '2020-02-01',
+                //     freq: 'weekly'
+                //   },
+                //   duration: '02:00'
+                // }
+
                 eventRender: function (info) {
-                    $(info.el).find('.fc-title').append("<br>" + info.event.extendedProps.department)
+                    if (info.event.extendedProps.department)
+                        $(info.el)
+                            .find(".fc-title")
+                            .append("<br>" + info.event.extendedProps.department);
                 },
-                // eventAfterRender: function (event, element) {
-                //     //Check what is the key for description in event and use that one.
-                //     element.find('.fc-title').append(" " + event.description);
-                //     element.bind('dblclick', function () {
-                //         $('#ModalEdit #id').val(event.id);
-                //         $('#ModalEdit #title').val(event.title);
-                //         $('#ModalEdit').modal('show');
-                //     });
-                // },
                 eventClick: function (info) {
                     if (del) {
                         alert(info.event.title);
                         del = false;
                     } else {
-                        calendar.changeView('timeGridDay', info.event.start);
+                        calendar.changeView("timeGridDay", info.event.start);
                     }
                 },
                 eventReceive: function (info) {
-                    console.log(info.event);
                     $.ajax({
                         url: "/timetable",
                         type: "POST",
-                        dataType: "application/json",
-                        data: JSON.stringify({ 'id': info.event.id, 'url': info.event.url, 'title': info.event.title, 'new_start': info.event.start }),
-                        timeout: 5000
-                    }).done(function (msg) {
-                        alert("Data Saved: " + msg);
+                        dataType: "json",
+                        contentType: "application/json",
+                        data: {
+                            id: info.event.id,
+                            url: info.event.url,
+                            title: info.event.title,
+                            start: info.event.start,
+                            color: info.event.color,
+                        },
+                        success: (data) => {
+                            data = JSON.parse(data);
+                            console.log(data.message);
+                            $("#name").text(data.message);
+                        },
+                        error: (jqXHR, textStatus, err) => {
+                            console.log(err);
+                        },
                     });
-                    // alert(`${info.event.title}, 'new_start': ${info.event.start}`);
                 },
                 eventResize: function (info) {
-                    alert(info.event.title + " end is now " + info.event.end.toISOString());
+                    alert(
+                        info.event.title + " end is now " + info.event.end.toISOString()
+                    );
                 },
                 //Receive event dragable
                 eventDrop: function (info) {
                     $.ajax({
                         url: "/timetable",
                         type: "POST",
-                        dataType: "application/json",
-                        data: JSON.stringify({ 'id': info.event.id, 'url': info.event.url, 'title': info.event.title, 'new_start': info.event.start }),
-                        timeout: 5000
-                    }).done(function (msg) {
-                        alert("Data Saved: " + msg);
+                        dataType: "json",
+                        contentType: "application/json",
+                        data: {
+                            id: info.event.id,
+                            url: info.event.url,
+                            title: info.event.title,
+                            start: info.event.start,
+                        },
+
+                        success: (data) => {
+                            data = JSON.parse(JSON.stringify(data));
+                            console.log(data.message);
+                            $("#name").text(data.message);
+                        },
+                        error: (jqXHR, textStatus, err) => {
+                            console.log(err);
+                        },
                     });
-                }
+                },
             });
             calendar.render();
         });
-
     </script>
 </head>
 
 <body>
     <ion-icon name="arrow-back-outline" id="backicon" onclick="history.back()"></ion-icon>
     <div id="container">
-        <div id='wrap'>
-            <div id='external-events'>
+        <div id="wrap">
+            <div id="external-events">
                 <h4>Events</h4>
-                <div id='external-events-list'>
+                <div id="external-events-list">
                     {% EVENTS %}
                 </div>
 
                 <p>
-                    <input type='checkbox' id='drop-remove' />
-                    <label for='drop-remove'>remove after drop</label>
+                    <input type="checkbox" id="drop-remove" />
+                    <label for="drop-remove">remove after drop</label>
                 </p>
             </div>
-            <div id='calendar' onchange="showData()"></div>
-            <div id='external-subjects'>
+            <div id="calendar" onchange="showData()"></div>
+            <div id="external-subjects">
                 <h4>Subjects</h4>
 
-                <div id='external-subjects-list'>
+                <div id="external-subjects-list">
                     {% SUBJECTS %}
                 </div>
 
                 <p>
-                    <input type='checkbox' id='drop-remove' />
-                    <label for='drop-remove'>remove after drop</label>
+                    <input type="checkbox" id="drop-remove" />
+                    <label for="drop-remove">remove after drop</label>
                 </p>
             </div>
-
-
-            <div style='clear:both'></div>
+            <div style="clear: both;"></div>
         </div>
     </div>
-
 </body>
 
 </html>
+https://fullcalendar.io/docs/events-json-feed

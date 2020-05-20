@@ -24,7 +24,8 @@ const displayPage = (req, res) => {
 };
 
 router
-  .get("/", (req, res) => {
+  .route("/")
+  .get((req, res) => {
     if (session.sessionCheck(req, res)) {
       if (req.session.loggedin) {
         conn.query(
@@ -32,7 +33,7 @@ router
           [req.session.username],
           (error, results, fields) => {
             results.forEach((result) => {
-              let content = `<div class='fc-event fc-subject' style="background-color:${result.color}">${result.subjectName}</div>`;
+              let content = `<div class='fc-event fc-subject' data-event='{"title": "${result.subjectName}", "duration": "03:00", "backgroundColor": "${result.subjectColor}","id": "${result.idSubject}","rrule":{"dtstart": "${result.subjectStartTime}","until": "${result.subjectEndTime}","freq": "weekly"}}' style="background-color:${result.subjectColor}">${result.subjectName}</div>`;
               fs.appendFileSync(
                 `${__dirname}/../views/placeholder/subject-on-timetable.html`,
                 content
@@ -47,6 +48,9 @@ router
     }
   })
   .post((req, res) => {
-    console.log(req.body);
+    // console.log(req.body);
+    // eslint-disable-next-line quotes
+    res.status(200).send('{ "name":"John", "age":30, "city":"New York", "message":"Success"}');
   });
+
 module.exports = router;

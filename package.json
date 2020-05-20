@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "main": "server.js",
   "scripts": {
-    "devStart": "nodemon server.js",
+    "devStart": "nodemon .",
     "test": "jest",
     "eslint": "npx eslint",
-    "start": "node server.js"
+    "start": "node ."
   },
   "keywords": [],
   "author": "",
@@ -20,8 +20,7 @@
     "express-session": "^1.17.1",
     "morgan": "^1.10.0",
     "mysql": "^2.18.1",
-    "nodemailer": "^6.4.6",
-    "sweetalert2": "^9.10.12"
+    "nodemailer": "^6.4.6"
   },
   "devDependencies": {
     "eslint": "^6.8.0",

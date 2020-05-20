@@ -10,6 +10,8 @@ const subjectRouter = require("./subjectRouter");
 const eventRouter = require("./eventRouter");
 const gradeRouter = require("./gradeRouter");
 const addSubjectRouter = require("./addSubjectRouter");
+const getSubject = require("./subjectGet");
+const getEvent = require("./eventGet");
 const deleteSubject = require("./subjectDelete");
 const notfound = fs.readFileSync(`${__dirname}/../views/notfound.html`);
 
@@ -26,7 +28,6 @@ router.use("/timetable", timetableRouter);
 router.use("/subject", subjectRouter);
 router.use("/event", eventRouter);
 router.use("/grade", gradeRouter);
-
 
 ///LOGOUT
 router.route("/logout").get((req, res) => {
@@ -51,6 +52,8 @@ router
 router
   .route("/delete-subject")
   .post((req, res) => deleteSubject.postMethod(req, res));
+router.route("/get-subject").get((req, res) => getSubject.getMethod(req, res));
 
+router.route("/get-event").get((req, res) => getEvent.getMethod(req, res));
 
 module.exports = router;

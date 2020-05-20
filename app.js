@@ -5,6 +5,8 @@ const conn = require("./models/connection");
 const cookieparser = require("cookie-parser");
 const pageRouter = require("./routes/pageRouter");
 const morgan = require("morgan");
+const bodyParser = require("body-parser");
+
 const app = express();
 
 const options = {
