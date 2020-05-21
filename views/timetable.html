@@ -8,7 +8,7 @@
     <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
     <link rel="stylesheet" href="css/timetable.css" />
     <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet" />
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.8.1/dist/sweetalert2.all.min.js"></script>
+    <script src="js/lib/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.js"
         integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
@@ -24,184 +24,7 @@
     <script src="js/lib/calendarjs/packages/rrule/main.js"></script>
     <script src="js/lib/calendarjs/vendor/rrule.js"></script>
     <title>Timetable</title>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            var Calendar = FullCalendar.Calendar;
-            var Draggable = FullCalendarInteraction.Draggable;
-
-            /* initialize the external events
-                                          -----------------------------------------------------------------*/
-
-            var containerEventsEl = document.getElementById("external-events-list");
-            new Draggable(containerEventsEl, {
-                itemSelector: ".fc-event",
-                eventData: function (eventEl) {
-                    return {
-                        title: eventEl.innerText.trim(),
-                    };
-                },
-            });
-
-            var containerSubjectsEl = document.getElementById(
-                "external-subjects-list"
-            );
-            new Draggable(containerSubjectsEl, {
-                itemSelector: ".fc-subject",
-                eventData: function (subjectEl) {
-                    // console.log(subjectEl.dataset.event);
-                    let data = JSON.parse(subjectEl.dataset.event);
-                    return {
-                        title: data.title,
-                        backgroundColor: data.backgroundColor,
-                    };
-                },
-            });
-
-            /* initialize the calendar
-                                     
-                        -----------------------------------------------------------------*/
-            var del = false;
-            var calendarEl = document.getElementById("calendar");
-            var calendar = new Calendar(calendarEl, {
-                plugins: ["interaction", "dayGrid", "timeGrid", "list"],
-                customButtons: {
-                    deleteButton: {
-                        text: "Delete",
-                        click: function () {
-                            let events = document.getElementsByClassName(
-                                "fc-time-grid-event"
-                            );
-                            for (let index = 0; index < events.length; index++) {
-                                let event = events[index];
-                                event.style.filter = "brightness(50%)";
-                                del = true;
-                            }
-                        },
-                    },
-                    cancelButton: {
-                        text: "Cancel",
-                        click: function () {
-                            let events = document.getElementsByClassName(
-                                "fc-time-grid-event"
-                            );
-                            for (let index = 0; index < events.length; index++) {
-                                let event = events[index];
-                                event.style.filter = "brightness(100%)";
-                                del = false;
-                            }
-                        },
-                    },
-                },
-                header: {
-                    left: "prev,next today",
-                    center: "title",
-                    right:
-                        "deleteButton,cancelButton dayGridMonth,timeGridWeek,timeGridDay,listWeek",
-                },
-                editable: true,
-                droppable: true,
-                weekNumbers: true,
-                weekNumbersWithinDays: true,
-                navLinks: true, // can click day/week names to navigate views
-                drop: function (arg) {
-                    // is the "remove after drop" checkbox checked?
-                    if (document.getElementById("drop-remove").checked) {
-                        // if so, remove the element from the "Draggable Events" list
-                        arg.draggedEl.parentNode.removeChild(arg.draggedEl);
-                    }
-                },
-
-                eventSources: [
-                    {
-                        url: "/get-event", // use the `url` property
-                        method: "GET"
-                    },
-                    {
-                        url: "/get-subject",
-                        method: "GET"
-                    }
-                ],
-                //This is for Subject
-                // {
-                //   title: 'rrule event',
-                //   rrule: {
-                //     dtstart: '2020-02-09T13:00:00',
-                //     until: '2020-02-01',
-                //     freq: 'weekly'
-                //   },
-                //   duration: '02:00'
-                // }
-
-                eventRender: function (info) {
-                    if (info.event.extendedProps.department)
-                        $(info.el)
-                            .find(".fc-title")
-                            .append("<br>" + info.event.extendedProps.department);
-                },
-                eventClick: function (info) {
-                    if (del) {
-                        alert(info.event.title);
-                        del = false;
-                    } else {
-                        calendar.changeView("timeGridDay", info.event.start);
-                    }
-                },
-                eventReceive: function (info) {
-                    $.ajax({
-                        url: "/timetable",
-                        type: "POST",
-                        dataType: "json",
-                        contentType: "application/json",
-                        data: {
-                            id: info.event.id,
-                            url: info.event.url,
-                            title: info.event.title,
-                            start: info.event.start,
-                            color: info.event.color,
-                        },
-                        success: (data) => {
-                            data = JSON.parse(data);
-                            console.log(data.message);
-                            $("#name").text(data.message);
-                        },
-                        error: (jqXHR, textStatus, err) => {
-                            console.log(err);
-                        },
-                    });
-                },
-                eventResize: function (info) {
-                    alert(
-                        info.event.title + " end is now " + info.event.end.toISOString()
-                    );
-                },
-                //Receive event dragable
-                eventDrop: function (info) {
-                    $.ajax({
-                        url: "/timetable",
-                        type: "POST",
-                        dataType: "json",
-                        contentType: "application/json",
-                        data: {
-                            id: info.event.id,
-                            url: info.event.url,
-                            title: info.event.title,
-                            start: info.event.start,
-                        },
-
-                        success: (data) => {
-                            data = JSON.parse(JSON.stringify(data));
-                            console.log(data.message);
-                            $("#name").text(data.message);
-                        },
-                        error: (jqXHR, textStatus, err) => {
-                            console.log(err);
-                        },
-                    });
-                },
-            });
-            calendar.render();
-        });
-    </script>
+    <script src="js/timetable.js"></script>
 </head>
 
 <body>
@@ -238,4 +61,3 @@
 </body>
 
 </html>
-https://fullcalendar.io/docs/events-json-feed
