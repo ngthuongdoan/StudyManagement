@@ -5,6 +5,9 @@ class Subject {
     teacherEmail,
     subjectRoom = "",
     subjectWeek,
+    subjectDay,
+    subjectStartRecur,
+    subjectEndRecur,
     subjectStartTime,
     subjectEndTime,
     subjectTarget = "",
@@ -17,6 +20,9 @@ class Subject {
     this.title = subjectName;
     this.room = subjectRoom;
     this.week = subjectWeek;
+    this.day = subjectDay;
+    this.startRecur = subjectStartRecur;
+    this.endRecur = subjectEndRecur;
     this.target = subjectTarget;
     this.note = subjectNote;
     this.teacherEmail = teacherEmail;
@@ -25,23 +31,21 @@ class Subject {
 
   send() {
     return {
-      id : this.id,
-      title : this.title,
-      extendedPros:{
-        room : this.room,
-        week : this.week,
-        target : this.target,
-        note : this.note,
-        teacherEmail : this.teacherEmail,
+      id: this.id,
+      title: this.title,
+      extendedPros: {
+        room: this.room,
+        week: this.week,
+        target: this.target,
+        note: this.note,
+        teacherEmail: this.teacherEmail,
       },
-      rrule: {
-        freq: "weekly",
-        wkst:this.start,
-        byweekno:[1,2,3,6,7,8,9,10,11,12,13,14,15,16,17],
-        dtstart: this.start,
-        until: this.end
-      },
-      backgroundColor : this.backgroundColor,
+      daysOfWeek: this.day.split(","),
+      startTime: this.start,
+      endTime: this.end,
+      startRecur: this.startRecur,
+      endRecur: this.endRecur,
+      backgroundColor: this.backgroundColor,
     };
   }
 }

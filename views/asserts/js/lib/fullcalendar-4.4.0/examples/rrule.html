@@ -27,27 +27,12 @@
       },
       defaultDate: '2020-02-12',
       editable: true,
-      navLinks: true, // can click day/week names to navigate views
-      selectable: true,
-      selectMirror: true,
-      select: function(arg) {
-        var title = prompt('Event Title:');
-        if (title) {
-          calendar.addEvent({
-            title: title,
-            start: arg.start,
-            end: arg.end,
-            allDay: arg.allDay
-          })
-        }
-        calendar.unselect()
-      },
       events: [
         {
           title: 'rrule event',
           rrule: {
             dtstart: '2020-02-09T13:00:00',
-            until: '2020-02-01',
+            // until: '2020-02-01',
             freq: 'weekly'
           },
           duration: '02:00'

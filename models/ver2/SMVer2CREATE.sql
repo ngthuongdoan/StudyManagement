@@ -40,7 +40,6 @@ create table teacher(
     constraint pk_teacher primary key (username, teacherEmail)
 );
 
-
 create table events(
 	username varchar(20) references accounts(username),
 	eventName nvarchar(200) not null,
