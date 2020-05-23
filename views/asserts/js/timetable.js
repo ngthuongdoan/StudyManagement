@@ -22,22 +22,21 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   });
 
-  var containerSubjectsEl = document.getElementById("external-subjects-list");
-  new Draggable(containerSubjectsEl, {
-    itemSelector: ".fc-subject",
-    eventData: function (subjectEl) {
-      let data = subjectEl.dataset.event;
-      data = JSON.parse(data);
-      // let department = (undefined === data.extendedProps.department)?"":data.extendedProps.department;
-      return {
-        title: data.title,
-        backgroundColor: data.backgroundColor,
-        // extendedProps: {
-        //   department: department,
-        // },
-      };
-    },
-  });
+  // var containerSubjectsEl = document.getElementById("external-subjects-list");
+  // new Draggable(containerSubjectsEl, {
+  //   itemSelector: ".fc-subject",
+  //   eventData: function (subjectEl) {
+  //     let data = subjectEl.dataset.subject;
+  //     data = JSON.parse(data);
+  //     return {
+  //       title: data.title,
+  //       backgroundColor: data.backgroundColor,
+  //       extendedProps: {
+  //         department: data.department,
+  //       },
+  //     };
+  //   },
+  // });
 
   /* initialize the calendar
                              
@@ -102,10 +101,11 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     ],
     eventRender: function (info) {
-      if (info.event.extendedProps.department)
+      let department = (info.event.extendedProps.department!==undefined) ?info.event.extendedProps.department:info.event.department;
+      if (department)
         $(info.el)
           .find(".fc-title")
-          .append("<br>" + info.event.extendedProps.department);
+          .append("<br>" + department);
     },
     eventClick: function (info) {
       if (del) {

@@ -12,7 +12,7 @@
   margin: 0 auto;
 }
 
-#external-events, #external-subjects {
+#external-events{
   float: left;
   width: 150px;
   padding: 0 10px;
@@ -21,31 +21,31 @@
   text-align: left;
 }
 
-#external-events h4, #external-subjects h4 {
+#external-events h4{
   font-size: 16px;
   margin-top: 0;
   padding-top: 1em;
 }
 
-#external-events .fc-event, #external-subjects .fc-subject {
+#external-events .fc-event{
   margin: 10px 0;
   padding: 5px;
   cursor: pointer;
   border: none;
 }
 
-#external-events p, #external-subjects p {
+#external-events p{
   margin: 1.5em 0;
   font-size: 11px;
   color: #666;
 }
 
-#external-events p input, #external-subjects p input {
+#external-events p input{
   margin: 0;
   vertical-align: middle;
 }
 
-#external-events-list, #external-subjects-list {
+#external-events-list{
   height: 150px;
   overflow: scroll;
 }
@@ -62,4 +62,8 @@
   position: absolute;
   font-size: 20px;
   cursor: pointer;
+}
+.fc-content{
+  cursor: pointer;
+
 }

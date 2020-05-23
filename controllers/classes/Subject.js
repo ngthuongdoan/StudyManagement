@@ -3,7 +3,7 @@ class Subject {
     idSubject,
     subjectName,
     teacherEmail,
-    subjectRoom = "",
+    subjectRoom,
     subjectWeek,
     subjectDay,
     subjectStartRecur,
@@ -18,7 +18,7 @@ class Subject {
     this.start = subjectStartTime;
     this.end = subjectEndTime;
     this.title = subjectName;
-    this.room = subjectRoom;
+    this.department = subjectRoom;
     this.week = subjectWeek;
     this.day = subjectDay;
     this.startRecur = subjectStartRecur;
@@ -33,19 +33,18 @@ class Subject {
     return {
       id: this.id,
       title: this.title,
-      extendedPros: {
-        room: this.room,
-        week: this.week,
-        target: this.target,
-        note: this.note,
-        teacherEmail: this.teacherEmail,
-      },
+      department: this.department,
+      week: this.week,
+      target: this.target,
+      note: this.note,
+      teacherEmail: this.teacherEmail,
       daysOfWeek: this.day.split(","),
       startTime: this.start,
       endTime: this.end,
       startRecur: this.startRecur,
       endRecur: this.endRecur,
       backgroundColor: this.backgroundColor,
+      editable: false,
     };
   }
 }

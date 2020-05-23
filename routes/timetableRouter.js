@@ -45,7 +45,22 @@ router
           [req.session.username],
           (error, results, fields) => {
             results.forEach((result) => {
-              let content = `<div class='fc-event fc-subject' data-event='{"id":"${result.idSubject}","title":"${result.subjectName}","extendedPros":{"room":"${result.subjectRoom}","week":"${result.subjectWeek}","target":"${result.subjectTarget}","note":"${result.subjectNote}","teacherEmail":"${result.teacherEmail}"},"daysOfWeek":"${result.subjectDay}","startTime":"${result.subjectStartTime}","endTime":"${result.subjectEndTime}","startRecur":"${result.subjectStartRecur}","endRecur":"${result.subjectEndRecur}","backgroundColor":"${result.subjectColor}"}' style="background-color:${result.subjectColor}">${result.subjectName}</div>`;
+              let content = `<div class='fc-event fc-subject' data-subject='{
+                "id":"${result.idSubject}",
+                "title":"${result.subjectName}",
+                "department":"${result.subjectRoom}",
+                "week":"${result.subjectWeek}",
+                "target":"${result.subjectTarget}",
+                "note":"${result.subjectNote}",
+                "teacherEmail":"${result.teacherEmail}",
+                "daysOfWeek":"${result.subjectDay}",
+                "startTime":"${result.subjectStartTime}",
+                "endTime":"${result.subjectEndTime}",
+                "startRecur":"${result.subjectStartRecur}",
+                "endRecur":"${result.subjectEndRecur}",
+                "backgroundColor":"${result.subjectColor}",
+                "editable":"false"
+              }' style="background-color:${result.subjectColor}">${result.subjectName}</div>`;
               fs.appendFileSync(
                 `${__dirname}/../views/placeholder/subject-on-timetable.html`,
                 content
