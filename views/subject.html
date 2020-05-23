@@ -13,8 +13,41 @@
     <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
     <script src="js/quicksortSubject.js"></script>
     <script src="js/lib/jscolor/jscolor.js"></script>
-
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="css/jquery.timeentry.css">
+    <script type="text/javascript" src="js/lib/jquery.timeentry.package-2.0.1/jquery.plugin.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.timeentry.package-2.0.1/jquery.timeentry.js"></script>
     <title>Subject</title>
+    <script>
+        $(function () {
+            // $.datepicker().formatDate("yy-mm-dd");
+            $("#subjectStartRecur").datepicker({
+                dateFormat: "yy-mm-dd",
+            });
+            $("#subjectEndRecur").datepicker({
+                dateFormat: "yy-mm-dd",
+            });
+            $('#subjectStartTime').timeEntry({ show24Hours: true });
+            $('#subjectEndTime').timeEntry({ show24Hours: true });
+
+            const days = [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+            ];
+            $("#subjectDay").autocomplete({
+                source: days
+            });
+            $('#subjectDay').autocomplete({ minLength: 0 });
+            $('#subjectDay').click(function () { $(this).autocomplete("search", ""); });
+        });
+    </script>
 </head>
 
 <body>
@@ -25,28 +58,39 @@
         </form>
     </div>
     <div id="overlay">
-         <!-- onsubmit="return validate();" -->
-        <form action="/subject" method="post" autocomplete="off" id="addform">
+        <form action="/subject" method="post" autocomplete="off" id="addform" onsubmit="return validate()">
             <h1 id="formlogo">Schooling</h1>
             <div class="data">
                 <label for="idSubject">ID Subject:</label>
-                <input type="text" name="idSubject" placeholder="CT112012" required><br>
+                <input type="text" id="idSubject" name="idSubject" placeholder="CT112012" required><br>
                 <label for="subjectName">Subject Name:</label>
-                <input type="text" name="subjectName" placeholder="Mạng máy tính" required><br>
+                <input type="text" id="subjectName" name="subjectName" placeholder="Mạng máy tính" required><br>
                 <label for="teacherName">Teacher Name:</label>
-                <select name="teacherName" id="">
+                <select name="teacherName" id="teacherName">
                     {% TEACHER %}
                 </select>
+                <label for="subjectStartRecur">Semester Start: </label>
+                <input type="text" id="subjectStartRecur" name="subjectStartRecur" required>
+                <label for="subjectEndRecur">Semester End: </label>
+                <input type="text" id="subjectEndRecur" name="subjectEndRecur" required>
+                <label for="subjectDay">Day:</label>
+                <input type="text" id="subjectDay" name="subjectDay" required>
+                <label for="subjectStartTime">From:</label>
+                <input type="text" id="subjectStartTime" name="subjectStartTime" required>
+                <label for="subjectEndTime">To:</label>
+                <input type="text" id="subjectEndTime" name="subjectEndTime" required>
+                <label for="subjectWeek">Week:</label>
+                <input type="text" id="subjectWeek" name="subjectWeek" placeholder="12345**90123**" required>
                 <label for="room">Room:</label>
-                <input type="text" name="room" placeholder="101/C1"><br>
+                <input type="text" id="subjectRoom" name="subjectRoom" placeholder="101/C1" required><br>
                 <label for="target">Target:</label>
-                <input type="number" name="target" step="0.1" required><br>
+                <input type="number" id="subjectTarget" name="subjectTarget" step="0.1" required><br>
                 <label for="note">Note:</label>
-                <textarea name="note" id="" cols="25" rows="5"></textarea>
+                <textarea name="subjectNote" id="subjectNote" cols="25" rows="5"></textarea>
                 <label for="color">Color</label>
-                <input class="jscolor" name="color">
+                <input class="jscolor" name="subjectColor" id="subjectColor">
             </div>
-            <input type="submit" class="btn" value="Submit">
+            <input type="submit" value="Submit" class="btn">
             <button type='button' class="btn" id="cancelbtn" onclick="overlayOff()">Cancel</button>
         </form>
     </div>

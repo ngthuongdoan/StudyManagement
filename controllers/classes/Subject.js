@@ -12,11 +12,11 @@ class Subject {
     subjectEndTime,
     subjectTarget = "",
     subjectNote = "",
-    subjectColor = "#FFFFFF",
+    subjectColor = "FFFFFF",
   }) {
     this.id = idSubject;
-    this.start = subjectStartTime;
-    this.end = subjectEndTime;
+    this.start = subjectStartTime+":00";
+    this.end = subjectEndTime+":00";
     this.title = subjectName;
     this.department = subjectRoom;
     this.week = subjectWeek;
@@ -29,6 +29,23 @@ class Subject {
     this.backgroundColor = subjectColor;
   }
 
+  post() {
+    return [
+      this.id,
+      this.teacherEmail,
+      this.title,
+      this.department,
+      this.week,
+      [this.day],
+      new Date(this.startRecur),
+      new Date(this.endRecur),
+      this.start,
+      this.end,
+      +this.target,
+      this.note,
+      this.backgroundColor,
+    ];
+  }
   send() {
     return {
       id: this.id,
