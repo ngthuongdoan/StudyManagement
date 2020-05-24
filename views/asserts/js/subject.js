@@ -52,12 +52,26 @@ const validate = () => {
   //Convert days
   if (days.indexOf(subjectDay.value) === -1) {
     isCheck = false;
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Invalid day",
+    });
   } else {
     subjectDay.value = days.indexOf(subjectDay.value);
     isCheck = true;
   }
   //Check start-end
-  if (new Date(subjectStartRecur.value) > new Date(subjectEndRecur.value))
+  if (new Date(subjectStartRecur.value) > new Date(subjectEndRecur.value)) {
     isCheck = false;
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Start Day geater than End Day",
+    });
+  }
+
+  //Check time
   return isCheck;
+
 };
