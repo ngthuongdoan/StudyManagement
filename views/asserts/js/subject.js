@@ -49,17 +49,18 @@ const validate = () => {
     "Saturday",
   ];
 
-  //Check id
-  // const idRegex = /^[A-Z]{2}[0-9]{5}$/gi;
-  // const idCheck = idSubject.search(idRegex) == -1 ? false : true;
-  // if (!idCheck) {
-  //   Swal.fire({
-  //     icon: "error",
-  //     title: "Oops...",
-  //     text: "Invalid ID",
-  //   });
-  //   return false;
-  // }
+  // console.log(idSubject.search(idRegex));
+  // //Check id
+  const idRegex = /^[A-Z]{2}[0-9]{5}$/gi;
+  const idCheck = ((idSubject.value).search(idRegex) == -1)? false : true;
+  if (!idCheck) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Invalid ID",
+    });
+    return false;
+  }
 
   //Convert days
   if (days.indexOf(subjectDay.value) === -1) {
@@ -81,40 +82,39 @@ const validate = () => {
       text: "Start Day geater than End Day",
     });
     return false;
-
   }
 
-  // //Check time
-  // const [shour, sminute] = subjectStartTime.value.split(":");
-  // const [ehour, eminute] = subjectEndTime.value.split(":");
+  //Check time
+  const [shour, sminute] = subjectStartTime.value.split(":");
+  const [ehour, eminute] = subjectEndTime.value.split(":");
 
-  // if (shour > ehour) {
-  //   Swal.fire({
-  //     icon: "error",
-  //     title: "Oops...",
-  //     text: "Start Time geater than End Time",
-  //   });
-  //   return false;
-  // } else if (shour == ehour) {
-  //   if (sminute >= eminute) {
-  //     Swal.fire({
-  //       icon: "error",
-  //       title: "Oops...",
-  //       text: "Start Time geater than End Time",
-  //     });
-  //   return false;
-  //   }
-  // }
+  if (shour > ehour) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Start Time geater than End Time",
+    });
+    return false;
+  } else if (shour == ehour) {
+    if (sminute >= eminute) {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Start Time geater than End Time",
+      });
+    return false;
+    }
+  }
 
-  // //Check target
-  // if ((+subjectTarget < 0) | (subjectTarget > 10)) {
-  //   Swal.fire({
-  //     icon: "error",
-  //     title: "Oops...",
-  //     text: "Invalid Target",
-  //   });
-  //   return false;
-  // }
+  //Check target
+  if ((Number.parseFloat(subjectTarget.value) < 0) | (Number.parseFloat(subjectTarget.value) > 10)) {
+    Swal.fire({
+      icon: "error",
+      title: "Oops...",
+      text: "Invalid Target",
+    });
+    return false;
+  }
 
   return true;
 };

@@ -21,7 +21,6 @@
     <title>Subject</title>
     <script>
         $(function () {
-            // $.datepicker().formatDate("yy-mm-dd");
             $("#subjectStartRecur").datepicker({
                 dateFormat: "yy-mm-dd",
             });
@@ -58,7 +57,7 @@
         </form>
     </div>
     <div id="overlay">
-        <form action="/subject" method="post" autocomplete="off" id="addform" onsubmit="return validate()">
+        <form action="/subject" method="post" autocomplete="off" id="addform" onsubmit="return(validate())">
             <h1 id="formlogo">Schooling</h1>
             <div class="data">
                 <label for="idSubject">ID Subject:</label>
