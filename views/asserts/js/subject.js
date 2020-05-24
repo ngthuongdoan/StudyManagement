@@ -24,12 +24,12 @@ const submitDelForm = (data) => {
   }
 };
 
+/**Function check add subject input
+ * @param None
+ * @return {Boolean} isChecked - true for submit form
+ */
 const validate = () => {
-  const form = document.getElementById("addform");
   const idSubject = document.getElementById("idSubject");
-  const teacherEmail = document.getElementById("teacherEmail");
-  const subjectName = document.getElementById("subjectName");
-  const subjectRoom = document.getElementById("subjectRoom");
   const subjectWeek = document.getElementById("subjectWeek");
   const subjectDay = document.getElementById("subjectDay");
   const subjectStartRecur = document.getElementById("subjectStartRecur");
@@ -48,30 +48,73 @@ const validate = () => {
     "Friday",
     "Saturday",
   ];
-  let isCheck = true;
+
+  //Check id
+  // const idRegex = /^[A-Z]{2}[0-9]{5}$/gi;
+  // const idCheck = idSubject.search(idRegex) == -1 ? false : true;
+  // if (!idCheck) {
+  //   Swal.fire({
+  //     icon: "error",
+  //     title: "Oops...",
+  //     text: "Invalid ID",
+  //   });
+  //   return false;
+  // }
+
   //Convert days
   if (days.indexOf(subjectDay.value) === -1) {
-    isCheck = false;
     Swal.fire({
       icon: "error",
       title: "Oops...",
       text: "Invalid day",
     });
+    return false;
   } else {
     subjectDay.value = days.indexOf(subjectDay.value);
-    isCheck = true;
   }
+
   //Check start-end
   if (new Date(subjectStartRecur.value) > new Date(subjectEndRecur.value)) {
-    isCheck = false;
     Swal.fire({
       icon: "error",
       title: "Oops...",
       text: "Start Day geater than End Day",
     });
+    return false;
+
   }
 
-  //Check time
-  return isCheck;
+  // //Check time
+  // const [shour, sminute] = subjectStartTime.value.split(":");
+  // const [ehour, eminute] = subjectEndTime.value.split(":");
 
+  // if (shour > ehour) {
+  //   Swal.fire({
+  //     icon: "error",
+  //     title: "Oops...",
+  //     text: "Start Time geater than End Time",
+  //   });
+  //   return false;
+  // } else if (shour == ehour) {
+  //   if (sminute >= eminute) {
+  //     Swal.fire({
+  //       icon: "error",
+  //       title: "Oops...",
+  //       text: "Start Time geater than End Time",
+  //     });
+  //   return false;
+  //   }
+  // }
+
+  // //Check target
+  // if ((+subjectTarget < 0) | (subjectTarget > 10)) {
+  //   Swal.fire({
+  //     icon: "error",
+  //     title: "Oops...",
+  //     text: "Invalid Target",
+  //   });
+  //   return false;
+  // }
+
+  return true;
 };

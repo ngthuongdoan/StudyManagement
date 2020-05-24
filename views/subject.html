@@ -4,7 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <meta http-equiv="refresh" content=""> -->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/subject.css">
@@ -15,8 +14,8 @@
     <script src="js/lib/jscolor/jscolor.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <link rel="stylesheet" type="text/css" href="css/jquery.timeentry.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="js/lib/jquery.timeentry.package-2.0.1/jquery.timeentry.css">
     <script type="text/javascript" src="js/lib/jquery.timeentry.package-2.0.1/jquery.plugin.js"></script>
     <script type="text/javascript" src="js/lib/jquery.timeentry.package-2.0.1/jquery.timeentry.js"></script>
     <title>Subject</title>
@@ -29,6 +28,7 @@
             $("#subjectEndRecur").datepicker({
                 dateFormat: "yy-mm-dd",
             });
+
             $('#subjectStartTime').timeEntry({ show24Hours: true });
             $('#subjectEndTime').timeEntry({ show24Hours: true });
 
@@ -135,7 +135,6 @@
     {% NOTIFY %}
     <script src="js/subject.js"></script>
     <script src="js/overlay.js"></script>
-
 </body>
 
 </html>
