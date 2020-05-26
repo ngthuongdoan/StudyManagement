@@ -4,48 +4,76 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <meta http-equiv="refresh" content=""> -->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/subject.css">
+    <link rel="stylesheet" href="css/event.css">
     <script src="js/lib/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
     <script src="js/quicksortSubject.js"></script>
     <script src="js/lib/jscolor/jscolor.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="js/lib/jquery.timeentry.package-2.0.1/jquery.timeentry.css">
+    <script type="text/javascript" src="js/lib/jquery.timeentry.package-2.0.1/jquery.plugin.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.timeentry.package-2.0.1/jquery.timeentry.js"></script>
     <title>Event</title>
+    <script>
+        $(function () {
+            $("#eventStartRecur").datepicker({
+                dateFormat: "yy-mm-dd",
+            });
+            $("#eventEndRecur").datepicker({
+                dateFormat: "yy-mm-dd",
+            });
+
+            $('#eventStartTime').timeEntry({ show24Hours: true });
+            $('#eventEndTime').timeEntry({ show24Hours: true });
+
+            const days = [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+            ];
+            $("#eventDay").autocomplete({
+                source: days
+            });
+            $('#eventDay').autocomplete({ minLength: 0 });
+            $('#eventDay').click(function () { $(this).autocomplete("search", ""); });
+        });
+    </script>
 </head>
 
 <body>
-    <div style="display: none;">
-        <form action="/delete-subject" method="POST" id="delete">
+    <!-- <div style="display: none;">
+        <form action="/delete-event" method="POST" id="delete">
             <input type="text" name="idSubject" id="delid" value="">
             <input type="submit" value="" id="delBtn">
         </form>
-    </div>
+    </div> -->
     <div id="overlay">
-         <!-- onsubmit="return validate();" -->
-        <form action="/subject" method="post" autocomplete="off" id="addform">
+        <form action="/event" method="post" autocomplete="off" id="addform" onsubmit="return(validate())">
             <h1 id="formlogo">Schooling</h1>
             <div class="data">
-                <label for="idSubject">ID Subject:</label>
-                <input type="text" name="idSubject" placeholder="CT112012" required><br>
-                <label for="subjectName">Subject Name:</label>
-                <input type="text" name="subjectName" placeholder="Mạng máy tính" required><br>
-                <label for="teacherName">Teacher Name:</label>
-                <select name="teacherName" id="">
-                    {% TEACHER %}
-                </select>
-                <label for="room">Room:</label>
-                <input type="text" name="room" placeholder="101/C1"><br>
-                <label for="target">Target:</label>
-                <input type="number" name="target" step="0.1" required><br>
+                <label for="eventName">Event Name:</label>
+                <input type="text" id="eventName" name="eventName" placeholder="Mạng máy tính" required><br>
+                <label for="eventStartTime">From:</label>
+                <input type="text" id="eventStartTime" name="eventStartTime" required>
+                <label for="eventEndTime">To:</label>
+                <input type="text" id="eventEndTime" name="eventEndTime" required>
+                <label for="eventPlace">Place:</label>
+                <input type="text" id="eventPlace" name="eventPlace" placeholder="101/C1" required><br>
                 <label for="note">Note:</label>
-                <textarea name="note" id="" cols="25" rows="5"></textarea>
-                <label for="color">Color</label>
-                <input class="jscolor" name="color">
+                <textarea name="eventNote" id="eventNote" cols="25" rows="5"></textarea>
+                <label for="eventColor">Color</label>
+                <input class="jscolor" name="eventColor" id="eventColor">
             </div>
-            <input type="submit" class="btn" value="Submit">
+            <input type="submit" value="Submit" class="btn">
             <button type='button' class="btn" id="cancelbtn" onclick="overlayOff()">Cancel</button>
         </form>
     </div>
@@ -63,8 +91,8 @@
             <ul>
                 <li class="category"><a href="/dashboard">Home</a></li>
                 <li class="category"><a href="/timetable">Timetable</a></li>
-                <li class="category"><a href="/subject">Subject</a></li>
-                <li class="category active"><a href="/event">Event</a></li>
+                <li class="category active"><a href="/event">event</a></li>
+                <li class="category"><a href="/event">Event</a></li>
                 <li class="category"><a href="/teacher">Teacher</a></li>
                 <li class="category"><a href="/grade">Grade</a></li>
             </ul>
@@ -88,9 +116,8 @@
         </div>
     </main>
     {% NOTIFY %}
-    <script src="js/subject.js"></script>
+    <script src="js/event.js"></script>
     <script src="js/overlay.js"></script>
-
 </body>
 
 </html>

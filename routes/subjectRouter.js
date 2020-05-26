@@ -25,14 +25,21 @@ const createSubjectCards = (req, results) => {
     );
     card = popup.replaceTemplate("COLOR", results[j].subjectColor, card);
 
-    card = popup.replaceTemplate(
-      "{% TEACHERNAME %}",
-      results[j].teacherName,
-      card
-    );
-    fs.appendFileSync(
-      `${__dirname}/../views/placeholder/subject-data.html`,
-      card
+    conn.query(
+      `select teacherName from subjects join teacher on subjects.teacherEmail = teacher.teacherEmail
+    where teacher.username=? and idSubject=?`,
+      [req.session.username, results[j].idSubject],
+      (error, results, fields) => {
+        card = popup.replaceTemplate(
+          "{% TEACHERNAME %}",
+          results[0].teacherName,
+          card
+        );
+        fs.appendFileSync(
+          `${__dirname}/../views/placeholder/subject-data.html`,
+          card
+        );
+      }
     );
   }
 };
@@ -82,7 +89,6 @@ router
               "SELECT * FROM teacher WHERE username=?",
               [req.session.username],
               (error, results, fields) => {
-                // results.forEach(result=> result.teacherName=)
                 addTeacher(results);
                 replaceResultPage(req.session);
                 res.end(resultPage);
@@ -121,9 +127,9 @@ router
           subjectNote: req.body.subjectNote,
           subjectColor: "#" + req.body.subjectColor,
         });
-        console.log(subject.post());
+        // console.log(subject.post());
         conn.query(
-          `INSERT INTO subjects VALUE('${req.session.username}',?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+          `INSERT INTO subjects VALUE('${req.session.username}',?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
           subject.post(),
           (error, results, fields) => {
             if (error) {
@@ -136,5 +142,4 @@ router
       }
     );
   });
-
 module.exports = router;

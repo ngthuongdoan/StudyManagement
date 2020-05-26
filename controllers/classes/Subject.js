@@ -44,6 +44,7 @@ class Subject {
       +this.target,
       this.note,
       this.backgroundColor,
+      null
     ];
   }
   send() {
