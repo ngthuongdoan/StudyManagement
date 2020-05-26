@@ -47,6 +47,7 @@ class Subject {
       null
     ];
   }
+  
   send() {
     return {
       id: this.id,

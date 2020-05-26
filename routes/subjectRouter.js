@@ -2,7 +2,6 @@ const fs = require("fs");
 const express = require("express");
 const conn = require("../models/connection");
 const session = require("../controllers/session");
-const QuickSort = require("../controllers/quicksort");
 const popup = require("../controllers/replaceTemplate");
 const Subject = require("../controllers/classes/Subject");
 const subjectPage = fs.readFileSync(`${__dirname}/../views/subject.html`);
@@ -11,33 +10,33 @@ const router = express.Router();
 
 const createSubjectCards = (req, results) => {
   for (let j = 0; j < results.length; j++) {
-    let card = fs.readFileSync(`${__dirname}/../views/placeholder/card.html`);
-    card = popup.replaceTemplate(/{% ID %}/g, results[j].idSubject, card);
-    card = popup.replaceTemplate(
+    let subjectCard = fs.readFileSync(`${__dirname}/../views/placeholder/subject-card.html`);
+    subjectCard = popup.replaceTemplate(/{% ID %}/g, results[j].idSubject, subjectCard);
+    subjectCard = popup.replaceTemplate(
       "{% TARGET %}",
       results[j].subjectTarget,
-      card
+      subjectCard
     );
-    card = popup.replaceTemplate(
+    subjectCard = popup.replaceTemplate(
       "{% SUBJECTNAME %}",
       results[j].subjectName,
-      card
+      subjectCard
     );
-    card = popup.replaceTemplate("COLOR", results[j].subjectColor, card);
+    subjectCard = popup.replaceTemplate("COLOR", results[j].subjectColor, subjectCard);
 
     conn.query(
       `select teacherName from subjects join teacher on subjects.teacherEmail = teacher.teacherEmail
     where teacher.username=? and idSubject=?`,
       [req.session.username, results[j].idSubject],
       (error, results, fields) => {
-        card = popup.replaceTemplate(
+        subjectCard = popup.replaceTemplate(
           "{% TEACHERNAME %}",
           results[0].teacherName,
-          card
+          subjectCard
         );
         fs.appendFileSync(
           `${__dirname}/../views/placeholder/subject-data.html`,
-          card
+          subjectCard
         );
       }
     );
@@ -64,14 +63,7 @@ const replaceResultPage = (session) => {
   resultPage = popup.replaceTemplate("{% TEACHER %}", teacherData, subjectPage);
   resultPage = popup.replaceAccountTemplate(session, resultPage);
   resultPage = popup.replaceTemplate("{% CARDS %}", subjectdata, resultPage);
-  if (session.notify) {
-    resultPage = popup.replaceTemplate(
-      "{% NOTIFY %}",
-      session.notify,
-      resultPage
-    );
-    session.notify = "";
-  }
+
   fs.writeFileSync(`${__dirname}/../views/placeholder/teacher-name.html`, "");
   fs.writeFileSync(`${__dirname}/../views/placeholder/subject-data.html`, "");
 };
@@ -134,6 +126,7 @@ router
           (error, results, fields) => {
             if (error) {
               console.log(error.sql);
+              res.redirect("/notfound");
             } else {
               res.redirect("/subject");
             }

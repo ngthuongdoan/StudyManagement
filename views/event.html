@@ -10,7 +10,7 @@
     <script src="js/lib/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
-    <script src="js/quicksortSubject.js"></script>
+    <!-- <script src="js/quicksortSubject.js"></script> -->
     <script src="js/lib/jscolor/jscolor.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -20,32 +20,32 @@
     <script type="text/javascript" src="js/lib/jquery.timeentry.package-2.0.1/jquery.timeentry.js"></script>
     <title>Event</title>
     <script>
-        $(function () {
-            $("#eventStartRecur").datepicker({
-                dateFormat: "yy-mm-dd",
-            });
-            $("#eventEndRecur").datepicker({
-                dateFormat: "yy-mm-dd",
-            });
+        // $(function () {
+        //     $("#eventStartTime").datepicker({
+        //         dateFormat: "yy-mm-dd",
+        //     });
+        //     $("#eventEndTime").datepicker({
+        //         dateFormat: "yy-mm-dd",
+        //     });
 
-            $('#eventStartTime').timeEntry({ show24Hours: true });
-            $('#eventEndTime').timeEntry({ show24Hours: true });
+        //     $('#eventStartTime').timeEntry({ show24Hours: true });
+        //     $('#eventEndTime').timeEntry({ show24Hours: true });
 
-            const days = [
-                "Sunday",
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-            ];
-            $("#eventDay").autocomplete({
-                source: days
-            });
-            $('#eventDay').autocomplete({ minLength: 0 });
-            $('#eventDay').click(function () { $(this).autocomplete("search", ""); });
-        });
+            // const days = [
+            //     "Sunday",
+            //     "Monday",
+            //     "Tuesday",
+            //     "Wednesday",
+            //     "Thursday",
+            //     "Friday",
+            //     "Saturday",
+            // ];
+            // $("#eventDay").autocomplete({
+            //     source: days
+            // });
+            // $('#eventDay').autocomplete({ minLength: 0 });
+            // $('#eventDay').click(function () { $(this).autocomplete("search", ""); });
+        // });
     </script>
 </head>
 
@@ -91,20 +91,19 @@
             <ul>
                 <li class="category"><a href="/dashboard">Home</a></li>
                 <li class="category"><a href="/timetable">Timetable</a></li>
-                <li class="category active"><a href="/event">event</a></li>
-                <li class="category"><a href="/event">Event</a></li>
+                <li class="category"><a href="/subject">Subject</a></li>
+                <li class="category active"><a href="/event">Event</a></li>
                 <li class="category"><a href="/teacher">Teacher</a></li>
-                <li class="category"><a href="/grade">Grade</a></li>
             </ul>
             <h1 id="logo">Schooling</h1>
         </div>
         <div class='rightpanel'>
-            <div class="sort">
+            <!-- <div class="sort">
                 <button class="sortbtn" onclick="sortTable(0)">Name</button>
                 <button class="sortbtn" onclick="sortTable(1)">ID</button>
                 <button class="sortbtn" onclick="sortTable(2)">Teacher</button>
                 <button class="sortbtn" onclick="sortTable(3)">Target</button>
-            </div>
+            </div> -->
             <button class="btn" onclick="overlayOn()">Add new</button>
             <button class="btn" id="delbtn" onclick="deleteSubject()">Delete</button>
             <div id="message" style='margin-left: 400px;display: none;'>
@@ -115,7 +114,6 @@
             </div>
         </div>
     </main>
-    {% NOTIFY %}
     <script src="js/event.js"></script>
     <script src="js/overlay.js"></script>
 </body>

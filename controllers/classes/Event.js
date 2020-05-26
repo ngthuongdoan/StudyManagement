@@ -15,6 +15,18 @@ class Event {
     this.backgroundColor = eventColor;
   }
 
+  post() {
+    return [
+      this.title,
+      new Date(this.start),
+      new Date (this.end),
+      this.department,
+      this.note,
+      this.backgroundColor,
+      null
+    ];
+  }
+
   send() {
     return {
       title: this.title,

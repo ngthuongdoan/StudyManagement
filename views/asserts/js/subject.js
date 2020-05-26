@@ -1,4 +1,8 @@
 /* eslint-disable no-undef */
+/**
+ * Function delete a subject
+ * @param None
+ */
 const deleteSubject = () => {
   document.getElementById("message").style.display = "block";
   let btn = document.getElementById("delbtn");
@@ -14,6 +18,10 @@ const deleteSubject = () => {
   submitDelForm(data);
 };
 
+/**
+ * Function submit delete a subject
+ * @param None
+ */
 const submitDelForm = (data) => {
   for (const el of data) {
     el.addEventListener("click", () => {
@@ -30,15 +38,12 @@ const submitDelForm = (data) => {
  */
 const validate = () => {
   const idSubject = document.getElementById("idSubject");
-  const subjectWeek = document.getElementById("subjectWeek");
   const subjectDay = document.getElementById("subjectDay");
   const subjectStartRecur = document.getElementById("subjectStartRecur");
   const subjectEndRecur = document.getElementById("subjectEndRecur");
   const subjectStartTime = document.getElementById("subjectStartTime");
   const subjectEndTime = document.getElementById("subjectEndTime");
   const subjectTarget = document.getElementById("subjectTarget");
-  const subjectNote = document.getElementById("subjectNote");
-  const subjectColor = document.getElementById("subjectColor");
   const days = [
     "Sunday",
     "Monday",
@@ -115,6 +120,5 @@ const validate = () => {
     });
     return false;
   }
-
   return true;
 };

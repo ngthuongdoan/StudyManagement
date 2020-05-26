@@ -142,33 +142,23 @@ body main .leftpanel ul li a:hover {
   overflow: scroll;
 }
 
-.subject-card {
+.event-card {
   float: left;
   color: black;
   display: block;
   background-color: wheat;
-  width: 200px;
-  height: 300px;
+  width: 300px;
+  height: 100px;
   text-align: center;
   -webkit-box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
           box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
   margin: 20px 30px;
-}
-
-.subject-target {
-  margin-bottom: 50px;
-}
-
-.target-container {
-  padding-top: 50px;
-  width: 200px;
-  height: 150px;
-  background-color: white;
+  padding: 10px;
 }
 
 p {
-  color: white;
   font-size: 16px;
+  color: white;
 }
 
 a {
@@ -271,31 +261,4 @@ a {
   margin-left: 0;
   margin-bottom: 50px;
 }
-
-.sort {
-  display: block;
-  margin-left: 30px;
-  margin-bottom: -10px;
-}
-
-.sort .sortbtn {
-  display: block;
-  float: left;
-  margin-top: 20px;
-  margin-right: 20px;
-  margin-bottom: 0;
-  width: 60px;
-  padding: 5px;
-  border-radius: 10px;
-  border: #8c98b8 1px solid;
-  color: white;
-  background-color: #bdd1cf;
-  -webkit-transition: all 0.2s ease-in-out;
-  transition: all 0.2s ease-in-out;
-}
-
-.sort .sortbtn:hover {
-  background-color: #8fa1a0;
-  color: black;
-}
-/*# sourceMappingURL=subject.css.map */
+/*# sourceMappingURL=event.css.map */
