@@ -1,9 +1,9 @@
 const fs = require("fs");
 const express = require("express");
-const session = require("../controllers/session");
-const popup = require("../controllers/replaceTemplate");
+const session = require("../../controllers/session");
+const popup = require("../../controllers/replaceTemplate");
 const router = express.Router();
-const dashboard = fs.readFileSync(`${__dirname}/../views/dashboard.html`);
+const dashboard = fs.readFileSync(`${__dirname}/../../views/dashboard.html`);
 
 router.get("/", (req, res) => {
   //CHECK IF SESSION NOT EXPERIED

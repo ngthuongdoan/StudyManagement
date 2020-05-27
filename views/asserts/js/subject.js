@@ -14,20 +14,28 @@ const deleteSubject = () => {
   for (let i = 0; i < a.length; i++) {
     a[i].setAttribute("href", "");
   }
-  const data = document.getElementsByClassName("subject-card");
-  submitDelForm(data);
+  const data = document.getElementsByClassName("event-card");
+  submitForm(data);
 };
 
 /**
  * Function submit delete a subject
  * @param None
  */
-const submitDelForm = (data) => {
+const submitForm = (data) => {
   for (const el of data) {
     el.addEventListener("click", () => {
       let [id] = el.children[1].innerText.split(" ");
-      document.getElementById("delid").setAttribute("value", id);
-      document.getElementById("delete").submit();
+      let form = document.createElement("form");
+      form.style.display = "none";
+      let idSubject = document.createElement("input");
+      form.method = "POST";
+      form.action = "/delete-subject";
+      idSubject.value = id;
+      idSubject.name = "idSubject";
+      form.appendChild(idSubject);
+      document.body.appendChild(form);
+      form.submit();
     });
   }
 };
@@ -57,7 +65,7 @@ const validate = () => {
   // console.log(idSubject.search(idRegex));
   // //Check id
   const idRegex = /^[A-Z]{2}[0-9]{5}$/gi;
-  const idCheck = ((idSubject.value).search(idRegex) == -1)? false : true;
+  const idCheck = idSubject.value.search(idRegex) == -1 ? false : true;
   if (!idCheck) {
     Swal.fire({
       icon: "error",
@@ -107,12 +115,15 @@ const validate = () => {
         title: "Oops...",
         text: "Start Time geater than End Time",
       });
-    return false;
+      return false;
     }
   }
 
   //Check target
-  if ((Number.parseFloat(subjectTarget.value) < 0) | (Number.parseFloat(subjectTarget.value) > 10)) {
+  if (
+    (Number.parseFloat(subjectTarget.value) < 0) |
+    (Number.parseFloat(subjectTarget.value) > 10)
+  ) {
     Swal.fire({
       icon: "error",
       title: "Oops...",

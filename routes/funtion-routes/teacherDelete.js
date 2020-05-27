@@ -1,5 +1,5 @@
-const conn = require("../models/connection");
-const Teacher = require("../controllers/classes/Teacher");
+const conn = require("../../models/connection");
+const Teacher = require("../../controllers/classes/Teacher");
 
 exports.postMethod = (req, res) => {
   const teacher = new Teacher({
@@ -9,11 +9,11 @@ exports.postMethod = (req, res) => {
   });
   conn.query(
     "DELETE FROM teacher WHERE username=? AND teacherName=? AND teacherEmail=?",
-    [req.session.username,teacher.name, teacher.email],
+    [req.session.username, teacher.name, teacher.email],
     (error, results, fields) => {
       conn.query(
-        "DELETE FROM subjects WHERE username=? AND teacherName=?",
-        [req.session.username,teacher.name],
+        "DELETE FROM subjects WHERE username=? AND teacherEmail=?",
+        [req.session.username,teacher.email],
         (error, results, fields) => {
           if(!error){
             res.redirect("/teacher");

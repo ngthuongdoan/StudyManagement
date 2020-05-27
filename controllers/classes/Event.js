@@ -1,9 +1,9 @@
 class Event {
   constructor({
-    eventName,
-    eventStartTime,
-    eventEndTime,
-    eventPlace,
+    eventName="",
+    eventStartTime="",
+    eventEndTime="",
+    eventPlace="",
     eventNote = "",
     eventColor = "",
   }) {
@@ -13,6 +13,10 @@ class Event {
     this.department = eventPlace;
     this.note = eventNote;
     this.backgroundColor = eventColor;
+  }
+
+  get eventName (){
+    return this.title;
   }
 
   post() {

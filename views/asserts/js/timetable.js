@@ -1,12 +1,18 @@
 /* eslint-disable no-undef */
 document.addEventListener("DOMContentLoaded", function () {
-  var Calendar = FullCalendar.Calendar;
-  var Draggable = FullCalendarInteraction.Draggable;
+  let Calendar = FullCalendar.Calendar;
+  let Draggable = FullCalendarInteraction.Draggable;
 
+  // let weekOfYear = function (date) {
+  //   let d = new Date(+date);
+  //   d.setHours(0, 0, 0);
+  //   d.setDate(d.getDate() + 4 - (d.getDay() || 7));
+  //   return Math.ceil(((d - new Date(d.getFullYear(), 0, 1)) / 8.64e7 + 1) / 7);
+  // };
   /* initialize the external events
                                   -----------------------------------------------------------------*/
 
-  var containerEventsEl = document.getElementById("external-events-list");
+  let containerEventsEl = document.getElementById("external-events-list");
   new Draggable(containerEventsEl, {
     itemSelector: ".fc-event",
     eventData: function (eventEl) {
@@ -22,59 +28,44 @@ document.addEventListener("DOMContentLoaded", function () {
     },
   });
 
-  // var containerSubjectsEl = document.getElementById("external-subjects-list");
-  // new Draggable(containerSubjectsEl, {
-  //   itemSelector: ".fc-subject",
-  //   eventData: function (subjectEl) {
-  //     let data = subjectEl.dataset.subject;
-  //     data = JSON.parse(data);
-  //     return {
-  //       title: data.title,
-  //       backgroundColor: data.backgroundColor,
-  //       extendedProps: {
-  //         department: data.department,
-  //       },
-  //     };
-  //   },
-  // });
-
   /* initialize the calendar
                              
                 -----------------------------------------------------------------*/
-  var del = false;
-  var calendarEl = document.getElementById("calendar");
-  var calendar = new Calendar(calendarEl, {
+  let del = false;
+  let calendarEl = document.getElementById("calendar");
+  let calendar = new Calendar(calendarEl, {
     plugins: ["interaction", "dayGrid", "timeGrid", "list"],
-    customButtons: {
-      deleteButton: {
-        text: "Delete",
-        click: function () {
-          let events = document.getElementsByClassName("fc-time-grid-event");
-          for (let index = 0; index < events.length; index++) {
-            let event = events[index];
-            event.style.filter = "brightness(50%)";
-            del = true;
-          }
-        },
-      },
-      cancelButton: {
-        text: "Cancel",
-        click: function () {
-          let events = document.getElementsByClassName("fc-time-grid-event");
-          for (let index = 0; index < events.length; index++) {
-            let event = events[index];
-            event.style.filter = "brightness(100%)";
-            del = false;
-          }
-        },
-      },
-    },
+    // customButtons: {
+    //   deleteButton: {
+    //     text: "Delete",
+    //     click: function () {
+    //       let events = document.getElementsByClassName("fc-time-grid-event");
+    //       for (let index = 0; index < events.length; index++) {
+    //         let event = events[index];
+    //         event.style.filter = "brightness(50%)";
+    //         del = true;
+    //       }
+    //     },
+    //   },
+    //   cancelButton: {
+    //     text: "Cancel",
+    //     click: function () {
+    //       let events = document.getElementsByClassName("fc-time-grid-event");
+    //       for (let index = 0; index < events.length; index++) {
+    //         let event = events[index];
+    //         event.style.filter = "brightness(100%)";
+    //         del = false;
+    //       }
+    //     },
+    //   },
+    // },
     header: {
       left: "prev,next today",
       center: "title",
       right:
-        "deleteButton,cancelButton dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+        "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
     },
+    firstDay: 1,
     editable: true,
     droppable: true,
     weekNumbers: true,
@@ -101,7 +92,10 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     ],
     eventRender: function (info) {
-      let department = (info.event.extendedProps.department!==undefined) ?info.event.extendedProps.department:info.event.department;
+      let department =
+        info.event.extendedProps.department !== undefined
+          ? info.event.extendedProps.department
+          : info.event.department;
       if (department)
         $(info.el)
           .find(".fc-title")

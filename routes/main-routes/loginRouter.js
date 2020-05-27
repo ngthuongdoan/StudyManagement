@@ -1,10 +1,10 @@
 const fs = require("fs");
 const express = require("express");
 const bcrypt = require("bcrypt");
-const conn = require("../models/connection");
-const popup = require("../controllers/replaceTemplate");
-const login = fs.readFileSync(`${__dirname}/../views/login.html`);
-const session = require("../controllers/session");
+const conn = require("../../models/connection");
+const popup = require("../../controllers/replaceTemplate");
+const login = fs.readFileSync(`${__dirname}/../../views/login.html`);
+const session = require("../../controllers/session");
 const router = express.Router();
 
 router

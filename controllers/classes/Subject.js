@@ -29,6 +29,10 @@ class Subject {
     this.backgroundColor = subjectColor;
   }
 
+  get id(){
+    return this.id;
+  }
+
   post() {
     return [
       this.id,

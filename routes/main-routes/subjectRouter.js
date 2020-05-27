@@ -1,16 +1,16 @@
 const fs = require("fs");
 const express = require("express");
-const conn = require("../models/connection");
-const session = require("../controllers/session");
-const popup = require("../controllers/replaceTemplate");
-const Subject = require("../controllers/classes/Subject");
-const subjectPage = fs.readFileSync(`${__dirname}/../views/subject.html`);
+const conn = require("../../models/connection");
+const session = require("../../controllers/session");
+const popup = require("../../controllers/replaceTemplate");
+const Subject = require("../../controllers/classes/Subject");
+const subjectPage = fs.readFileSync(`${__dirname}/../../views/subject.html`);
 let resultPage;
 const router = express.Router();
 
 const createSubjectCards = (req, results) => {
   for (let j = 0; j < results.length; j++) {
-    let subjectCard = fs.readFileSync(`${__dirname}/../views/placeholder/subject-card.html`);
+    let subjectCard = fs.readFileSync(`${__dirname}/../../views/placeholder/subject-card.html`);
     subjectCard = popup.replaceTemplate(/{% ID %}/g, results[j].idSubject, subjectCard);
     subjectCard = popup.replaceTemplate(
       "{% TARGET %}",
@@ -35,7 +35,7 @@ const createSubjectCards = (req, results) => {
           subjectCard
         );
         fs.appendFileSync(
-          `${__dirname}/../views/placeholder/subject-data.html`,
+          `${__dirname}/../../views/placeholder/subject-data.html`,
           subjectCard
         );
       }
@@ -47,7 +47,7 @@ const addTeacher = (results) => {
   results.forEach((el) => {
     let data = `<option value='${el.teacherName}'>${el.teacherName}</option>\n`;
     fs.appendFileSync(
-      `${__dirname}/../views/placeholder/teacher-name.html`,
+      `${__dirname}/../../views/placeholder/teacher-name.html`,
       data
     );
   });
@@ -55,17 +55,17 @@ const addTeacher = (results) => {
 
 const replaceResultPage = (session) => {
   const teacherData = fs.readFileSync(
-    `${__dirname}/../views/placeholder/teacher-name.html`
+    `${__dirname}/../../views/placeholder/teacher-name.html`
   );
   const subjectdata = fs.readFileSync(
-    `${__dirname}/../views/placeholder/subject-data.html`
+    `${__dirname}/../../views/placeholder/subject-data.html`
   );
   resultPage = popup.replaceTemplate("{% TEACHER %}", teacherData, subjectPage);
   resultPage = popup.replaceAccountTemplate(session, resultPage);
   resultPage = popup.replaceTemplate("{% CARDS %}", subjectdata, resultPage);
 
-  fs.writeFileSync(`${__dirname}/../views/placeholder/teacher-name.html`, "");
-  fs.writeFileSync(`${__dirname}/../views/placeholder/subject-data.html`, "");
+  fs.writeFileSync(`${__dirname}/../../views/placeholder/teacher-name.html`, "");
+  fs.writeFileSync(`${__dirname}/../../views/placeholder/subject-data.html`, "");
 };
 
 router

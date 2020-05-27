@@ -1,17 +1,17 @@
 const fs = require("fs");
 const express = require("express");
-const conn = require("../models/connection");
-const session = require("../controllers/session");
-const popup = require("../controllers/replaceTemplate");
-const timetablePage = fs.readFileSync(`${__dirname}/../views/timetable.html`);
+const conn = require("../../models/connection");
+const session = require("../../controllers/session");
+const popup = require("../../controllers/replaceTemplate");
+const timetablePage = fs.readFileSync(`${__dirname}/../../views/timetable.html`);
 const router = express.Router();
 
 const displayPage = (req, res) => {
   let subjectOnTimetable = fs.readFileSync(
-    `${__dirname}/../views/placeholder/subject-on-timetable.html`
+    `${__dirname}/../../views/placeholder/subject-on-timetable.html`
   );
   let eventOnTimetable = fs.readFileSync(
-    `${__dirname}/../views/placeholder/event-on-timetable.html`
+    `${__dirname}/../../views/placeholder/event-on-timetable.html`
   );
   let resultPage = popup.replaceTemplate(
     "{% SUBJECTS %}",
@@ -24,11 +24,11 @@ const displayPage = (req, res) => {
     resultPage
   );
   fs.writeFileSync(
-    `${__dirname}/../views/placeholder/subject-on-timetable.html`,
+    `${__dirname}/../../views/placeholder/subject-on-timetable.html`,
     ""
   );
   fs.writeFileSync(
-    `${__dirname}/../views/placeholder/event-on-timetable.html`,
+    `${__dirname}/../../views/placeholder/event-on-timetable.html`,
     ""
   );
 
@@ -62,7 +62,7 @@ router
                 "editable":"false"
               }' style="background-color:${result.subjectColor}">${result.subjectName}</div>`;
               fs.appendFileSync(
-                `${__dirname}/../views/placeholder/subject-on-timetable.html`,
+                `${__dirname}/../../views/placeholder/subject-on-timetable.html`,
                 content
               );
             });
@@ -82,7 +82,7 @@ router
                     "backgroundColor": "${result.eventColor}"
                   }' style="background-color:${result.eventColor}">${result.eventName}</div>`;
                   fs.appendFileSync(
-                    `${__dirname}/../views/placeholder/event-on-timetable.html`,
+                    `${__dirname}/../../views/placeholder/event-on-timetable.html`,
                     content
                   );
                 });

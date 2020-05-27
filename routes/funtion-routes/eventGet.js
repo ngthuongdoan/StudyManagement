@@ -1,5 +1,5 @@
-const conn = require("../models/connection");
-const Event=require("../controllers/classes/Event");
+const conn = require("../../models/connection");
+const Event=require("../../controllers/classes/Event");
 
 exports.getMethod = (req, res) => {
   conn.query(

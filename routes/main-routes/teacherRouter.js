@@ -1,11 +1,11 @@
 const fs = require("fs");
 const express = require("express");
-const popup = require("../controllers/replaceTemplate");
-const session = require("../controllers/session");
-const conn = require("../models/connection");
-const QuickSort = require("../controllers/quicksort");
-const Teacher = require("../controllers/classes/Teacher");
-const teacherPage = fs.readFileSync(`${__dirname}/../views/teacher.html`);
+const popup = require("../../controllers/replaceTemplate");
+const session = require("../../controllers/session");
+const conn = require("../../models/connection");
+const QuickSort = require("../../controllers/quicksort");
+const Teacher = require("../../controllers/classes/Teacher");
+const teacherPage = fs.readFileSync(`${__dirname}/../../views/teacher.html`);
 let resultPage = teacherPage;
 
 const router = express.Router();
@@ -24,7 +24,7 @@ const createTeacherTable = (results) => {
             <td>${teacher.email}</td>
             <td>${teacher.number}</td>
         </tr>`;
-        fs.appendFileSync(`${__dirname}/../views/placeholder/teacher-data.html`, data);
+        fs.appendFileSync(`${__dirname}/../../views/placeholder/teacher-data.html`, data);
       }
 };
 
@@ -42,7 +42,7 @@ router
           createTeacherTable(results);
           //CREATE TEACHER PAGE
           const teacherdata = fs.readFileSync(
-            `${__dirname}/../views/placeholder/teacher-data.html`
+            `${__dirname}/../../views/placeholder/teacher-data.html`
           );
           resultPage = popup.replaceAccountTemplate(req.session, teacherPage);
           resultPage = popup.replaceTemplate(
@@ -50,7 +50,7 @@ router
             teacherdata,
             resultPage
           );
-          fs.writeFileSync(`${__dirname}/../views/placeholder/teacher-data.html`, "");
+          fs.writeFileSync(`${__dirname}/../../views/placeholder/teacher-data.html`, "");
           res.end(resultPage);
         });
       } else {
@@ -68,7 +68,6 @@ router
       email: req.body.teacherEmail,
       number: req.body.teacherNumber
     });
-    console.table(teacher);
     conn.query(
       "INSERT INTO teacher VALUES(?,?,?,?);",
       [req.session.username, teacher.name, teacher.email, teacher.number],

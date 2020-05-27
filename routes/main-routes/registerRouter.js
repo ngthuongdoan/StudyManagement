@@ -1,10 +1,10 @@
 const fs = require("fs");
 const express = require("express");
-const conn = require("../models/connection");
-const popup = require("../controllers/replaceTemplate");
-const User = require("../controllers/classes/User");
+const conn = require("../../models/connection");
+const popup = require("../../controllers/replaceTemplate");
+const User = require("../../controllers/classes/User");
 const router = express.Router();
-const register = fs.readFileSync(`${__dirname}/../views/register.html`);
+const register = fs.readFileSync(`${__dirname}/../../views/register.html`);
 
 router
   .get("/", (req, res) => {

@@ -20,32 +20,17 @@
     <script type="text/javascript" src="js/lib/jquery.timeentry.package-2.0.1/jquery.timeentry.js"></script>
     <title>Event</title>
     <script>
-        // $(function () {
-        //     $("#eventStartTime").datepicker({
-        //         dateFormat: "yy-mm-dd",
-        //     });
-        //     $("#eventEndTime").datepicker({
-        //         dateFormat: "yy-mm-dd",
-        //     });
+        $(function () {
+            $("#eventStartDate").datepicker({
+                dateFormat: "yy-mm-dd",
+            });
+            $("#eventEndDate").datepicker({
+                dateFormat: "yy-mm-dd",
+            });
 
-        //     $('#eventStartTime').timeEntry({ show24Hours: true });
-        //     $('#eventEndTime').timeEntry({ show24Hours: true });
-
-            // const days = [
-            //     "Sunday",
-            //     "Monday",
-            //     "Tuesday",
-            //     "Wednesday",
-            //     "Thursday",
-            //     "Friday",
-            //     "Saturday",
-            // ];
-            // $("#eventDay").autocomplete({
-            //     source: days
-            // });
-            // $('#eventDay').autocomplete({ minLength: 0 });
-            // $('#eventDay').click(function () { $(this).autocomplete("search", ""); });
-        // });
+            $('#eventStartTime').timeEntry({ show24Hours: true });
+            $('#eventEndTime').timeEntry({ show24Hours: true });
+        });
     </script>
 </head>
 
@@ -62,6 +47,10 @@
             <div class="data">
                 <label for="eventName">Event Name:</label>
                 <input type="text" id="eventName" name="eventName" placeholder="Mạng máy tính" required><br>
+                <label for="eventStartDate">Start Day: </label>
+                <input type="text" id="eventStartDate" name="eventStartDate" required>
+                <label for="eventEndDate">End Day: </label>
+                <input type="text" id="eventEndDate" name="eventEndDate" required>
                 <label for="eventStartTime">From:</label>
                 <input type="text" id="eventStartTime" name="eventStartTime" required>
                 <label for="eventEndTime">To:</label>
@@ -105,7 +94,7 @@
                 <button class="sortbtn" onclick="sortTable(3)">Target</button>
             </div> -->
             <button class="btn" onclick="overlayOn()">Add new</button>
-            <button class="btn" id="delbtn" onclick="deleteSubject()">Delete</button>
+            <button class="btn" id="delbtn" onclick="deleteEvent()">Delete</button>
             <div id="message" style='margin-left: 400px;display: none;'>
                 <h4>Please choose the card</h4>
             </div>

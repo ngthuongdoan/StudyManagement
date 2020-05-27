@@ -1,5 +1,5 @@
-const conn = require("../models/connection");
-const Subject = require("../controllers/classes/Subject");
+const conn = require("../../models/connection");
+const Subject = require("../../controllers/classes/Subject");
 
 exports.getMethod = (req, res) => {
   conn.query(
