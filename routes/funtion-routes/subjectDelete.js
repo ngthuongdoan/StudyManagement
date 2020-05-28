@@ -5,16 +5,17 @@ exports.postMethod = (req, res) => {
   const subject = new Subject({
     idSubject: req.body.idSubject
   });
+  console.log(subject);
   conn.query(
     "DELETE FROM subjects WHERE username=? AND idSubject=?",
-    [req.session.username, subject.id()],
+    [req.session.username, subject.getId()],
     (error, results, fields) => {
       console.log(error);
       console.log(results);
       if (error) {
-        res.json({message:"Error",data:subject});
+        res.redirect("/notfound");
       } else {
-        res.json({message:"Done",data:subject});
+        res.redirect("/subject");
       }
     }
   );

@@ -12,9 +12,9 @@ const deleteSubject = () => {
   });
   let a = document.getElementsByClassName("linktodetail");
   for (let i = 0; i < a.length; i++) {
-    a[i].setAttribute("href", "");
+    a[i].onclick = () => false;
   }
-  const data = document.getElementsByClassName("event-card");
+  const data = document.getElementsByClassName("subject-card");
   submitForm(data);
 };
 

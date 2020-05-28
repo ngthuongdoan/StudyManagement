@@ -29,7 +29,7 @@ class Subject {
     this.backgroundColor = subjectColor;
   }
 
-  get id(){
+  getId(){
     return this.id;
   }
 

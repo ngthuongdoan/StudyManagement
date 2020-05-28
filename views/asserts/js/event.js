@@ -12,9 +12,9 @@ const deleteEvent = () => {
   });
   let a = document.getElementsByClassName("linktodetail");
   for (let i = 0; i < a.length; i++) {
-    a[i].setAttribute("href", "");
+    a[i].onclick = () => false;
   }
-  const data = document.getElementsByClassName("subject-card");
+  const data = document.getElementsByClassName("event-card");
   submitDelForm(data);
 };
 
@@ -30,16 +30,15 @@ const submitDelForm = (data) => {
       form.method = "POST";
       form.action = "/delete-event";
       let eventName = document.createElement("input");
-      eventName.value = id;
+      const name = document.getElementsByClassName("event-name")[0].innerHTML;
+      eventName.value = name;
       eventName.name = "eventName";
       form.appendChild(eventName);
       document.body.appendChild(form);
-      console.log(form.toString());
       form.submit();
     });
   }
 };
-
 
 /**Function check add subject input
  * @param None

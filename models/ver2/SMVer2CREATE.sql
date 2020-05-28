@@ -1,13 +1,9 @@
 DROP DATABASE IF EXISTS studymanagement_exp;
 create database studymanagement_exp;
 use studymanagement_exp;
-
+SET SQL_SAFE_UPDATES = 0;
 -- select * from accounts;
--- select * from detailSubject;
--- select * from detailEvent;
--- select * from events;
--- select * from grade;
--- select * from semester;
+-- select * from events; 
 -- select * from subjects;
 -- select * from teacher;
 -- select * from timetable;
