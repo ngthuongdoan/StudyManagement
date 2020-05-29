@@ -10,8 +10,14 @@ const router = express.Router();
 
 const createSubjectCards = (req, results) => {
   for (let j = 0; j < results.length; j++) {
-    let subjectCard = fs.readFileSync(`${__dirname}/../../views/placeholder/subject-card.html`);
-    subjectCard = popup.replaceTemplate(/{% ID %}/g, results[j].idSubject, subjectCard);
+    let subjectCard = fs.readFileSync(
+      `${__dirname}/../../views/placeholder/subject-card.html`
+    );
+    subjectCard = popup.replaceTemplate(
+      /{% ID %}/g,
+      results[j].idSubject,
+      subjectCard
+    );
     subjectCard = popup.replaceTemplate(
       "{% TARGET %}",
       results[j].subjectTarget,
@@ -22,7 +28,11 @@ const createSubjectCards = (req, results) => {
       results[j].subjectName,
       subjectCard
     );
-    subjectCard = popup.replaceTemplate("COLOR", results[j].subjectColor, subjectCard);
+    subjectCard = popup.replaceTemplate(
+      "COLOR",
+      results[j].subjectColor,
+      subjectCard
+    );
 
     conn.query(
       `select teacherName from subjects join teacher on subjects.teacherEmail = teacher.teacherEmail
@@ -64,12 +74,19 @@ const replaceResultPage = (session) => {
   resultPage = popup.replaceAccountTemplate(session, resultPage);
   resultPage = popup.replaceTemplate("{% CARDS %}", subjectdata, resultPage);
 
-  fs.writeFileSync(`${__dirname}/../../views/placeholder/teacher-name.html`, "");
-  fs.writeFileSync(`${__dirname}/../../views/placeholder/subject-data.html`, "");
+  fs.writeFileSync(
+    `${__dirname}/../../views/placeholder/teacher-name.html`,
+    ""
+  );
+  fs.writeFileSync(
+    `${__dirname}/../../views/placeholder/subject-data.html`,
+    ""
+  );
 };
 
 router
-  .get("/", (req, res) => {
+  .route("/")
+  .get((req, res) => {
     if (session.sessionCheck(req, res)) {
       if (req.session.loggedin) {
         conn.query(
@@ -96,7 +113,7 @@ router
       res.redirect("/login");
     }
   })
-  .post("/", (req, res) => {
+  .post((req, res) => {
     // console.log(req.body);
     conn.query(
       "SELECT teacherEmail FROM teacher WHERE username=? AND teacherName=?",
@@ -119,7 +136,6 @@ router
           subjectNote: req.body.subjectNote,
           subjectColor: "#" + req.body.subjectColor,
         });
-        // console.log(subject.post());
         conn.query(
           `INSERT INTO subjects VALUE('${req.session.username}',?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
           subject.post(),
@@ -132,6 +148,23 @@ router
             }
           }
         );
+      }
+    );
+  })
+  .delete((req, res) => {
+    const subject = new Subject({
+      idSubject: req.body.idSubject,
+    });
+    conn.query(
+      "DELETE FROM subjects WHERE username=? AND idSubject=?",
+      [req.session.username, subject.getId()],
+      (error, results, fields) => {
+        if (error) {
+          console.log(error.message);
+          res.redirect("/notfound");
+        } else {
+          res.redirect("/subject");
+        }
       }
     );
   });

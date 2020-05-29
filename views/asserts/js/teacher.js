@@ -1,8 +1,9 @@
+/* eslint-disable no-undef */
 const deleteTeacher = () => {
   document.getElementById("message").style.display = "block";
   let btn = document.getElementById("delbtn");
   btn.textContent = "Cancel";
-  btn.addEventListener("click", ()=>{
+  btn.addEventListener("click", () => {
     window.location.reload();
   });
 
@@ -10,20 +11,44 @@ const deleteTeacher = () => {
   submitForm(data);
 };
 
-const submitForm = data => {
+const submitForm = (data) => {
   for (const el of data) {
     el.classList.add("activerow");
+    el.onclick = false;
     el.addEventListener("click", () => {
-      document
-        .getElementById("delname")
-        .setAttribute("value", el.children[0].innerText);
-      document
-        .getElementById("delemail")
-        .setAttribute("value", el.children[1].innerText);
-      document
-        .getElementById("delnum")
-        .setAttribute("value", el.children[2].innerText);
-      document.getElementById("delete").submit();
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.value) {
+          let form = document.createElement("form");
+          form.style.display = "none";
+          form.method = "POST";
+          form.action = "/teacher?_method=DELETE";
+
+          let teacherName = document.createElement("input");
+          teacherName.value = el.children[0].innerText;
+          teacherName.name = "teacherName";
+          form.appendChild(teacherName);
+
+          let teacherEmail = document.createElement("input");
+          teacherEmail.value = el.children[1].innerText;
+          teacherEmail.name = "teacherEmail";
+          form.appendChild(teacherEmail);
+
+          let teacherNumber = document.createElement("input");
+          teacherNumber.value = el.children[0].innerText;
+          teacherNumber.name = "teacherNumber";
+          form.appendChild(teacherNumber);
+          document.body.appendChild(form);
+          form.submit();
+        }
+      });
     });
   }
 };

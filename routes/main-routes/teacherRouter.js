@@ -11,30 +11,37 @@ let resultPage = teacherPage;
 const router = express.Router();
 
 const createTeacherTable = (results) => {
-    for (let j = 0; j < results.length; j++) {
-        let obj = {
-          name: results[j].teacherName,
-          email: results[j].teacherEmail,
-          number: results[j].teacherNumber
-        };
-        let teacher = new Teacher(obj);
-        let link = teacher.name.normalize("NFD").replace(/[\u0300-\u036f]/g, "").replace(/ /g,"");
-        let data = `<tr class='teacher' onclick="window.location='/teacher/${link}';">
+  for (let j = 0; j < results.length; j++) {
+    let obj = {
+      name: results[j].teacherName,
+      email: results[j].teacherEmail,
+      number: results[j].teacherNumber,
+    };
+    let teacher = new Teacher(obj);
+    let link = teacher.name
+      .normalize("NFD")
+      .replace(/[\u0300-\u036f]/g, "")
+      .replace(/ /g, "");
+    let data = `<tr class='teacher' onclick="window.location='/teacher/${link}';">
             <td>${teacher.name}</td>
             <td>${teacher.email}</td>
             <td>${teacher.number}</td>
         </tr>`;
-        fs.appendFileSync(`${__dirname}/../../views/placeholder/teacher-data.html`, data);
-      }
+    fs.appendFileSync(
+      `${__dirname}/../../views/placeholder/teacher-data.html`,
+      data
+    );
+  }
 };
 
-router.param("teacherName",(req,res,next,teacherName)=>{
+router.param("teacherName", (req, res, next, teacherName) => {
   req.teacherName = teacherName;
   next();
 });
 
 router
-  .get("/", (req, res) => {
+  .route("/")
+  .get((req, res) => {
     if (session.sessionCheck(req, res)) {
       if (req.session.loggedin) {
         let query = "select * from teacher where username=?;";
@@ -50,7 +57,10 @@ router
             teacherdata,
             resultPage
           );
-          fs.writeFileSync(`${__dirname}/../../views/placeholder/teacher-data.html`, "");
+          fs.writeFileSync(
+            `${__dirname}/../../views/placeholder/teacher-data.html`,
+            ""
+          );
           res.end(resultPage);
         });
       } else {
@@ -62,11 +72,11 @@ router
       res.redirect("/login");
     }
   })
-  .post("/", (req, res) => {
+  .post((req, res) => {
     const teacher = new Teacher({
       name: req.body.teacherName,
       email: req.body.teacherEmail,
-      number: req.body.teacherNumber
+      number: req.body.teacherNumber,
     });
     conn.query(
       "INSERT INTO teacher VALUES(?,?,?,?);",
@@ -87,9 +97,31 @@ router
         }
       }
     );
+  })
+  .delete((req, res) => {
+    const teacher = new Teacher({
+      name: req.body.teacherName,
+      email: req.body.teacherEmail,
+      number: req.body.teacherNumber,
+    });
+    conn.query(
+      "DELETE FROM teacher WHERE username=? AND teacherName=? AND teacherEmail=?",
+      [req.session.username, teacher.name, teacher.email],
+      (error, results, fields) => {
+        conn.query(
+          "DELETE FROM subjects WHERE username=? AND teacherEmail=?",
+          [req.session.username, teacher.email],
+          (error, results, fields) => {
+            if (!error) {
+              res.redirect("/teacher");
+            }
+          }
+        );
+      }
+    );
   });
 
-router.get("/:teacherName",(req,res)=>{
+router.get("/:teacherName", (req, res) => {
   res.redirect("/teacher");
 });
 

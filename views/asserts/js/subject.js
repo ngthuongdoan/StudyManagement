@@ -25,17 +25,31 @@ const deleteSubject = () => {
 const submitForm = (data) => {
   for (const el of data) {
     el.addEventListener("click", () => {
-      let [id] = el.children[1].innerText.split(" ");
-      let form = document.createElement("form");
-      form.style.display = "none";
-      let idSubject = document.createElement("input");
-      form.method = "POST";
-      form.action = "/delete-subject";
-      idSubject.value = id;
-      idSubject.name = "idSubject";
-      form.appendChild(idSubject);
-      document.body.appendChild(form);
-      form.submit();
+
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      })
+      .then((result) => {
+        if (result.value) {
+          let [id] = el.children[1].innerText.split(" ");
+          let form = document.createElement("form");
+          form.style.display = "none";
+          let idSubject = document.createElement("input");
+          form.method = "POST";
+          form.action = "/subject?_method=DELETE";
+          idSubject.value = id;
+          idSubject.name = "idSubject";
+          form.appendChild(idSubject);
+          document.body.appendChild(form);
+          form.submit();
+        }
+      });
     });
   }
 };

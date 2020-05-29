@@ -18,8 +18,16 @@ const createEventCards = (results) => {
     card = popup.replaceTemplate("COLOR", results[j].eventColor, card);
     let start = new Date(results[j].eventStartTime);
     let end = new Date(results[j].eventEndTime);
-    card = popup.replaceTemplate("{% START %}", `${start.toDateString()} ${start.getHours()}:${start.getMinutes()}`, card);
-    card = popup.replaceTemplate("{% END %}",`${end.toDateString()} ${end.getHours()}:${end.getMinutes()}`, card);
+    card = popup.replaceTemplate(
+      "{% START %}",
+      `${start.toDateString()} ${start.getHours()}:${start.getMinutes()}`,
+      card
+    );
+    card = popup.replaceTemplate(
+      "{% END %}",
+      `${end.toDateString()} ${end.getHours()}:${end.getMinutes()}`,
+      card
+    );
 
     fs.appendFileSync(
       `${__dirname}/../../views/placeholder/event-data.html`,
@@ -80,6 +88,22 @@ router
       (error, results, fields) => {
         if (error) {
           console.log(error.message);
+          res.redirect("/notfound");
+        } else {
+          res.redirect("/event");
+        }
+      }
+    );
+  })
+  .delete((req, res) => {
+    const event = new Event({
+      eventName: req.body.eventName,
+    });
+    conn.query(
+      "DELETE FROM events WHERE username=? AND eventName=?",
+      [req.session.username, event.eventName],
+      (error, results, fields) => {
+        if (error) {
           res.redirect("/notfound");
         } else {
           res.redirect("/event");
