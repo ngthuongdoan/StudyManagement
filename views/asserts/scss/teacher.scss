@@ -7,7 +7,8 @@
   text-align: center;
 }
 
-#overlay {
+#add-overlay,
+#modify-overlay {
   position: fixed;
   display: none;
   width: 100%;
@@ -18,7 +19,6 @@
   bottom: 0;
   background-color: rgba(0, 0, 0, 0.5);
   z-index: 2;
-  // cursor: pointer;
   form {
     text-align: center;
     width: 400px;
@@ -45,12 +45,14 @@
         font-size: 16px;
         padding-top: 10px;
       }
-      input{
+      input {
         font-size: 16px;
         padding: 5px auto;
       }
     }
-    .btn {
+    .btn,
+    .cancelbtn {
+      cursor: pointer;
       margin-top: 30px;
       margin-right: 20px;
       width: 100px;
@@ -70,27 +72,34 @@
         border-style: outset;
       }
     }
-    
+    .cancelbtn {
+      background-color: #9b9294;
+      transition: background-color 0.3s ease-in-out;
+      &:hover {
+        background-color: #665f60;
+      }
+    }
   }
 }
 
-#cancelbtn,#delbtn {
+#cancelbtn,
+#delbtn {
   margin-right: 0px;
   margin-left: 20px;
   background-color: #9b9294;
   transition: background-color 0.3s ease-in-out;
-  &:hover{
+  &:hover {
     background-color: #665f60;
   }
 }
-#alert{
+#alert {
   visibility: hidden;
 }
 .rightpanel {
   .btn {
     margin: 20px 40px;
     margin-left: 600px;
-    margin-right:5px;
+    margin-right: 5px;
     width: 100px;
     background-color: rgb(252, 90, 131);
     border-radius: 10px;
@@ -132,6 +141,6 @@
   }
 }
 
-.activerow{
+.activerow {
   background-color: #a8d1d0;
 }

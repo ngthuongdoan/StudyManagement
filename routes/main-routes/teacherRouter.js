@@ -22,7 +22,7 @@ const createTeacherTable = (results) => {
       .normalize("NFD")
       .replace(/[\u0300-\u036f]/g, "")
       .replace(/ /g, "");
-    let data = `<tr class='teacher' onclick="window.location='/teacher/${link}';">
+    let data = `<tr class='teacher'">
             <td>${teacher.name}</td>
             <td>${teacher.email}</td>
             <td>${teacher.number}</td>
@@ -93,6 +93,23 @@ router
             )
           );
         } else {
+          res.redirect("/teacher");
+        }
+      }
+    );
+  })
+  .put((req, res) => {
+    const teacher = new Teacher({
+      name: req.body.teacherName,
+      email: req.body.teacherEmail,
+      number: req.body.teacherNumber,
+    });
+    console.log(teacher);
+    conn.query(
+      "UPDATE teacher SET teacherEmail = ?, teacherNumber = ? WHERE teacherName = ? and username = ?",
+      [teacher.email, teacher.number, teacher.name, req.session.username],
+      (error, results, fields) => {
+        if (!error) {
           res.redirect("/teacher");
         }
       }

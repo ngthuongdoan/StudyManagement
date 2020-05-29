@@ -1,7 +1,15 @@
-const overlayOn = () => {
-  document.getElementById("overlay").style.display = "block";
+const addOverlayOn = () => {
+  document.getElementById("add-overlay").style.display = "block";
 };
 
-const overlayOff = () => {
-  document.getElementById("overlay").style.display = "none";
+const addOverlayOff = () => {
+  document.getElementById("add-overlay").style.display = "none";
+};
+
+const modifyOverlayOn = () => {
+  document.getElementById("modify-overlay").style.display = "block";
+};
+
+const modifyOverlayOff = () => {
+  document.getElementById("modify-overlay").style.display = "none";
 };

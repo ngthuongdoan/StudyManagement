@@ -8,10 +8,10 @@ const deleteTeacher = () => {
   });
 
   const data = document.getElementsByClassName("teacher");
-  submitForm(data);
+  submitDelForm(data);
 };
 
-const submitForm = (data) => {
+const submitDelForm = (data) => {
   for (const el of data) {
     el.classList.add("activerow");
     el.onclick = false;
@@ -52,3 +52,17 @@ const submitForm = (data) => {
     });
   }
 };
+
+const data = document.getElementsByClassName("teacher");
+for (let index = 0; index < data.length; index++) {
+  const teacher = data[index];
+  teacher.addEventListener("click", () => {
+    document.getElementById("modifyName").value =
+      teacher.children[0].innerText;
+    document.getElementById("modifyEmail").value =
+      teacher.children[1].innerText;
+    document.getElementById("modifyNumber").value =
+      teacher.children[2].innerText;
+    modifyOverlayOn();
+  });
+}
