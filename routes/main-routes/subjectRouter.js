@@ -10,35 +10,56 @@ const router = express.Router();
 
 const createSubjectCards = (req, results) => {
   for (let j = 0; j < results.length; j++) {
+    const currentSubject = new Subject({
+      id: results[j].idSubject,
+      title: results[j].subjectName,
+      teacherEmail: req.session.teacherEmail,
+      department: results[j].subjectRoom,
+      week: results[j].subjectWeek,
+      day: results[j].subjectDay,
+      startRecur: results[j].subjectStartRecur,
+      endRecur: results[j].subjectEndRecur,
+      start: results[j].subjectStartTime,
+      end: results[j].subjectEndTime,
+      target: results[j].subjectTarget,
+      note: results[j].subjectNote,
+      backgroundColor: results[j].subjectColor,
+    });
     let subjectCard = fs.readFileSync(
       `${__dirname}/../../views/placeholder/subject-card.html`
     );
     subjectCard = popup.replaceTemplate(
       /{% ID %}/g,
-      results[j].idSubject,
+      currentSubject.id,
+      subjectCard
+    );
+    subjectCard = popup.replaceTemplate(
+      "{% DATA %}",
+      JSON.stringify(currentSubject.send()),
       subjectCard
     );
     subjectCard = popup.replaceTemplate(
       "{% TARGET %}",
-      results[j].subjectTarget,
+      currentSubject.target,
       subjectCard
     );
     subjectCard = popup.replaceTemplate(
       "{% SUBJECTNAME %}",
-      results[j].subjectName,
+      currentSubject.title,
       subjectCard
     );
     subjectCard = popup.replaceTemplate(
       "COLOR",
-      results[j].subjectColor,
+      "#"+currentSubject.backgroundColor,
       subjectCard
     );
 
     conn.query(
       `select teacherName from subjects join teacher on subjects.teacherEmail = teacher.teacherEmail
     where teacher.username=? and idSubject=?`,
-      [req.session.username, results[j].idSubject],
+      [req.session.username, currentSubject.id],
       (error, results, fields) => {
+        console.log(results);
         subjectCard = popup.replaceTemplate(
           "{% TEACHERNAME %}",
           results[0].teacherName,
@@ -70,7 +91,11 @@ const replaceResultPage = (session) => {
   const subjectdata = fs.readFileSync(
     `${__dirname}/../../views/placeholder/subject-data.html`
   );
-  resultPage = popup.replaceTemplate("{% TEACHER %}", teacherData, subjectPage);
+  resultPage = popup.replaceTemplate(
+    /{% TEACHER %}/gi,
+    teacherData,
+    subjectPage
+  );
   resultPage = popup.replaceAccountTemplate(session, resultPage);
   resultPage = popup.replaceTemplate("{% CARDS %}", subjectdata, resultPage);
 
@@ -114,28 +139,26 @@ router
     }
   })
   .post((req, res) => {
-    // console.log(req.body);
     conn.query(
       "SELECT teacherEmail FROM teacher WHERE username=? AND teacherName=?",
       [req.session.username, req.body.teacherName],
       (error, results, fields) => {
-        req.session.teacherEmail = results[0].teacherEmail;
-        //CREATE SUBJECT OBJ TO POST
         const subject = new Subject({
-          idSubject: req.body.idSubject,
-          subjectName: req.body.subjectName,
-          teacherEmail: req.session.teacherEmail,
-          subjectRoom: req.body.subjectRoom,
-          subjectWeek: req.body.subjectWeek,
-          subjectDay: req.body.subjectDay,
-          subjectStartRecur: req.body.subjectStartRecur,
-          subjectEndRecur: req.body.subjectEndRecur,
-          subjectStartTime: req.body.subjectStartTime,
-          subjectEndTime: req.body.subjectEndTime,
-          subjectTarget: req.body.subjectTarget,
-          subjectNote: req.body.subjectNote,
-          subjectColor: "#" + req.body.subjectColor,
+          id: req.body.idSubject,
+          title: req.body.subjectName,
+          teacherEmail: results[0].teacherEmail,
+          department: req.body.subjectRoom,
+          week: req.body.subjectWeek,
+          day: req.body.subjectDay,
+          startRecur: req.body.subjectStartRecur,
+          endRecur: req.body.subjectEndRecur,
+          start: req.body.subjectStartTime,
+          end: req.body.subjectEndTime,
+          target: req.body.subjectTarget,
+          note: req.body.subjectNote,
+          backgroundColor: req.body.subjectColor,
         });
+
         conn.query(
           `INSERT INTO subjects VALUE('${req.session.username}',?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
           subject.post(),
@@ -153,11 +176,11 @@ router
   })
   .delete((req, res) => {
     const subject = new Subject({
-      idSubject: req.body.idSubject,
+      id: req.body.idSubject,
     });
     conn.query(
       "DELETE FROM subjects WHERE username=? AND idSubject=?",
-      [req.session.username, subject.getId()],
+      [req.session.username, subject.id],
       (error, results, fields) => {
         if (error) {
           console.log(error.message);
@@ -165,6 +188,55 @@ router
         } else {
           res.redirect("/subject");
         }
+      }
+    );
+  })
+  .put((req, res) => {
+    conn.query(
+      "SELECT teacherEmail FROM teacher WHERE username=? AND teacherName=?",
+      [req.session.username, req.body.teacherName],
+      (error, results, fields) => {
+        const modifySubject = new Subject({
+          id: req.body.idSubject,
+          title: req.body.subjectName,
+          teacherEmail: results[0].teacherEmail,
+          department: req.body.subjectRoom,
+          week: req.body.subjectWeek,
+          day: req.body.subjectDay,
+          startRecur: req.body.subjectStartRecur,
+          endRecur: req.body.subjectEndRecur,
+          start: req.body.subjectStartTime,
+          end: req.body.subjectEndTime,
+          target: req.body.subjectTarget,
+          note: req.body.subjectNote,
+          backgroundColor: req.body.subjectColor,
+        });
+        conn.query(
+          "UPDATE subjects SET subjectRoom=? ,subjectWeek=?, subjectStartTime=?, subjectEndTime=?, subjectStartRecur=?, subjectEndRecur=?, subjectDay=?, teacherEmail=?, subjectTarget=?, subjectNote=?, subjectColor=? WHERE idSubject =? AND username=?",
+          [
+            modifySubject.department,
+            modifySubject.week,
+            modifySubject.start,
+            modifySubject.end,
+            new Date(modifySubject.startRecur),
+            new Date(modifySubject.endRecur),
+            [modifySubject.day],
+            modifySubject.teacherEmail,
+            +modifySubject.target,
+            modifySubject.note,
+            modifySubject.backgroundColor,
+            modifySubject.id,
+            req.session.username,
+          ],
+          (error, results, fields) => {
+            console.log(results);
+            if (!error) {
+              res.redirect("/subject");
+            } else {
+              res.redirect("/notfound");
+            }
+          }
+        );
       }
     );
   });

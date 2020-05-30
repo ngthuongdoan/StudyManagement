@@ -60,7 +60,7 @@ router
                 "endRecur":"${result.subjectEndRecur}",
                 "backgroundColor":"${result.subjectColor}",
                 "editable":"false"
-              }' style="background-color:${result.subjectColor}">${result.subjectName}</div>`;
+              }' style="background-color:#${result.subjectColor}">${result.subjectName}</div>`;
               fs.appendFileSync(
                 `${__dirname}/../../views/placeholder/subject-on-timetable.html`,
                 content
@@ -80,7 +80,7 @@ router
                     },
                     "description": "${result.eventNote}",
                     "backgroundColor": "${result.eventColor}"
-                  }' style="background-color:${result.eventColor}">${result.eventName}</div>`;
+                  }' style="background-color:#${result.eventColor}">${result.eventName}</div>`;
                   fs.appendFileSync(
                     `${__dirname}/../../views/placeholder/event-on-timetable.html`,
                     content

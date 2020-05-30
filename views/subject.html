@@ -21,15 +21,15 @@
     <title>Subject</title>
     <script>
         $(function () {
-            $("#subjectStartRecur").datepicker({
+            $("#subjectStartRecur, #modifySubjectStartRecur").datepicker({
                 dateFormat: "yy-mm-dd",
             });
-            $("#subjectEndRecur").datepicker({
+            $("#subjectEndRecur, #modifySubjectEndRecur").datepicker({
                 dateFormat: "yy-mm-dd",
             });
 
-            $('#subjectStartTime').timeEntry({ show24Hours: true });
-            $('#subjectEndTime').timeEntry({ show24Hours: true });
+            $('#subjectStartTime, #modifySubjectStartTime').timeEntry({ show24Hours: true });
+            $('#subjectEndTime, #modifySubjectEndTime').timeEntry({ show24Hours: true });
 
             const days = [
                 "Sunday",
@@ -40,18 +40,18 @@
                 "Friday",
                 "Saturday",
             ];
-            $("#subjectDay").autocomplete({
+            $("#subjectDay, #modifySubjectDay").autocomplete({
                 source: days
             });
-            $('#subjectDay').autocomplete({ minLength: 0 });
-            $('#subjectDay').click(function () { $(this).autocomplete("search", ""); });
+            $('#subjectDay, #modifySubjectDay').autocomplete({ minLength: 0 });
+            $('#subjectDay, #modifySubjectDay').click(function () { $(this).autocomplete("search", ""); });
         });
     </script>
 </head>
 
 <body>
-    <div id="overlay">
-        <form action="/subject" method="post" autocomplete="off" id="addform" onsubmit="return(validate())">
+    <div id="add-overlay">
+        <form action="/subject" method="post" autocomplete="off" id="addform" onsubmit="return(addValidate())">
             <h1 id="formlogo">Schooling</h1>
             <div class="data">
                 <label for="idSubject">ID Subject:</label>
@@ -84,7 +84,44 @@
                 <input class="jscolor" name="subjectColor" id="subjectColor">
             </div>
             <input type="submit" value="Submit" class="btn">
-            <button type='button' class="btn" id="cancelbtn" onclick="overlayOff()">Cancel</button>
+            <button type='button' class="btn" id="cancelbtn" onclick="addOverlayOff()">Cancel</button>
+        </form>
+    </div>
+    <div id="modify-overlay">
+        <form action="/subject?_method=PUT" method="post" autocomplete="off" id="addform" onsubmit="return(modifyValidate())">
+            <h1 id="formlogo">Schooling</h1>
+            <div class="data">
+                <label for="idSubject">ID Subject:</label>
+                <input type="text" id="modifyIdSubject" name="idSubject" readonly><br>
+                <label for="subjectName">Subject Name:</label>
+                <input type="text" id="modifySubjectName" name="subjectName" readonly><br>
+                <label for="teacherName">Teacher Name:</label>
+                <select name="teacherName" id="modifyTeacherName">
+                    {% TEACHER %}
+                </select>
+                <label for="subjectStartRecur">Semester Start: </label>
+                <input type="text" id="modifySubjectStartRecur" name="subjectStartRecur" required>
+                <label for="subjectEndRecur">Semester End: </label>
+                <input type="text" id="modifySubjectEndRecur" name="subjectEndRecur" required>
+                <label for="subjectDay">Day:</label>
+                <input type="text" id="modifySubjectDay" name="subjectDay" required>
+                <label for="subjectStartTime">From:</label>
+                <input type="text" id="modifySubjectStartTime" name="subjectStartTime" required>
+                <label for="subjectEndTime">To:</label>
+                <input type="text" id="modifySubjectEndTime" name="subjectEndTime" required>
+                <label for="subjectWeek">Week:</label>
+                <input type="text" id="modifySubjectWeek" name="subjectWeek" required>
+                <label for="room">Room:</label>
+                <input type="text" id="modifySubjectRoom" name="subjectRoom" required><br>
+                <label for="target">Target:</label>
+                <input type="number" id="modifySubjectTarget" name="subjectTarget" step="0.1" required><br>
+                <label for="note">Note:</label>
+                <textarea name="subjectNote" id="modifySubjectNote" cols="25" rows="5"></textarea>
+                <label for="color">Color</label>
+                <input class="jscolor" name="subjectColor" id="modifySubjectColor">
+            </div>
+            <input type="submit" value="Update" class="btn">
+            <button type='button' class="btn" id="cancelbtn" onclick="modifyOverlayOff()">Cancel</button>
         </form>
     </div>
     <main>
@@ -114,7 +151,7 @@
                 <button class="sortbtn" onclick="sortTable(2)">Teacher</button>
                 <button class="sortbtn" onclick="sortTable(3)">Target</button>
             </div>
-            <button class="btn" onclick="overlayOn()">Add new</button>
+            <button class="btn" onclick="addOverlayOn()">Add new</button>
             <button class="btn" id="delbtn" onclick="deleteSubject()">Delete</button>
             <div id="message" style='margin-left: 400px;display: none;'>
                 <h4>Please choose the card</h4>

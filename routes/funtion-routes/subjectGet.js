@@ -9,19 +9,19 @@ exports.getMethod = (req, res) => {
       let subjects = [];
       results.forEach((result) => {
         const opt = {
-          idSubject: result.idSubject,
-          subjectName: result.subjectName,
+          id: result.idSubject,
+          title: result.subjectName,
           teacherEmail: result.teacherEmail,
-          subjectRoom: result.subjectRoom,
-          subjectWeek: result.subjectWeek,
-          subjectDay: result.subjectDay,
-          subjectStartRecur: result.subjectStartRecur,
-          subjectEndRecur: result.subjectEndRecur,
-          subjectStartTime: result.subjectStartTime,
-          subjectEndTime: result.subjectEndTime,
-          subjectTarget: result.subjectTarget,
-          subjectNote: result.subjectNote,
-          subjectColor: result.subjectColor,
+          department: result.subjectRoom,
+          week: result.subjectWeek,
+          day: result.subjectDay,
+          startRecur: result.subjectStartRecur,
+          endRecur: result.subjectEndRecur,
+          start: result.subjectStartTime,
+          end: result.subjectEndTime,
+          target: result.subjectTarget,
+          note: result.subjectNote,
+          backgroundColor: "#"+result.subjectColor,
         };
         let subject = new Subject(opt);
         subjects.push(subject.send());

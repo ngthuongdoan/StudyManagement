@@ -2,10 +2,12 @@ DROP DATABASE IF EXISTS studymanagement_exp;
 create database studymanagement_exp;
 use studymanagement_exp;
 SET SQL_SAFE_UPDATES = 0;
+select teacherName from subjects join teacher on subjects.teacherEmail = teacher.teacherEmail
+    where teacher.username="ngthuongdoan" and idSubject="CT24201";
 -- select * from accounts;
 -- select * from events; 
 -- select * from subjects;
--- select * from teacher;
+-- select * from teacher	;
 -- select * from timetable;
 
 -- drop table accounts;

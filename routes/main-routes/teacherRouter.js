@@ -111,6 +111,8 @@ router
       (error, results, fields) => {
         if (!error) {
           res.redirect("/teacher");
+        } else {
+          res.redirect("/notfound");
         }
       }
     );
@@ -137,9 +139,5 @@ router
       }
     );
   });
-
-router.get("/:teacherName", (req, res) => {
-  res.redirect("/teacher");
-});
 
 module.exports = router;

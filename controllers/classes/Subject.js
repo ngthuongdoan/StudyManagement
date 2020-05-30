@@ -1,36 +1,73 @@
 class Subject {
   constructor({
-    idSubject,
-    subjectName,
+    id,
+    title,
     teacherEmail,
-    subjectRoom,
-    subjectWeek,
-    subjectDay,
-    subjectStartRecur,
-    subjectEndRecur,
-    subjectStartTime,
-    subjectEndTime,
-    subjectTarget = "",
-    subjectNote = "",
-    subjectColor = "FFFFFF",
+    department,
+    week,
+    day,
+    startRecur,
+    endRecur,
+    start,
+    end,
+    target = "",
+    note = "",
+    backgroundColor = "FFFFFF",
   }) {
-    this.id = idSubject;
-    this.start = subjectStartTime+":00";
-    this.end = subjectEndTime+":00";
-    this.title = subjectName;
-    this.department = subjectRoom;
-    this.week = subjectWeek;
-    this.day = subjectDay;
-    this.startRecur = subjectStartRecur;
-    this.endRecur = subjectEndRecur;
-    this.target = subjectTarget;
-    this.note = subjectNote;
-    this.teacherEmail = teacherEmail;
-    this.backgroundColor = subjectColor;
+    this._id = id;
+    this._start = start;
+    this._end = end;
+    this._title = title;
+    this._department = department;
+    this._week = week;
+    this._day = day;
+    this._startRecur = startRecur;
+    this._endRecur = endRecur;
+    this._target = target;
+    this._note = note;
+    this._teacherEmail = teacherEmail;
+    this._backgroundColor = backgroundColor;
   }
 
-  getId(){
-    return this.id;
+  get id(){
+    return this._id;
+  }
+
+  get start(){
+    return this._start;
+  }
+  get end(){
+    return this._end;
+  }
+  get title(){
+    return this._title;
+  }
+  get department(){
+    return this._department;
+  }
+  get week(){
+    return this._week;
+  }
+  get day(){
+    return this._day;
+  }
+  get startRecur(){
+    return this._startRecur;
+  }
+  get endRecur(){
+    return this._endRecur;
+  }
+  get target(){
+    return this._target;
+  }
+  get note(){
+    return this._note;
+  }
+  get teacherEmail(){
+    return this._teacherEmail;
+  }
+  get backgroundColor(){
+    return this._backgroundColor;
   }
 
   post() {
