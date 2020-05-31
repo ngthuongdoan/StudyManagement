@@ -21,7 +21,7 @@ exports.getMethod = (req, res) => {
           end: result.subjectEndTime,
           target: result.subjectTarget,
           note: result.subjectNote,
-          backgroundColor: "#"+result.subjectColor,
+          backgroundColor: "#" + result.subjectColor,
         };
         let subject = new Subject(opt);
         subjects.push(subject.send());

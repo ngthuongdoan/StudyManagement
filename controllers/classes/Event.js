@@ -1,33 +1,48 @@
 class Event {
   constructor({
-    eventName="",
-    eventStartTime="",
-    eventEndTime="",
-    eventPlace="",
-    eventNote = "",
-    eventColor = "",
+    title = "",
+    start = "",
+    end = "",
+    department = "",
+    note = "",
+    backgroundColor = "",
   }) {
-    this.title = eventName;
-    this.start = eventStartTime;
-    this.end = eventEndTime;
-    this.department = eventPlace;
-    this.note = eventNote;
-    this.backgroundColor = eventColor;
+    this._title = title;
+    this._start = start;
+    this._end = end;
+    this._department = department;
+    this._note = note;
+    this._backgroundColor = backgroundColor;
   }
 
-  get eventName (){
-    return this.title;
+  get title() {
+    return this._title;
+  }
+  get start() {
+    return this._start;
+  }
+  get end() {
+    return this._end;
+  }
+  get department() {
+    return this._department;
+  }
+  get note() {
+    return this._note;
+  }
+  get backgroundColor() {
+    return this._backgroundColor;
   }
 
   post() {
     return [
       this.title,
       new Date(this.start),
-      new Date (this.end),
+      new Date(this.end),
       this.department,
       this.note,
       this.backgroundColor,
-      null
+      null,
     ];
   }
 

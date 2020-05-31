@@ -206,7 +206,7 @@ a {
   background-color: #665f60;
 }
 
-#overlay {
+#add-overlay, #modify-overlay {
   position: fixed;
   display: none;
   width: 100%;
@@ -219,7 +219,7 @@ a {
   z-index: 2;
 }
 
-#overlay form {
+#add-overlay form, #modify-overlay form {
   text-align: center;
   width: 400px;
   height: 600px;
@@ -231,7 +231,7 @@ a {
   overflow: auto;
 }
 
-#overlay form #formlogo {
+#add-overlay form #formlogo, #modify-overlay form #formlogo {
   padding-top: 20px;
   font-family: "Bahiana", cursive;
   font-size: 50px;
@@ -242,23 +242,23 @@ a {
   margin-bottom: 30px;
 }
 
-#overlay form .data {
+#add-overlay form .data, #modify-overlay form .data {
   text-align: left;
   margin-left: 110px;
 }
 
-#overlay form .data label {
+#add-overlay form .data label, #modify-overlay form .data label {
   display: block;
   font-size: 16px;
   padding-top: 10px;
 }
 
-#overlay form .data input {
+#add-overlay form .data input, #modify-overlay form .data input {
   font-size: 16px;
   padding: 5px auto;
 }
 
-#overlay form input[type="submit"] {
+#add-overlay form input[type="submit"], #modify-overlay form input[type="submit"] {
   margin-left: 0;
   margin-bottom: 50px;
 }

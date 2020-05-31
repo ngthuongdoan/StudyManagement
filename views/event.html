@@ -10,7 +10,6 @@
     <script src="js/lib/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
-    <!-- <script src="js/quicksortSubject.js"></script> -->
     <script src="js/lib/jscolor/jscolor.js"></script>
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
@@ -21,28 +20,22 @@
     <title>Event</title>
     <script>
         $(function () {
-            $("#eventStartDate").datepicker({
+            $("#eventStartDate, #modifyEventStartDate").datepicker({
                 dateFormat: "yy-mm-dd",
             });
-            $("#eventEndDate").datepicker({
+            $("#eventEndDate, modifyEventEndDate").datepicker({
                 dateFormat: "yy-mm-dd",
             });
 
-            $('#eventStartTime').timeEntry({ show24Hours: true });
-            $('#eventEndTime').timeEntry({ show24Hours: true });
+            $('#eventStartTime, #modifyEventStartTime').timeEntry({ show24Hours: true });
+            $('#eventEndTime, #modifyEventStartTime').timeEntry({ show24Hours: true });
         });
     </script>
 </head>
 
 <body>
-    <!-- <div style="display: none;">
-        <form action="/delete-event" method="POST" id="delete">
-            <input type="text" name="idSubject" id="delid" value="">
-            <input type="submit" value="" id="delBtn">
-        </form>
-    </div> -->
-    <div id="overlay">
-        <form action="/event" method="post" autocomplete="off" id="addform" onsubmit="return(validate())">
+    <div id="add-overlay">
+        <form action="/event" method="post"  id="addform" onsubmit="return(addValidate())">
             <h1 id="formlogo">Schooling</h1>
             <div class="data">
                 <label for="eventName">Event Name:</label>
@@ -63,7 +56,32 @@
                 <input class="jscolor" name="eventColor" id="eventColor">
             </div>
             <input type="submit" value="Submit" class="btn">
-            <button type='button' class="btn" id="cancelbtn" onclick="overlayOff()">Cancel</button>
+            <button type='button' class="btn" id="cancelbtn" onclick="addOverlayOff()">Cancel</button>
+        </form>
+    </div>
+    <div id="modify-overlay">
+        <form action="/event?_method='PUT'" method="post" autocomplete="off" id="addform" onsubmit="return(modifyValidate())">
+            <h1 id="formlogo">Schooling</h1>
+            <div class="data">
+                <label for="eventName">Event Name:</label>
+                <input type="text" id="modifyEventName" name="eventName" readonly><br>
+                <label for="eventStartDate">Start Day: </label>
+                <input type="text" id="modifyEventStartDate" name="eventStartDate" required>
+                <label for="eventEndDate">End Day: </label>
+                <input type="text" id="modifyEventEndDate" name="eventEndDate" required>
+                <label for="eventStartTime">From:</label>
+                <input type="text" id="modifyEventStartTime" name="eventStartTime" required>
+                <label for="eventEndTime">To:</label>
+                <input type="text" id="modifyEventEndTime" name="eventEndTime" required>
+                <label for="eventPlace">Place:</label>
+                <input type="text" id="modifyEventPlace" name="eventPlace" placeholder="101/C1" required><br>
+                <label for="note">Note:</label>
+                <textarea name="eventNote" id="modifyEventNote" cols="25" rows="5"></textarea>
+                <label for="eventColor">Color</label>
+                <input class="jscolor" name="eventColor" id="modifyEventColor">
+            </div>
+            <input type="submit" value="Submit" class="btn">
+            <button type='button' class="btn" id="cancelbtn" onclick="modifyOverlayOff()">Cancel</button>
         </form>
     </div>
     <main>
@@ -93,7 +111,7 @@
                 <button class="sortbtn" onclick="sortTable(2)">Teacher</button>
                 <button class="sortbtn" onclick="sortTable(3)">Target</button>
             </div> -->
-            <button class="btn" onclick="overlayOn()">Add new</button>
+            <button class="btn" onclick="addOverlayOn()">Add new</button>
             <button class="btn" id="delbtn" onclick="deleteEvent()">Delete</button>
             <div id="message" style='margin-left: 400px;display: none;'>
                 <h4>Please choose the card</h4>

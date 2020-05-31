@@ -1,5 +1,5 @@
-<a href="/event?eventName={% NAME %}" class='linktodetail'>
-    <div class="event-card" style='background-color: COLOR;'>
+<a onclick="modifyOverlayOn()" class='linktodetail'>
+    <div class="event-card" style='background-color: COLOR; cursor: pointer;' data-event='{% DATA %}'>
         <div style="margin-top: -10px; padding: 0;width: 100%; height: 10px ;background-color: white;"></div>
         <p><span class='event-name'>{% NAME %}</span></p>
         <p class="event-place">Place: {% PLACE %}</p>
