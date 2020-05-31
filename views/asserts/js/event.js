@@ -8,7 +8,6 @@ for (let index = 0; index < data.length; index++) {
     document.getElementById("modifyEventName").value = eventData.title;
     const [eventStartDate, eventStartTime] = eventData.start.split("T");
     const [eventEndDate, eventEndTime] = eventData.end.split("T");
-
     document.getElementById("modifyEventStartDate").value = eventStartDate;
     document.getElementById("modifyEventEndDate").value = eventEndDate;
     document.getElementById("modifyEventStartTime").value = eventStartTime.slice(0,5);

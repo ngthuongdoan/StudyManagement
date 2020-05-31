@@ -60,7 +60,7 @@
         </form>
     </div>
     <div id="modify-overlay">
-        <form action="/event?_method='PUT'" method="post" autocomplete="off" id="addform" onsubmit="return(modifyValidate())">
+        <form action="/event?_method=PUT" method="post" autocomplete="off" id="addform" onsubmit="return(modifyValidate())">
             <h1 id="formlogo">Schooling</h1>
             <div class="data">
                 <label for="eventName">Event Name:</label>
@@ -80,7 +80,7 @@
                 <label for="eventColor">Color</label>
                 <input class="jscolor" name="eventColor" id="modifyEventColor">
             </div>
-            <input type="submit" value="Submit" class="btn">
+            <input type="submit" value="Update" class="btn">
             <button type='button' class="btn" id="cancelbtn" onclick="modifyOverlayOff()">Cancel</button>
         </form>
     </div>

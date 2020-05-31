@@ -13,10 +13,14 @@ const createEventCards = (results) => {
     let card = fs.readFileSync(
       `${__dirname}/../../views/placeholder/event-card.html`
     );
+    let start = new Date(results[j].eventStartTime);
+    start.setHours(start.getHours() + 7);
+    let end = results[j].eventEndTime;
+    end.setHours(end.getHours() + 7);
     const event = new Event({
       title: results[j].eventName,
-      start: results[j].eventStartTime,
-      end: results[j].eventEndTime,
+      start: start,
+      end: end,
       department: results[j].eventPlace,
       note: results[j].eventNote,
       backgroundColor: results[j].eventColor,
@@ -29,16 +33,20 @@ const createEventCards = (results) => {
     card = popup.replaceTemplate(/{% NAME %}/g, event.title, card);
     card = popup.replaceTemplate("{% PLACE %}", event.department, card);
     card = popup.replaceTemplate("COLOR", "#" + event.backgroundColor, card);
-    let start = new Date(event.start);
-    let end = new Date(event.end);
     card = popup.replaceTemplate(
       "{% START %}",
-      `${start.toDateString()} ${start.getHours()}:${start.getMinutes()}`,
+      `${start.toISOString().split("T")[0]} at ${start
+        .toISOString()
+        .split("T")[1]
+        .slice(0, 5)}`,
       card
     );
     card = popup.replaceTemplate(
       "{% END %}",
-      `${end.toDateString()} ${end.getHours()}:${end.getMinutes()}`,
+      `${end.toISOString().split("T")[0]} at ${end
+        .toISOString()
+        .split("T")[1]
+        .slice(0, 5)}`,
       card
     );
 
@@ -103,6 +111,39 @@ router
           res.redirect("/notfound");
         } else {
           res.redirect("/event");
+        }
+      }
+    );
+  })
+  .put((req, res) => {
+    const eventStartTime =
+      req.body.eventStartDate + "T" + req.body.eventStartTime;
+    const eventEndTime = req.body.eventEndDate + "T" + req.body.eventEndTime;
+
+    const modifyEvent = new Event({
+      title: req.body.eventName,
+      start: eventStartTime,
+      end: eventEndTime,
+      department: req.body.eventPlace,
+      note: req.body.eventNote,
+      backgroundColor: req.body.eventColor,
+    });
+    conn.query(
+      "UPDATE events SET eventStartTime = ?, eventEndTime = ?, eventPlace = ?,eventNote = ?, eventColor = ? WHERE eventName = ? AND username = ?",
+      [
+        new Date(modifyEvent.start),
+        new Date(modifyEvent.end),
+        modifyEvent.department,
+        modifyEvent.note,
+        modifyEvent.backgroundColor,
+        modifyEvent.title,
+        req.session.username,
+      ],
+      (error, results, fields) => {
+        if (!error) {
+          res.redirect("/event");
+        } else {
+          res.redirect("/notfound");
         }
       }
     );

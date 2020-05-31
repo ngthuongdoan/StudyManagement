@@ -10,6 +10,10 @@ const router = express.Router();
 
 const createSubjectCards = (req, results) => {
   for (let j = 0; j < results.length; j++) {
+    let startRecur=results[j].subjectStartRecur;
+    startRecur.setHours(startRecur.getHours() + 7);
+    let endRecur=results[j].subjectEndRecur;
+    endRecur.setHours(endRecur.getHours() + 7);
     const currentSubject = new Subject({
       id: results[j].idSubject,
       title: results[j].subjectName,
@@ -17,8 +21,8 @@ const createSubjectCards = (req, results) => {
       department: results[j].subjectRoom,
       week: results[j].subjectWeek,
       day: results[j].subjectDay,
-      startRecur: results[j].subjectStartRecur,
-      endRecur: results[j].subjectEndRecur,
+      startRecur: startRecur,
+      endRecur: endRecur,
       start: results[j].subjectStartTime,
       end: results[j].subjectEndTime,
       target: results[j].subjectTarget,
@@ -229,7 +233,6 @@ router
             req.session.username,
           ],
           (error, results, fields) => {
-            console.log(results);
             if (!error) {
               res.redirect("/subject");
             } else {

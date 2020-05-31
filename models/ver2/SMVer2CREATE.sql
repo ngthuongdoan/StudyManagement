@@ -2,8 +2,8 @@ DROP DATABASE IF EXISTS studymanagement_exp;
 create database studymanagement_exp;
 use studymanagement_exp;
 SET SQL_SAFE_UPDATES = 0;
-select teacherName from subjects join teacher on subjects.teacherEmail = teacher.teacherEmail
-    where teacher.username="ngthuongdoan" and idSubject="CT24201";
+SET @@global.time_zone = '+00:00';
+
 -- select * from accounts;
 -- select * from events; 
 -- select * from subjects;
