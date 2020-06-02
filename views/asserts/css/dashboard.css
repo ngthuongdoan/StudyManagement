@@ -123,4 +123,80 @@ body main .leftpanel ul li a:hover {
   font-size: 20px;
   color: white;
 }
+
+#account-overlay {
+  display: none;
+  position: fixed;
+  width: 300px;
+  height: 600px;
+  text-align: center;
+  background-color: white;
+  margin: 20px auto;
+  left: 550px;
+  -webkit-box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.6);
+          box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  overflow: auto;
+}
+
+#account-overlay img {
+  margin: 30px 0px;
+  margin-bottom: 10px;
+  height: 100px;
+  width: 100px;
+  border-radius: 100px;
+  border: 2px yellow solid;
+}
+
+#account-overlay label {
+  display: block;
+  font-size: 16px;
+  padding-top: 10px;
+}
+
+#account-overlay input {
+  font-size: 16px;
+  padding: 5px auto;
+}
+
+#account-overlay fieldset {
+  width: 200px;
+  margin: 0 auto;
+}
+
+#account-overlay #education, #account-overlay #confirmpassword {
+  margin-bottom: 20px;
+}
+
+#account-overlay .btn,
+#account-overlay .cancelbtn {
+  width: 100px;
+  background-color: #ff416c;
+  border-radius: 50px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 10px 0px;
+  margin: 10px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+#account-overlay .btn:hover,
+#account-overlay .cancelbtn:hover {
+  background-color: #bd0375;
+  -webkit-box-shadow: #5a5454 0px 0px 2px;
+          box-shadow: #5a5454 0px 0px 2px;
+}
+
+#account-overlay .cancelbtn {
+  background-color: #9b9294;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#account-overlay .cancelbtn:hover {
+  background-color: #665f60;
+}
 /*# sourceMappingURL=dashboard.css.map */

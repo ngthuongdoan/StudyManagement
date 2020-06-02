@@ -13,3 +13,11 @@ const modifyOverlayOn = () => {
 const modifyOverlayOff = () => {
   document.getElementById("modify-overlay").style.display = "none";
 };
+
+const accountOverlayOn = () => {
+  document.getElementById("account-overlay").style.display = "block";
+};
+
+const accountOverlayOff = () => {
+  document.getElementById("account-overlay").style.display = "none";
+};

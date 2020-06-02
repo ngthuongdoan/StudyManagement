@@ -65,6 +65,7 @@ create table subjects(
     subjectTarget varchar(4) not null,
     subjectNote nvarchar(400),
     subjectColor varchar(20),
-    constraint pk_subject primary key(username,idSubject,subjectStartTime,subjectEndTime)
+    id int auto_increment,
+    constraint pk_subject primary key(id,username)
 );
 

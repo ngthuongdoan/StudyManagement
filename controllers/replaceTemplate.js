@@ -23,11 +23,11 @@ exports.replaceTemplate = (position, content, template) => {
 
 exports.replaceAccountTemplate = (session, template) => {
   let result = this.replaceTemplate(
-    "{% ACCOUNTNAME %}",
+    /{% ACCOUNTNAME %}/gi,
     session.fullname,
     template
   );
-  result = this.replaceTemplate("{% AVATAR %}", session.avatar, result);
-  result = this.replaceTemplate("{% USERNAME %}", session.username, result);
+  result = this.replaceTemplate(/{% AVATAR %}/gi, session.avatar, result);
+  result = this.replaceTemplate(/{% USERNAME %}/gi, session.username, result);
   return result.toString();
 };

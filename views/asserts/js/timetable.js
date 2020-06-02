@@ -1,14 +1,29 @@
 /* eslint-disable no-undef */
+function getWeekNumber(d) {
+  // Copy date so don't modify original
+  d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
+  // Set to nearest Thursday: current date + 4 - current day number
+  // Make Sunday's day number 7
+  d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
+  // Get first day of year
+  var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  // Calculate full weeks to nearest Thursday
+  var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+  // Return array of year and week number
+  return weekNo;
+}
+
+function getAllIndexes(arr, val) {
+  var indexes = [],
+    i = -1;
+  while ((i = arr.indexOf(val, i + 1)) != -1) {
+    indexes.push(i + 1);
+  }
+  return indexes;
+}
 document.addEventListener("DOMContentLoaded", function () {
   let Calendar = FullCalendar.Calendar;
   let Draggable = FullCalendarInteraction.Draggable;
-
-  // let weekOfYear = function (date) {
-  //   let d = new Date(+date);
-  //   d.setHours(0, 0, 0);
-  //   d.setDate(d.getDate() + 4 - (d.getDay() || 7));
-  //   return Math.ceil(((d - new Date(d.getFullYear(), 0, 1)) / 8.64e7 + 1) / 7);
-  // };
   /* initialize the external events
                                   -----------------------------------------------------------------*/
 
@@ -62,8 +77,7 @@ document.addEventListener("DOMContentLoaded", function () {
     header: {
       left: "prev,next today",
       center: "title",
-      right:
-        "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+      right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
     },
     firstDay: 1,
     editable: true,
@@ -92,6 +106,14 @@ document.addEventListener("DOMContentLoaded", function () {
       },
     ],
     eventRender: function (info) {
+      // let excludedWeeks = getAllIndexes(
+      //   info.event.extendedProps.week.split(""),
+      //   "*"
+      // );
+      // let theDate = info.event.start;
+      // if (excludedWeeks.indexOf(getWeekNumber(theDate)) != -1) {
+      //   return false;
+      // }
       let department =
         info.event.extendedProps.department !== undefined
           ? info.event.extendedProps.department
@@ -155,6 +177,9 @@ document.addEventListener("DOMContentLoaded", function () {
           console.log(err);
         },
       });
+    },
+    dateClick: function (info) {
+      alert(info.date);
     },
   });
   calendar.render();
