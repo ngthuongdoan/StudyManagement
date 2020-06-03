@@ -128,7 +128,7 @@ body main .leftpanel ul li a:hover {
   display: none;
   position: fixed;
   width: 300px;
-  height: 600px;
+  height: 400px;
   text-align: center;
   background-color: white;
   margin: 20px auto;
@@ -157,11 +157,6 @@ body main .leftpanel ul li a:hover {
 #account-overlay input {
   font-size: 16px;
   padding: 5px auto;
-}
-
-#account-overlay fieldset {
-  width: 200px;
-  margin: 0 auto;
 }
 
 #account-overlay #education, #account-overlay #confirmpassword {

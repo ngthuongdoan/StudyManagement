@@ -34,6 +34,19 @@
 </head>
 
 <body>
+    <div id="account-overlay">
+        <img src="{% AVATAR %}" id="avatar" alt="avatar">
+        <input type="file" name="filetoupload" id="upload" accept=".png, .jpg, .jpeg" style="display: none;">
+        <label for="oldpassword">Old Password:</label>
+        <input type="password" name="oldpassword" id="oldpassword">
+        <label for="newpassword">New Password:</label>
+        <input type="password" name="newpassword" id="newpassword">
+        <label for="confirmpassword">Confirm Password:</label>
+        <input type="password" name="confirmpassword" id="confirmpassword">
+        <br>
+        <button class="btn" onclick="updateAccount()">Update</button>
+        <button class="btn cancelbtn" onclick="accountOverlayOff()">Cancel</button>
+    </div>
     <div id="add-overlay">
         <form action="/event" method="post"  id="addform" onsubmit="return(addValidate())">
             <h1 id="formlogo">Schooling</h1>
@@ -89,7 +102,7 @@
             <a href="/logout" id="logoutbtn">
                 <ion-icon name="log-out-outline"></ion-icon>
             </a>
-            <a id="accountlink" href="/account?id={% USERNAME %}">
+            <a id="accountlink" onclick="accountOverlayOn()">
                 <div class="account">
                     <img src="{% AVATAR %}" alt="avatar">
                     <h2 id="accountname">{% ACCOUNTNAME %}</h2>
@@ -123,6 +136,7 @@
     </main>
     <script src="js/event.js"></script>
     <script src="js/overlay.js"></script>
+    <script src="js/account.js"></script>
 </body>
 
 </html>
