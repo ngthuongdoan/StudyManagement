@@ -4,7 +4,7 @@ class Subject {
     title,
     teacherEmail,
     department,
-    week,
+    week="",
     day,
     startRecur,
     endRecur,

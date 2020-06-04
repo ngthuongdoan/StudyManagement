@@ -77,7 +77,6 @@ for (let index = 0; index < data.length; index++) {
     document.getElementById("modifySubjectDay").value = days[subjectData.daysOfWeek[0]];
     document.getElementById("modifySubjectStartTime").value = subjectData.startTime.slice(0,5);
     document.getElementById("modifySubjectEndTime").value = subjectData.endTime.slice(0,5);
-    document.getElementById("modifySubjectWeek").value = subjectData.week;
     document.getElementById("modifySubjectRoom").value = subjectData.department;
     document.getElementById("modifySubjectTarget").value = subjectData.target;
     document.getElementById("modifySubjectNote").value = subjectData.note;
