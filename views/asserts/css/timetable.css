@@ -203,50 +203,7 @@ body main .leftpanel ul li a:hover {
   padding: 10px;
 }
 
-#wrap {
-  margin: 0 auto;
-}
-
-#external-events {
-  float: left;
-  width: 150px;
-  padding: 0 10px;
-  border: 1px solid #ccc;
-  background: #eee;
-  text-align: left;
-}
-
-#external-events h4 {
-  font-size: 16px;
-  margin-top: 0;
-  padding-top: 1em;
-}
-
-#external-events .fc-event {
-  margin: 10px 0;
-  padding: 5px;
-  cursor: pointer;
-  border: none;
-}
-
-#external-events p {
-  margin: 1.5em 0;
-  font-size: 11px;
-  color: #666;
-}
-
-#external-events p input {
-  margin: 0;
-  vertical-align: middle;
-}
-
-#external-events-list {
-  height: 150px;
-  overflow: scroll;
-}
-
 #calendar {
-  float: right;
   max-width: 900px;
   margin: 0 auto;
   color: #423b3b;

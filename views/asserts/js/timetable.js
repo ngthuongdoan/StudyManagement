@@ -23,25 +23,25 @@ function getAllIndexes(arr, val) {
 }
 document.addEventListener("DOMContentLoaded", function () {
   let Calendar = FullCalendar.Calendar;
-  let Draggable = FullCalendarInteraction.Draggable;
-  /* initialize the external events
-                                  -----------------------------------------------------------------*/
+  // let Draggable = FullCalendarInteraction.Draggable;
+  // /* initialize the external events
+  //                                 -----------------------------------------------------------------*/
 
-  let containerEventsEl = document.getElementById("external-events-list");
-  new Draggable(containerEventsEl, {
-    itemSelector: ".fc-event",
-    eventData: function (eventEl) {
-      let data = eventEl.dataset.event;
-      data = JSON.parse(data);
-      return {
-        title: data.title,
-        backgroundColor: data.backgroundColor,
-        extendedProps: {
-          department: data.extendedProps.department,
-        },
-      };
-    },
-  });
+  // let containerEventsEl = document.getElementById("external-events-list");
+  // new Draggable(containerEventsEl, {
+  //   itemSelector: ".fc-event",
+  //   eventData: function (eventEl) {
+  //     let data = eventEl.dataset.event;
+  //     data = JSON.parse(data);
+  //     return {
+  //       title: data.title,
+  //       backgroundColor: data.backgroundColor,
+  //       extendedProps: {
+  //         department: data.extendedProps.department,
+  //       },
+  //     };
+  //   },
+  // });
 
   /* initialize the calendar
                              
@@ -86,13 +86,13 @@ document.addEventListener("DOMContentLoaded", function () {
     overlay: false,
     weekNumbersWithinDays: true,
     navLinks: true, // can click day/week names to navigate views
-    drop: function (arg) {
-      // is the "remove after drop" checkbox checked?
-      if (document.getElementById("drop-remove").checked) {
-        // if so, remove the element from the "Draggable Events" list
-        arg.draggedEl.parentNode.removeChild(arg.draggedEl);
-      }
-    },
+    // drop: function (arg) {
+    //   // is the "remove after drop" checkbox checked?
+    //   if (document.getElementById("drop-remove").checked) {
+    //     // if so, remove the element from the "Draggable Events" list
+    //     arg.draggedEl.parentNode.removeChild(arg.draggedEl);
+    //   }
+    // },
 
     eventSources: [
       {
@@ -124,35 +124,28 @@ document.addEventListener("DOMContentLoaded", function () {
           .append("<br>" + department);
     },
     eventClick: function (info) {
-      if (del) {
-        alert(info.event.title);
-        del = false;
-      } else {
-        calendar.changeView("timeGridDay", info.event.start);
-      }
+      calendar.changeView("timeGridDay", info.event.start);
     },
-    eventReceive: function (info) {
-      $.ajax({
-        url: "/timetable",
-        type: "POST",
-        dataType: "json",
-        contentType: "application/json",
-        data: {
-          id: info.event.id,
-          url: info.event.url,
-          title: info.event.title,
-          start: info.event.start,
-          color: info.event.color,
-        },
-        success: (data) => {
-          data = JSON.parse(data);
-          console.log(data.message);
-        },
-        error: (jqXHR, textStatus, err) => {
-          console.log(err);
-        },
-      });
-    },
+    // eventReceive: function (info) {
+    //   $.ajax({
+    //     url: "/event?_method=PUT",
+    //     type: "POST",
+    //     data: {
+    //       type: "timetable",
+    //       id: info.event.id,
+    //       url: info.event.url,
+    //       title: info.event.title,
+    //       start: info.event.start,
+    //       color: info.event.color,
+    //     },
+    //     success: (data) => {
+    //       data = JSON.parse(data);
+    //     },
+    //     error: (jqXHR, textStatus, err) => {
+    //       console.log(err);
+    //     },
+    //   });
+    // },
     eventResize: function (info) {
       alert(info.event.title + " end is now " + info.event.end.toISOString());
     },

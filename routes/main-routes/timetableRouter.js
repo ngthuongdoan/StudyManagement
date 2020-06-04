@@ -97,13 +97,7 @@ router
     }
   })
   .post((req, res) => {
-    // console.log(req.body);
-    // eslint-disable-next-line quotes
-    // res
-    //   .status(200)
-    //   .send(
-    //     '{ "name":"John", "age":30, "city":"New York", "message":"Success"}'
-    //   );
+
   });
 
 module.exports = router;
