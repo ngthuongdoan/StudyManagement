@@ -116,37 +116,68 @@ router
     );
   })
   .put((req, res) => {
-    const eventStartTime =
-      req.body.eventStartDate + "T" + req.body.eventStartTime;
-    const eventEndTime = req.body.eventEndDate + "T" + req.body.eventEndTime;
-
-    const modifyEvent = new Event({
-      title: req.body.eventName,
-      start: eventStartTime,
-      end: eventEndTime,
-      department: req.body.eventPlace,
-      note: req.body.eventNote,
-      backgroundColor: req.body.eventColor,
-    });
-    conn.query(
-      "UPDATE events SET eventStartTime = ?, eventEndTime = ?, eventPlace = ?,eventNote = ?, eventColor = ? WHERE eventName = ? AND username = ?",
-      [
-        new Date(modifyEvent.start),
-        new Date(modifyEvent.end),
-        modifyEvent.department,
-        modifyEvent.note,
-        modifyEvent.backgroundColor,
-        modifyEvent.title,
-        req.session.username,
-      ],
-      (error, results, fields) => {
-        if (!error) {
-          res.redirect("/event");
-        } else {
-          res.redirect("/notfound");
+    if (req.body.timetable) {
+      const modifyEvent = new Event({
+        title: req.body.title,
+        start: new Date(req.body.start),
+        end: new Date(req.body.end),
+        department: req.body.department,
+        note: req.body.note,
+        backgroundColor: req.body.backgroundColor,
+      });
+      conn.query(
+        "UPDATE events SET eventStartTime = ?, eventEndTime = ?, eventPlace = ?,eventNote = ?, eventColor = ? WHERE eventName = ? AND username = ?",
+        [
+          new Date(modifyEvent.start),
+          new Date(modifyEvent.end),
+          modifyEvent.department,
+          modifyEvent.note,
+          modifyEvent.backgroundColor.replace("#", ""),
+          modifyEvent.title,
+          req.session.username,
+        ],
+        (error, results, fields) => {
+          if (!error) {
+            res.status(200).send();
+          } else {
+            res.status(404).send();
+          }
         }
-      }
-    );
+      );
+      res.status(200).send(modifyEvent);
+    } else {
+      const eventStartTime =
+        req.body.eventStartDate + "T" + req.body.eventStartTime;
+      const eventEndTime = req.body.eventEndDate + "T" + req.body.eventEndTime;
+
+      const modifyEvent = new Event({
+        title: req.body.eventName,
+        start: eventStartTime,
+        end: eventEndTime,
+        department: req.body.eventPlace,
+        note: req.body.eventNote,
+        backgroundColor: req.body.eventColor,
+      });
+      conn.query(
+        "UPDATE events SET eventStartTime = ?, eventEndTime = ?, eventPlace = ?,eventNote = ?, eventColor = ? WHERE eventName = ? AND username = ?",
+        [
+          new Date(modifyEvent.start),
+          new Date(modifyEvent.end),
+          modifyEvent.department,
+          modifyEvent.note,
+          modifyEvent.backgroundColor,
+          modifyEvent.title,
+          req.session.username,
+        ],
+        (error, results, fields) => {
+          if (!error) {
+            res.redirect("/event");
+          } else {
+            res.redirect("/notfound");
+          }
+        }
+      );
+    }
   })
   .delete((req, res) => {
     const event = new Event({

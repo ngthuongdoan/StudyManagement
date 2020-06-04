@@ -80,6 +80,7 @@ document.addEventListener("DOMContentLoaded", function () {
       right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
     },
     firstDay: 1,
+    allDaySlot: false,
     editable: true,
     droppable: true,
     weekNumbers: true,
@@ -147,32 +148,59 @@ document.addEventListener("DOMContentLoaded", function () {
     //   });
     // },
     eventResize: function (info) {
-      alert(info.event.title + " end is now " + info.event.end.toISOString());
+      $.ajax({
+        url: "/event?_method=PUT",
+        type: "POST",
+        data: {
+          timetable: true,
+          title: info.event.title,
+          start: info.event.start,
+          end: info.event.end,
+          department: info.event.extendedProps.department,
+          note: info.event.extendedProps.note,
+          backgroundColor: info.event.backgroundColor,
+        },
+        success: (data) => {
+          Swal.fire({
+            icon: "success",
+            title: "Updated!!!",
+          });
+        },
+        error: (jqXHR, textStatus, err) => {
+          Swal.fire({
+            icon: "error",
+            title: "Problem Occur. Please refresh and try again!!!",
+          });
+        },
+      });
     },
     //Receive event dragable
     eventDrop: function (info) {
       $.ajax({
-        url: "/timetable",
+        url: "/event?_method=PUT",
         type: "POST",
-        dataType: "json",
-        contentType: "application/json",
         data: {
-          id: info.event.id,
-          url: info.event.url,
+          timetable: true,
           title: info.event.title,
           start: info.event.start,
+          end: info.event.end,
+          department: info.event.extendedProps.department,
+          note: info.event.extendedProps.note,
+          backgroundColor: info.event.backgroundColor,
         },
         success: (data) => {
-          data = JSON.parse(JSON.stringify(data));
-          console.log(data.message);
+          Swal.fire({
+            icon: "success",
+            title: "Updated!!!",
+          });
         },
         error: (jqXHR, textStatus, err) => {
-          console.log(err);
+          Swal.fire({
+            icon: "error",
+            title: "Problem Occur. Please refresh and try again!!!",
+          });
         },
       });
-    },
-    dateClick: function (info) {
-      alert(info.date);
     },
   });
   calendar.render();
