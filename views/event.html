@@ -22,9 +22,13 @@
         $(function () {
             $("#eventStartDate, #modifyEventStartDate").datepicker({
                 dateFormat: "yy-mm-dd",
+                changeYear: true,
+                changeMonth: true
             });
             $("#eventEndDate, modifyEventEndDate").datepicker({
                 dateFormat: "yy-mm-dd",
+                changeYear: true,
+                changeMonth: true
             });
 
             $('#eventStartTime, #modifyEventStartTime').timeEntry({ show24Hours: true });
@@ -118,12 +122,11 @@
             <h1 id="logo">Schooling</h1>
         </div>
         <div class='rightpanel'>
-            <!-- <div class="sort">
+            <div class="sort">
                 <button class="sortbtn" onclick="sortTable(0)">Name</button>
-                <button class="sortbtn" onclick="sortTable(1)">ID</button>
-                <button class="sortbtn" onclick="sortTable(2)">Teacher</button>
-                <button class="sortbtn" onclick="sortTable(3)">Target</button>
-            </div> -->
+                <button class="sortbtn" onclick="sortTable(1)">Place</button>
+                <!-- <button class="sortbtn" onclick="sortTable(2)">Time</button> -->
+            </div>
             <button class="btn" onclick="addOverlayOn()">Add new</button>
             <button class="btn" id="delbtn" onclick="deleteEvent()">Delete</button>
             <div id="message" style='margin-left: 400px;display: none;'>
@@ -135,6 +138,7 @@
         </div>
     </main>
     <script src="js/event.js"></script>
+    <script src="js/quicksortEvent.js"></script>
     <script src="js/overlay.js"></script>
     <script src="js/account.js"></script>
 </body>

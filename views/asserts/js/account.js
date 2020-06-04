@@ -10,21 +10,36 @@ function fasterPreview(uploader) {
 }
 
 $("#upload").change(function () {
-  let data = new FormData();
-  $.each($("#upload")[0].files, function (i, file) {
-    data.append("file-" + i, file);
-  });
-  fasterPreview(this);
-  $.ajax({
-    type: "POST",
-    url: "/change-avatar",
-    data: data,
-    cache: false,
-    contentType: false,
-    processData: false,
-    success: function (response) {
-      console.log("success");
-    },
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes",
+  }).then((result) => {
+    if (result.value) {
+      let data = new FormData();
+      $.each($("#upload")[0].files, function (i, file) {
+        data.append("file-" + i, file);
+      });
+      fasterPreview(this);
+      $.ajax({
+        type: "POST",
+        url: "/change-avatar",
+        data: data,
+        cache: false,
+        contentType: false,
+        processData: false,
+        success: function (response) {
+          Swal.fire({
+            icon: "success",
+            title: "Updated!!!",
+          });
+        },
+      });
+    }
   });
 });
 

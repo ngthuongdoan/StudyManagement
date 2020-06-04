@@ -240,7 +240,7 @@ a {
   display: inline-block;
   margin-top: 30px;
   margin-bottom: 20px;
-  margin-left: 500px;
+  margin-left: 150px;
   width: 100px;
   background-color: #ff416c;
   border: none;
@@ -332,5 +332,32 @@ a {
 #add-overlay form input[type="submit"], #modify-overlay form input[type="submit"] {
   margin-left: 0;
   margin-bottom: 50px;
+}
+
+.sort {
+  display: block;
+  margin-left: 30px;
+  margin-bottom: -10px;
+}
+
+.sort .sortbtn {
+  display: block;
+  float: left;
+  margin-top: 20px;
+  margin-right: 20px;
+  margin-bottom: 0;
+  width: 60px;
+  padding: 5px;
+  border-radius: 10px;
+  border: #8c98b8 1px solid;
+  color: white;
+  background-color: #bdd1cf;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+.sort .sortbtn:hover {
+  background-color: #8fa1a0;
+  color: black;
 }
 /*# sourceMappingURL=event.css.map */

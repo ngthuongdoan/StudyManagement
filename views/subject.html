@@ -23,9 +23,13 @@
         $(function () {
             $("#subjectStartRecur, #modifySubjectStartRecur").datepicker({
                 dateFormat: "yy-mm-dd",
+                changeYear: true,
+                changeMonth: true
             });
             $("#subjectEndRecur, #modifySubjectEndRecur").datepicker({
                 dateFormat: "yy-mm-dd",
+                changeYear: true,
+                changeMonth: true
             });
 
             $('#subjectStartTime, #modifySubjectStartTime').timeEntry({ show24Hours: true });
