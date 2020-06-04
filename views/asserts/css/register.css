@@ -35,14 +35,15 @@ body #form {
           box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
 }
 
-h2 {
-  padding-top: 30px;
+#logo {
+  padding-top: 70px;
   font-family: "Bahiana", cursive;
   font-size: 100px;
   text-shadow: black 8px 9px;
   -webkit-text-stroke-width: 0.1px;
   -webkit-text-stroke-color: black;
   color: #e4abfb;
+  margin-bottom: 100px;
 }
 
 .login {
@@ -64,6 +65,7 @@ h2 {
 .login .btn {
   margin-top: 10px;
   margin-right: 20px;
+  margin-bottom: 30px;
   width: 150px;
   background-color: #ff416c;
   border: none;
@@ -124,5 +126,9 @@ h2 {
   margin-top: -25px;
   color: white;
   font-weight: bold;
+}
+
+#logo {
+  margin-bottom: 80px;
 }
 /*# sourceMappingURL=register.css.map */

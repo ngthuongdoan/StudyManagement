@@ -35,7 +35,7 @@ body #form {
           box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
 }
 
-h2 {
+#logo {
   padding-top: 70px;
   font-family: "Bahiana", cursive;
   font-size: 100px;
@@ -43,13 +43,21 @@ h2 {
   -webkit-text-stroke-width: 0.1px;
   -webkit-text-stroke-color: black;
   color: #e4abfb;
+  margin-bottom: 100px;
 }
 
-.forget {
-  margin-top: 100px;
+#forget, #newpasswordform {
+  background-color: rgba(0, 0, 0, 0.3);
+  margin: 30px auto;
+  max-width: 600px;
+  min-width: 600px;
+  min-height: 700px;
+  text-align: center;
+  -webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
 }
 
-.forget #email {
+#forget input, #newpasswordform input {
   width: 50%;
   height: auto;
   border: none;
@@ -62,7 +70,7 @@ h2 {
   z-index: 2;
 }
 
-.forget .btn {
+#forget .btn, #newpasswordform .btn {
   margin-top: 25px;
   width: 150px;
   background-color: #ff416c;
@@ -76,13 +84,13 @@ h2 {
   transition: all 0.3s ease-in-out;
 }
 
-.forget .btn:hover {
+#forget .btn:hover, #newpasswordform .btn:hover {
   background-color: #bd0375;
   -webkit-box-shadow: #5a5454 0px 0px 10px;
           box-shadow: #5a5454 0px 0px 10px;
 }
 
-.forget .label-name {
+#forget .label-name, #newpasswordform .label-name {
   margin-left: -150px;
   font-size: 18px;
   position: absolute;
@@ -93,15 +101,26 @@ h2 {
   opacity: 0.7;
 }
 
-.forget hr {
+#forget hr, #newpasswordform hr {
   margin: 25px auto;
   margin-top: 0px;
   width: 50%;
   border: 1px solid #0077ff;
 }
 
-.forget a {
+#forget a, #newpasswordform a {
   font-style: italic;
   color: #00b9ff;
+}
+
+.swal2-container .swal2-popup.swal2-toast {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+  position: relative;
 }
 /*# sourceMappingURL=forget.css.map */

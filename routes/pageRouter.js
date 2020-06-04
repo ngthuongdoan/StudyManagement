@@ -8,6 +8,7 @@ const accountRouter = require("./main-routes/accountRouter");
 const registerRouter = require("./main-routes/registerRouter");
 const dashboardRouter = require("./main-routes/dashboardRouter");
 const teacherRouter = require("./main-routes/teacherRouter");
+const forgetRouter = require("./main-routes/forgetRouter");
 const getSubject = require("./funtion-routes/subjectGet");
 const getEvent = require("./funtion-routes/eventGet");
 const changeAvatar = require("./funtion-routes/changeAvatar");
@@ -26,6 +27,8 @@ router.use("/timetable", timetableRouter);
 router.use("/subject", subjectRouter);
 router.use("/event", eventRouter);
 router.use("/account", accountRouter);
+router.use("/forget", forgetRouter);
+
 
 
 //FORGET PAGE
