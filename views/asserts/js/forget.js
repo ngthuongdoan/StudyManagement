@@ -46,8 +46,8 @@ $(function () {
 });
 
 const updatePassword = () => {
-    $("#forget").hide();
-    $("#newpasswordform").show();
+  $("#forget").hide();
+  $("#newpasswordform").show();
   $("#updateBtn").click(() => {
     const password = $("#newpassword").val();
     const confirm = $("#confirmpassword").val();
@@ -74,9 +74,9 @@ const updatePassword = () => {
             email: $("#email").val(),
             newpassword: password,
           },
-          success:()=>{
-              window.location="/login";
-          }
+          success: () => {
+            window.location = "/login";
+          },
         });
       }
     }
