@@ -1,0 +1,222 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+  margin: 0;
+}
+
+body {
+  background: url(../img/login_signup.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: top left;
+  margin: 30px 0px;
+  margin-left: 50px;
+}
+
+body main {
+  background-color: #e1f4f3;
+  position: absolute;
+  border-radius: 30px;
+  -webkit-box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+          box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  z-index: -1;
+}
+
+body main .leftpanel {
+  text-align: center;
+  background-color: #333333;
+  color: white;
+  float: left;
+  width: 200px;
+  height: 600px;
+  border-radius: 30px;
+}
+
+body main .leftpanel #accountlink {
+  text-decoration: none;
+  cursor: default;
+}
+
+body main .leftpanel #accountlink .account {
+  background-color: #2c2525;
+  height: 200px;
+  border-top-left-radius: 30px;
+  border-top-right-radius: 30px;
+  text-align: center;
+}
+
+body main .leftpanel #accountlink .account img {
+  margin: 30px 0px;
+  margin-bottom: 10px;
+  height: 100px;
+  width: 100px;
+  border-radius: 100px;
+  border: 2px yellow solid;
+}
+
+body main .leftpanel #accountlink .account #accountname {
+  color: white;
+  margin-top: 0;
+  font-size: 16px;
+}
+
+body main .leftpanel ul {
+  text-align: left;
+}
+
+body main .leftpanel ul li {
+  list-style: none;
+}
+
+body main .leftpanel ul li a {
+  display: block;
+  padding: 20px;
+  text-decoration: none;
+  color: white;
+  text-transform: uppercase;
+  font-size: 16px;
+  font-weight: bolder;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+body main .leftpanel ul li a:hover {
+  background-color: yellow;
+  color: #706c61;
+}
+
+#logo {
+  margin-top: 50px;
+  font-family: "Bahiana", cursive;
+  font-size: 50px;
+  text-shadow: black 8px 9px;
+  -webkit-text-stroke-width: 0.1px;
+  -webkit-text-stroke-color: black;
+  color: #706c61;
+}
+
+.active {
+  background-color: yellow;
+  color: #706c61;
+}
+
+#logoutbtn {
+  display: block;
+  background-color: white;
+  border-radius: 50px;
+  width: 30px;
+  position: absolute;
+  left: 160px;
+  top: 10px;
+  border: 1px solid yellow;
+}
+
+#logoutbtn ion-icon {
+  left: 5px;
+  font-size: 20px;
+  color: white;
+}
+
+#account-overlay {
+  display: none;
+  position: fixed;
+  width: 300px;
+  height: 400px;
+  text-align: center;
+  background-color: white;
+  margin: 20px auto;
+  left: 550px;
+  -webkit-box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.6);
+          box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.6);
+  border-radius: 10px;
+  overflow: auto;
+}
+
+#account-overlay img {
+  margin: 30px 0px;
+  margin-bottom: 10px;
+  height: 100px;
+  width: 100px;
+  border-radius: 100px;
+  border: 2px yellow solid;
+}
+
+#account-overlay label {
+  display: block;
+  font-size: 16px;
+  padding-top: 10px;
+}
+
+#account-overlay input {
+  font-size: 16px;
+  padding: 5px auto;
+}
+
+#account-overlay #education, #account-overlay #confirmpassword {
+  margin-bottom: 20px;
+}
+
+#account-overlay .btn,
+#account-overlay .cancelbtn {
+  width: 100px;
+  background-color: #ff416c;
+  border-radius: 50px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  padding: 10px 0px;
+  margin: 10px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+#account-overlay .btn:hover,
+#account-overlay .cancelbtn:hover {
+  background-color: #bd0375;
+  -webkit-box-shadow: #5a5454 0px 0px 2px;
+          box-shadow: #5a5454 0px 0px 2px;
+}
+
+#account-overlay .cancelbtn {
+  background-color: #9b9294;
+  -webkit-transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+}
+
+#account-overlay .cancelbtn:hover {
+  background-color: #665f60;
+}
+
+#container {
+  background-color: white;
+  width: 1100px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 10px;
+}
+
+#calendar {
+  max-width: 900px;
+  margin: 0 auto;
+  color: #423b3b;
+}
+
+#backicon {
+  display: block;
+  position: absolute;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.fc-content {
+  cursor: pointer;
+}
+/*# sourceMappingURL=timetable.css.map */

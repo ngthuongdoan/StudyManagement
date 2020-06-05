@@ -2,101 +2,60 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="icon" href="img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="css/timetable.css">
-    <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.8.1/dist/sweetalert2.all.min.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="img/favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/timetable.css" />
+    <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet" />
+    <script src="js/lib/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"
+        integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <link href="js/lib/fullcalendar-4.4.0/packages/core/main.css" rel="stylesheet" />
+    <link href="js/lib/fullcalendar-4.4.0/packages/daygrid/main.css" rel="stylesheet" />
+    <link href="js/lib/fullcalendar-4.4.0/packages/timegrid/main.css" rel="stylesheet" />
+    <link href="js/lib/fullcalendar-4.4.0/packages/list/main.css" rel="stylesheet" />
+    <script src="js/lib/fullcalendar-4.4.0/packages/core/main.js"></script>
+    <script src="js/lib/fullcalendar-4.4.0/packages/interaction/main.js"></script>
+    <script src="js/lib/fullcalendar-4.4.0/packages/daygrid/main.js"></script>
+    <script src="js/lib/fullcalendar-4.4.0/packages/timegrid/main.js"></script>
+    <script src="js/lib/fullcalendar-4.4.0/packages/list/main.js"></script>
     <title>Timetable</title>
+    <script src="js/timetable.js"></script>
 </head>
 
 <body>
-    <div id="overlay">
-        <!-- <form action="/timetable" method="post" autocomplete="off">
-            <h1 id="formlogo">Schooling</h1>
-            <div class="data">
-                <label for="timetableName">Name:</label>
-                <input type="text" name="timetableName" placeholder="Name" required><br>
-                <label for="periods">Periods:</label>
-                <input type="number" name="periods" required><br>
-                <label for="startDay">Start day:</label>
-                <select name="startDay" id="">
-                    <option value="0" selected>Monday</option>
-                    <option value="1">Tuesday</option>
-                    <option value="2">Wednesday</option>
-                    <option value="3">Thursday</option>
-                    <option value="4">Friday</option>
-                    <option value="5">Saturday</option>
-                    <option value="6">Sunday</option>
-                </select>
-                <label for="endDay">End day:</label>
-                <select name="endDay" id="">
-                    <option value="0">Monday</option>
-                    <option value="1">Tuesday</option>
-                    <option value="2">Wednesday</option>
-                    <option value="3">Thursday</option>
-                    <option value="4">Friday</option>
-                    <option value="5" selected>Saturday</option>
-                    <option value="6">Sunday</option>
-                </select>
-                <br>
-            </div>
-            <input type="submit" class="btn" value="Submit">
-            <button type='button' class="btn" id="cancelbtn" onclick="overlayOff()">Cancel</button>
-        </form> -->
-        <div id="subject-container">
-            <ion-icon id="exit-icon" name="close-outline" onclick='overlay.style.display="none"'></ion-icon>
-            {% ALL-SUBJECT %}
-        </div>
+    <ion-icon name="arrow-back-outline" id="backicon" onclick="window.location='/'"></ion-icon>
+    <div id="container">
+        <!-- <div id="wrap"> -->
+            <!-- <div id="external-events">
+                <h4>Events</h4>
+                <div id="external-events-list">
+                    {% EVENTS %}
+                </div>
+
+                <p>
+                    <input type="checkbox" id="drop-remove" />
+                    <label for="drop-remove">remove after drop</label>
+                </p>
+            </div> -->
+            <div id="calendar"></div>
+            <!-- <div id="external-subjects">
+                <h4>Subjects</h4>
+
+                <div id="external-subjects-list">
+                    {% SUBJECTS %}
+                </div>
+
+                <p>
+                    <input type="checkbox" id="drop-remove" />
+                    <label for="drop-remove">remove after drop</label>
+                </p>
+            </div> -->
+            <!-- <div style="clear: both;"></div> -->
+        <!-- </div> -->
     </div>
-    <main>
-        <div class="leftpanel">
-            <a href="/logout" id="logoutbtn">
-                <ion-icon name="log-out-outline"></ion-icon>
-            </a>
-            <a id="accountlink" href="/account?id={% USERNAME %}">
-                <div class="account">
-                    <img src="{% AVATAR %}" alt="avatar">
-                    <h2 id="accountname">{% ACCOUNTNAME %}</h2>
-                </div>
-            </a>
-            <ul>
-                <li class="category"><a href="/dashboard">Home</a></li>
-                <li class="category active"><a href="/timetable">Timetable</a></li>
-                <li class="category"><a href="/subject">Subject</a></li>
-                <li class="category "><a href="/teacher">Teacher</a></li>
-                <li class="category "><a href="/grade">Grade</a></li>
-            </ul>
-            <h1 id="logo">Schooling</h1>
-        </div>
-        <div class='rightpanel'>
-            <!-- <button class="btn" onclick="overlayOn()">Add new</button>
-            <button class="btn" id="cancelbtn" onclick="deleteTeacher()">Delete</button> -->
-            <button class="btn" style="float:left; margin:0 10px; width:fit-content; padding: 10px"
-                onclick="getStudyTime(true)">Add Subject</button>
-            <button class="btn"
-                style="float:left; margin:0 10px; width:fit-content; padding: 10px; background-color: #9b9294"
-                onclick="submit();getStudyTime(false)">Done</button>
-            <div class="mainwindow">
-                <label for="timetablename">Please choose timetable</label>
-                <select name="timetablename" id="timetablename">
-                    <option value="" href='/timetable'></option>
-                    {% OPTION %}
-                </select>
-                <div class="clear">
-                    <table id="table">
-                        {% TABLE %}
-                    </table>
-                </div>
-            </div>
-        </div>
-    </main>
-    <div id="alert">{% POPUP %}</div>
-    <script src="js/teacher.js"></script>
-    <script src="js/interactive-timetable.js"></script>
 </body>
 
 </html>

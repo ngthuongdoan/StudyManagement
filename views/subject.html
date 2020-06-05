@@ -4,50 +4,141 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- <meta http-equiv="refresh" content=""> -->
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/subject.css">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.8.1/dist/sweetalert2.all.min.js"></script>
+    <script src="js/lib/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
     <script src="js/quicksortSubject.js"></script>
-    <script src="js/jscolor.js"></script>
-
+    <script src="js/lib/jscolor/jscolor.js"></script>
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" type="text/css" href="js/lib/jquery.timeentry.package-2.0.1/jquery.timeentry.css">
+    <script type="text/javascript" src="js/lib/jquery.timeentry.package-2.0.1/jquery.plugin.js"></script>
+    <script type="text/javascript" src="js/lib/jquery.timeentry.package-2.0.1/jquery.timeentry.js"></script>
     <title>Subject</title>
+    <script>
+        $(function () {
+            $("#subjectStartRecur, #modifySubjectStartRecur").datepicker({
+                dateFormat: "yy-mm-dd",
+                changeYear: true,
+                changeMonth: true
+            });
+            $("#subjectEndRecur, #modifySubjectEndRecur").datepicker({
+                dateFormat: "yy-mm-dd",
+                changeYear: true,
+                changeMonth: true
+            });
+
+            $('#subjectStartTime, #modifySubjectStartTime').timeEntry({ show24Hours: true });
+            $('#subjectEndTime, #modifySubjectEndTime').timeEntry({ show24Hours: true });
+
+            const days = [
+                "Sunday",
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday",
+            ];
+            $("#subjectDay, #modifySubjectDay").autocomplete({
+                source: days
+            });
+            $('#subjectDay, #modifySubjectDay').autocomplete({ minLength: 0 });
+            $('#subjectDay, #modifySubjectDay').click(function () { $(this).autocomplete("search", ""); });
+        });
+    </script>
 </head>
 
 <body>
-    <div style="display: none;">
-        <form action="/delete-subject" method="POST" id="delete">
-            <input type="text" name="idSubject" id="delid" value="">
-            <input type="submit" value="" id="delBtn">
-        </form>
+    <div id="account-overlay">
+        <img src="{% AVATAR %}" id="avatar" alt="avatar">
+        <input type="file" name="filetoupload" id="upload" accept=".png, .jpg, .jpeg" style="display: none;">
+        <label for="oldpassword">Old Password:</label>
+        <input type="password" name="oldpassword" id="oldpassword">
+        <label for="newpassword">New Password:</label>
+        <input type="password" name="newpassword" id="newpassword">
+        <label for="confirmpassword">Confirm Password:</label>
+        <input type="password" name="confirmpassword" id="confirmpassword">
+        <br>
+        <button class="btn" onclick="updateAccount()">Update</button>
+        <button class="btn cancelbtn" onclick="accountOverlayOff()">Cancel</button>
     </div>
-    <div id="overlay">
-         <!-- onsubmit="return validate();" -->
-        <form action="/subject" method="post" autocomplete="off" id="addform">
+    <div id="add-overlay">
+        <form action="/subject" method="post" autocomplete="off" id="addform" onsubmit="return(addValidate())">
             <h1 id="formlogo">Schooling</h1>
             <div class="data">
                 <label for="idSubject">ID Subject:</label>
-                <input type="text" name="idSubject" placeholder="CT112012" required><br>
+                <input type="text" id="idSubject" name="idSubject" placeholder="CT112012" required><br>
                 <label for="subjectName">Subject Name:</label>
-                <input type="text" name="subjectName" placeholder="Mạng máy tính" required><br>
+                <input type="text" id="subjectName" name="subjectName" placeholder="Mạng máy tính" required><br>
                 <label for="teacherName">Teacher Name:</label>
-                <select name="teacherName" id="">
+                <select name="teacherName" id="teacherName">
                     {% TEACHER %}
                 </select>
+                <label for="subjectStartRecur">Semester Start: </label>
+                <input type="text" id="subjectStartRecur" name="subjectStartRecur" required>
+                <label for="subjectEndRecur">Semester End: </label>
+                <input type="text" id="subjectEndRecur" name="subjectEndRecur" required>
+                <label for="subjectDay">Day:</label>
+                <input type="text" id="subjectDay" name="subjectDay" required>
+                <label for="subjectStartTime">From:</label>
+                <input type="text" id="subjectStartTime" name="subjectStartTime" required>
+                <label for="subjectEndTime">To:</label>
+                <input type="text" id="subjectEndTime" name="subjectEndTime" required>
+                <!-- <label for="subjectWeek">Week:</label>
+                <input type="text" id="subjectWeek" name="subjectWeek" placeholder="12345**90123**" required> -->
                 <label for="room">Room:</label>
-                <input type="text" name="room" placeholder="101/C1"><br>
+                <input type="text" id="subjectRoom" name="subjectRoom" placeholder="101/C1" required><br>
                 <label for="target">Target:</label>
-                <input type="number" name="target" step="0.1" required><br>
+                <input type="number" id="subjectTarget" name="subjectTarget" step="0.1" required><br>
                 <label for="note">Note:</label>
-                <textarea name="note" id="" cols="25" rows="5"></textarea>
+                <textarea name="subjectNote" id="subjectNote" cols="25" rows="5"></textarea>
                 <label for="color">Color</label>
-                <input class="jscolor" name="color">
+                <input class="jscolor" name="subjectColor" id="subjectColor">
             </div>
-            <input type="submit" class="btn" value="Submit">
-            <button type='button' class="btn" id="cancelbtn" onclick="overlayOff()">Cancel</button>
+            <input type="submit" value="Submit" class="btn">
+            <button type='button' class="btn" id="cancelbtn" onclick="addOverlayOff()">Cancel</button>
+        </form>
+    </div>
+    <div id="modify-overlay">
+        <form action="/subject?_method=PUT" method="post" autocomplete="off" id="addform" onsubmit="return(modifyValidate())">
+            <h1 id="formlogo">Schooling</h1>
+            <div class="data">
+                <label for="idSubject">ID Subject:</label>
+                <input type="text" id="modifyIdSubject" name="idSubject" readonly><br>
+                <label for="subjectName">Subject Name:</label>
+                <input type="text" id="modifySubjectName" name="subjectName" readonly><br>
+                <label for="teacherName">Teacher Name:</label>
+                <select name="teacherName" id="modifyTeacherName">
+                    {% TEACHER %}
+                </select>
+                <label for="subjectStartRecur">Semester Start: </label>
+                <input type="text" id="modifySubjectStartRecur" name="subjectStartRecur" required>
+                <label for="subjectEndRecur">Semester End: </label>
+                <input type="text" id="modifySubjectEndRecur" name="subjectEndRecur" required>
+                <label for="subjectDay">Day:</label>
+                <input type="text" id="modifySubjectDay" name="subjectDay" required>
+                <label for="subjectStartTime">From:</label>
+                <input type="text" id="modifySubjectStartTime" name="subjectStartTime" required>
+                <label for="subjectEndTime">To:</label>
+                <input type="text" id="modifySubjectEndTime" name="subjectEndTime" required>
+                <!-- <label for="subjectWeek">Week:</label>
+                <input type="text" id="modifySubjectWeek" name="subjectWeek" required> -->
+                <label for="room">Room:</label>
+                <input type="text" id="modifySubjectRoom" name="subjectRoom" required><br>
+                <label for="target">Target:</label>
+                <input type="number" id="modifySubjectTarget" name="subjectTarget" step="0.1" required><br>
+                <label for="note">Note:</label>
+                <textarea name="subjectNote" id="modifySubjectNote" cols="25" rows="5"></textarea>
+                <label for="color">Color</label>
+                <input class="jscolor" name="subjectColor" id="modifySubjectColor">
+            </div>
+            <input type="submit" value="Update" class="btn">
+            <button type='button' class="btn" id="cancelbtn" onclick="modifyOverlayOff()">Cancel</button>
         </form>
     </div>
     <main>
@@ -55,7 +146,7 @@
             <a href="/logout" id="logoutbtn">
                 <ion-icon name="log-out-outline"></ion-icon>
             </a>
-            <a id="accountlink" href="/account?id={% USERNAME %}">
+            <a id="accountlink" onclick="accountOverlayOn()">
                 <div class="account">
                     <img src="{% AVATAR %}" alt="avatar">
                     <h2 id="accountname">{% ACCOUNTNAME %}</h2>
@@ -65,8 +156,8 @@
                 <li class="category"><a href="/dashboard">Home</a></li>
                 <li class="category"><a href="/timetable">Timetable</a></li>
                 <li class="category active"><a href="/subject">Subject</a></li>
+                <li class="category"><a href="/event">Event</a></li>
                 <li class="category"><a href="/teacher">Teacher</a></li>
-                <li class="category"><a href="/grade">Grade</a></li>
             </ul>
             <h1 id="logo">Schooling</h1>
         </div>
@@ -77,7 +168,7 @@
                 <button class="sortbtn" onclick="sortTable(2)">Teacher</button>
                 <button class="sortbtn" onclick="sortTable(3)">Target</button>
             </div>
-            <button class="btn" onclick="overlayOn()">Add new</button>
+            <button class="btn" onclick="addOverlayOn()">Add new</button>
             <button class="btn" id="delbtn" onclick="deleteSubject()">Delete</button>
             <div id="message" style='margin-left: 400px;display: none;'>
                 <h4>Please choose the card</h4>
@@ -87,9 +178,9 @@
             </div>
         </div>
     </main>
-    {% NOTIFY %}
     <script src="js/subject.js"></script>
     <script src="js/overlay.js"></script>
+    <script src="js/account.js"></script>
 
 </body>
 

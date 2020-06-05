@@ -1,0 +1,126 @@
+* {
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+  margin: 0;
+  min-height: 100%;
+  width: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100%;
+  background: url(../img/login_signup.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: top left;
+  color: #ffffff;
+}
+
+body #form {
+  background-color: rgba(0, 0, 0, 0.3);
+  margin: 30px auto;
+  max-width: 600px;
+  min-width: 600px;
+  min-height: 700px;
+  text-align: center;
+  -webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+#logo {
+  padding-top: 70px;
+  font-family: "Bahiana", cursive;
+  font-size: 100px;
+  text-shadow: black 8px 9px;
+  -webkit-text-stroke-width: 0.1px;
+  -webkit-text-stroke-color: black;
+  color: #e4abfb;
+  margin-bottom: 100px;
+}
+
+#forget, #newpasswordform {
+  background-color: rgba(0, 0, 0, 0.3);
+  margin: 30px auto;
+  max-width: 600px;
+  min-width: 600px;
+  min-height: 700px;
+  text-align: center;
+  -webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+          box-shadow: 0 5px 5px rgba(0, 0, 0, 0.5);
+}
+
+#forget input, #newpasswordform input {
+  width: 50%;
+  height: auto;
+  border: none;
+  background: none;
+  padding-top: 18px;
+  outline: none;
+  color: #3d3a3a;
+  font-weight: bolder;
+  font-size: 18px;
+  z-index: 2;
+}
+
+#forget .btn, #newpasswordform .btn {
+  margin-top: 25px;
+  width: 150px;
+  background-color: #ff416c;
+  border-radius: 50px;
+  border: none;
+  color: white;
+  font-weight: bold;
+  font-size: 24px;
+  padding: 10px 0px;
+  -webkit-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+#forget .btn:hover, #newpasswordform .btn:hover {
+  background-color: #bd0375;
+  -webkit-box-shadow: #5a5454 0px 0px 10px;
+          box-shadow: #5a5454 0px 0px 10px;
+}
+
+#forget .label-name, #newpasswordform .label-name {
+  margin-left: -150px;
+  font-size: 18px;
+  position: absolute;
+  margin-top: -55px;
+  width: 50%;
+  padding-top: 0px;
+  text-align: left;
+  opacity: 0.7;
+}
+
+#forget hr, #newpasswordform hr {
+  margin: 25px auto;
+  margin-top: 0px;
+  width: 50%;
+  border: 1px solid #0077ff;
+}
+
+#forget a, #newpasswordform a {
+  font-style: italic;
+  color: #00b9ff;
+}
+
+.swal2-container .swal2-popup.swal2-toast {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: start;
+  position: relative;
+}
+/*# sourceMappingURL=forget.css.map */

@@ -13,7 +13,7 @@ const conn = mysql.createConnection({
 });
 
 conn.connect((err) => {
-  err ? console.log("Error") : console.log("Connected");
+  err ? console.log("Turn on MySQL service") : console.log("Connected");
   console.log(databaseName);
 });
 

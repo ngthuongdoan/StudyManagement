@@ -8,23 +8,38 @@
     <link rel="shortcut icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.8.1/dist/sweetalert2.all.min.js"></script>
+    <script src="js/lib/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"
+        integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="css/forget.css">
     <title>Schooling login</title>
 </head>
 
 <body>
-    <form action="/forget" method="post" autocomplete="off" id="form">
-        <h2>Schooling</h2>
+    <div id="forget">
+        <h2 id="logo">Schooling</h2>
         <div class="forget">
             <input type="email" name="email" id="email">
             <br>
             <label for="email" class="label-name">Your email:</label>
             <hr>
-            <input type="submit" name="submit" class="btn">
+            <button class="btn" id="emailSubmit">Submit</button>
         </div>
-    </form>
-    {% POPUP %}
+    </div>
+    <div id="newpasswordform"  style="display: none;" >
+        <h2 id="logo">Schooling</h2>
+        <input type="password" name="newpassword" id="newpassword">
+        <br>
+        <label for="newpassword" class="label-name">New Password:</label>
+        <hr>
+        <input type="password" name="confirmpassword" id="confirmpassword">
+        <br>
+        <label for="confirmpassword" class="label-name">Confirm Password:</label>
+        <hr>
+        <button class="btn" id="updateBtn">Update</button>
+    </div>
+    <script src="js/forget.js"></script>
+
 </body>
 
 </html>

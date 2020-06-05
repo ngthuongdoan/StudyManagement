@@ -1,76 +1,111 @@
-const days = {
-  Monday: 0,
-  Tuesday: 1,
-  Wednesday: 2,
-  Thursday: 3,
-  Friday: 4,
-  Saturday: 5,
-  Sunday: 6
-};
 class Subject {
   constructor({
     id,
-    teachername,
-    teacheremail,
-    subjectname,
-    room = "",
-    studytime = "",
-    target,
+    title,
+    teacherEmail,
+    department,
+    week="",
+    day,
+    startRecur,
+    endRecur,
+    start,
+    end,
+    target = "",
     note = "",
-    color=""
+    backgroundColor = "FFFFFF",
   }) {
     this._id = id;
-    this._teachername = teachername;
-    this._teacheremail = teacheremail;
-    this._subjectname = subjectname;
-    this._room = room;
-    this._studytime = studytime.replace(/Monday|Tuesday|Wednesday|Thursday|Friday|Saturday|Sunday/gi, function(matched) {
-      return days[matched];
-    });
+    this._start = start;
+    this._end = end;
+    this._title = title;
+    this._department = department;
+    this._week = week;
+    this._day = day;
+    this._startRecur = startRecur;
+    this._endRecur = endRecur;
     this._target = target;
     this._note = note;
-    this._color = `#${color}`;
-  }
-  get id() {
-    return this._id;
-  }
-  get teachername() {
-    return this._teachername;
-  }
-  get teacheremail() {
-    return this._teacheremail;
-  }
-  get subjectname() {
-    return this._subjectname;
-  }
-  get room() {
-    return this._room;
-  }
-  get studytime() {
-    return this._studytime;
-  }
-  get target() {
-    return this._target;
-  }
-  get note() {
-    return this._note;
-  }
-  get color() {
-    return this._color;
+    this._teacherEmail = teacherEmail;
+    this._backgroundColor = backgroundColor;
   }
 
-  send() {
+  get id(){
+    return this._id;
+  }
+
+  get start(){
+    return this._start;
+  }
+  get end(){
+    return this._end;
+  }
+  get title(){
+    return this._title;
+  }
+  get department(){
+    return this._department;
+  }
+  get week(){
+    return this._week;
+  }
+  get day(){
+    return this._day;
+  }
+  get startRecur(){
+    return this._startRecur;
+  }
+  get endRecur(){
+    return this._endRecur;
+  }
+  get target(){
+    return this._target;
+  }
+  get note(){
+    return this._note;
+  }
+  get teacherEmail(){
+    return this._teacherEmail;
+  }
+  get backgroundColor(){
+    return this._backgroundColor;
+  }
+
+  post() {
     return [
       this.id,
-      this.teachername,
-      this.teacheremail,
-      this.subjectname,
-      this.room,
-      this.studytime,
-      this.target,
+      this.teacherEmail,
+      this.title,
+      this.department,
+      this.week,
+      [this.day],
+      new Date(this.startRecur),
+      new Date(this.endRecur),
+      this.start,
+      this.end,
+      +this.target,
       this.note,
-      this.color
+      this.backgroundColor,
+      null
     ];
+  }
+  
+  send() {
+    return {
+      id: this.id,
+      title: this.title,
+      department: this.department,
+      week: this.week,
+      target: this.target,
+      note: this.note,
+      teacherEmail: this.teacherEmail,
+      daysOfWeek: this.day.split(","),
+      startTime: this.start,
+      endTime: this.end,
+      startRecur: this.startRecur,
+      endRecur: this.endRecur,
+      backgroundColor: this.backgroundColor,
+      editable: false,
+    };
   }
 }
 

@@ -8,24 +8,27 @@
     <link rel="icon" href="img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="css/teacher.css">
     <link href="https://fonts.googleapis.com/css?family=Bahiana&display=swap" rel="stylesheet">
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9.8.1/dist/sweetalert2.all.min.js"></script>
+    <script src="js/lib/sweetalert2/dist/sweetalert2.all.min.js"></script>
     <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
     <script src="js/quicksortTeacher.js"></script>
-
     <title>Teachers</title>
 </head>
 
 <body>
-    <div style="display: none;">
-        <form action="/delete-teacher" method="POST" id="delete" >
-            <input type="text" name="teacherName" id="delname" value="">
-            <input type="text" name="teacherEmail" id="delemail" value="">
-            <input type="text" name="teacherNumber" id="delnum" value="">
-            <input type="submit" value="" id="deleteBtn">
-        </form>
+    <div id="account-overlay">
+        <img src="{% AVATAR %}" id="avatar" alt="avatar">
+        <input type="file" name="filetoupload" id="upload" accept=".png, .jpg, .jpeg" style="display: none;">
+        <label for="oldpassword">Old Password:</label>
+        <input type="password" name="oldpassword" id="oldpassword">
+        <label for="newpassword">New Password:</label>
+        <input type="password" name="newpassword" id="newpassword">
+        <label for="confirmpassword">Confirm Password:</label>
+        <input type="password" name="confirmpassword" id="confirmpassword">
+        <br>
+        <button class="btn" onclick="updateAccount()">Update</button>
+        <button class="btn cancelbtn" onclick="accountOverlayOff()">Cancel</button>
     </div>
-
-    <div id="overlay">
+    <div id="add-overlay">
         <form action="/teacher" method="post" autocomplete="off">
             <h1 id="formlogo">Schooling</h1>
             <div class="data">
@@ -36,15 +39,31 @@
                 <label for="teacherNumber">Telephone:</label>
                 <input type="tel" name="teacherNumber" pattern="[0-9]{10}" placeholder="0123456789"><br>
             </div>
-            <input type="submit" class="btn" value="Submit">
-            <button type='button' class="btn" id="cancelbtn" onclick="overlayOff()">Cancel</button>
+            <input type="submit" class="btn" value="Add">
+            <button type='button' class="cancelbtn" id="cancelbtn" onclick="addOverlayOff()">Cancel</button>
+            
+        </form>
+    </div>
+    <div id="modify-overlay">
+        <form action="/teacher?_method=PUT" method="post" autocomplete="off">
+            <h1 id="formlogo">Schooling</h1>
+            <div class="data">
+                <label for="teacherName">Name:</label>
+                <input type="text" readOnly style="background-color: rgba(216, 211, 211, 0.411);" name="teacherName" id="modifyName"><br>
+                <label for="teacherEmail">Email:</label>
+                <input type="email" name="teacherEmail" id="modifyEmail" required><br>
+                <label for="teacherNumber">Telephone:</label>
+                <input type="tel" name="teacherNumber" pattern="[0-9]{10}" id="modifyNumber"><br>
+            </div>
+            <input type="submit" class="btn" value="Update">
+            <button type='button' class="cancelbtn" id="cancelbtn" onclick="modifyOverlayOff()">Cancel</button>
             
         </form>
     </div>
     <main>
         <div class="leftpanel">
             <a href="/logout" id="logoutbtn"><ion-icon name="log-out-outline"></ion-icon></a>
-            <a id="accountlink" href="/account?id={% USERNAME %}">
+            <a id="accountlink" onclick="accountOverlayOn()">
                 <div class="account">
                     <img src="{% AVATAR %}" alt="avatar">
                     <h2 id="accountname">{% ACCOUNTNAME %}</h2>
@@ -54,13 +73,13 @@
                 <li class="category"><a href="/dashboard">Home</a></li>
                 <li class="category"><a href="/timetable">Timetable</a></li>
                 <li class="category"><a href="/subject">Subject</a></li>
+                <li class="category"><a href="/event">Event</a></li>
                 <li class="category active"><a href="/teacher">Teacher</a></li>
-                <li class="category"><a href="/grade">Grade</a></li>
             </ul>
             <h1 id="logo">Schooling</h1>
         </div>
         <div class='rightpanel'>
-            <button class="btn" onclick="overlayOn()">Add new</button>
+            <button class="btn" onclick="addOverlayOn()">Add new</button>
             <button class="btn" id="delbtn" onclick="deleteTeacher()">Delete</button>
             <div id="message" style='margin-left: 400px;display: none;'><h4>Please choose on the table</h4></div>
             <div class="mainwindow">
@@ -79,6 +98,7 @@
     <div id="alert">{% POPUP %}</div>
     <script src="js/overlay.js"></script>
     <script src="js/teacher.js"></script>
+    <script src="js/account.js"></script>
 
 </body>
 

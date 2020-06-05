@@ -39,3 +39,33 @@ where
     g.eventTime=b.eventTime and
     g.eventPlace=b.eventPlace
     ;
+    
+-- --------------------Events------------------------------
+SELECT * FROM Events
+WHERE username='ngthuongdoan';
+
+UPDATE Events SET eventStartTime = '', enventEndTime = '', eventPlace = '',eventNote = '', eventColor = ''
+WHERE eventName = '';
+
+DELETE FROM Events WHERE eventName = '';
+
+-- --------------teacher-------------------
+SELECT * FROM Teacher
+WHERE teacherName = '';
+
+UPDATE Teacher SET teacherEmail = '', teacherNumber = ''
+WHERE teacherName = '' and username = '';
+
+DELETE FROM Teacher WHERE teacherName ='' and username ='';
+
+-- --------------Subjects-----------------------------
+
+SELECT * FROM Subjects s join Teacher t on s.teacherID=t.teacherID
+where idSubject = '';
+
+UPDATE Subjects SET subjectRoom='',subjectWeek='',subjectStartTime='',subjectEndTime='',
+subjectStartRecur='',subjectEndRecur='',subjectDay='',teacherID='',subjectTarget='',
+subjectNote='',subjectColor=''
+WHERE idSubject ='';
+
+DELETE FROM Subjects WHERE idSubject='';

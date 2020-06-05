@@ -5,6 +5,9 @@ const conn = require("./models/connection");
 const cookieparser = require("cookie-parser");
 const pageRouter = require("./routes/pageRouter");
 const morgan = require("morgan");
+const methodOverride = require("method-override");
+
+
 const app = express();
 
 const options = {
@@ -56,7 +59,9 @@ app.use(
 );
 
 app.use(cookieparser());
-app.use(express.static(`${__dirname}/views`));
+app.use(methodOverride("_method"));
+app.use(express.static(`${__dirname}/views/asserts`));
+
 app.use(express.static(`${__dirname}/models/avatars`));
 
 app.use("/", pageRouter);

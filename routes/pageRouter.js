@@ -1,15 +1,17 @@
 const express = require("express");
 const fs = require("fs");
-const loginRouter = require("./loginRouter");
-const registerRouter = require("./registerRouter");
-const dashboardRouter = require("./dashboardRouter");
-const teacherRouter = require("./teacherRouter");
-const deleteTeacher = require("./teacherDelete");
-const timetableRouter = require("./timetableRouter");
-const subjectRouter = require("./subjectRouter");
-const gradeRouter = require("./gradeRouter");
-const addSubjectRouter = require("./addSubjectRouter");
-const deleteSubject = require("./subjectDelete");
+const loginRouter = require("./main-routes/loginRouter");
+const timetableRouter = require("./main-routes/timetableRouter");
+const subjectRouter = require("./main-routes/subjectRouter");
+const eventRouter = require("./main-routes/eventRouter");
+const accountRouter = require("./main-routes/accountRouter");
+const registerRouter = require("./main-routes/registerRouter");
+const dashboardRouter = require("./main-routes/dashboardRouter");
+const teacherRouter = require("./main-routes/teacherRouter");
+const forgetRouter = require("./main-routes/forgetRouter");
+const getSubject = require("./funtion-routes/subjectGet");
+const getEvent = require("./funtion-routes/eventGet");
+const changeAvatar = require("./funtion-routes/changeAvatar");
 const notfound = fs.readFileSync(`${__dirname}/../views/notfound.html`);
 
 const router = express.Router();
@@ -17,15 +19,29 @@ const router = express.Router();
 //ROOT
 router.use("/", dashboardRouter);
 router.use("/dashboard", dashboardRouter);
-//LOGIN
+//ROUTE
 router.use("/login", loginRouter);
 router.use("/register", registerRouter);
 router.use("/teacher", teacherRouter);
 router.use("/timetable", timetableRouter);
 router.use("/subject", subjectRouter);
-router.use("/grade", gradeRouter);
-// router.use("/add-subject", addSubjectRouter);
+router.use("/event", eventRouter);
+router.use("/account", accountRouter);
+router.use("/forget", forgetRouter);
 
+
+
+//FORGET PAGE
+
+//FUNCTION
+router.route("/get-subject").get((req, res) => getSubject.getMethod(req, res));
+router.route("/get-event").get((req, res) => getEvent.getMethod(req, res));
+router.use("/change-avatar", changeAvatar);
+
+//404 NOTFOUND
+router.route("/notfound").get((req, res) => {
+  res.end(notfound);
+});
 
 ///LOGOUT
 router.route("/logout").get((req, res) => {
@@ -33,23 +49,6 @@ router.route("/logout").get((req, res) => {
   req.session.destroy();
   res.redirect("/login");
 });
-
-//FORGET PAGE
-//404 NOTFOUND
-router.route("/notfound").get((req, res) => {
-  res.end(notfound);
-});
-
-//DASHBOARD
-router
-  .route("/add-subject")
-  .post((req, res) => addSubjectRouter.postMethod(req, res));
-router
-  .route("/delete-teacher")
-  .post((req, res) => deleteTeacher.postMethod(req, res));
-router
-  .route("/delete-subject")
-  .post((req, res) => deleteSubject.postMethod(req, res));
 
 
 module.exports = router;
