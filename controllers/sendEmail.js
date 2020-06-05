@@ -8,7 +8,7 @@ const sendEmail = function (receiver, code) {
     port: 465,
     auth: {
       user: "studymanegementsys@gmail.com",
-      pass: "@5RA2C^vh6zAR8sd",
+      pass: process.env.GOOGLE,
     },
   });
 
