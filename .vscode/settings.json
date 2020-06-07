@@ -1,6 +1,6 @@
 {
     "liveServer.settings.port": 5501,
-    "VSCodeCounter.showInStatusBar": true,
+    "VSCodeCounter.showInStatusBar": false,
     "appService.zipIgnorePattern": [
         "node_modules{,/**}",
         ".vscode{,/**}"

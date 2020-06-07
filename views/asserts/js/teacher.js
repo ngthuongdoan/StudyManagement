@@ -53,12 +53,32 @@ const submitDelForm = (data) => {
   }
 };
 
+const submitAddForm = () => {
+  event.preventDefault();
+  $.ajax({
+    type: "POST",
+    url: "/teacher",
+    data: {
+      teacherName: $("#teacherName").val(),
+      teacherEmail: $("#teacherEmail").val(),
+      teacherNumber: $("#teacherNumber").val(),
+    },
+    success:()=>{window.location="/teacher"},
+    error: function () {
+      Swal.fire({
+        icon: "error",
+        title: "Duplicate!",
+      });
+    },
+  });
+};
+
+
 const data = document.getElementsByClassName("teacher");
 for (let index = 0; index < data.length; index++) {
   const teacher = data[index];
   teacher.addEventListener("click", () => {
-    document.getElementById("modifyName").value =
-      teacher.children[0].innerText;
+    document.getElementById("modifyName").value = teacher.children[0].innerText;
     document.getElementById("modifyEmail").value =
       teacher.children[1].innerText;
     document.getElementById("modifyNumber").value =

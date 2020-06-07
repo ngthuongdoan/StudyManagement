@@ -1,4 +1,5 @@
 const mysql = require("mysql");
+const util = require("util");
 
 const conn = mysql.createConnection({
   host: process.env.MYSQL_URL,
@@ -10,5 +11,6 @@ const conn = mysql.createConnection({
 conn.connect((err) => {
   err ? console.log("Turn on MySQL service") : console.log("Connected");
 });
+const query = util.promisify(conn.query).bind(conn);
 
-module.exports = conn;
+module.exports = { conn, query };

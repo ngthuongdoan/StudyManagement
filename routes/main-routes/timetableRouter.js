@@ -1,9 +1,11 @@
 const fs = require("fs");
 const express = require("express");
-const conn = require("../../models/connection");
+const { query } = require("../../models/connection");
 const session = require("../../controllers/session");
 const popup = require("../../controllers/replaceTemplate");
-const timetablePage = fs.readFileSync(`${__dirname}/../../views/timetable.html`);
+const timetablePage = fs.readFileSync(
+  `${__dirname}/../../views/timetable.html`
+);
 const router = express.Router();
 
 const displayPage = (req, res) => {
@@ -35,17 +37,14 @@ const displayPage = (req, res) => {
   res.end(resultPage);
 };
 
-router
-  .route("/")
-  .get((req, res) => {
-    if (session.sessionCheck(req, res)) {
-      if (req.session.loggedin) {
-        conn.query(
-          "SELECT * FROM subjects WHERE username=?",
-          [req.session.username],
-          (error, results, fields) => {
-            results.forEach((result) => {
-              let content = `<div class='fc-event fc-subject' data-subject='{
+router.route("/").get(async (req, res) => {
+  if (session.sessionCheck(req, res)) {
+    if (req.session.loggedin) {
+      const subjects = await query("SELECT * FROM subjects WHERE username=?", [
+        req.session.username,
+      ]);
+      subjects.forEach((result) => {
+        let content = `<div class='fc-event fc-subject' data-subject='{
                 "id":"${result.idSubject}",
                 "title":"${result.subjectName}",
                 "department":"${result.subjectRoom}",
@@ -61,17 +60,16 @@ router
                 "backgroundColor":"${result.subjectColor}",
                 "editable":"false"
               }' style="background-color:#${result.subjectColor}">${result.subjectName}</div>`;
-              fs.appendFileSync(
-                `${__dirname}/../../views/placeholder/subject-on-timetable.html`,
-                content
-              );
-            });
-            conn.query(
-              "SELECT * FROM events WHERE username=?",
-              [req.session.username],
-              (error, results, fields) => {
-                results.forEach((result) => {
-                  let content = `<div class='fc-event' data-event='{
+        fs.appendFileSync(
+          `${__dirname}/../../views/placeholder/subject-on-timetable.html`,
+          content
+        );
+      });
+      const events = await query("SELECT * FROM events WHERE username=?", [
+        req.session.username,
+      ]);
+      events.forEach((result) => {
+        let content = `<div class='fc-event' data-event='{
                     "title": "${result.eventName}",
                     "start": "${result.eventStartTime}",
                     "end": "${result.eventEndTime}",
@@ -81,23 +79,18 @@ router
                     "description": "${result.eventNote}",
                     "backgroundColor": "${result.eventColor}"
                   }' style="background-color:#${result.eventColor}">${result.eventName}</div>`;
-                  fs.appendFileSync(
-                    `${__dirname}/../../views/placeholder/event-on-timetable.html`,
-                    content
-                  );
-                });
-                displayPage(req, res);
-              }
-            );
-          }
+        fs.appendFileSync(
+          `${__dirname}/../../views/placeholder/event-on-timetable.html`,
+          content
         );
-      } else {
-        res.redirect("/login");
-      }
+      });
+      displayPage(req, res);
+    } else {
+      res.redirect("/login");
     }
-  })
-  .post((req, res) => {
-
-  });
+  } else {
+    res.redirect("/login");
+  }
+});
 
 module.exports = router;

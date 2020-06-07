@@ -1,10 +1,10 @@
 # Details
 
-Date : 2020-05-30 14:09:27
+Date : 2020-06-07 09:31:37
 
 Directory e:\Code\StudyManagement
 
-Total : 457 files,  67305 codes, 6554 comments, 6174 blanks, all 80033 lines
+Total : 463 files,  68560 codes, 6585 comments, 6272 blanks, all 81417 lines
 
 [summary](results.md)
 
@@ -14,21 +14,22 @@ Total : 457 files,  67305 codes, 6554 comments, 6174 blanks, all 80033 lines
 | [.eslintrc.json](/.eslintrc.json) | JSON | 33 | 0 | 0 | 33 |
 | [README.md](/README.md) | Markdown | 26 | 0 | 8 | 34 |
 | [app.js](/app.js) | JavaScript | 60 | 8 | 13 | 81 |
-| [controllers/classes/Event.js](/controllers/classes/Event.js) | JavaScript | 44 | 0 | 5 | 49 |
+| [controllers/classes/ActivationCode.js](/controllers/classes/ActivationCode.js) | JavaScript | 16 | 0 | 5 | 21 |
+| [controllers/classes/Event.js](/controllers/classes/Event.js) | JavaScript | 59 | 0 | 5 | 64 |
 | [controllers/classes/Subject.js](/controllers/classes/Subject.js) | JavaScript | 107 | 0 | 6 | 113 |
 | [controllers/classes/Teacher.js](/controllers/classes/Teacher.js) | JavaScript | 17 | 0 | 3 | 20 |
 | [controllers/classes/Timetable.js](/controllers/classes/Timetable.js) | JavaScript | 0 | 0 | 1 | 1 |
 | [controllers/classes/User.js](/controllers/classes/User.js) | JavaScript | 47 | 0 | 3 | 50 |
 | [controllers/quicksort.js](/controllers/quicksort.js) | JavaScript | 44 | 15 | 5 | 64 |
 | [controllers/replaceTemplate.js](/controllers/replaceTemplate.js) | JavaScript | 31 | 0 | 3 | 34 |
-| [controllers/sendEmail.js](/controllers/sendEmail.js) | JavaScript | 20 | 0 | 4 | 24 |
+| [controllers/sendEmail.js](/controllers/sendEmail.js) | JavaScript | 21 | 0 | 7 | 28 |
 | [controllers/session.js](/controllers/session.js) | JavaScript | 20 | 1 | 2 | 23 |
 | [documents/data-flow/Ver2/exports/studymanagement_exp_accounts.sql](/documents/data-flow/Ver2/exports/studymanagement_exp_accounts.sql) | SQL | 36 | 12 | 8 | 56 |
 | [documents/data-flow/Ver2/exports/studymanagement_exp_events.sql](/documents/data-flow/Ver2/exports/studymanagement_exp_events.sql) | SQL | 37 | 12 | 8 | 57 |
 | [documents/data-flow/Ver2/exports/studymanagement_exp_sessions.sql](/documents/data-flow/Ver2/exports/studymanagement_exp_sessions.sql) | SQL | 33 | 12 | 8 | 53 |
 | [documents/data-flow/Ver2/exports/studymanagement_exp_subjects.sql](/documents/data-flow/Ver2/exports/studymanagement_exp_subjects.sql) | SQL | 44 | 12 | 8 | 64 |
 | [documents/data-flow/Ver2/exports/studymanagement_exp_teacher.sql](/documents/data-flow/Ver2/exports/studymanagement_exp_teacher.sql) | SQL | 34 | 12 | 8 | 54 |
-| [models/connection.js](/models/connection.js) | JavaScript | 16 | 0 | 5 | 21 |
+| [models/connection.js](/models/connection.js) | JavaScript | 11 | 0 | 4 | 15 |
 | [models/studymanagement.sql](/models/studymanagement.sql) | SQL | 103 | 10 | 6 | 119 |
 | [models/studymanagement_accounts.sql](/models/studymanagement_accounts.sql) | SQL | 36 | 12 | 8 | 56 |
 | [models/studymanagement_grade.sql](/models/studymanagement_grade.sql) | SQL | 32 | 12 | 8 | 52 |
@@ -37,38 +38,43 @@ Total : 457 files,  67305 codes, 6554 comments, 6174 blanks, all 80033 lines
 | [models/studymanagement_subjects.sql](/models/studymanagement_subjects.sql) | SQL | 40 | 12 | 8 | 60 |
 | [models/studymanagement_teacher.sql](/models/studymanagement_teacher.sql) | SQL | 34 | 12 | 8 | 54 |
 | [models/studymanagement_timetable.sql](/models/studymanagement_timetable.sql) | SQL | 35 | 12 | 8 | 55 |
-| [models/ver2/SMVer2CREATE.sql](/models/ver2/SMVer2CREATE.sql) | SQL | 46 | 15 | 8 | 69 |
+| [models/ver2/SMVer2CREATE.sql](/models/ver2/SMVer2CREATE.sql) | SQL | 48 | 15 | 9 | 72 |
 | [models/ver2/SMVer2SELECT.sql](/models/ver2/SMVer2SELECT.sql) | SQL | 51 | 8 | 12 | 71 |
-| [package-lock.json](/package-lock.json) | JSON | 2,981 | 0 | 1 | 2,982 |
-| [package.json](/package.json) | JSON | 42 | 0 | 1 | 43 |
+| [package-lock.json](/package-lock.json) | JSON | 3,023 | 0 | 1 | 3,024 |
+| [package.json](/package.json) | JSON | 44 | 0 | 1 | 45 |
+| [routes/funtion-routes/changeAvatar.js](/routes/funtion-routes/changeAvatar.js) | JavaScript | 33 | 0 | 3 | 36 |
 | [routes/funtion-routes/eventGet.js](/routes/funtion-routes/eventGet.js) | JavaScript | 24 | 0 | 2 | 26 |
 | [routes/funtion-routes/subjectGet.js](/routes/funtion-routes/subjectGet.js) | JavaScript | 31 | 0 | 2 | 33 |
+| [routes/main-routes/accountRouter.js](/routes/main-routes/accountRouter.js) | JavaScript | 35 | 0 | 3 | 38 |
 | [routes/main-routes/dashboardRouter.js](/routes/main-routes/dashboardRouter.js) | JavaScript | 31 | 2 | 3 | 36 |
-| [routes/main-routes/eventRouter.js](/routes/main-routes/eventRouter.js) | JavaScript | 106 | 1 | 9 | 116 |
+| [routes/main-routes/eventRouter.js](/routes/main-routes/eventRouter.js) | JavaScript | 191 | 1 | 9 | 201 |
+| [routes/main-routes/forgetRouter.js](/routes/main-routes/forgetRouter.js) | JavaScript | 45 | 2 | 3 | 50 |
 | [routes/main-routes/gradeRouter.js](/routes/main-routes/gradeRouter.js) | JavaScript | 19 | 2 | 3 | 24 |
 | [routes/main-routes/loginRouter.js](/routes/main-routes/loginRouter.js) | JavaScript | 45 | 2 | 3 | 50 |
 | [routes/main-routes/registerRouter.js](/routes/main-routes/registerRouter.js) | JavaScript | 35 | 2 | 3 | 40 |
-| [routes/main-routes/subjectRouter.js](/routes/main-routes/subjectRouter.js) | JavaScript | 177 | 1 | 8 | 186 |
-| [routes/main-routes/teacherRouter.js](/routes/main-routes/teacherRouter.js) | JavaScript | 135 | 4 | 7 | 146 |
-| [routes/main-routes/timetableRouter.js](/routes/main-routes/timetableRouter.js) | JavaScript | 98 | 7 | 5 | 110 |
-| [routes/pageRouter.js](/routes/pageRouter.js) | JavaScript | 33 | 7 | 10 | 50 |
+| [routes/main-routes/subjectRouter.js](/routes/main-routes/subjectRouter.js) | JavaScript | 235 | 5 | 8 | 248 |
+| [routes/main-routes/teacherRouter.js](/routes/main-routes/teacherRouter.js) | JavaScript | 134 | 4 | 6 | 144 |
+| [routes/main-routes/timetableRouter.js](/routes/main-routes/timetableRouter.js) | JavaScript | 98 | 0 | 6 | 104 |
+| [routes/pageRouter.js](/routes/pageRouter.js) | JavaScript | 37 | 7 | 11 | 55 |
 | [server.js](/server.js) | JavaScript | 6 | 0 | 1 | 7 |
-| [views/asserts/css/dashboard.css](/views/asserts/css/dashboard.css) | CSS | 109 | 1 | 16 | 126 |
-| [views/asserts/css/event.css](/views/asserts/css/event.css) | CSS | 230 | 1 | 34 | 265 |
-| [views/asserts/css/forget.css](/views/asserts/css/forget.css) | CSS | 95 | 1 | 11 | 107 |
-| [views/asserts/css/grade.css](/views/asserts/css/grade.css) | CSS | 200 | 1 | 29 | 230 |
-| [views/asserts/css/home.css](/views/asserts/css/home.css) | CSS | 174 | 1 | 26 | 201 |
+| [test.rest](/test.rest) | HTTP | 1 | 0 | 0 | 1 |
+| [views/asserts/css/dashboard.css](/views/asserts/css/dashboard.css) | CSS | 171 | 1 | 25 | 197 |
+| [views/asserts/css/event.css](/views/asserts/css/event.css) | CSS | 316 | 1 | 46 | 363 |
+| [views/asserts/css/forget.css](/views/asserts/css/forget.css) | CSS | 113 | 1 | 12 | 126 |
+| [views/asserts/css/grade.css](/views/asserts/css/grade.css) | CSS | 262 | 1 | 38 | 301 |
+| [views/asserts/css/home.css](/views/asserts/css/home.css) | CSS | 236 | 1 | 35 | 272 |
 | [views/asserts/css/login-register.css](/views/asserts/css/login-register.css) | CSS | 33 | 1 | 3 | 37 |
 | [views/asserts/css/login.css](/views/asserts/css/login.css) | CSS | 97 | 1 | 12 | 110 |
 | [views/asserts/css/notfound.css](/views/asserts/css/notfound.css) | CSS | 50 | 1 | 5 | 56 |
-| [views/asserts/css/register.css](/views/asserts/css/register.css) | CSS | 113 | 1 | 14 | 128 |
-| [views/asserts/css/subject.css](/views/asserts/css/subject.css) | CSS | 269 | 1 | 41 | 311 |
+| [views/asserts/css/register.css](/views/asserts/css/register.css) | CSS | 118 | 1 | 15 | 134 |
+| [views/asserts/css/subject.css](/views/asserts/css/subject.css) | CSS | 331 | 1 | 50 | 382 |
 | [views/asserts/css/sweetalert2.css](/views/asserts/css/sweetalert2.css) | CSS | 1,588 | 1 | 193 | 1,782 |
-| [views/asserts/css/teacher.css](/views/asserts/css/teacher.css) | CSS | 273 | 1 | 40 | 314 |
-| [views/asserts/css/timetable.css](/views/asserts/css/timetable.css) | CSS | 166 | 1 | 27 | 194 |
+| [views/asserts/css/teacher.css](/views/asserts/css/teacher.css) | CSS | 335 | 1 | 49 | 385 |
+| [views/asserts/css/timetable.css](/views/asserts/css/timetable.css) | CSS | 192 | 1 | 29 | 222 |
 | [views/asserts/css/variables.css](/views/asserts/css/variables.css) | CSS | 1 | 0 | 0 | 1 |
-| [views/asserts/js/event.js](/views/asserts/js/event.js) | JavaScript | 65 | 15 | 6 | 86 |
-| [views/asserts/js/interactive-timetable.js](/views/asserts/js/interactive-timetable.js) | JavaScript | 67 | 21 | 10 | 98 |
+| [views/asserts/js/account.js](/views/asserts/js/account.js) | JavaScript | 79 | 1 | 5 | 85 |
+| [views/asserts/js/event.js](/views/asserts/js/event.js) | JavaScript | 131 | 21 | 11 | 163 |
+| [views/asserts/js/forget.js](/views/asserts/js/forget.js) | JavaScript | 81 | 1 | 3 | 85 |
 | [views/asserts/js/lib/fullcalendar-4.4.0/README.md](/views/asserts/js/lib/fullcalendar-4.4.0/README.md) | Markdown | 9 | 0 | 5 | 14 |
 | [views/asserts/js/lib/fullcalendar-4.4.0/examples/background-events.html](/views/asserts/js/lib/fullcalendar-4.4.0/examples/background-events.html) | HTML | 98 | 0 | 12 | 110 |
 | [views/asserts/js/lib/fullcalendar-4.4.0/examples/daygrid-views.html](/views/asserts/js/lib/fullcalendar-4.4.0/examples/daygrid-views.html) | HTML | 100 | 0 | 10 | 110 |
@@ -426,30 +432,30 @@ Total : 457 files,  67305 codes, 6554 comments, 6174 blanks, all 80033 lines
 | [views/asserts/js/lib/sweetalert2/src/utils/utils.js](/views/asserts/js/lib/sweetalert2/src/utils/utils.js) | JavaScript | 31 | 41 | 12 | 84 |
 | [views/asserts/js/lib/sweetalert2/src/variables.scss](/views/asserts/js/lib/sweetalert2/src/variables.scss) | SCSS | 142 | 23 | 24 | 189 |
 | [views/asserts/js/lib/sweetalert2/sweetalert2.d.ts](/views/asserts/js/lib/sweetalert2/sweetalert2.d.ts) | TypeScript | 177 | 671 | 133 | 981 |
-| [views/asserts/js/overlay.js](/views/asserts/js/overlay.js) | JavaScript | 12 | 0 | 4 | 16 |
+| [views/asserts/js/overlay.js](/views/asserts/js/overlay.js) | JavaScript | 18 | 0 | 6 | 24 |
+| [views/asserts/js/quicksortEvent.js](/views/asserts/js/quicksortEvent.js) | JavaScript | 136 | 7 | 12 | 155 |
 | [views/asserts/js/quicksortSubject.js](/views/asserts/js/quicksortSubject.js) | JavaScript | 178 | 7 | 11 | 196 |
 | [views/asserts/js/quicksortTeacher.js](/views/asserts/js/quicksortTeacher.js) | JavaScript | 74 | 6 | 7 | 87 |
-| [views/asserts/js/subject.js](/views/asserts/js/subject.js) | JavaScript | 121 | 19 | 9 | 149 |
+| [views/asserts/js/subject.js](/views/asserts/js/subject.js) | JavaScript | 211 | 25 | 17 | 253 |
 | [views/asserts/js/teacher.js](/views/asserts/js/teacher.js) | JavaScript | 61 | 1 | 7 | 69 |
-| [views/asserts/js/timetable.js](/views/asserts/js/timetable.js) | JavaScript | 117 | 39 | 6 | 162 |
+| [views/asserts/js/timetable.js](/views/asserts/js/timetable.js) | JavaScript | 114 | 88 | 6 | 208 |
 | [views/asserts/js/validate.js](/views/asserts/js/validate.js) | JavaScript | 31 | 0 | 3 | 34 |
-| [views/asserts/scss/dashboard.scss](/views/asserts/scss/dashboard.scss) | SCSS | 106 | 0 | 6 | 112 |
-| [views/asserts/scss/event.scss](/views/asserts/scss/event.scss) | SCSS | 116 | 23 | 8 | 147 |
-| [views/asserts/scss/forget.scss](/views/asserts/scss/forget.scss) | SCSS | 61 | 0 | 2 | 63 |
+| [views/asserts/scss/dashboard.scss](/views/asserts/scss/dashboard.scss) | SCSS | 162 | 0 | 8 | 170 |
+| [views/asserts/scss/event.scss](/views/asserts/scss/event.scss) | SCSS | 139 | 0 | 8 | 147 |
+| [views/asserts/scss/forget.scss](/views/asserts/scss/forget.scss) | SCSS | 63 | 0 | 3 | 66 |
 | [views/asserts/scss/grade.scss](/views/asserts/scss/grade.scss) | SCSS | 87 | 0 | 2 | 89 |
 | [views/asserts/scss/home.scss](/views/asserts/scss/home.scss) | SCSS | 65 | 2 | 2 | 69 |
-| [views/asserts/scss/login-register.scss](/views/asserts/scss/login-register.scss) | SCSS | 31 | 0 | 4 | 35 |
-| [views/asserts/scss/login.scss](/views/asserts/scss/login.scss) | SCSS | 63 | 0 | 2 | 65 |
+| [views/asserts/scss/login-register.scss](/views/asserts/scss/login-register.scss) | SCSS | 41 | 0 | 4 | 45 |
+| [views/asserts/scss/login.scss](/views/asserts/scss/login.scss) | SCSS | 54 | 0 | 3 | 57 |
 | [views/asserts/scss/notfound.scss](/views/asserts/scss/notfound.scss) | SCSS | 48 | 0 | 4 | 52 |
-| [views/asserts/scss/register.scss](/views/asserts/scss/register.scss) | SCSS | 79 | 0 | 2 | 81 |
+| [views/asserts/scss/register.scss](/views/asserts/scss/register.scss) | SCSS | 74 | 0 | 2 | 76 |
 | [views/asserts/scss/subject.scss](/views/asserts/scss/subject.scss) | SCSS | 153 | 1 | 9 | 163 |
 | [views/asserts/scss/teacher.scss](/views/asserts/scss/teacher.scss) | SCSS | 142 | 0 | 5 | 147 |
-| [views/asserts/scss/timetable.scss](/views/asserts/scss/timetable.scss) | SCSS | 58 | 0 | 11 | 69 |
-| [views/dashboard.html](/views/dashboard.html) | HTML | 42 | 0 | 3 | 45 |
-| [views/event.html](/views/event.html) | HTML | 93 | 13 | 4 | 110 |
-| [views/forget.html](/views/forget.html) | HTML | 27 | 0 | 3 | 30 |
-| [views/grade.html](/views/grade.html) | HTML | 47 | 1 | 4 | 52 |
-| [views/login.html](/views/login.html) | HTML | 40 | 0 | 3 | 43 |
+| [views/asserts/scss/timetable.scss](/views/asserts/scss/timetable.scss) | SCSS | 22 | 1 | 3 | 26 |
+| [views/dashboard.html](/views/dashboard.html) | HTML | 59 | 0 | 4 | 63 |
+| [views/event.html](/views/event.html) | HTML | 141 | 1 | 4 | 146 |
+| [views/forget.html](/views/forget.html) | HTML | 41 | 0 | 4 | 45 |
+| [views/login.html](/views/login.html) | HTML | 41 | 0 | 3 | 44 |
 | [views/notfound.html](/views/notfound.html) | HTML | 19 | 0 | 3 | 22 |
 | [views/option.html](/views/option.html) | HTML | 0 | 0 | 1 | 1 |
 | [views/placeholder/code.html](/views/placeholder/code.html) | HTML | 27 | 0 | 3 | 30 |
@@ -465,8 +471,8 @@ Total : 457 files,  67305 codes, 6554 comments, 6174 blanks, all 80033 lines
 | [views/placeholder/teacher-name.html](/views/placeholder/teacher-name.html) | HTML | 0 | 0 | 1 | 1 |
 | [views/placeholder/timetable-data.html](/views/placeholder/timetable-data.html) | HTML | 0 | 0 | 1 | 1 |
 | [views/register.html](/views/register.html) | HTML | 63 | 0 | 3 | 66 |
-| [views/subject.html](/views/subject.html) | HTML | 163 | 0 | 5 | 168 |
-| [views/teacher.html](/views/teacher.html) | HTML | 84 | 1 | 6 | 91 |
-| [views/timetable.html](/views/timetable.html) | HTML | 45 | 12 | 4 | 61 |
+| [views/subject.html](/views/subject.html) | HTML | 177 | 4 | 6 | 187 |
+| [views/teacher.html](/views/teacher.html) | HTML | 98 | 1 | 6 | 105 |
+| [views/timetable.html](/views/timetable.html) | HTML | 32 | 26 | 3 | 61 |
 
 [summary](results.md)
