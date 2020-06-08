@@ -85,21 +85,20 @@ router
       res.status(404).send();
     }
   })
-  .put((req, res) => {
+  .put(async(req, res) => {
     const teacher = new Teacher({
       name: req.body.teacherName,
       email: req.body.teacherEmail,
       number: req.body.teacherNumber,
     });
-    console.log(teacher);
     try {
-      query(
+      await query(
         "UPDATE teacher SET teacherEmail = ?, teacherNumber = ? WHERE teacherName = ? and username = ?",
         [teacher.email, teacher.number, teacher.name, req.session.username]
       );
-      res.redirect("/notfound");
-    } catch (e) {
       res.redirect("/teacher");
+    } catch (e) {
+      res.redirect("/notfound");
     }
   })
   .delete(async (req, res) => {

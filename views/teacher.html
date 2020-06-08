@@ -31,7 +31,7 @@
         <button class="btn cancelbtn" onclick="accountOverlayOff()">Cancel</button>
     </div>
     <div id="add-overlay">
-        <form action="/teacher" method="post" autocomplete="off">
+        <form action="/teacher" method="post" autocomplete="off" onsubmit="submitAddForm()">
             <h1 id="formlogo">Schooling</h1>
             <div class="data">
                 <label for="teacherName">Name:</label>
@@ -42,13 +42,13 @@
                 <input type="tel" id="teacherNumber" name="teacherNumber" pattern="[0-9]{10}"
                     placeholder="0123456789"><br>
             </div>
-            <button class="btn" onclick="submitAddForm()" id="submitbtn">Add</button>
+            <input type="submit" value="Add" class="btn" >
             <button type='button' class="cancelbtn" id="cancelbtn" onclick="addOverlayOff()">Cancel</button>
 
         </form>
     </div>
     <div id="modify-overlay">
-        <form action="/teacher?_method=PUT" method="post" autocomplete="off">
+        <form action="/teacher?_method=PUT" method="post" autocomplete="off" onsubmit="submitModifyForm()" id="modifyForm">
             <h1 id="formlogo">Schooling</h1>
             <div class="data">
                 <label for="teacherName">Name:</label>

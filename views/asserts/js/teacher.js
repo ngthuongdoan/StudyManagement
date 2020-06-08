@@ -11,6 +11,23 @@ const deleteTeacher = () => {
   submitDelForm(data);
 };
 
+const submitModifyForm = () => {
+  event.preventDefault();
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, Update it!",
+  }).then((result) => {
+    if (result.value) {
+      $("#modifyForm").submit();
+    }
+  });
+};
+
 const submitDelForm = (data) => {
   for (const el of data) {
     el.classList.add("activerow");
@@ -63,7 +80,9 @@ const submitAddForm = () => {
       teacherEmail: $("#teacherEmail").val(),
       teacherNumber: $("#teacherNumber").val(),
     },
-    success:()=>{window.location="/teacher"},
+    success: () => {
+      window.location = "/teacher";
+    },
     error: function () {
       Swal.fire({
         icon: "error",
@@ -72,7 +91,6 @@ const submitAddForm = () => {
     },
   });
 };
-
 
 const data = document.getElementsByClassName("teacher");
 for (let index = 0; index < data.length; index++) {
