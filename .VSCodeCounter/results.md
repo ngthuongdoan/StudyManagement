@@ -1,45 +1,46 @@
 # Summary
 
-Date : 2020-05-30 14:09:28
+Date : 2020-06-07 09:31:38
 
 Directory e:\Code\StudyManagement
 
-Total : 457 files,  67305 codes, 6554 comments, 6174 blanks, all 80033 lines
+Total : 463 files,  68560 codes, 6585 comments, 6272 blanks, all 81417 lines
 
 [details](details.md)
 
 ## Languages
 | language | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| JavaScript | 306 | 47,805 | 5,210 | 3,522 | 56,537 |
-| CSS | 27 | 5,811 | 305 | 722 | 6,838 |
+| JavaScript | 312 | 48,479 | 5,258 | 3,564 | 57,301 |
+| CSS | 27 | 6,256 | 305 | 783 | 7,344 |
 | TypeScript | 12 | 3,729 | 708 | 269 | 4,706 |
-| JSON | 16 | 3,588 | 0 | 15 | 3,603 |
-| SCSS | 23 | 2,394 | 72 | 307 | 2,773 |
-| HTML | 40 | 2,384 | 27 | 289 | 2,700 |
+| JSON | 16 | 3,632 | 0 | 15 | 3,647 |
+| SCSS | 23 | 2,435 | 50 | 303 | 2,788 |
+| HTML | 39 | 2,432 | 32 | 287 | 2,751 |
 | Markdown | 15 | 876 | 1 | 882 | 1,759 |
-| SQL | 15 | 627 | 177 | 122 | 926 |
+| SQL | 15 | 629 | 177 | 123 | 929 |
 | PHP | 3 | 91 | 54 | 46 | 191 |
+| HTTP | 1 | 1 | 0 | 0 | 1 |
 
 ## Directories
 | path | files | code | comment | blank | total |
 | :--- | ---: | ---: | ---: | ---: | ---: |
-| . | 457 | 67,305 | 6,554 | 6,174 | 80,033 |
-| controllers | 9 | 330 | 16 | 32 | 378 |
-| controllers\classes | 5 | 215 | 0 | 18 | 233 |
+| . | 463 | 68,560 | 6,585 | 6,272 | 81,417 |
+| controllers | 10 | 362 | 16 | 40 | 418 |
+| controllers\classes | 6 | 246 | 0 | 23 | 269 |
 | documents | 5 | 184 | 60 | 40 | 284 |
 | documents\data-flow | 5 | 184 | 60 | 40 | 284 |
 | documents\data-flow\Ver2 | 5 | 184 | 60 | 40 | 284 |
 | documents\data-flow\Ver2\exports | 5 | 184 | 60 | 40 | 284 |
-| models | 11 | 459 | 117 | 87 | 663 |
-| models\ver2 | 2 | 97 | 23 | 20 | 140 |
-| routes | 11 | 734 | 28 | 55 | 817 |
-| routes\funtion-routes | 2 | 55 | 0 | 4 | 59 |
-| routes\main-routes | 8 | 646 | 21 | 41 | 708 |
-| views | 415 | 62,450 | 6,325 | 5,936 | 74,711 |
-| views\asserts | 392 | 61,782 | 6,298 | 5,885 | 73,965 |
-| views\asserts\css | 14 | 3,398 | 13 | 451 | 3,862 |
-| views\asserts\js | 366 | 57,375 | 6,259 | 5,377 | 69,011 |
+| models | 11 | 456 | 117 | 87 | 660 |
+| models\ver2 | 2 | 99 | 23 | 21 | 143 |
+| routes | 14 | 993 | 27 | 65 | 1,085 |
+| routes\funtion-routes | 3 | 88 | 0 | 7 | 95 |
+| routes\main-routes | 10 | 868 | 20 | 47 | 935 |
+| views | 416 | 63,372 | 6,357 | 6,016 | 75,745 |
+| views\asserts | 394 | 62,656 | 6,325 | 5,967 | 74,948 |
+| views\asserts\css | 14 | 3,843 | 13 | 512 | 4,368 |
+| views\asserts\js | 368 | 57,763 | 6,308 | 5,402 | 69,473 |
 | views\asserts\js\lib | 357 | 56,649 | 6,151 | 5,314 | 68,114 |
 | views\asserts\js\lib\fullcalendar-4.4.0 | 244 | 43,337 | 3,982 | 2,044 | 49,363 |
 | views\asserts\js\lib\fullcalendar-4.4.0\examples | 21 | 1,951 | 54 | 313 | 2,318 |
@@ -73,7 +74,7 @@ Total : 457 files,  67305 codes, 6554 comments, 6174 blanks, all 80033 lines
 | views\asserts\js\lib\sweetalert2\src\utils | 34 | 1,556 | 163 | 308 | 2,027 |
 | views\asserts\js\lib\sweetalert2\src\utils\dom | 21 | 1,011 | 69 | 224 | 1,304 |
 | views\asserts\js\lib\sweetalert2\src\utils\dom\renderers | 13 | 468 | 43 | 125 | 636 |
-| views\asserts\scss | 12 | 1,009 | 26 | 57 | 1,092 |
+| views\asserts\scss | 12 | 1,050 | 4 | 53 | 1,107 |
 | views\placeholder | 12 | 45 | 0 | 12 | 57 |
 
 [details](details.md)

@@ -23,25 +23,6 @@ function getAllIndexes(arr, val) {
 }
 document.addEventListener("DOMContentLoaded", function () {
   let Calendar = FullCalendar.Calendar;
-  // let Draggable = FullCalendarInteraction.Draggable;
-  // /* initialize the external events
-  //                                 -----------------------------------------------------------------*/
-
-  // let containerEventsEl = document.getElementById("external-events-list");
-  // new Draggable(containerEventsEl, {
-  //   itemSelector: ".fc-event",
-  //   eventData: function (eventEl) {
-  //     let data = eventEl.dataset.event;
-  //     data = JSON.parse(data);
-  //     return {
-  //       title: data.title,
-  //       backgroundColor: data.backgroundColor,
-  //       extendedProps: {
-  //         department: data.extendedProps.department,
-  //       },
-  //     };
-  //   },
-  // });
 
   /* initialize the calendar
                              
@@ -50,30 +31,7 @@ document.addEventListener("DOMContentLoaded", function () {
   let calendarEl = document.getElementById("calendar");
   let calendar = new Calendar(calendarEl, {
     plugins: ["interaction", "dayGrid", "timeGrid", "list"],
-    // customButtons: {
-    //   deleteButton: {
-    //     text: "Delete",
-    //     click: function () {
-    //       let events = document.getElementsByClassName("fc-time-grid-event");
-    //       for (let index = 0; index < events.length; index++) {
-    //         let event = events[index];
-    //         event.style.filter = "brightness(50%)";
-    //         del = true;
-    //       }
-    //     },
-    //   },
-    //   cancelButton: {
-    //     text: "Cancel",
-    //     click: function () {
-    //       let events = document.getElementsByClassName("fc-time-grid-event");
-    //       for (let index = 0; index < events.length; index++) {
-    //         let event = events[index];
-    //         event.style.filter = "brightness(100%)";
-    //         del = false;
-    //       }
-    //     },
-    //   },
-    // },
+
     header: {
       left: "prev,next today",
       center: "title",
@@ -87,14 +45,7 @@ document.addEventListener("DOMContentLoaded", function () {
     overlay: false,
     weekNumbersWithinDays: true,
     navLinks: true, // can click day/week names to navigate views
-    // drop: function (arg) {
-    //   // is the "remove after drop" checkbox checked?
-    //   if (document.getElementById("drop-remove").checked) {
-    //     // if so, remove the element from the "Draggable Events" list
-    //     arg.draggedEl.parentNode.removeChild(arg.draggedEl);
-    //   }
-    // },
-
+    defaultView: "timeGridWeek",
     eventSources: [
       {
         url: "/get-event", // use the `url` property

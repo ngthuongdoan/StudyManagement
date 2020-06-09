@@ -1,6 +1,6 @@
 const fs = require("fs");
 const express = require("express");
-const conn = require("../../models/connection");
+const { query } = require("../../models/connection");
 const session = require("../../controllers/session");
 const popup = require("../../controllers/replaceTemplate");
 const eventPage = fs.readFileSync(`${__dirname}/../../views/event.html`);
@@ -69,18 +69,16 @@ const replaceResultPage = (session) => {
 
 router
   .route("/")
-  .get((req, res) => {
+  .get(async (req, res) => {
     if (session.sessionCheck(req, res)) {
       if (req.session.loggedin) {
-        conn.query(
+        const queryevents = await query(
           "SELECT * FROM events WHERE username=?",
-          [req.session.username],
-          (error, results, field) => {
-            createEventCards(results);
-            replaceResultPage(req.session);
-            res.end(resultPage);
-          }
+          [req.session.username]
         );
+        createEventCards(queryevents);
+        replaceResultPage(req.session);
+        res.end(resultPage);
       } else {
         res.redirect("/login");
       }
@@ -89,7 +87,7 @@ router
       res.redirect("/login");
     }
   })
-  .post((req, res) => {
+  .post(async (req, res) => {
     const eventStartTime =
       req.body.eventStartDate + "T" + req.body.eventStartTime;
     const eventEndTime = req.body.eventEndDate + "T" + req.body.eventEndTime;
@@ -102,20 +100,18 @@ router
       note: req.body.eventNote,
       backgroundColor: req.body.eventColor,
     });
-    conn.query(
-      `INSERT INTO events VALUE('${req.session.username}',?,?,?,?,?,?,?)`,
-      postEvent.post(),
-      (error, results, fields) => {
-        if (error) {
-          console.log(error.message);
-          res.redirect("/notfound");
-        } else {
-          res.redirect("/event");
-        }
-      }
-    );
+    try {
+      await query(
+        `INSERT INTO events VALUE('${req.session.username}',?,?,?,?,?,?,?)`,
+        postEvent.post()
+      );
+      res.redirect("/event");
+    } catch (error) {
+      console.log(error.message);
+      res.redirect("/notfound");
+    }
   })
-  .put((req, res) => {
+  .put(async (req, res) => {
     if (req.body.timetable) {
       const modifyEvent = new Event({
         title: req.body.title,
@@ -125,26 +121,23 @@ router
         note: req.body.note,
         backgroundColor: req.body.backgroundColor,
       });
-      conn.query(
-        "UPDATE events SET eventStartTime = ?, eventEndTime = ?, eventPlace = ?,eventNote = ?, eventColor = ? WHERE eventName = ? AND username = ?",
-        [
-          new Date(modifyEvent.start),
-          new Date(modifyEvent.end),
-          modifyEvent.department,
-          modifyEvent.note,
-          modifyEvent.backgroundColor.replace("#", ""),
-          modifyEvent.title,
-          req.session.username,
-        ],
-        (error, results, fields) => {
-          if (!error) {
-            res.status(200).send();
-          } else {
-            res.status(404).send();
-          }
-        }
-      );
-      res.status(200).send(modifyEvent);
+      try {
+        await query(
+          "UPDATE events SET eventStartTime = ?, eventEndTime = ?, eventPlace = ?,eventNote = ?, eventColor = ? WHERE eventName = ? AND username = ?",
+          [
+            new Date(modifyEvent.start),
+            new Date(modifyEvent.end),
+            modifyEvent.department,
+            modifyEvent.note,
+            modifyEvent.backgroundColor.replace("#", ""),
+            modifyEvent.title,
+            req.session.username,
+          ]
+        );
+        res.status(200).send();
+      } catch (e) {
+        res.status(404).send();
+      }
     } else {
       const eventStartTime =
         req.body.eventStartDate + "T" + req.body.eventStartTime;
@@ -158,43 +151,39 @@ router
         note: req.body.eventNote,
         backgroundColor: req.body.eventColor,
       });
-      conn.query(
-        "UPDATE events SET eventStartTime = ?, eventEndTime = ?, eventPlace = ?,eventNote = ?, eventColor = ? WHERE eventName = ? AND username = ?",
-        [
-          new Date(modifyEvent.start),
-          new Date(modifyEvent.end),
-          modifyEvent.department,
-          modifyEvent.note,
-          modifyEvent.backgroundColor,
-          modifyEvent.title,
-          req.session.username,
-        ],
-        (error, results, fields) => {
-          if (!error) {
-            res.redirect("/event");
-          } else {
-            res.redirect("/notfound");
-          }
-        }
-      );
+      try {
+        await query(
+          "UPDATE events SET eventStartTime = ?, eventEndTime = ?, eventPlace = ?,eventNote = ?, eventColor = ? WHERE eventName = ? AND username = ?",
+          [
+            new Date(modifyEvent.start),
+            new Date(modifyEvent.end),
+            modifyEvent.department,
+            modifyEvent.note,
+            modifyEvent.backgroundColor,
+            modifyEvent.title,
+            req.session.username,
+          ]
+        );
+        res.redirect("/event");
+      } catch (e) {
+        res.redirect("/notfound");
+      }
     }
   })
-  .delete((req, res) => {
+  .delete(async (req, res) => {
     const event = new Event({
       title: req.body.eventName,
     });
-    conn.query(
-      "DELETE FROM events WHERE username=? AND eventName=?",
-      [req.session.username, event.title],
-      (error, results, fields) => {
-        if (error) {
-          console.log(error.message);
-          res.redirect("/notfound");
-        } else {
-          res.redirect("/event");
-        }
-      }
-    );
+    try {
+      await query("DELETE FROM events WHERE username=? AND eventName=?", [
+        req.session.username,
+        event.title,
+      ]);
+      res.redirect("/event");
+    } catch (e) {
+      console.log(e.message);
+      res.redirect("/notfound");
+    }
   });
 
 module.exports = router;

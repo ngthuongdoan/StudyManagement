@@ -1,4 +1,10 @@
 {
     "liveServer.settings.port": 5501,
-    "VSCodeCounter.showInStatusBar": true
+    "VSCodeCounter.showInStatusBar": false,
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/40fbaaaf-6620-4694-a303-0c9d52db902d/resourceGroups/Students/providers/Microsoft.Web/sites/studymanagement",
+    "appService.deploySubpath": "."
 }

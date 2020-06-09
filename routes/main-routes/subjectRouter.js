@@ -1,6 +1,6 @@
 const fs = require("fs");
 const express = require("express");
-const conn = require("../../models/connection");
+const { query } = require("../../models/connection");
 const session = require("../../controllers/session");
 const popup = require("../../controllers/replaceTemplate");
 const Subject = require("../../controllers/classes/Subject");
@@ -8,11 +8,11 @@ const subjectPage = fs.readFileSync(`${__dirname}/../../views/subject.html`);
 let resultPage;
 const router = express.Router();
 
-const createSubjectCards = (req, results) => {
+const createSubjectCards = async (req, results) => {
   for (let j = 0; j < results.length; j++) {
-    let startRecur=results[j].subjectStartRecur;
+    let startRecur = results[j].subjectStartRecur;
     startRecur.setHours(startRecur.getHours() + 7);
-    let endRecur=results[j].subjectEndRecur;
+    let endRecur = results[j].subjectEndRecur;
     endRecur.setHours(endRecur.getHours() + 7);
     const currentSubject = new Subject({
       id: results[j].idSubject,
@@ -54,26 +54,23 @@ const createSubjectCards = (req, results) => {
     );
     subjectCard = popup.replaceTemplate(
       "COLOR",
-      "#"+currentSubject.backgroundColor,
+      "#" + currentSubject.backgroundColor,
       subjectCard
     );
 
-    conn.query(
+    const queryteachers = await query(
       `select teacherName from subjects join teacher on subjects.teacherEmail = teacher.teacherEmail
     where teacher.username=? and idSubject=?`,
-      [req.session.username, currentSubject.id],
-      (error, results, fields) => {
-        console.log(results);
-        subjectCard = popup.replaceTemplate(
-          "{% TEACHERNAME %}",
-          results[0].teacherName,
-          subjectCard
-        );
-        fs.appendFileSync(
-          `${__dirname}/../../views/placeholder/subject-data.html`,
-          subjectCard
-        );
-      }
+      [req.session.username, currentSubject.id]
+    );
+    subjectCard = popup.replaceTemplate(
+      "{% TEACHERNAME %}",
+      queryteachers[0].teacherName,
+      subjectCard
+    );
+    fs.appendFileSync(
+      `${__dirname}/../../views/placeholder/subject-data.html`,
+      subjectCard
     );
   }
 };
@@ -115,25 +112,21 @@ const replaceResultPage = (session) => {
 
 router
   .route("/")
-  .get((req, res) => {
+  .get(async (req, res) => {
     if (session.sessionCheck(req, res)) {
       if (req.session.loggedin) {
-        conn.query(
+        const querysubjects = await query(
           "SELECT * FROM subjects WHERE username=?",
-          [req.session.username],
-          (error, results, fields) => {
-            createSubjectCards(req, results);
-            conn.query(
-              "SELECT * FROM teacher WHERE username=?",
-              [req.session.username],
-              (error, results, fields) => {
-                addTeacher(results);
-                replaceResultPage(req.session);
-                res.end(resultPage);
-              }
-            );
-          }
+          [req.session.username]
         );
+        const queryteachers = await query(
+          "SELECT * FROM teacher WHERE username=?",
+          [req.session.username]
+        );
+        await createSubjectCards(req, querysubjects);
+        addTeacher(queryteachers);
+        replaceResultPage(req.session);
+        res.end(resultPage);
       } else {
         res.redirect("/login");
       }
@@ -142,106 +135,92 @@ router
       res.redirect("/login");
     }
   })
-  .post((req, res) => {
-    conn.query(
+  .post(async (req, res) => {
+    const queryteacher = await query(
       "SELECT teacherEmail FROM teacher WHERE username=? AND teacherName=?",
-      [req.session.username, req.body.teacherName],
-      (error, results, fields) => {
-        const subject = new Subject({
-          id: req.body.idSubject,
-          title: req.body.subjectName,
-          teacherEmail: results[0].teacherEmail,
-          department: req.body.subjectRoom,
-          // week: req.body.subjectWeek,
-          day: req.body.subjectDay,
-          startRecur: req.body.subjectStartRecur,
-          endRecur: req.body.subjectEndRecur,
-          start: req.body.subjectStartTime,
-          end: req.body.subjectEndTime,
-          target: req.body.subjectTarget,
-          note: req.body.subjectNote,
-          backgroundColor: req.body.subjectColor,
-        });
-
-        conn.query(
-          `INSERT INTO subjects VALUE('${req.session.username}',?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
-          subject.post(),
-          (error, results, fields) => {
-            if (error) {
-              console.log(error.sql);
-              res.redirect("/notfound");
-            } else {
-              res.redirect("/subject");
-            }
-          }
-        );
-      }
+      [req.session.username, req.body.teacherName]
     );
+    const subject = new Subject({
+      id: req.body.idSubject,
+      title: req.body.subjectName,
+      teacherEmail: queryteacher[0].teacherEmail,
+      department: req.body.subjectRoom,
+      day: req.body.subjectDay,
+      startRecur: req.body.subjectStartRecur,
+      endRecur: req.body.subjectEndRecur,
+      start: req.body.subjectStartTime,
+      end: req.body.subjectEndTime,
+      target: req.body.subjectTarget,
+      note: req.body.subjectNote,
+      backgroundColor: req.body.subjectColor,
+    });
+    try {
+      await query(
+        `INSERT INTO subjects VALUE('${req.session.username}',?,?,?,?,?,?,?,?,?,?,?,?,?,?)`,
+        subject.post()
+      );
+      res.redirect("/subject");
+    } catch (e) {
+      res.redirect("/notfound");
+    }
   })
-  .delete((req, res) => {
+  .delete(async (req, res) => {
     const subject = new Subject({
       id: req.body.idSubject,
     });
-    conn.query(
-      "DELETE FROM subjects WHERE username=? AND idSubject=?",
-      [req.session.username, subject.id],
-      (error, results, fields) => {
-        if (error) {
-          console.log(error.message);
-          res.redirect("/notfound");
-        } else {
-          res.redirect("/subject");
-        }
-      }
-    );
+    try {
+      await query("DELETE FROM subjects WHERE username=? AND idSubject=?", [
+        req.session.username,
+        subject.id,
+      ]);
+      res.redirect("/subject");
+    } catch (e) {
+      console.log(e.message);
+      res.redirect("/notfound");
+    }
   })
-  .put((req, res) => {
-    conn.query(
+  .put(async (req, res) => {
+    const queryteachers = await query(
       "SELECT teacherEmail FROM teacher WHERE username=? AND teacherName=?",
-      [req.session.username, req.body.teacherName],
-      (error, results, fields) => {
-        const modifySubject = new Subject({
-          id: req.body.idSubject,
-          title: req.body.subjectName,
-          teacherEmail: results[0].teacherEmail,
-          department: req.body.subjectRoom,
-          // week: req.body.subjectWeek,
-          day: req.body.subjectDay,
-          startRecur: req.body.subjectStartRecur,
-          endRecur: req.body.subjectEndRecur,
-          start: req.body.subjectStartTime,
-          end: req.body.subjectEndTime,
-          target: req.body.subjectTarget,
-          note: req.body.subjectNote,
-          backgroundColor: req.body.subjectColor,
-        });
-        conn.query(
-          "UPDATE subjects SET subjectRoom=? ,subjectWeek=?, subjectStartTime=?, subjectEndTime=?, subjectStartRecur=?, subjectEndRecur=?, subjectDay=?, teacherEmail=?, subjectTarget=?, subjectNote=?, subjectColor=? WHERE idSubject =? AND username=?",
-          [
-            modifySubject.department,
-            // modifySubject.week,
-            "",
-            modifySubject.start,
-            modifySubject.end,
-            new Date(modifySubject.startRecur),
-            new Date(modifySubject.endRecur),
-            [modifySubject.day],
-            modifySubject.teacherEmail,
-            +modifySubject.target,
-            modifySubject.note,
-            modifySubject.backgroundColor,
-            modifySubject.id,
-            req.session.username,
-          ],
-          (error, results, fields) => {
-            if (!error) {
-              res.redirect("/subject");
-            } else {
-              res.redirect("/notfound");
-            }
-          }
-        );
-      }
+      [req.session.username, req.body.teacherName]
     );
+    const modifySubject = new Subject({
+      id: req.body.idSubject,
+      title: req.body.subjectName,
+      teacherEmail: queryteachers[0].teacherEmail,
+      department: req.body.subjectRoom,
+      day: req.body.subjectDay,
+      startRecur: req.body.subjectStartRecur,
+      endRecur: req.body.subjectEndRecur,
+      start: req.body.subjectStartTime,
+      end: req.body.subjectEndTime,
+      target: req.body.subjectTarget,
+      note: req.body.subjectNote,
+      backgroundColor: req.body.subjectColor,
+    });
+    try {
+      await query(
+        "UPDATE subjects SET subjectRoom=? ,subjectWeek=?, subjectStartTime=?, subjectEndTime=?, subjectStartRecur=?, subjectEndRecur=?, subjectDay=?, teacherEmail=?, subjectTarget=?, subjectNote=?, subjectColor=? WHERE idSubject =? AND username=?",
+        [
+          modifySubject.department,
+          // modifySubject.week,
+          "",
+          modifySubject.start,
+          modifySubject.end,
+          new Date(modifySubject.startRecur),
+          new Date(modifySubject.endRecur),
+          [modifySubject.day],
+          modifySubject.teacherEmail,
+          +modifySubject.target,
+          modifySubject.note,
+          modifySubject.backgroundColor,
+          modifySubject.id,
+          req.session.username,
+        ]
+      );
+      res.redirect("/subject");
+    } catch (e) {
+      res.redirect("/notfound");
+    }
   });
 module.exports = router;
