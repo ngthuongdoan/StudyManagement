@@ -1,9 +1,9 @@
 /* eslint-disable no-undef */
 function getWeekNumber(d) {
-  // Copy date so don't modify original
+  // Copy date so don"t modify original
   d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
   // Set to nearest Thursday: current date + 4 - current day number
-  // Make Sunday's day number 7
+  // Make Sunday"s day number 7
   d.setUTCDate(d.getUTCDate() + 4 - (d.getUTCDay() || 7));
   // Get first day of year
   var yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
@@ -21,6 +21,7 @@ function getAllIndexes(arr, val) {
   }
   return indexes;
 }
+
 document.addEventListener("DOMContentLoaded", function () {
   let Calendar = FullCalendar.Calendar;
 
@@ -32,10 +33,33 @@ document.addEventListener("DOMContentLoaded", function () {
   let calendar = new Calendar(calendarEl, {
     plugins: ["interaction", "dayGrid", "timeGrid", "list"],
 
+    customButtons: {
+      printBtn: {
+        text: "Print",
+        click: function () {
+          let border = $(".fc td");
+          border.css("border-style", "none");
+          var content = document.getElementsByTagName("table")[0];
+          var w = content.offsetWidth*3;
+          var h = content.offsetHeight*3;
+          html2canvas(content, {
+            dpi: 300, // Set to 300 DPI
+            scale: 3, // Adjusts your resolution
+            onrendered: function(canvas) {
+              var img = canvas.toDataURL("image/png", 1);
+              var doc = new jsPDF("L", "px", [w, h]);
+              doc.addImage(img, "PNG", 0, 0, w, h);
+              doc.save("sample-file.pdf");
+            }
+          });
+          border.css("border-style", "solid");
+        },
+      },
+    },
     header: {
       left: "prev,next today",
       center: "title",
-      right: "dayGridMonth,timeGridWeek,timeGridDay,listWeek",
+      right: "printBtn dayGridMonth,timeGridWeek,timeGridDay,listWeek",
     },
     firstDay: 1,
     allDaySlot: false,
