@@ -9,6 +9,7 @@ const conn = mysql.createConnection({
 });
 
 conn.connect((err) => {
+  console.log(err);
   err ? console.log("Turn on MySQL service") : console.log("Connected");
 });
 const query = util.promisify(conn.query).bind(conn);

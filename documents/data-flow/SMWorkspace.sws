@@ -5,13 +5,14 @@
 <Workspace>
 	<Local Expanded="Yes">
 		<Model Expanded="Yes" ID="{6CCA14F0-0927-4CDF-9826-1931B559C120}" Loaded="No" Name="SMClass" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="SMClass.oom"/>
-		<Model Expanded="Yes" ID="{4B5E7372-18A5-487E-B665-510A1E408AAC}" Name="StudyManagementSystemClassDiagram" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="Ver2/StudyManagementSystemClassDiagram.oom"/>
+		<Model Expanded="Yes" ID="{4B5E7372-18A5-487E-B665-510A1E408AAC}" Loaded="No" Name="StudyManagementSystemClassDiagram" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="Ver2/StudyManagementSystemClassDiagram.oom"/>
 		<Model Expanded="Yes" ID="{414AA1BA-C187-4AFB-9368-D657C083F1C8}" Loaded="No" Name="PKNhanAi" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="file:///D|/Google Drive/University/NLXDPM/PKNhanAi/PKNhanAi.prj"/>
 		<Model Expanded="Yes" ID="{8B26B09D-FA27-4467-B60E-B7ED97543AE5}" Loaded="No" Name="Case_2" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="file:///D|/Google Drive/University/NLXDPM/PKNhanAi/Case_2.oom"/>
 		<Model Expanded="Yes" ID="{A099ECFE-C4B7-4ED0-B815-4CC1DA4B92D9}" Loaded="No" Name="Case_1" Type="{18112060-1A4B-11D1-83D9-444553540000}" URL="file:///D|/Google Drive/University/NLXDPM/PKNhanAi/Case_1.oom"/>
-		<Model Expanded="Yes" ID="{77DD51B5-4B99-4993-9A6A-FEED703636A9}" Name="StudyManagementSystemCDM" Type="{1E597170-9350-11D1-AB3C-0020AF71E433}" URL="Ver2/StudyManagementSystemCDM.cdm"/>
-		<Model Expanded="Yes" ID="{0A49FCCA-9292-403B-B59D-BA10A0574C40}" Name="StudyManagementSystemLDM" Type="{5F45F978-C4F3-4E35-A3FC-AF3318663A0F}" URL="Ver2/StudyManagementSystemLDM.ldm"/>
-		<Model Expanded="Yes" ID="{F1C40CC5-55A7-44C3-A313-FE46ACB5CFF0}" Name="StudyManagementSystemPDM" Selected="Yes" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="Ver2/StudyManagementSystemPDM.pdm"/>
+		<Model Expanded="Yes" ID="{77DD51B5-4B99-4993-9A6A-FEED703636A9}" Loaded="No" Name="StudyManagementSystemCDM" Type="{1E597170-9350-11D1-AB3C-0020AF71E433}" URL="Ver2/StudyManagementSystemCDM.cdm"/>
+		<Model Expanded="Yes" ID="{0A49FCCA-9292-403B-B59D-BA10A0574C40}" Loaded="No" Name="StudyManagementSystemLDM" Type="{5F45F978-C4F3-4E35-A3FC-AF3318663A0F}" URL="Ver2/StudyManagementSystemLDM.ldm"/>
+		<Model Expanded="Yes" ID="{F1C40CC5-55A7-44C3-A313-FE46ACB5CFF0}" Loaded="No" Name="StudyManagementSystemPDM" Type="{CDE44E21-9669-11D1-9914-006097355D9B}" URL="Ver2/StudyManagementSystemPDM.pdm"/>
+		<Model Expanded="Yes" ID="{BD2A0FC9-CACA-4DA2-A8DD-1B1739DEC0F9}" Name="Ma Famile" Selected="Yes" Type="{FF4B6538-9856-42CF-B9B9-304ED370CEAA}" URL="file:///D|/Google Drive/University/MaFa/Ma Famile/Ma Famile.prj"/>
 	</Local>
 	<BrowserModule Name="Repository"/>
 </Workspace>
